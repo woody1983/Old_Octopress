@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: OctoPress | Woody's Octopress Blog]]></title>
-  <link href="http://yoursite.com/blog/categories/octopress/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2012-08-06T22:40:41+08:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://woody1983.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://woody1983.github.com/"/>
+  <updated>2012-08-06T22:54:24+08:00</updated>
+  <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.xu]]></name>
     <email><![CDATA[unix1983@gmail.com]]></email>
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[Rush OctoPress]]></title>
-    <link href="http://yoursite.com/blog/2012/08/05/rush-octopress/"/>
+    <link href="http://woody1983.github.com/blog/2012/08/05/rush-octopress/"/>
     <updated>2012-08-05T19:37:00+08:00</updated>
-    <id>http://yoursite.com/blog/2012/08/05/rush-octopress</id>
-    <content type="html"><![CDATA[<p><code>"Fortune favors the brave" Vergil</code></p>
+    <id>http://woody1983.github.com/blog/2012/08/05/rush-octopress</id>
+    <content type="html"><![CDATA[<p><code>Git</code>+<code>Octopress</code>+'Ruby`</p>
 
 <blockquote><p>终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。</p></blockquote>
 
