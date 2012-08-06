@@ -1,36 +1,68 @@
-## What is Octopress?
+Github
+======
 
-Octopress is [Jekyll](https://github.com/mojombo/jekyll) blogging at its finest.
+About git
 
-1. **Octopress sports a clean responsive theme** written in semantic HTML5, focused on readability and friendliness toward mobile devices.
-2. **Code blogging is easy and beautiful.** Embed code (with [Solarized](http://ethanschoonover.com/solarized) styling) in your posts from gists, jsFiddle or from your filesystem.
-3. **Third party integration is simple** with built-in support for Twitter, Pinboard, Delicious, GitHub Repositories, Disqus Comments and Google Analytics.
-4. **It's easy to use.** A collection of rake tasks simplifies development and makes deploying a cinch.
-5. **Ships with great plug-ins** some original and others from the Jekyll community &mdash; tested and improved.
+```
+git checkout -b new_branch || git branch new_office
+git checkout branch/master
+git diff new_branch master
+git merge new_branch {makesure you save master*}
 
+git add -A 
+git commit -m "make clean"
+git push
+```
 
-## Documentation
+>cool! I Love Git.
 
-Check out [Octopress.org](http://octopress.org/docs) for guides and documentation.
+`2012-08-06 Commit`
 
+![Alt text](http://img1.douban.com/view/group_topic/large/public/27626318-1.jpg)
 
-## Contributing
+This is my Objective-C Project
 
-We love to see people contributing to Octopress, whether it's a bug report, feature suggestion or a pull request. At the moment, we try to keep the core slick and lean, focusing on basic blogging needs, so some of your suggestions might not find their way into Octopress. For those ideas, we started a [list of 3rd party plug-ins](https://github.com/imathis/octopress/wiki/3rd-party-plugins), where you can link your own Octopress plug-in repositories. For the future, we're thinking about ways to easier add them them into our main releases.
-
-
-## License
-(The MIT License)
-
-Copyright © 2009-2011 Brandon Mathis
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-#### If you want to be awesome.
-- Proudly display the 'Powered by Octopress' credit in the footer.
-- Add your site to the Wiki so we can watch the community grow.
+``` shell
+[root@mysql-test-woody just_c]# git add -A
+[root@mysql-test-woody just_c]# git commit -m "make clean"
+[master 8db2d64] make clean
+ 31 files changed, 0 insertions(+), 0 deletions(-)
+ rename Address.c => C_Source/Address.c (100%)
+ rename FreeTest.c => C_Source/FreeTest.c (100%)
+ rename FreeTest_Copy.c => C_Source/FreeTest_Copy.c (100%)
+ rename MallocAndFree.c => C_Source/MallocAndFree.c (100%)
+ rename MallocAndFree_Copy.c => C_Source/MallocAndFree_Copy.c (100%)
+ rename Pint_array.c => C_Source/Pint_array.c (100%)
+ rename array.c => C_Source/array.c (100%)
+ rename def.c => C_Source/def.c (100%)
+ rename demo01.c => C_Source/demo01.c (100%)
+ rename demo02.c => C_Source/demo02.c (100%)
+ rename demo3.c => C_Source/demo3.c (100%)
+ rename demo4.c => C_Source/demo4.c (100%)
+ rename demo5.c => C_Source/demo5.c (100%)
+ rename demo6.c => C_Source/demo6.c (100%)
+ rename demo_string.c => C_Source/demo_string.c (100%)
+ rename dim_array.c => C_Source/dim_array.c (100%)
+ rename diy_main.c => C_Source/diy_main.c (100%)
+ rename double_test.c => C_Source/double_test.c (100%)
+ rename hello.c => C_Source/hello.c (100%)
+ rename if_demo1.c => C_Source/if_demo1.c (100%)
+ rename if_demo2.c => C_Source/if_demo2.c (100%)
+ rename main.c => C_Source/main.c (100%)
+ rename pint.c => C_Source/pint.c (100%)
+ rename ptest.c => C_Source/ptest.c (100%)
+ rename puts.c => C_Source/puts.c (100%)
+ rename scan_demo.c => C_Source/scan_demo.c (100%)
+ rename scan_demo01.c => C_Source/scan_demo01.c (100%)
+ rename swap2.c => C_Source/swap2.c (100%)
+ rename swap2_copy.c => C_Source/swap2_copy.c (100%)
+ rename switch.c => C_Source/switch.c (100%)
+ rename while_demo.c => C_Source/while_demo.c (100%)
+[root@mysql-test-woody just_c]# git push
+Counting objects: 4, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 1.14 KiB, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To git@github.com:woody1983/just_c.git
+   fc7f53d..8db2d64  master -> master
+```
