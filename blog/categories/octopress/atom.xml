@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: OctoPress | Woody's Octopress Blog]]></title>
+  <link href="http://yoursite.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2012-08-06T22:40:41+08:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name><![CDATA[Woody.xu]]></name>
+    <email><![CDATA[unix1983@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rush OctoPress]]></title>
+    <link href="http://yoursite.com/blog/2012/08/05/rush-octopress/"/>
+    <updated>2012-08-05T19:37:00+08:00</updated>
+    <id>http://yoursite.com/blog/2012/08/05/rush-octopress</id>
+    <content type="html"><![CDATA[<p><code>"Fortune favors the brave" Vergil</code></p>
+
+<blockquote><p>终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。</p></blockquote>
+
+<p>```
+$ curl -L https://get.rvm.io | bash -s stable --ruby</p>
+
+<h1>给 ~/.bashrc (Linux) 或 ~/.bash_profile (Mac 环境) 加上脚本引用，执行下面这行（注意修改文件名）:</h1>
+
+<p>$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.' >> ~/.bashrc</p>
+
+<h1>如果是 Linux</h1>
+
+<p>$ source ~/.bashrc</p>
+
+<h1>first install openssl</h1>
+
+<p>rvm pkg install openssl</p>
+
+<p>rvm install 1.9.3 -C --with-openssl-dir=$HOME/.rvm/usr
+rvm use 1.9.3
+rvm rubygems latest
+rvm install rbenv
+```</p>
+
+<p>``` c Address.c Source Code</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>void main(void)
+{</p>
+
+<pre><code>int x;
+int y;
+x=0x76543210;
+y=0xfedcba98;
+
+printf("\n%x",&amp;y);
+printf("\n%d %d",x,y);
+</code></pre>
+
+<p>}
+/<em>演示变量地址和变量的值</em>/
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
