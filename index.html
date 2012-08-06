@@ -9,7 +9,7 @@
   <meta name="author" content="Woody.xu">
 
   
-  <meta name="description" content="Git+Octopress+&#8217;Ruby` 终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。 1
+  <meta name="description" content="Git+Octopress+Ruby 终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。 1
 2
 3
 4
@@ -25,7 +25,7 @@
 14
 15
 16
-$ curl -L https://get.rvm.io | &hellip;">
+$ curl -L https://get.rvm.io | bash -s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,7 +109,7 @@ $ curl -L https://get.rvm.io | &hellip;">
   </header>
 
 
-  <div class="entry-content"><p><code>Git</code>+<code>Octopress</code>+&#8217;Ruby`</p>
+  <div class="entry-content"><p><code>Git</code>+<code>Octopress</code>+<code>Ruby</code></p>
 
 <blockquote><p>终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。</p></blockquote>
 
@@ -147,9 +147,31 @@ $ curl -L https://get.rvm.io | &hellip;">
 </span><span class='line'>rvm install rbenv</span></code></pre></td></tr></table></div></figure>
 
 
+<h3>Depoly三部曲</h3>
+
+<blockquote><p>建立一个source的分支用来保存博客源文件</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate #生成静态文件
+</span><span class='line'>rake preview #本地预览
+</span><span class='line'>rake deploy #发布到github 只是第一次上传会比较慢一些 后面就快很多
+</span><span class='line'>
+</span><span class='line'>git remote add octopress_github git@github.com:username/username.github.com.git
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m "blog source md or something"
+</span><span class='line'>git push octopress_github source</span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><figcaption><span>Address.c Source Code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+
+
+<figure class='code'><figcaption><span>Address.c Source Code|测试一下贴代码功能 爽</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

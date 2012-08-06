@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OctoPress | Woody's Octopress Blog]]></title>
   <link href="http://woody1983.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-06T22:54:24+08:00</updated>
+  <updated>2012-08-06T23:00:58+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.xu]]></name>
@@ -18,7 +18,7 @@
     <link href="http://woody1983.github.com/blog/2012/08/05/rush-octopress/"/>
     <updated>2012-08-05T19:37:00+08:00</updated>
     <id>http://woody1983.github.com/blog/2012/08/05/rush-octopress</id>
-    <content type="html"><![CDATA[<p><code>Git</code>+<code>Octopress</code>+'Ruby`</p>
+    <content type="html"><![CDATA[<p><code>Git</code>+<code>Octopress</code>+<code>Ruby</code></p>
 
 <blockquote><p>终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。</p></blockquote>
 
@@ -43,7 +43,22 @@ rvm rubygems latest
 rvm install rbenv
 ```</p>
 
-<p>``` c Address.c Source Code</p>
+<h3>Depoly三部曲</h3>
+
+<blockquote><p>建立一个source的分支用来保存博客源文件</p></blockquote>
+
+<p>```
+rake generate #生成静态文件
+rake preview #本地预览
+rake deploy #发布到github 只是第一次上传会比较慢一些 后面就快很多</p>
+
+<p>git remote add octopress_github git@github.com:username/username.github.com.git
+git add .
+git commit -m "blog source md or something"
+git push octopress_github source
+```</p>
+
+<p>``` c Address.c Source Code|测试一下贴代码功能 爽</p>
 
 <h1>include &lt;stdio.h></h1>
 
