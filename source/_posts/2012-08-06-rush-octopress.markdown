@@ -6,7 +6,7 @@ comments: true
 categories:  [OctoPress]
 ---
 
-`Git`+`Octopress`+'Ruby`
+`Git`+`Octopress`+`Ruby`
 
 >终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。
 
@@ -29,7 +29,21 @@ rvm rubygems latest
 rvm install rbenv
 ```
 
-``` c Address.c Source Code
+###Depoly三部曲
+>建立一个source的分支用来保存博客源文件
+
+```
+rake generate #生成静态文件
+rake preview #本地预览
+rake deploy #发布到github 只是第一次上传会比较慢一些 后面就快很多
+
+git remote add octopress_github git@github.com:username/username.github.com.git
+git add .
+git commit -m "blog source md or something"
+git push octopress_github source
+```
+
+``` c Address.c Source Code|测试一下贴代码功能 爽
 #include <stdio.h>
 void main(void)
 {
