@@ -18,7 +18,17 @@ git push
 
 `2012-08-06 Commit`
 
-`2012-08-06 Update source.branch something`
+`2012-08-07 Update source.branch something`
+
+`2012-08-07 19:33 Back Home`
+
+add about `git pull` something
+
+```
+  392  git checkout origin/master -b master #把master的分支也checkout出来
+  402  git pull origin master
+  403  git pull origin source
+```
 
 ``` shell 
   570  git clone git@github.com:woody1983/woody1983.github.com.git
