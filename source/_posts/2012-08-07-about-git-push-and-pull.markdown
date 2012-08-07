@@ -40,3 +40,31 @@ To git@github.com:woody1983/woody1983.github.com.git
 
 >先merge一下 看能不能合并和发布出去。
 
+```
+woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git merge todo
+Updating 60ba0bf..5a7acfa
+Fast-forward
+ .../2012-08-07-about-git-push-and-pull.markdown    |   42 ++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+ create mode 100644 source/_posts/2012-08-07-about-git-push-and-pull.markdown
+woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git add .
+woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git commit -m "merge todo blog 2"
+# On branch source
+# Your branch is ahead of 'origin/master' by 616 commits.
+#
+nothing to commit (working directory clean) #merge过来就不需要commit了？
+woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git branch
+  master
+  octopress_github/todo
+* source
+  todo
+woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git push origin source
+Total 0 (delta 0), reused 0 (delta 0)
+To git@github.com:woody1983/woody1983.github.com.git
+   60ba0bf..5a7acfa  source -> source
+
+```
+####现在source是最新的版本内容了
+
+###有一个地方需要注意的就是如何保证todo和source的一致性
+也就是说最安全的做法就是以后写作只在todo里面完成 先push到远端的todo分支里然后到source里去merge 最后完成发布和push
