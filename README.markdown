@@ -17,7 +17,25 @@ git push
 >cool! I Love Git.
 
 `2012-08-06 Commit`
+
 `2012-08-06 Update source.branch something`
+
+```shell step
+  570  git clone git@github.com:woody1983/woody1983.github.com.git
+  571  cd woody1983.github.com/
+  572  ls -lah
+  573  git remote add octopress_github git@github.com:woody1983/woody1983.github.com.git
+  574  git branch
+  575  git branch -r
+  577  git checkout origin/source -b source
+  578  git branch
+  579  ls -lah
+  580  vi README.markdown
+  581  git add .
+  582  git commit -m "update source.branch"
+  583  git push octopress_github source
+  584  history
+```
 
 ![Alt text](http://img1.douban.com/view/group_topic/large/public/27626318-1.jpg)
 
