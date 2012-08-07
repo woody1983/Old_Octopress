@@ -20,7 +20,7 @@ git push
 
 `2012-08-06 Update source.branch something`
 
-```shell step
+``` shell step
   570  git clone git@github.com:woody1983/woody1983.github.com.git
   571  cd woody1983.github.com/
   572  ls -lah
