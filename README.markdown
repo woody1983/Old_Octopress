@@ -49,7 +49,7 @@ add about `git pull` something
   584  history
 ```
 
-![Alt LvBu](./images/lvbu.jpg)
+![Alt LvBu](/images/lvbu.jpg)
 
 ###初始化clone这个Project
 
