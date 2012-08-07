@@ -49,8 +49,7 @@ add about `git pull` something
   584  history
 ```
 
-![Alt LvBu](/blob/source/images/lvbu.jpg)
-![Alt LvBu2](/source/images/lvbu.jpg)
+![Alt LvBu](https://github.com/woody1983/woody1983.github.com/blob/source/images/lvbu.jpg)
 
 ###初始化clone这个Project
 
