@@ -22,6 +22,8 @@ git push
 
 `2012-08-07 19:33 Back Home`
 
+![Alt text](http://img1.douban.com/view/group_topic/large/public/27626318-1.jpg)
+
 add about `git pull` something
 
 ```
@@ -47,7 +49,7 @@ add about `git pull` something
   584  history
 ```
 
-![Alt text](http://img1.douban.com/view/group_topic/large/public/27626318-1.jpg)
+![Alt LvBu](images/lvbu.jpg)
 
 ###初始化clone这个Project
 
