@@ -8,7 +8,8 @@ categories: git,mac,ruby,octopress
 
 #### gcc
 先说gcc 我这个mac安装过Xcode4.4 但安装过程中还是提示少c编译环境 查了一下需要安装xcode的插件
-`安装command line tools。具体路径为：Xcode –> Preferences –> Downloads 的Components下，选择安装Command Line Tools 即可。`
+
+安装command line tools。具体路径为：`Xcode –> Preferences –> Downloads 的Components`下，选择安装Command Line Tools 即可。
 
 #### wget
 我下载的是source code编译安装的
