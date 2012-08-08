@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: c | Woody's 电子游牧日志]]></title>
+  <link href="http://woody1983.github.com/blog/categories/c/atom.xml" rel="self"/>
+  <link href="http://woody1983.github.com/"/>
+  <updated>2012-08-08T21:17:16+08:00</updated>
+  <id>http://woody1983.github.com/</id>
+  <author>
+    <name><![CDATA[Woody.Xu]]></name>
+    <email><![CDATA[unix1983@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C里面的Byte Bit概念和数据类型]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/08/c-byte-bit-date-type/"/>
+    <updated>2012-08-08T21:16:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/08/c-byte-bit-date-type</id>
+    <content type="html"><![CDATA[<h1>二进制 八进制 十六进制</h1>
+
+<p><code>位bit</code>是含有0或1的一个单位</p>
+
+<p>给一串二进制加上架构的概念，这样的结构叫<code>字节</code></p>
+
+<p>一个字节<code>byte</code>由<code>8</code>位构成, 一个字<code>word</code>由<code>32</code>构成或<code>4</code>个字节</p>
+
+<p>一个字节最大是8位，8位数的二进制 <code>1111 1111</code>换成十进制<code>255</code>,也就是说一个字节最大能存的整数是<code>255</code></p>
+
+<p>2个字节可以存放 <code>2的16次方</code>=65535 4个字节<code>2的32次方</code>=4 294 967 295</p>
+
+<p>大小写的26个英文字母还有10个数字和标点符号加在一起的内容在字节对应中有个<code>ASC2</code>的编码。</p>
+
+<h3>内存编号</h3>
+
+<blockquote><p>起始编号是1 隔8个位置加1</p></blockquote>
+
+<table>
+<thead>
+<tr>
+<th>起始编码1 </th>
+<th> 位7 </th>
+<th> 位6 </th>
+<th> 位5 </th>
+<th> 位4 </th>
+<th> 位3 </th>
+<th> 位2 </th>
+<th> 位1 </th>
+<th> 位0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 </td>
+<td> 0  </td>
+<td> 0 </td>
+<td> 0 </td>
+<td> 1 </td>
+<td> 0 </td>
+<td> 1 </td>
+<td> 1 </td>
+<td> 0</td>
+</tr>
+<tr>
+<td>2 </td>
+<td> 1  </td>
+<td> 0 </td>
+<td> 1 </td>
+<td> 1 </td>
+<td> 0 </td>
+<td> 0 </td>
+<td> 1 </td>
+<td> 1</td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>C语言用的是起始地址＋长度 编码2开始 往后4个字节</h3>
+
+<hr />
+
+<h1>数据类型 DataType</h1>
+
+<h4>数据类型是程序所处理的数据的抽象，将可能出现的数据进行分类 比如整数和带小数点的数。</h4>
+
+<h4>C语言创造了很多丰富的数据类型</h4>
+
+<ul>
+<li>构造类型</li>
+<li>指针类型</li>
+<li>空类型</li>
+<li>基本类型</li>
+</ul>
+
+
+<h4>基本类型</h4>
+
+<p>枚举类型<code>enum</code> 字符类型<code>char</code> 数值类型包括<code>实型</code>和<code>整型</code></p>
+
+<ul>
+<li>实型包括 单精度<code>float</code> 双精度<code>double</code></li>
+<li>整型包括 短整型<code>short</code> 整型<code>int</code> 长整型<code>long</code></li>
+</ul>
+
+
+<h4>构造类型</h4>
+
+<p>包括 <code>数组</code> <code>结构体</code> <code>共用体</code></p>
+
+<p>构造类型是由多个其他数据雷西瓜组合而成，可以分解成若干个元素或成员，每个元素或成员要么是一个基本数据类型，要么又是一个构造类型。</p>
+
+<ul>
+<li>数组 所有元素是同一个类型</li>
+<li>结构体 不同数据类型的组合</li>
+<li>共用体 多个雨啊宿不同数据类型 共用一块内存</li>
+</ul>
+
+
+<h4>空类型</h4>
+
+<p>Void 多数用在函数和指针的地方</p>
+
+<p><code>
+需要Google一下的内容是
+内存地址的布局方式
+int x = 4294967295 打印出来的正好是255
+如果x的声明是4294967296 换成32地址的话
+1 0000-0000 0000-0000 0000-0000 0000-0000
+如果x的声明是4294967297 换成32地址的话
+1 0000-0000 0000-0000 0000-0000 0000-0001
+</code></p>
+
+<h1>整数类型</h1>
+
+<blockquote><p>类型分为 short int long</p></blockquote>
+
+<p>short <code>16-bit</code>or<code>2-byte</code> max--><code>11111111 11111111</code>二进制 <code>65535</code>十进制</p>
+
+<p>int <code>32 bit</code> or <code>4 byte</code>max--><code>11111111 11111111 11111111 11111111</code>二进制 <code>4294967295</code>十进制</p>
+
+<p>long <code>32 bit</code> or <code>4 byte</code>max--><code>11111111 11111111 11111111 11111111</code>二进制 <code>4294967295</code>十进制</p>
+
+<h4>一个int类型的整数实际上就是一个32个坑 一个萝卜一个坑</h4>
+
+<h2>整数的正负</h2>
+
+<p><code>
+有符号和无符号两种 32个坑的左边第一个坑就是用来标记正负的 最高位就是最左边那一位 0为正 1为负
+</code></p>
+
+<h4>关于补码 (需要另外单独资料)</h4>
+
+<p>23的二进制是0001 0111</p>
+
+<p>正数的补码就是该数的二进制数</p>
+
+<p>负数的补码是 例:-23</p>
+
+<ul>
+<li>先取该数的绝对值(-23)=23</li>
+<li>变成二进制 0001 0111</li>
+<li>二进制取反 1变0 0变1  1110 1000</li>
+<li>将取反后的值加1</li>
+</ul>
+
+
+<p><code>计算机中的数值是以补码的形式存储的!!!</code>
+<code>所有负数的二进制补码的最高位必然也必须是1</code></p>
+
+<p>signed int 表示4个字节的存储单元 第32位是符号位 剩下的31位才是数据位。</p>
+
+<p>一个二进制数如何解释 还要看要把这个数当作什么数据类型来解释 unsigned int 和 signed int 最高位的字符完全代表了不同的含义 要么计算成一个数 要么当成一个正负号标记位。</p>
+]]></content>
+  </entry>
+  
+</feed>

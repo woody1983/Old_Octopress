@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git,mac,ruby,octopress | Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/git-mac-ruby-octopress/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-08T20:52:40+08:00</updated>
+  <updated>2012-08-08T21:17:16+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -20,8 +20,9 @@
     <id>http://woody1983.github.com/blog/2012/08/08/mac-install-gcc-ruby</id>
     <content type="html"><![CDATA[<h4>gcc</h4>
 
-<p>先说gcc 我这个mac安装过Xcode4.4 但安装过程中还是提示少c编译环境 查了一下需要安装xcode的插件
-<code>安装command line tools。具体路径为：Xcode –&gt; Preferences –&gt; Downloads 的Components下，选择安装Command Line Tools 即可。</code></p>
+<p>先说gcc 我这个mac安装过Xcode4.4 但安装过程中还是提示少c编译环境 查了一下需要安装xcode的插件</p>
+
+<p>安装command line tools。具体路径为：<code>Xcode –&gt; Preferences –&gt; Downloads 的Components</code>下，选择安装Command Line Tools 即可。</p>
 
 <h4>wget</h4>
 
