@@ -16,11 +16,11 @@ footer: true
 ### 修仙
 
 #### 技术方面
-* 喜欢`FreeBSD`.`Python`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/`豆瓣深度用户`
+* 喜欢`FreeBSD`.`Python`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/[豆瓣深度用户](http://www.douban.com/people/woody1983/ "《上海老味道》")
 * 不喜欢 `Java`.`WordPress`
 * 研究学习 `Git`.`OctoPress`.`Rails3`.`C`.`MarkDown`
 
 #### 生活方面
 * 喜欢看`散文`和写`饮食`的文章，推荐[《上海老味道》](http://book.douban.com/subject/2044609/ "《上海老味道》")和[《文艺犯》](http://book.douban.com/subject/10491690/"《文艺犯》")
 * 讨厌对我指手画脚一般口气的文章和装逼的文章 比如《别告诉我你会XXX》《XXX岁之前你应该XXX》。
-* 喜欢`盆栽植物`/`LOMO`／`韩国年糕火锅`/`Wagas`
+* 喜欢`盆栽植物`/`LOMO`／[韩国年糕火锅](http://www.dianping.com/shop/5440689)/`Wagas`

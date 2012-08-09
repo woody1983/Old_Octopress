@@ -9,6 +9,7 @@ categories:  [OctoPress]
 `Git`+`Octopress`+`Ruby`
 
 >终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。
+<!-- more -->
 
 ```
 $ curl -L https://get.rvm.io | bash -s stable --ruby

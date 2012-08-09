@@ -3,7 +3,7 @@ layout: post
 title: "mac安装gcc和ruby"
 date: 2012-08-08 20:27
 comments: true
-categories: git,mac,ruby,octopress
+categories: [git,mac,ruby,octopress]
 ---
 
 #### gcc
@@ -13,7 +13,7 @@ categories: git,mac,ruby,octopress
 
 #### wget
 我下载的是source code编译安装的
-
+<!-- more -->
 ```
 wget http://ftp.gnu.org/gnu/wget/wget-1.14.tar.gz
 tar zxvf wget-1.14.tar.gz
