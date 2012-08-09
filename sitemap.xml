@@ -2,30 +2,34 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://woody1983.github.com/blog/2012/08/05/rush-octopress/</loc>
-        <lastmod>2012-08-08T20:52:09+08:00</lastmod>
+        <lastmod>2012-08-09T22:40:56+08:00</lastmod>
     </url>
     <url>
         <loc>http://woody1983.github.com/blog/2012/08/07/about-git-push-and-pull/</loc>
-        <lastmod>2012-08-08T20:52:09+08:00</lastmod>
+        <lastmod>2012-08-09T22:40:56+08:00</lastmod>
     </url>
     <url>
         <loc>http://woody1983.github.com/blog/2012/08/08/mac-install-gcc-ruby/</loc>
-        <lastmod>2012-08-08T21:18:43+08:00</lastmod>
+        <lastmod>2012-08-09T22:40:56+08:00</lastmod>
     </url>
     <url>
         <loc>http://woody1983.github.com/blog/2012/08/08/c-byte-bit-date-type/</loc>
-        <lastmod>2012-08-08T21:18:43+08:00</lastmod>
+        <lastmod>2012-08-09T22:40:56+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://woody1983.github.com/blog/2012/08/09/make-todo/</loc>
+        <lastmod>2012-08-09T22:40:56+08:00</lastmod>
     </url>
     <url>
         <loc>http://woody1983.github.com/about/</loc>
-        <lastmod>2012-08-08T20:52:09+08:00</lastmod>
+        <lastmod>2012-08-09T22:40:56+08:00</lastmod>
     </url>
     <url>
         <loc>http://woody1983.github.com/blog/archives/</loc>
-        <lastmod>2012-08-08T21:18:43+08:00</lastmod>
+        <lastmod>2012-08-09T22:40:56+08:00</lastmod>
     </url>
     <url>
         <loc>http://woody1983.github.com/</loc>
-        <lastmod>2012-08-08T21:18:43+08:00</lastmod>
+        <lastmod>2012-08-09T22:40:56+08:00</lastmod>
     </url>
 </urlset>

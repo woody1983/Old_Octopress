@@ -4,7 +4,7 @@
   <title><![CDATA[Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-08T21:27:54+08:00</updated>
+  <updated>2012-08-09T22:42:45+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[打造牛轰的todo]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/09/make-todo/"/>
+    <updated>2012-08-09T20:52:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/09/make-todo</id>
+    <content type="html"><![CDATA[<h3>为什么要这个todo？</h3>
+
+<p>很重要的一个原因:<code>我们欠管</code>，而恰恰也是因为这个大多数人的todo基本上就素一个摆设，要么敷衍自己要么敷衍家长大部分是敷衍寒暑假，给自己的玩耍创造更多的舆论支持。</p>
+
+<h3>为什么大多数的todo是没用的?</h3>
+
+<p>很简单，我们大脑最聪明的时候就是你不告诉他该怎么做的时候，说白了就是<code>潜意识</code>，另外最要命的是我们的大脑逃避痛苦的速度是你想象不到的快，这就是人为什么容易走神而自己却不知道。</p>
+
+<!-- more -->
+
+
+<h3>举个栗子</h3>
+
+<p>还是举个例子比较好理解，就拿学习英语这事儿来说吧，我相信大多数人上学的时候甚至是工作的时候都做过无数次的学习计划，很荣幸，我也是。</p>
+
+<p>但计划就是计划，新概念永远是第一本看的最多遍，这就是每次时间到了大脑开始进行todo里面各项任务时经常遇到的问题。</p>
+
+<h3>怎么做todo？最不反人类</h3>
+
+<p>还是以英语为栗子!! 学习英语首先要确定一些东西：</p>
+
+<ul>
+<li>什么时间学？几点开始，几点结束？</li>
+<li>在哪里学？</li>
+<li>学习的材料在哪？</li>
+<li>一次学多少？第一阶段要学到哪里？</li>
+<li>怎么才算是学？你要做什么？</li>
+</ul>
+
+
+<p>其实第五个问题最重要，前面几个只是做铺垫。你必须知道做什么才叫做学习？否则到时间了，你还是要面对这个问题，思考的时间一拉长问题就麻烦了。</p>
+
+<h4>我是怎么修改这个学习todo的</h4>
+
+<ul>
+<li>早上学习45min，心情好的话学一个小时。晚上有时间就看，不在计划内。</li>
+<li>桌子上。坚决不在公司学，就算有时间最多写个英语的twitter练习一下</li>
+<li><code>新概念</code>/<code>NCE-1</code> 别笑 我1还是没过关呢，问题是不知道怎样才算是过关</li>
+<li>学多少是个问题，遥遥无期本身就是个压力，以一本教材为<code>Milestone</code>最合适。</li>
+<li><code>重点</code>早上的练习任务就是超课文，抄完就默写，不用动脑子，只管做就可以了。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>再说说执行过程中的事情
+</span><span class='line'>所谓抄写最好的地方就是大脑几乎不需要为这个todo的动作和流程付出太多的思考，下意识里去接受就可以了。
+</span><span class='line'>题外话 如果能延伸一些的话 抄写的时候可以找一些英语对白听听，现在华尔街英语貌似有下载的mp3流出。可以拿来试试</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在试验过几次，感觉是非常好的，早上起来洗漱完毕，做到桌子上下意识直接拿书起来抄，我很喜欢用笔书写时的感觉，尤其时笔尖和纸张接触使的摩擦力。但现在更多的时间使用电脑来敲打，一是比较环保，二是平时用键盘也最多，也熟悉，如果现在用键盘输入的英语练习多了的话，对以后的使用还是有帮助，总不会那么生涩吧。</p>
+
+<p>洗洗睡了</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C里面的Byte Bit概念和数据类型]]></title>
@@ -31,6 +93,9 @@
 <p>2个字节可以存放 <code>2的16次方</code>=65535 4个字节<code>2的32次方</code>=4 294 967 295</p>
 
 <p>大小写的26个英文字母还有10个数字和标点符号加在一起的内容在字节对应中有个<code>ASC2</code>的编码。</p>
+
+<!-- more -->
+
 
 <h3>内存编号</h3>
 
@@ -196,6 +261,9 @@
 
 <p>我下载的是source code编译安装的</p>
 
+<!-- more -->
+
+
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -289,6 +357,9 @@
 
 <p>同一个git的<code>Repo</code> 我如果需要在<code>office</code>和<code>home</code>里分开维护的话 数据的一致性是最主要的。
 比如我在家里写的blog，早上到公司以后就需要先pull下来最新版本的Repo 然后在一天中任何一个时间点或时间段都会随意的维护工作记录或笔记什么的。</p>
+
+<!-- more -->
+
 
 <p>现在的做法是把没写完的blog先<code>push</code>到一个<code>TODO的branch</code>里 然后push到远端一个分支 也叫todo</p>
 
@@ -399,6 +470,11 @@
     <content type="html"><![CDATA[<p><code>Git</code>+<code>Octopress</code>+<code>Ruby</code></p>
 
 <blockquote><p>终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。</p></blockquote>
+
+<!-- more -->
+
+
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

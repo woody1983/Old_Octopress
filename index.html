@@ -7,7 +7,7 @@
 	<meta name="author" content="Woody.Xu">
 
 	
-	<meta name="description" content="二进制 八进制 十六进制 位bit是含有0或1的一个单位 给一串二进制加上架构的概念，这样的结构叫字节 一个字节byte由8位构成, 一个字word由32构成或4个字节 一个字节最大是8位，8位数的二进制 1111 1111换成十进制255,也就是说一个字节最大能存的整数是255 &hellip;">
+	<meta name="description" content="为什么要这个todo？ 很重要的一个原因:我们欠管，而恰恰也是因为这个大多数人的todo基本上就素一个摆设，要么敷衍自己要么敷衍家长大部分是敷衍寒暑假，给自己的玩耍创造更多的舆论支持。 为什么大多数的todo是没用的? 很简单，我们大脑最聪明的时候就是你不告诉他该怎么做的时候，说白了就是潜意识， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,6 +81,50 @@
 
 
     <article class="post">
+	<h1 class="title"><a href="/blog/2012/08/09/make-todo/">打造牛轰的todo</a></h1>
+	<div class="entry-content">
+		<h3>为什么要这个todo？</h3>
+
+<p>很重要的一个原因:<code>我们欠管</code>，而恰恰也是因为这个大多数人的todo基本上就素一个摆设，要么敷衍自己要么敷衍家长大部分是敷衍寒暑假，给自己的玩耍创造更多的舆论支持。</p>
+
+<h3>为什么大多数的todo是没用的?</h3>
+
+<p>很简单，我们大脑最聪明的时候就是你不告诉他该怎么做的时候，说白了就是<code>潜意识</code>，另外最要命的是我们的大脑逃避痛苦的速度是你想象不到的快，这就是人为什么容易走神而自己却不知道。</p>
+
+
+		
+		<a href="/blog/2012/08/09/make-todo/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-09T20:52:00+08:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gtd/'>gtd</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/08/09/make-todo//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
 	<h1 class="title"><a href="/blog/2012/08/08/c-byte-bit-date-type/">C里面的Byte Bit概念和数据类型</a></h1>
 	<div class="entry-content">
 		<h1>二进制 八进制 十六进制</h1>
@@ -97,155 +141,9 @@
 
 <p>大小写的26个英文字母还有10个数字和标点符号加在一起的内容在字节对应中有个<code>ASC2</code>的编码。</p>
 
-<h3>内存编号</h3>
-
-<blockquote><p>起始编号是1 隔8个位置加1</p></blockquote>
-
-<table>
-<thead>
-<tr>
-<th>起始编码1 </th>
-<th> 位7 </th>
-<th> 位6 </th>
-<th> 位5 </th>
-<th> 位4 </th>
-<th> 位3 </th>
-<th> 位2 </th>
-<th> 位1 </th>
-<th> 位0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1 </td>
-<td> 0  </td>
-<td> 0 </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 1 </td>
-<td> 0</td>
-</tr>
-<tr>
-<td>2 </td>
-<td> 1  </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 1 </td>
-<td> 0 </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 1</td>
-</tr>
-</tbody>
-</table>
-
-
-<h3>C语言用的是起始地址＋长度 编码2开始 往后4个字节</h3>
-
-<hr />
-
-<h1>数据类型 DataType</h1>
-
-<h4>数据类型是程序所处理的数据的抽象，将可能出现的数据进行分类 比如整数和带小数点的数。</h4>
-
-<h4>C语言创造了很多丰富的数据类型</h4>
-
-<ul>
-<li>构造类型</li>
-<li>指针类型</li>
-<li>空类型</li>
-<li>基本类型</li>
-</ul>
-
-
-<h4>基本类型</h4>
-
-<p>枚举类型<code>enum</code> 字符类型<code>char</code> 数值类型包括<code>实型</code>和<code>整型</code></p>
-
-<ul>
-<li>实型包括 单精度<code>float</code> 双精度<code>double</code></li>
-<li>整型包括 短整型<code>short</code> 整型<code>int</code> 长整型<code>long</code></li>
-</ul>
-
-
-<h4>构造类型</h4>
-
-<p>包括 <code>数组</code> <code>结构体</code> <code>共用体</code></p>
-
-<p>构造类型是由多个其他数据雷西瓜组合而成，可以分解成若干个元素或成员，每个元素或成员要么是一个基本数据类型，要么又是一个构造类型。</p>
-
-<ul>
-<li>数组 所有元素是同一个类型</li>
-<li>结构体 不同数据类型的组合</li>
-<li>共用体 多个雨啊宿不同数据类型 共用一块内存</li>
-</ul>
-
-
-<h4>空类型</h4>
-
-<p>Void 多数用在函数和指针的地方</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>需要Google一下的内容是
-</span><span class='line'>内存地址的布局方式 
-</span><span class='line'>int x = 4294967295 打印出来的正好是255
-</span><span class='line'>如果x的声明是4294967296 换成32地址的话
-</span><span class='line'>1 0000-0000 0000-0000 0000-0000 0000-0000 
-</span><span class='line'>如果x的声明是4294967297 换成32地址的话
-</span><span class='line'>1 0000-0000 0000-0000 0000-0000 0000-0001 </span></code></pre></td></tr></table></div></figure>
-
-
-<h1>整数类型</h1>
-
-<blockquote><p>类型分为 short int long</p></blockquote>
-
-<p>short <code>16-bit</code>or<code>2-byte</code> max&#8211;><code>11111111 11111111</code>二进制 <code>65535</code>十进制</p>
-
-<p>int <code>32 bit</code> or <code>4 byte</code>max&#8211;><code>11111111 11111111 11111111 11111111</code>二进制 <code>4294967295</code>十进制</p>
-
-<p>long <code>32 bit</code> or <code>4 byte</code>max&#8211;><code>11111111 11111111 11111111 11111111</code>二进制 <code>4294967295</code>十进制</p>
-
-<h4>一个int类型的整数实际上就是一个32个坑 一个萝卜一个坑</h4>
-
-<h2>整数的正负</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>有符号和无符号两种 32个坑的左边第一个坑就是用来标记正负的 最高位就是最左边那一位 0为正 1为负</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>关于补码 (需要另外单独资料)</h4>
-
-<p>23的二进制是0001 0111</p>
-
-<p>正数的补码就是该数的二进制数</p>
-
-<p>负数的补码是 例:-23</p>
-
-<ul>
-<li>先取该数的绝对值(-23)=23</li>
-<li>变成二进制 0001 0111</li>
-<li>二进制取反 1变0 0变1  1110 1000</li>
-<li>将取反后的值加1</li>
-</ul>
-
-
-<p><code>计算机中的数值是以补码的形式存储的!!!</code>
-<code>所有负数的二进制补码的最高位必然也必须是1</code></p>
-
-<p>signed int 表示4个字节的存储单元 第32位是符号位 剩下的31位才是数据位。</p>
-
-<p>一个二进制数如何解释 还要看要把这个数当作什么数据类型来解释 unsigned int 和 signed int 最高位的字符完全代表了不同的含义 要么计算成一个数 要么当成一个正负号标记位。</p>
 
 		
-		
+		<a href="/blog/2012/08/08/c-byte-bit-date-type/" class="more-link">Read on &rarr;</a>
 	</div>
 
 
@@ -289,90 +187,9 @@
 
 <p>我下载的是source code编译安装的</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://ftp.gnu.org/gnu/wget/wget-1.14.tar.gz
-</span><span class='line'>tar zxvf wget-1.14.tar.gz
-</span><span class='line'>cd wget-1.14
-</span><span class='line'>./configure --with-ssl=openssl
-</span><span class='line'>make
-</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Yaml</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz`
-</span><span class='line'>解tar 编译安装 不装这个东西 rvm安装ruby总是报错</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>rvm</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-</span><span class='line'>rvm --version
-</span><span class='line'>
-</span><span class='line'>xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ rvm install 1.9.3
-</span><span class='line'>Fetching yaml-0.1.4.tar.gz to /Users/xj/.rvm/archives
-</span><span class='line'>Extracting yaml-0.1.4.tar.gz to /Users/xj/.rvm/src
-</span><span class='line'>Configuring yaml in /Users/xj/.rvm/src/yaml-0.1.4.
-</span><span class='line'>Compiling yaml in /Users/xj/.rvm/src/yaml-0.1.4.
-</span><span class='line'>Installing yaml to /Users/xj/.rvm/usr
-</span><span class='line'>Building 'ruby-1.9.3-p194' using clang - but it's not (fully) supported, expect errors.
-</span><span class='line'>Installing Ruby from source to: /Users/xj/.rvm/rubies/ruby-1.9.3-p194, this may take a while depending on your cpu(s)...
-</span><span class='line'>中间需要download文件 
-</span><span class='line'>Install of ruby-1.9.3-p194 - #complete
-</span><span class='line'>Ruby 'ruby-1.9.3-p194' was built using clang - but it's not (fully) supported, expect errors.
-</span><span class='line'>xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ ruby -v
-</span><span class='line'>ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.4.0]
-</span><span class='line'>xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ gem -v
-</span><span class='line'>1.8.24
-</span><span class='line'>安装完以后看一下</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>bundle</h4>
-
-<p><code>bundle install</code></p>
-
-<p>这个是最关键的一步 进入项目文件里面 bundle所有需要的gem包</p>
-
-<h4>rake for octopress</h4>
-
-<p>日常维护octopress常用的命令大概就这么几个 分别为git和rake的</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate 声称静态页面
-</span><span class='line'>rake preview 预览
-</span><span class='line'>rake deploy 发布</span></code></pre></td></tr></table></div></figure>
-
 
 		
-		
+		<a href="/blog/2012/08/08/mac-install-gcc-ruby/" class="more-link">Read on &rarr;</a>
 	</div>
 
 
@@ -393,7 +210,7 @@
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/git-mac-ruby-octopress/'>git,mac,ruby,octopress</a>
+	<a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
 
 
 </div>
@@ -411,107 +228,9 @@
 <p>同一个git的<code>Repo</code> 我如果需要在<code>office</code>和<code>home</code>里分开维护的话 数据的一致性是最主要的。
 比如我在家里写的blog，早上到公司以后就需要先pull下来最新版本的Repo 然后在一天中任何一个时间点或时间段都会随意的维护工作记录或笔记什么的。</p>
 
-<p>现在的做法是把没写完的blog先<code>push</code>到一个<code>TODO的branch</code>里 然后push到远端一个分支 也叫todo</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git checkout -b todo
-</span><span class='line'>Switched to a new branch 'todo'
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git branch
-</span><span class='line'>  master
-</span><span class='line'>  source
-</span><span class='line'>* todo
-</span><span class='line'>创建一个todo的分支 
-</span><span class='line'>
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git add .
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git commit -m "todo branch : save temp file"
-</span><span class='line'>[todo 92e67d5] todo branch : save temp file
-</span><span class='line'> 1 file changed, 14 insertions(+)
-</span><span class='line'> create mode 100644 source/_posts/2012-08-07-about-git-push-and-pull.markdown
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git push origin todo
-</span><span class='line'>Counting objects: 8, done.
-</span><span class='line'>Delta compression using up to 2 threads.
-</span><span class='line'>Compressing objects: 100% (5/5), done.
-</span><span class='line'>Writing objects: 100% (5/5), 883 bytes, done.
-</span><span class='line'>Total 5 (delta 2), reused 0 (delta 0)
-</span><span class='line'>To git@github.com:woody1983/woody1983.github.com.git
-</span><span class='line'> * [new branch]      todo -&gt; todo</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>先merge一下 看能不能合并和发布出去。</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git merge todo
-</span><span class='line'>Updating 60ba0bf..5a7acfa
-</span><span class='line'>Fast-forward
-</span><span class='line'> .../2012-08-07-about-git-push-and-pull.markdown    |   42 ++++++++++++++++++++
-</span><span class='line'> 1 file changed, 42 insertions(+)
-</span><span class='line'> create mode 100644 source/_posts/2012-08-07-about-git-push-and-pull.markdown
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git add .
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git commit -m "merge todo blog 2"
-</span><span class='line'># On branch source
-</span><span class='line'># Your branch is ahead of 'origin/master' by 616 commits.
-</span><span class='line'>#
-</span><span class='line'>nothing to commit (working directory clean) #merge过来就不需要commit了？
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git branch
-</span><span class='line'>  master
-</span><span class='line'>  octopress_github/todo
-</span><span class='line'>* source
-</span><span class='line'>  todo
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git push origin source
-</span><span class='line'>Total 0 (delta 0), reused 0 (delta 0)
-</span><span class='line'>To git@github.com:woody1983/woody1983.github.com.git
-</span><span class='line'>   60ba0bf..5a7acfa  source -&gt; source
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>现在source是最新的版本内容了</h4>
-
-<h3>有一个地方需要注意的就是如何保证todo和source的一致性</h3>
-
-<p>也就是说最安全的做法就是以后写作只在todo里面完成 先push到远端的todo分支里然后到source里去merge 最后完成发布和push</p>
 
 		
-		
+		<a href="/blog/2012/08/07/about-git-push-and-pull/" class="more-link">Read on &rarr;</a>
 	</div>
 
 
@@ -549,95 +268,9 @@
 
 <blockquote><p>终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。</p></blockquote>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -L https://get.rvm.io | bash -s stable --ruby
-</span><span class='line'>
-</span><span class='line'>#给 ~/.bashrc (Linux) 或 ~/.bash_profile (Mac 环境) 加上脚本引用，执行下面这行（注意修改文件名）:
-</span><span class='line'>
-</span><span class='line'>$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.' &gt;&gt; ~/.bashrc
-</span><span class='line'>
-</span><span class='line'># 如果是 Linux 
-</span><span class='line'>$ source ~/.bashrc
-</span><span class='line'>
-</span><span class='line'>#first install openssl
-</span><span class='line'>rvm pkg install openssl
-</span><span class='line'>
-</span><span class='line'>rvm install 1.9.3 -C --with-openssl-dir=$HOME/.rvm/usr
-</span><span class='line'>rvm use 1.9.3
-</span><span class='line'>rvm rubygems latest
-</span><span class='line'>rvm install rbenv</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Depoly三部曲</h3>
-
-<blockquote><p>建立一个source的分支用来保存博客源文件</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate #生成静态文件
-</span><span class='line'>rake preview #本地预览
-</span><span class='line'>rake deploy #发布到github 只是第一次上传会比较慢一些 后面就快很多
-</span><span class='line'>
-</span><span class='line'>git remote add octopress_github git@github.com:username/username.github.com.git
-</span><span class='line'>git add .
-</span><span class='line'>git commit -m "blog source md or something"
-</span><span class='line'>git push octopress_github source</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>Address.c Source Code|测试一下贴代码功能 爽</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
-</span><span class='line'><span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">x</span><span class="o">=</span><span class="mh">0x76543210</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">y</span><span class="o">=</span><span class="mh">0xfedcba98</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%x&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%d %d&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="cm">/*演示变量地址和变量的值*/</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 
 		
-		
+		<a href="/blog/2012/08/05/rush-octopress/" class="more-link">Read on &rarr;</a>
 	</div>
 
 

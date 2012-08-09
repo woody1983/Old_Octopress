@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c | Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-08T21:27:54+08:00</updated>
+  <updated>2012-08-09T22:42:45+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -31,6 +31,9 @@
 <p>2个字节可以存放 <code>2的16次方</code>=65535 4个字节<code>2的32次方</code>=4 294 967 295</p>
 
 <p>大小写的26个英文字母还有10个数字和标点符号加在一起的内容在字节对应中有个<code>ASC2</code>的编码。</p>
+
+<!-- more -->
+
 
 <h3>内存编号</h3>
 

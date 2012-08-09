@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-08T21:27:54+08:00</updated>
+  <updated>2012-08-09T22:42:45+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[mac安装gcc和ruby]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/08/mac-install-gcc-ruby/"/>
+    <updated>2012-08-08T20:27:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/08/mac-install-gcc-ruby</id>
+    <content type="html"><![CDATA[<h4>gcc</h4>
+
+<p>先说gcc 我这个mac安装过Xcode4.4 但安装过程中还是提示少c编译环境 查了一下需要安装xcode的插件</p>
+
+<p>安装command line tools。具体路径为：<code>Xcode –&gt; Preferences –&gt; Downloads 的Components</code>下，选择安装Command Line Tools 即可。</p>
+
+<h4>wget</h4>
+
+<p>我下载的是source code编译安装的</p>
+
+<!-- more -->
+
+
+<p><code>
+wget http://ftp.gnu.org/gnu/wget/wget-1.14.tar.gz
+tar zxvf wget-1.14.tar.gz
+cd wget-1.14
+./configure --with-ssl=openssl
+make
+make install
+</code></p>
+
+<h4>Yaml</h4>
+
+<p><code>
+wget http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz`
+解tar 编译安装 不装这个东西 rvm安装ruby总是报错
+</code></p>
+
+<h4>rvm</h4>
+
+<p>```
+bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+rvm --version</p>
+
+<p>xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ rvm install 1.9.3
+Fetching yaml-0.1.4.tar.gz to /Users/xj/.rvm/archives
+Extracting yaml-0.1.4.tar.gz to /Users/xj/.rvm/src
+Configuring yaml in /Users/xj/.rvm/src/yaml-0.1.4.
+Compiling yaml in /Users/xj/.rvm/src/yaml-0.1.4.
+Installing yaml to /Users/xj/.rvm/usr
+Building 'ruby-1.9.3-p194' using clang - but it's not (fully) supported, expect errors.
+Installing Ruby from source to: /Users/xj/.rvm/rubies/ruby-1.9.3-p194, this may take a while depending on your cpu(s)...
+中间需要download文件
+Install of ruby-1.9.3-p194 - #complete
+Ruby 'ruby-1.9.3-p194' was built using clang - but it's not (fully) supported, expect errors.
+xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ ruby -v
+ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.4.0]
+xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ gem -v
+1.8.24
+安装完以后看一下
+```</p>
+
+<h4>bundle</h4>
+
+<p><code>bundle install</code></p>
+
+<p>这个是最关键的一步 进入项目文件里面 bundle所有需要的gem包</p>
+
+<h4>rake for octopress</h4>
+
+<p>日常维护octopress常用的命令大概就这么几个 分别为git和rake的</p>
+
+<p><code>
+rake generate 声称静态页面
+rake preview 预览
+rake deploy 发布
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于Git的push & pull]]></title>
@@ -22,6 +98,9 @@
 
 <p>同一个git的<code>Repo</code> 我如果需要在<code>office</code>和<code>home</code>里分开维护的话 数据的一致性是最主要的。
 比如我在家里写的blog，早上到公司以后就需要先pull下来最新版本的Repo 然后在一天中任何一个时间点或时间段都会随意的维护工作记录或笔记什么的。</p>
+
+<!-- more -->
+
 
 <p>现在的做法是把没写完的blog先<code>push</code>到一个<code>TODO的branch</code>里 然后push到远端一个分支 也叫todo</p>
 
