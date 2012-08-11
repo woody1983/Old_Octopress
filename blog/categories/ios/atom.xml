@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: IOS | Woody's 电子游牧日志]]></title>
+  <link href="http://woody1983.github.com/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://woody1983.github.com/"/>
+  <updated>2012-08-11T23:29:18+08:00</updated>
+  <id>http://woody1983.github.com/</id>
+  <author>
+    <name><![CDATA[Woody.Xu]]></name>
+    <email><![CDATA[unix1983@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iDecide's logic]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/11/idecides-logic/"/>
+    <updated>2012-08-11T23:11:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/11/idecides-logic</id>
+    <content type="html"><![CDATA[<h4>iDecide’s logic</h4>
+
+<p>Any controls you create need a method that Interface Builder can use to connect the control to behaviors specified in the implementation file.</p>
+
+<p>The .xib file describes the button as you configured it in Interface Builder.
+You’ll likely notice all the files’ names have “ViewController”
+in them. Don’t sweat that for now, we’ll explain that in a bit.</p>
+
+<p>iDecideViewController.h
+This line declares a method called buttonPressed that Interface Builder will recognize as a possible callback.</p>
+
+<p>iDecideViewController.m
+You provide the method implementation in the
+.m file. Here’s where you code up what should actually happen when the button is pressed.</p>
+
+<h4>IBOutlet与IBAction</h4>
+
+<p>通过在变量前增加IBOutlet来说明该变量将与界面上的某个UI对象对应，在方法前增加IBAction来说明该方法将与界面上的事件对应.</p>
+
+<!-- more -->
+
+
+<p>Below is the code for when the button gets tapped. Add the bolded code to the iDecideViewController.h and iDecideViewController.m files. We are creating three things: the UILabel property, the IBAction to respond to the button press, and the IBOutlet to change the label when the button is pressed.</p>
+
+<h3>iDecideViewController.h</h3>
+
+<p><code>UILabel *decisionText_;</code></p>
+
+<p>We need to change the label text to provide our answer, so we need an IBOutlet to be able to get to the label control that the framework will build from our nib.</p>
+
+<p><code>@property (retain, nonatomic) IBOutlet UILabel *decisionText;</code></p>
+
+<p>We’ll talk more about properties later in the book.</p>
+
+<p><code>-(IBAction)buttonPressed:(id)sender;</code></p>
+
+<p>Here’s the action that will be called when the button is pressed.</p>
+
+<h3>iDecideViewController.m</h3>
+
+<p><code>@synthesize decisionText=decisionText_;</code></p>
+
+<p>The @synthesize tells the compiler to create a getter and setter for the property we declared in the header file. We’ll get into that more in Chapter 3.</p>
+
+<p><code>-(IBAction)buttonPressed:(id)sender</code></p>
+
+<p>This is the implementation of the method that gets called when the button is pressed.</p>
+
+<p><code>decisionText_.text = @”Go for it!”;</code></p>
+
+<p>We’ll use our reference to the label to change the text.</p>
+
+<p>Click on the circle next to New Referencing Outlet and drag it to the @property statement for the Outlet in the .h file on the right. Now when the decisionText UILabel is generated, our decisionText property will reference the control, through the IBOutlet.</p>
+
+<p>```
+//
+//  iDecideViewController.h
+//  iDecide
+//
+//  Created by Woody.Xu on 12-8-11.
+//  Copyright (c) 2012年 Woody.Xu. All rights reserved.
+//</p>
+
+<h1>import &lt;UIKit/UIKit.h></h1>
+
+<p>@interface iDecideViewController : UIViewController{</p>
+
+<pre><code>    UILabel *decisionText;
+</code></pre>
+
+<p>}</p>
+
+<p>@property (retain,nonatomic) IBOutlet UILabel *decisionText;</p>
+
+<p>-(IBAction)buttonPressed:(id)sender;</p>
+
+<p>-(IBAction)buttonPressed_redo:(id)sender;</p>
+
+<p>-(IBAction)buttonPressed_green:(id)sender;</p>
+
+<p>@end</p>
+
+<p>```
+and</p>
+
+<p>```</p>
+
+<h1>import "iDecideViewController.h"</h1>
+
+<p>@interface iDecideViewController ()</p>
+
+<pre><code>@end
+
+@implementation iDecideViewController
+@synthesize decisionText=decisionText_;
+
+-(IBAction)buttonPressed:(id)sender{
+        decisionText_.text=@"Go for it!";
+            decisionText_.textColor= [UIColor blackColor];
+}
+</code></pre>
+
+<p>-(IBAction)buttonPressed_redo:(id)sender{</p>
+
+<pre><code>    decisionText_.text=@"You wang redo?";
+        decisionText_.textColor= [UIColor redColor];
+</code></pre>
+
+<p>}</p>
+
+<p>-(IBAction)buttonPressed_green:(id)sender{</p>
+
+<pre><code>    decisionText_.text=@"You choose Green";
+        decisionText_.textColor= [UIColor greenColor];
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[App Magnets]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/11/app-magnets/"/>
+    <updated>2012-08-11T23:09:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/11/app-magnets</id>
+    <content type="html"><![CDATA[<h2>App Magnets</h2>
+
+<ul>
+<li>Determine app layout. <code>确定应用程序的布局</code></li>
+<li>Build the GUI <code>构建用户图形界面</code></li>
+<li>Figure out how to use the controls <code>弄清楚如何使用控件</code></li>
+<li>Handle the data <code>处理数据</code></li>
+<li>Generate the email.  <code>生成电子邮件</code></li>
+</ul>
+
+
+<h3>Determine app layout.</h3>
+
+<p>Before you start coding anything, sketch up what you’re thinking.</p>
+
+<h3>Build the GUI</h3>
+
+<p>Some people write backend code first—we’re going to go back and forth depending on our project, but to get started, we’ll do the GUI first this time.</p>
+
+<h3>Figure out how to use the controls</h3>
+
+<p>After you’ve landed on the general app design, you need to get into the documentation a little and figure out how to implement the controls you’ve chosen.</p>
+
+<h3>Handle the data</h3>
+
+<p>Here we need to manage the data coming from the controls.</p>
+
+<h3>Generate the email.</h3>
+
+<p>We’ll help you out with this last step.</p>
+]]></content>
+  </entry>
+  
+</feed>

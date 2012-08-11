@@ -1,0 +1,324 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>iDecide's logic - Woody's 电子游牧日志</title>
+	<meta name="author" content="Woody.Xu">
+
+	
+	<meta name="description" content="iDecide’s logic Any controls you create need a method that Interface Builder can use to connect the control to behaviors specified in the &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Woody's 电子游牧日志" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Woody's 电子游牧日志</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:woody1983.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/unix1983@gmail.com?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/xiaoputi" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/woody1983" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:woody1983.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h1 class="title">iDecide's Logic</h1>
+	<div class="entry-content"><h4>iDecide’s logic</h4>
+
+<p>Any controls you create need a method that Interface Builder can use to connect the control to behaviors specified in the implementation file.</p>
+
+<p>The .xib file describes the button as you configured it in Interface Builder.
+You’ll likely notice all the files’ names have “ViewController”
+in them. Don’t sweat that for now, we’ll explain that in a bit.</p>
+
+<p>iDecideViewController.h
+This line declares a method called buttonPressed that Interface Builder will recognize as a possible callback.</p>
+
+<p>iDecideViewController.m
+You provide the method implementation in the
+.m file. Here’s where you code up what should actually happen when the button is pressed.</p>
+
+<h4>IBOutlet与IBAction</h4>
+
+<p>通过在变量前增加IBOutlet来说明该变量将与界面上的某个UI对象对应，在方法前增加IBAction来说明该方法将与界面上的事件对应.</p>
+
+<!-- more -->
+
+
+<p>Below is the code for when the button gets tapped. Add the bolded code to the iDecideViewController.h and iDecideViewController.m files. We are creating three things: the UILabel property, the IBAction to respond to the button press, and the IBOutlet to change the label when the button is pressed.</p>
+
+<h3>iDecideViewController.h</h3>
+
+<p><code>UILabel *decisionText_;</code></p>
+
+<p>We need to change the label text to provide our answer, so we need an IBOutlet to be able to get to the label control that the framework will build from our nib.</p>
+
+<p><code>@property (retain, nonatomic) IBOutlet UILabel *decisionText;</code></p>
+
+<p>We’ll talk more about properties later in the book.</p>
+
+<p><code>-(IBAction)buttonPressed:(id)sender;</code></p>
+
+<p>Here’s the action that will be called when the button is pressed.</p>
+
+<h3>iDecideViewController.m</h3>
+
+<p><code>@synthesize decisionText=decisionText_;</code></p>
+
+<p>The @synthesize tells the compiler to create a getter and setter for the property we declared in the header file. We’ll get into that more in Chapter 3.</p>
+
+<p><code>-(IBAction)buttonPressed:(id)sender</code></p>
+
+<p>This is the implementation of the method that gets called when the button is pressed.</p>
+
+<p><code>decisionText_.text = @”Go for it!”;</code></p>
+
+<p>We’ll use our reference to the label to change the text.</p>
+
+<p>Click on the circle next to New Referencing Outlet and drag it to the @property statement for the Outlet in the .h file on the right. Now when the decisionText UILabel is generated, our decisionText property will reference the control, through the IBOutlet.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//
+</span><span class='line'>//  iDecideViewController.h
+</span><span class='line'>//  iDecide
+</span><span class='line'>//
+</span><span class='line'>//  Created by Woody.Xu on 12-8-11.
+</span><span class='line'>//  Copyright (c) 2012年 Woody.Xu. All rights reserved.
+</span><span class='line'>//
+</span><span class='line'>
+</span><span class='line'>#import &lt;UIKit/UIKit.h&gt;
+</span><span class='line'>
+</span><span class='line'>@interface iDecideViewController : UIViewController{
+</span><span class='line'>      UILabel *decisionText;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>@property (retain,nonatomic) IBOutlet UILabel *decisionText;
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed:(id)sender;
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender;
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender;
+</span><span class='line'>
+</span><span class='line'>@end
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#import "iDecideViewController.h"
+</span><span class='line'>
+</span><span class='line'>@interface iDecideViewController ()
+</span><span class='line'>
+</span><span class='line'>  @end
+</span><span class='line'>
+</span><span class='line'>  @implementation iDecideViewController
+</span><span class='line'>  @synthesize decisionText=decisionText_;
+</span><span class='line'>
+</span><span class='line'>  -(IBAction)buttonPressed:(id)sender{
+</span><span class='line'>          decisionText_.text=@"Go for it!";
+</span><span class='line'>              decisionText_.textColor= [UIColor blackColor];
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender{
+</span><span class='line'>      decisionText_.text=@"You wang redo?";
+</span><span class='line'>          decisionText_.textColor= [UIColor redColor];
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender{
+</span><span class='line'>      decisionText_.text=@"You choose Green";
+</span><span class='line'>          decisionText_.textColor= [UIColor greenColor];
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-11T23:11:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ios/'>IOS</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/08/11/idecides-logic/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2012
+
+    Woody.Xu
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'woodyxu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://woody1983.github.com/blog/2012/08/11/idecides-logic/';
+        var disqus_url = 'http://woody1983.github.com/blog/2012/08/11/idecides-logic/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
