@@ -4,7 +4,7 @@
   <title><![CDATA[Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-11T23:29:18+08:00</updated>
+  <updated>2012-08-11T23:42:03+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,160 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[first app]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/11/first-app/"/>
+    <updated>2012-08-11T23:32:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/11/first-app</id>
+    <content type="html"><![CDATA[<h4>iDecideViewController.h</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#import &lt;UIKit/UIKit.h&gt;
+</span><span class='line'>
+</span><span class='line'>@interface iDecideViewController : UIViewController{
+</span><span class='line'>    UILabel *decisionText;
+</span><span class='line'>    UITextField *host;
+</span><span class='line'>    UITextField *port;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>@property (retain,nonatomic) IBOutlet UILabel *decisionText;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed:(id)sender;
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender;
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender;
+</span><span class='line'>
+</span><span class='line'>@end
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>UIViewController 尝试声明了label和TextFiled等组件的使用，声明完毕以后需要在.storyboard中去right－click选择触发动作。并指向到<code>-(IBAction)</code>上。</p>
+
+<!-- more -->
+
+
+<h4>iDecideViewController.m</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#import "iDecideViewController.h"
+</span><span class='line'>
+</span><span class='line'>@interface iDecideViewController ()
+</span><span class='line'>
+</span><span class='line'>@end
+</span><span class='line'>
+</span><span class='line'>@implementation iDecideViewController
+</span><span class='line'>@synthesize decisionText=decisionText_;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed:(id)sender{
+</span><span class='line'>    decisionText_.text=@"Go for it!";
+</span><span class='line'>    decisionText_.textColor= [UIColor blackColor];
+</span><span class='line'>}
+</span><span class='line'>// 声明文字内容和颜色
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender{
+</span><span class='line'>    decisionText_.text=@"You wang redo?";
+</span><span class='line'>    decisionText_.textColor= [UIColor redColor];
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender{
+</span><span class='line'>    decisionText_.text=@"You choose Green";
+</span><span class='line'>    decisionText_.textColor= [UIColor greenColor];
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>- (void)viewDidLoad
+</span><span class='line'>{
+</span><span class='line'>    [super viewDidLoad];
+</span><span class='line'>    host.text = @"192.168.1.100";
+</span><span class='line'>    port.text = @"3306";
+</span><span class='line'>    // 加载页面自动显示 没搞明白具体有什么特别的用处 仅作demo
+</span><span class='line'>  // Do any additional setup after loading the view, typically from a nib.
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>- (void)viewDidUnload
+</span><span class='line'>{
+</span><span class='line'>    [super viewDidUnload];
+</span><span class='line'>    // Release any retained subviews of the main view.
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+</span><span class='line'>{
+</span><span class='line'>    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>@end
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Here’s what YOU can do to bend your brain into submission]]></title>
