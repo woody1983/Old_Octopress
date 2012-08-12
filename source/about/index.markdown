@@ -18,7 +18,7 @@ footer: true
 #### 技术方面
 * 喜欢`FreeBSD`.`Python`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/[豆瓣深度用户](http://www.douban.com/people/woody1983/ "《上海老味道》")
 * 不喜欢 `Java`.`WordPress`
-* 研究学习 `Git`.`OctoPress`.`Rails3`.`C`.`MarkDown`
+* 研究学习 `Git`.`OctoPress`.`Rails3`.`C`.`MarkDown`.`IOS`.`Objective-C`
 
 #### 生活方面
 * 喜欢看`散文`和写`饮食`的文章，推荐[《上海老味道》](http://book.douban.com/subject/2044609/ "《上海老味道》")和[《文艺犯》](http://book.douban.com/subject/10491690/"《文艺犯》")
