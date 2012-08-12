@@ -4,7 +4,7 @@
   <title><![CDATA[Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-11T23:42:03+08:00</updated>
+  <updated>2012-08-12T13:05:49+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,131 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[About PickerViewController]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/12/about-pickerviewconyroller/"/>
+    <updated>2012-08-12T12:44:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/12/about-pickerviewconyroller</id>
+    <content type="html"><![CDATA[<h4>Pickers get their data from a datasource and tell their delegates when something happens</h4>
+
+<p><code>UIPickerViewDatasource.</code> and <code>UIPickerViewDelegate.</code></p>
+
+<p>Controls have their own specific datasources and delegates</p>
+
+<!-- more-->
+
+
+<h4>First, declare that the controller conforms to both protocols</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@interface</span> <span class="nc">InstaEmailViewController</span> : <span class="nc">UIViewController</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">UIPickerViewDataSource</span><span class="p">,</span> <span class="n">UIPickerViewDelegate</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSArray</span><span class="o">*</span> <span class="n">activities_</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">NSArray</span><span class="o">*</span> <span class="n">feelings_</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后在InstaEmailViewController.m文件中去定义array的具体内容</p>
+
+<figure class='code'><figcaption><span>InstaEmailViewController.m</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">activities_</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSArray</span> <span class="n">alloc</span> <span class="p">]</span> <span class="nl">initWithObjects:</span><span class="s">@&quot;sleeping&quot;</span><span class="p">,</span><span class="s">@&quot;eating&quot;</span><span class="p">,</span><span class="s">@&quot;working&quot;</span><span class="p">,</span><span class="s">@&quot;thinking&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">feelings_</span> <span class="o">=</span><span class="p">[[</span><span class="n">NSArray</span> <span class="n">alloc</span> <span class="p">]</span><span class="nl">initWithObjects:</span><span class="s">@&quot;awesome&quot;</span><span class="p">,</span><span class="s">@&quot;sad&quot;</span><span class="p">,</span><span class="s">@&quot;happy&quot;</span><span class="p">,</span><span class="s">@&quot;ambivalent&quot;</span><span class="p">,</span><span class="s">@&quot;nauseous&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>              <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>记得要Release出去</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dealloc</span><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">emailPicker_</span> <span class="n">release</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">activities_</span> <span class="n">release</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">feelings_</span> <span class="n">release</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">dealloc</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>The datasource protocol has two required methods</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nf">numberOfComponentsInPickerView:</span><span class="p">(</span><span class="n">UIPickerView</span> <span class="o">*</span><span class="p">)</span> <span class="n">pickerView</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="c1">//要返回有多少个components(组件)</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nl">pickerView:</span><span class="p">(</span><span class="n">UIPickerView</span> <span class="o">*</span><span class="p">)</span><span class="n">pickerView</span> <span class="nl">numberOfRowsInComponent:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">component</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">[</span><span class="n">activities_</span> <span class="n">count</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">[</span><span class="n">feelings_</span> <span class="n">count</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这一步做完以后 将<code>Outlets</code>下的Datasource link到<code>File's Owner</code>上</p>
+
+<h3>There’s just one method for the delegate protocol</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">pickerView:</span><span class="p">(</span><span class="n">UIPickerView</span> <span class="o">*</span><span class="p">)</span><span class="nv">pickerView</span> <span class="nf">titleForRow:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">row</span> <span class="nf">forComponent:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">component</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="p">[</span><span class="n">activities_</span> <span class="nl">objectAtIndex:</span><span class="n">row</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="p">[</span><span class="n">feelings_</span> <span class="nl">objectAtIndex:</span><span class="n">row</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一样 也是link到Outlets上。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[first app]]></title>

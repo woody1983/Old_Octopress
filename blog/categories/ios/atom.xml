@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IOS | Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-11T23:42:03+08:00</updated>
+  <updated>2012-08-12T13:05:49+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[About PickerViewController]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/12/about-pickerviewconyroller/"/>
+    <updated>2012-08-12T12:44:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/12/about-pickerviewconyroller</id>
+    <content type="html"><![CDATA[<h4>Pickers get their data from a datasource and tell their delegates when something happens</h4>
+
+<p><code>UIPickerViewDatasource.</code> and <code>UIPickerViewDelegate.</code></p>
+
+<p>Controls have their own specific datasources and delegates</p>
+
+<!-- more-->
+
+
+<h4>First, declare that the controller conforms to both protocols</h4>
+
+<p>``` objective-c
+@interface InstaEmailViewController : UIViewController
+&lt;UIPickerViewDataSource, UIPickerViewDelegate> {</p>
+
+<pre><code>NSArray* activities_;
+NSArray* feelings_;
+</code></pre>
+
+<p>}
+@end
+```</p>
+
+<p>然后在InstaEmailViewController.m文件中去定义array的具体内容</p>
+
+<p>``` objective-c InstaEmailViewController.m
+- (void)viewDidLoad
+{</p>
+
+<pre><code>[super viewDidLoad];
+activities_ = [[NSArray alloc ] initWithObjects:@"sleeping",@"eating",@"working",@"thinking", nil];
+feelings_ =[[NSArray alloc ]initWithObjects:@"awesome",@"sad",@"happy",@"ambivalent",@"nauseous", nil];
+            // Do any additional setup after loading the view, typically from a nib.
+</code></pre>
+
+<p>}
+```
+记得要Release出去</p>
+
+<p>``` objective-c
+-(void)dealloc{</p>
+
+<pre><code>[emailPicker_ release];
+[activities_ release];
+[feelings_ release];
+[super dealloc];
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>The datasource protocol has two required methods</h3>
+
+<p>``` objective-c
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *) pickerView {</p>
+
+<pre><code>    return 2;
+</code></pre>
+
+<p>} //要返回有多少个components(组件)</p>
+
+<p>-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {</p>
+
+<pre><code>if (component == 0) {
+    return [activities_ count];
+}
+else {
+    return [feelings_ count];
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>这一步做完以后 将<code>Outlets</code>下的Datasource link到<code>File's Owner</code>上</p>
+
+<h3>There’s just one method for the delegate protocol</h3>
+
+<p>``` objective-c
+- (NSString <em>)pickerView:(UIPickerView </em>)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {</p>
+
+<pre><code>if (component == 0) {
+        return [activities_ objectAtIndex:row];
+} 
+else { 
+        return [feelings_ objectAtIndex:row];
+}
+    return nil; 
+</code></pre>
+
+<p>}</p>
+
+<p>```
+一样 也是link到Outlets上。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[first app]]></title>
