@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IOS | Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-12T13:05:49+08:00</updated>
+  <updated>2012-08-12T13:13:31+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -122,7 +122,7 @@ else {
     <id>http://woody1983.github.com/blog/2012/08/11/first-app</id>
     <content type="html"><![CDATA[<h4>iDecideViewController.h</h4>
 
-<p>```</p>
+<p>``` objective-c</p>
 
 <h1>import &lt;UIKit/UIKit.h></h1>
 
@@ -154,7 +154,7 @@ UITextField *port;
 
 <h4>iDecideViewController.m</h4>
 
-<p>```</p>
+<p>``` objective-c</p>
 
 <h1>import "iDecideViewController.h"</h1>
 
@@ -276,7 +276,7 @@ You provide the method implementation in the
 
 <p>Click on the circle next to New Referencing Outlet and drag it to the @property statement for the Outlet in the .h file on the right. Now when the decisionText UILabel is generated, our decisionText property will reference the control, through the IBOutlet.</p>
 
-<p>```
+<p>``` objective-c
 //
 //  iDecideViewController.h
 //  iDecide
@@ -307,35 +307,37 @@ You provide the method implementation in the
 <p>```
 and</p>
 
-<p>```</p>
+<p>``` objective-c</p>
 
 <h1>import "iDecideViewController.h"</h1>
 
 <p>@interface iDecideViewController ()</p>
 
-<pre><code>@end
+<p>@end</p>
 
-@implementation iDecideViewController
-@synthesize decisionText=decisionText_;
+<p>@implementation iDecideViewController
+@synthesize decisionText=decisionText_;</p>
 
--(IBAction)buttonPressed:(id)sender{
-        decisionText_.text=@"Go for it!";
-            decisionText_.textColor= [UIColor blackColor];
-}
+<p>-(IBAction)buttonPressed:(id)sender{</p>
+
+<pre><code>decisionText_.text=@"Go for it!";
+decisionText_.textColor= [UIColor blackColor];
 </code></pre>
+
+<p>}</p>
 
 <p>-(IBAction)buttonPressed_redo:(id)sender{</p>
 
-<pre><code>    decisionText_.text=@"You wang redo?";
-        decisionText_.textColor= [UIColor redColor];
+<pre><code>decisionText_.text=@"You wang redo?";
+decisionText_.textColor= [UIColor redColor];
 </code></pre>
 
 <p>}</p>
 
 <p>-(IBAction)buttonPressed_green:(id)sender{</p>
 
-<pre><code>    decisionText_.text=@"You choose Green";
-        decisionText_.textColor= [UIColor greenColor];
+<pre><code>decisionText_.text=@"You choose Green";
+decisionText_.textColor= [UIColor greenColor];
 </code></pre>
 
 <p>}

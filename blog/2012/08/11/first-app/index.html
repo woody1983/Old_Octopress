@@ -99,7 +99,7 @@
 	<h1 class="title">First App</h1>
 	<div class="entry-content"><h4>iDecideViewController.h</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -117,24 +117,24 @@
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#import &lt;UIKit/UIKit.h&gt;
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'>@interface iDecideViewController : UIViewController{
-</span><span class='line'>    UILabel *decisionText;
-</span><span class='line'>    UITextField *host;
-</span><span class='line'>    UITextField *port;
-</span><span class='line'>}
+</span><span class='line'><span class="k">@interface</span> <span class="nc">iDecideViewController</span> : <span class="nc">UIViewController</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">UILabel</span> <span class="o">*</span><span class="n">decisionText</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">host</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">port</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>@property (retain,nonatomic) IBOutlet UILabel *decisionText;
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span><span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">decisionText</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_redo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_green:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>@end
+</span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -145,7 +145,7 @@
 
 <h4>iDecideViewController.m</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -193,54 +193,54 @@
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
 <span class='line-number'>48</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#import "iDecideViewController.h"
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &quot;iDecideViewController.h&quot;</span>
 </span><span class='line'>
-</span><span class='line'>@interface iDecideViewController ()
+</span><span class='line'><span class="k">@interface</span> <span class="nc">iDecideViewController</span> <span class="p">()</span>
 </span><span class='line'>
-</span><span class='line'>@end
+</span><span class='line'><span class="k">@end</span>
 </span><span class='line'>
-</span><span class='line'>@implementation iDecideViewController
-</span><span class='line'>@synthesize decisionText=decisionText_;
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed:(id)sender{
-</span><span class='line'>    decisionText_.text=@"Go for it!";
-</span><span class='line'>    decisionText_.textColor= [UIColor blackColor];
-</span><span class='line'>}
-</span><span class='line'>// 声明文字内容和颜色
-</span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender{
-</span><span class='line'>    decisionText_.text=@"You wang redo?";
-</span><span class='line'>    decisionText_.textColor= [UIColor redColor];
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender{
-</span><span class='line'>    decisionText_.text=@"You choose Green";
-</span><span class='line'>    decisionText_.textColor= [UIColor greenColor];
-</span><span class='line'>}
+</span><span class='line'><span class="err">@</span><span class="n">implementation</span> <span class="n">iDecideViewController</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">decisionText</span><span class="o">=</span><span class="n">decisionText_</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'>- (void)viewDidLoad
-</span><span class='line'>{
-</span><span class='line'>    [super viewDidLoad];
-</span><span class='line'>    host.text = @"192.168.1.100";
-</span><span class='line'>    port.text = @"3306";
-</span><span class='line'>    // 加载页面自动显示 没搞明白具体有什么特别的用处 仅作demo
-</span><span class='line'>  // Do any additional setup after loading the view, typically from a nib.
-</span><span class='line'>}
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">decisionText_</span><span class="p">.</span><span class="n">text</span><span class="o">=</span><span class="s">@&quot;Go for it!&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">decisionText_</span><span class="p">.</span><span class="n">textColor</span><span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">blackColor</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// 声明文字内容和颜色</span>
 </span><span class='line'>
-</span><span class='line'>- (void)viewDidUnload
-</span><span class='line'>{
-</span><span class='line'>    [super viewDidUnload];
-</span><span class='line'>    // Release any retained subviews of the main view.
-</span><span class='line'>}
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_redo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">decisionText_</span><span class="p">.</span><span class="n">text</span><span class="o">=</span><span class="s">@&quot;You wang redo?&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">decisionText_</span><span class="p">.</span><span class="n">textColor</span><span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-</span><span class='line'>{
-</span><span class='line'>    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-</span><span class='line'>}
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_green:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">decisionText_</span><span class="p">.</span><span class="n">text</span><span class="o">=</span><span class="s">@&quot;You choose Green&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">decisionText_</span><span class="p">.</span><span class="n">textColor</span><span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">greenColor</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>@end
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">host</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">@&quot;192.168.1.100&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">port</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">@&quot;3306&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// 加载页面自动显示 没搞明白具体有什么特别的用处 仅作demo</span>
+</span><span class='line'>  <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidUnload</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidUnload</span><span class="p">];</span>
+</span><span class='line'>    <span class="c1">// Release any retained subviews of the main view.</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">shouldAutorotateToInterfaceOrientation:</span><span class="p">(</span><span class="n">UIInterfaceOrientation</span><span class="p">)</span><span class="nv">interfaceOrientation</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">interfaceOrientation</span> <span class="o">!=</span> <span class="n">UIInterfaceOrientationPortraitUpsideDown</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>

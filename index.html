@@ -127,7 +127,7 @@
 	<div class="entry-content">
 		<h4>iDecideViewController.h</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -145,24 +145,24 @@
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#import &lt;UIKit/UIKit.h&gt;
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'>@interface iDecideViewController : UIViewController{
-</span><span class='line'>    UILabel *decisionText;
-</span><span class='line'>    UITextField *host;
-</span><span class='line'>    UITextField *port;
-</span><span class='line'>}
+</span><span class='line'><span class="k">@interface</span> <span class="nc">iDecideViewController</span> : <span class="nc">UIViewController</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">UILabel</span> <span class="o">*</span><span class="n">decisionText</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">host</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">port</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>@property (retain,nonatomic) IBOutlet UILabel *decisionText;
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span><span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">decisionText</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_redo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_green:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>@end
+</span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

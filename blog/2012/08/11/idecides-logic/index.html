@@ -133,7 +133,7 @@ You provide the method implementation in the
 
 <p>Click on the circle next to New Referencing Outlet and drag it to the @property statement for the Outlet in the .h file on the right. Now when the decisionText UILabel is generated, our decisionText property will reference the control, through the IBOutlet.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -156,35 +156,35 @@ You provide the method implementation in the
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>//
-</span><span class='line'>//  iDecideViewController.h
-</span><span class='line'>//  iDecide
-</span><span class='line'>//
-</span><span class='line'>//  Created by Woody.Xu on 12-8-11.
-</span><span class='line'>//  Copyright (c) 2012年 Woody.Xu. All rights reserved.
-</span><span class='line'>//
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">//</span>
+</span><span class='line'><span class="cp">//  iDecideViewController.h</span>
+</span><span class='line'><span class="cp">//  iDecide</span>
+</span><span class='line'><span class="cp">//</span>
+</span><span class='line'><span class="cp">//  Created by Woody.Xu on 12-8-11.</span>
+</span><span class='line'><span class="cp">//  Copyright (c) 2012年 Woody.Xu. All rights reserved.</span>
+</span><span class='line'><span class="cp">//</span>
 </span><span class='line'>
-</span><span class='line'>#import &lt;UIKit/UIKit.h&gt;
+</span><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'>@interface iDecideViewController : UIViewController{
-</span><span class='line'>      UILabel *decisionText;
-</span><span class='line'>}
+</span><span class='line'><span class="k">@interface</span> <span class="nc">iDecideViewController</span> : <span class="nc">UIViewController</span><span class="p">{</span>
+</span><span class='line'>      <span class="n">UILabel</span> <span class="o">*</span><span class="n">decisionText</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>@property (retain,nonatomic) IBOutlet UILabel *decisionText;
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span><span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">decisionText</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_redo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender;
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_green:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>@end
+</span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>and</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -208,30 +208,31 @@ You provide the method implementation in the
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#import "iDecideViewController.h"
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &quot;iDecideViewController.h&quot;</span>
 </span><span class='line'>
-</span><span class='line'>@interface iDecideViewController ()
+</span><span class='line'><span class="k">@interface</span> <span class="nc">iDecideViewController</span> <span class="p">()</span>
 </span><span class='line'>
-</span><span class='line'>  @end
+</span><span class='line'><span class="k">@end</span>
 </span><span class='line'>
-</span><span class='line'>  @implementation iDecideViewController
-</span><span class='line'>  @synthesize decisionText=decisionText_;
+</span><span class='line'><span class="err">@</span><span class="n">implementation</span> <span class="n">iDecideViewController</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">decisionText</span><span class="o">=</span><span class="n">decisionText_</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>  -(IBAction)buttonPressed:(id)sender{
-</span><span class='line'>          decisionText_.text=@"Go for it!";
-</span><span class='line'>              decisionText_.textColor= [UIColor blackColor];
-</span><span class='line'>  }
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">{</span>
+</span><span class='line'>  <span class="n">decisionText_</span><span class="p">.</span><span class="n">text</span><span class="o">=</span><span class="s">@&quot;Go for it!&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">decisionText_</span><span class="p">.</span><span class="n">textColor</span><span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">blackColor</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_redo:(id)sender{
-</span><span class='line'>      decisionText_.text=@"You wang redo?";
-</span><span class='line'>          decisionText_.textColor= [UIColor redColor];
-</span><span class='line'>}
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_redo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">{</span>
+</span><span class='line'>  <span class="n">decisionText_</span><span class="p">.</span><span class="n">text</span><span class="o">=</span><span class="s">@&quot;You wang redo?&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">decisionText_</span><span class="p">.</span><span class="n">textColor</span><span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>-(IBAction)buttonPressed_green:(id)sender{
-</span><span class='line'>      decisionText_.text=@"You choose Green";
-</span><span class='line'>          decisionText_.textColor= [UIColor greenColor];
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_green:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">{</span>
+</span><span class='line'>  <span class="n">decisionText_</span><span class="p">.</span><span class="n">text</span><span class="o">=</span><span class="s">@&quot;You choose Green&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">decisionText_</span><span class="p">.</span><span class="n">textColor</span><span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">greenColor</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
