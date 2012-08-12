@@ -7,7 +7,7 @@ categories: IOS
 ---
 
 ####iDecideViewController.h
-``` 
+``` objective-c
 #import <UIKit/UIKit.h>
 
 @interface iDecideViewController : UIViewController{
@@ -34,7 +34,7 @@ UIViewController 尝试声明了label和TextFiled等组件的使用，声明完�
 <!-- more -->
 
 ####iDecideViewController.m
-``` 
+``` objective-c
 #import "iDecideViewController.h"
 
 @interface iDecideViewController ()

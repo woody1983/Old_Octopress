@@ -58,7 +58,7 @@ We’ll use our reference to the label to change the text.
 
 Click on the circle next to New Referencing Outlet and drag it to the @property statement for the Outlet in the .h file on the right. Now when the decisionText UILabel is generated, our decisionText property will reference the control, through the IBOutlet.
 
-```
+``` objective-c
 //
 //  iDecideViewController.h
 //  iDecide
@@ -86,30 +86,30 @@ Click on the circle next to New Referencing Outlet and drag it to the @property 
 ```
 and
 
-```
+``` objective-c
 #import "iDecideViewController.h"
 
 @interface iDecideViewController ()
 
-	@end
+@end
 
-	@implementation iDecideViewController
-	@synthesize decisionText=decisionText_;
+@implementation iDecideViewController
+@synthesize decisionText=decisionText_;
 
-	-(IBAction)buttonPressed:(id)sender{
-		    decisionText_.text=@"Go for it!";
-		        decisionText_.textColor= [UIColor blackColor];
-	}
+-(IBAction)buttonPressed:(id)sender{
+	decisionText_.text=@"Go for it!";
+	decisionText_.textColor= [UIColor blackColor];
+}
 
 
 -(IBAction)buttonPressed_redo:(id)sender{
-	    decisionText_.text=@"You wang redo?";
-	        decisionText_.textColor= [UIColor redColor];
+	decisionText_.text=@"You wang redo?";
+	decisionText_.textColor= [UIColor redColor];
 }
 
 -(IBAction)buttonPressed_green:(id)sender{
-	    decisionText_.text=@"You choose Green";
-	        decisionText_.textColor= [UIColor greenColor];
+	decisionText_.text=@"You choose Green";
+	decisionText_.textColor= [UIColor greenColor];
 }
 ```
 
