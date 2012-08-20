@@ -23,7 +23,7 @@ it "…"
   pending
 end
 ```
-
+<!-- more-->
 ###let 语法 有需要才会出来运算。
 ``` ruby 
 let(:user) {User.new(:is_vip => true)
