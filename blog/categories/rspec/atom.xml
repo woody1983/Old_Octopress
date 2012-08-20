@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RSpec | Woody's 电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/rspec/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-08-20T21:22:03+08:00</updated>
+  <updated>2012-08-20T21:23:36+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -36,6 +36,9 @@ it "…"
   pending
 end
 </code></p>
+
+<!-- more-->
+
 
 <h3>let 语法 有需要才会出来运算。</h3>
 
