@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: RSpec | Woody's 电子游牧日志]]></title>
+  <link href="http://woody1983.github.com/blog/categories/rspec/atom.xml" rel="self"/>
+  <link href="http://woody1983.github.com/"/>
+  <updated>2012-08-20T21:15:31+08:00</updated>
+  <id>http://woody1983.github.com/</id>
+  <author>
+    <name><![CDATA[Woody.Xu]]></name>
+    <email><![CDATA[unix1983@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[关于rspec浅见]]></title>
+    <link href="http://woody1983.github.com/blog/2012/08/20/about-rspec/"/>
+    <updated>2012-08-20T20:52:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/08/20/about-rspec</id>
+    <content type="html"><![CDATA[<h3>刚入手没几天，感觉开发过程中多了很多乐趣。</h3>
+
+<p><code>should</code> and <code>should_not</code></p>
+
+<h2>before and after</h2>
+
+<p>before(:each) 每段it之前执行
+before(:all) 每段describe 之前执行
+after(:each)
+after(:all)</p>
+
+<h3>pending 可以先列出来打算要写的代码</h3>
+
+<p><code>ruby
+it "…"
+  pending
+end
+</code></p>
+
+<h3>let 语法 有需要才会出来运算。</h3>
+
+<p><code>ruby
+let(:user) {User.new(:is_vip =&gt; true)
+</code></p>
+
+<h3>should 后面</h3>
+
+<p>be_true
+be_false
+be_nil</p>
+
+<h3>检查class和def</h3>
+
+<ul>
+<li>target.should be_a_kind_of(Array)      <code>target.class.should == Array</code></li>
+<li>target.should be_an_instance_of(Array) <code>target.class.should == Array</code></li>
+<li>target.should respond_to(:foo)         <code>target.respond_to?(:foo).should == true</code></li>
+</ul>
+
+
+<h3>检查array hash</h3>
+
+<ul>
+<li>target.should have_key(:foo) <code>#target[:foo].should_not == nil</code></li>
+<li>target.should include(4)     <code>#target.include?(4).should == true</code></li>
+<li>target.should have(3).items  <code>#target.items.length == 3</code></li>
+</ul>
+
+
+<h3>任何be_开头的</h3>
+
+<ul>
+<li>target.should be_empty <code>#target.empty?.should == true</code></li>
+<li>target.should be_blank <code>#target.blank?.should == true</code></li>
+<li>target.should be_admin <code>#target.admin?.should == true</code></li>
+</ul>
+
+
+<h3>should ==   一招鲜吃遍天</h3>
+
+<h3>expect to</h3>
+
+<h4>希望一段代码会改变某个值货丢出例外</h4>
+
+<p><code>ruby
+it "should update status to shipping" do
+  expect{order.ship!}.to change{order.status}.from("new").to("shippping")
+end
+</code></p>
+
+<h4>希望status从new变成shipping</h4>
+
+<p>和这段差不多</p>
+
+<p><code>ruby
+it "should update status to shipping "do
+order.status.should == "new"
+order.ship!
+order.status.should == "shipping"
+end
+</code></p>
+
+<h3>subject 可以省略 receiver</h3>
+
+<p><code>ruby
+subject {Order.new(:status =&gt; "New")}
+it {should be_valid} #subject.valid?should == true
+its(:status){should == "New"} #subject.status.should == "New"
+</code></p>
+
+<h3>it example specify 是一样的 都是别名</h3>
+
+<h4>rspec filename.rb -fs 输出specdox文件</h4>
+
+<h4>rspec filename.rb -fh 输出html文件</h4>
+
+<h3>useful Rspec tools</h3>
+
+<ul>
+<li>factory_girl 造测试数据</li>
+<li>shoulda 更多rails专用的matcher</li>
+<li>capybara 提供浏览器模拟</li>
+</ul>
+
+
+<h3>rcov 测试覆盖度 看有哪些代码没有测试到</h3>
+
+<h3>Capydara</h3>
+
+<ul>
+<li>fill_in 'Login', :with=>'username'</li>
+<li>click_link 'Sign up'</li>
+</ul>
+
+
+<h3>每个it只有一个测试目的。不被周边因素影响</h3>
+]]></content>
+  </entry>
+  
+</feed>
