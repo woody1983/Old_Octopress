@@ -1,0 +1,23 @@
+---
+layout: post
+title: "mvc"
+date: 2012-08-22 00:36
+comments: true
+categories: Rails
+---
+
+![img](http://ruby.railstutorial.org/images/figures/mvc_detailed.png)
+
+* The browser issues a request for the /users URI.
+* Rails routes /users to the index action in the Users controller.
+* The index action asks the User model to retrieve all users (User.all).
+* The User model pulls all the users from the database.
+* The User model returns the list of users to the controller.
+* The controller captures the users in the @users variable, which is passed to the index view.
+* The view uses embedded Ruby to render the page as HTML.
+* The controller passes the HTML back to the browser.3
+
+
+![img1](http://ruby.railstutorial.org/images/figures/demo_controller_inheritance.png)
+`app/controllers/application_controller.rb`
+
