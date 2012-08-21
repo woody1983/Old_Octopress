@@ -17,12 +17,14 @@ categories: Rails
 
 ###创建一个负责静态页面的控制器
 `rails generate controller StaticPages home help --no-test-framework`
+
 其实还可以添加 about contact等方法
 
 删除一个控制器`rails destroy  controller FooBars baz quux`
 <!-- more -->
 ### route中的get方法
 `config/routes.rb`
+
 by using get we arrange for the route to respond to a GET request
 `get "static_pages/about"`
 
