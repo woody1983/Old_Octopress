@@ -6,7 +6,8 @@ comments: true
 categories: Rails
 ---
 
-![img](http://ruby.railstutorial.org/images/figures/mvc_detailed.png)
+![About MVC][id1]
+[id1]: http://ruby.railstutorial.org/images/figures/mvc_detailed.png
 
 * The browser issues a request for the /users URI.
 * Rails routes /users to the index action in the Users controller.
@@ -17,7 +18,8 @@ categories: Rails
 * The view uses embedded Ruby to render the page as HTML.
 * The controller passes the HTML back to the browser.3
 
-
-![img1](http://ruby.railstutorial.org/images/figures/demo_controller_inheritance.png)
+![About Controller][id]
 `app/controllers/application_controller.rb`
 
+
+[id]: http://ruby.railstutorial.org/images/figures/demo_controller_inheritance.png  "Optional title attribute"
