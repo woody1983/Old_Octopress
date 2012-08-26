@@ -1,0 +1,212 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>数据库建模 范式的灵活运用 - Woody's 电子游牧日志</title>
+	<meta name="author" content="Woody.Xu">
+
+	
+	<meta name="description" content="标准的需求： 用户名 email 主页 电话 联系地址 发帖ID 发帖标题 发帖内容 回复ID 回复标题 回复内容 按照2NF开始拆分 对应关系的确定为 (用户名) → (email,主页,电话,联系地址)
+(发帖ID) → (发帖标题,发帖内容)
+(回复ID) → (回复标题,回复内容) &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Woody's 电子游牧日志" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Woody's 电子游牧日志</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:woody1983.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/unix1983@gmail.com?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/xiaoputi" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/woody1983" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:woody1983.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h1 class="title">数据库建模 范式的灵活运用</h1>
+	<div class="entry-content"><h2>标准的需求：</h2>
+
+<h3>用户名 email 主页 电话 联系地址 发帖ID 发帖标题 发帖内容 回复ID 回复标题 回复内容</h3>
+
+<p>按照2NF开始拆分</p>
+
+<h4>对应关系的确定为</h4>
+
+<ul>
+<li>(用户名) → (email,主页,电话,联系地址)</li>
+<li>(发帖ID) → (发帖标题,发帖内容)</li>
+<li>(回复ID) → (回复标题,回复内容)</li>
+</ul>
+
+
+<h4>表为5张表</h4>
+
+<pre><code>1、用户信息：用户名，email，主页，电话，联系地址 
+2、帖子信息：发帖ID，标题，内容 
+3、回复信息：回复ID，标题，内容 
+4、发贴：用户名，发帖ID 
+5、回复：发帖ID，回复ID 
+</code></pre>
+
+<p>4和5都存在1:N的情况 1、2、3是标准的1:1</p>
+
+<h4>NF的要求都是满足了 但有个问题：</h4>
+
+<blockquote><p>比如一个用户发了10个帖子 每个帖子有10个回复。</p></blockquote>
+
+<h4>每张表的数据情况为</h4>
+
+<h5>1:1 2:10 3:100 4:10 5:100  产生221条数据</h5>
+
+<h3>如果将4和5的1:N关系转移到2、3中去，不满足3NF的要求 但是数据量会发生改变</h3>
+
+<pre><code>用户信息：用户名，email，主页，电话，联系地址 
+帖子信息：用户名，发帖ID，标题，内容 
+回复信息：发帖ID，回复ID，标题，内容 
+</code></pre>
+
+<h3>用户信息表还是1条数据 帖子信息表是10条数据 恢复信息也是100条 总数据量为111条数据。 数据量减少一半。</h3>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-29T20:34:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2010</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2010/04/29/mysql-dnf/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2012
+
+    Woody.Xu
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'woodyxu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://woody1983.github.com/blog/2010/04/29/mysql-dnf/';
+        var disqus_url = 'http://woody1983.github.com/blog/2010/04/29/mysql-dnf/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
