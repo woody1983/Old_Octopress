@@ -1,0 +1,483 @@
+---
+layout: post
+title: "【转】MySQL存储过程例子，包含事务，参数，嵌套调用，游标，循环等"
+date: 2012-01-03 19:02
+comments: true
+categories: MySQL
+---
+
+``` sql
+drop procedure if exists pro_rep_shadow_rs;   
+delimiter |   
+----------------------------------   
+-- rep_shadow_rs   
+-- 用来处理信息的增加，更新和删除   
+-- 每次只更新上次以来没有做过的数据   
+-- 根据不同的标志位   
+-- 需要一个输出的参数，   
+-- 如果返回为0，则调用失败，事务回滚   
+-- 如果返回为1，调用成功，事务提交   
+--   
+-- 测试方法   
+-- call pro_rep_shadow_rs(@rtn);   
+-- select @rtn;   
+----------------------------------   
+create procedure pro_rep_shadow_rs(out rtn int)   
+begin   
+    -- 声明变量，所有的声明必须在非声明的语句前面   
+    declare iLast_rep_sync_id int default -1;   
+    declare iMax_rep_sync_id int default -1;   
+    -- 如果出现异常，或自动处理并rollback,但不再通知调用方了   
+    -- 如果希望应用获得异常，需要将下面这一句，以及启动事务和提交事务的语句全部去掉   
+    declare exit handler for sqlexception rollback;   
+    -- 查找上一次的   
+    select eid into iLast_rep_sync_id from rep_de_proc_log where tbl='rep_shadow_rs';   
+    -- 如果不存在，则增加一行   
+    if iLast_rep_sync_id=-1 then   
+      insert into rep_de_proc_log(rid,eid,tbl) values(0,0,'rep_shadow_rs');   
+      set iLast_rep_sync_id = 0;   
+    end if;   
+       
+    -- 下一个数字   
+    set iLast_rep_sync_id=iLast_rep_sync_id+1;   
+    -- 设置默认的返回值为0：失败   
+    set rtn=0;   
+       
+    -- 启动事务   
+    start transaction;   
+    -- 查找最大编号   
+    select max(rep_sync_id) into iMax_rep_sync_id from rep_shadow_rs;   
+    -- 有新数据   
+    if iMax_rep_sync_id>=iLast_rep_sync_id then   
+        -- 调用   
+        call pro_rep_shadow_rs_do(iLast_rep_sync_id,iMax_rep_sync_id);   
+        -- 更新日志   
+        update rep_de_proc_log set rid=iLast_rep_sync_id,eid=iMax_rep_sync_id where tbl='rep_shadow_rs';   
+    end if;   
+       
+    -- 运行没有异常，提交事务   
+    commit;   
+    -- 设置返回值为1 
+    set rtn=1;   
+end;   
+|   
+delimiter ;   
+```
+<!-- more-->>
+``` sql
+drop procedure if exists pro_rep_shadow_rs_do;   
+delimiter |   
+---------------------------------   
+-- 处理指定编号范围内的数据   
+-- 需要输入2个参数   
+-- last_rep_sync_id 是编号的最小值   
+-- max_rep_sync_id 是编号的最大值   
+-- 无返回值   
+---------------------------------   
+create procedure pro_rep_shadow_rs_do(last_rep_sync_id int, max_rep_sync_id int)   
+begin   
+    declare iRep_operationtype varchar(1);   
+    declare iRep_status varchar(1);   
+    declare iRep_Sync_id int;   
+    declare iId int;   
+    -- 这个用于处理游标到达最后一行的情况   
+    declare stop int default 0;   
+    -- 声明游标   
+    declare cur cursor for select id,Rep_operationtype,iRep_status,rep_sync_id from rep_shadow_rs where rep_sync_id between last_rep_sync_id and max_rep_sync_id;   
+    -- 声明游标的异常处理，设置一个终止标记   
+    declare CONTINUE HANDLER FOR SQLSTATE '02000' SET stop=1;   
+       
+    -- 打开游标   
+    open cur;   
+       
+    -- 读取一行数据到变量   
+    fetch cur into iId,iRep_operationtype,iRep_status,iRep_Sync_id;   
+    -- 这个就是判断是否游标已经到达了最后   
+    while stop <> 1 do 
+        -- 各种判断   
+        if iRep_operationtype='I' then   
+            insert into rs0811 (id,fnbm) select id,fnbm from rep_shadow_rs where rep_sync_id=iRep_sync_id;   
+        elseif iRep_operationtype='U' then   
+        begin   
+            if iRep_status='A' then   
+                insert into rs0811 (id,fnbm) select id,fnbm from rep_shadow_rs where rep_sync_id=iRep_sync_id;   
+            elseif iRep_status='B' then   
+                delete from rs0811 where id=iId;   
+            end if;   
+        end;   
+        elseif iRep_operationtype='D' then   
+            delete from rs0811 where id=iId;   
+        end if;    
+           
+        -- 读取下一行的数据    
+        fetch cur into iId,iRep_operationtype,iRep_status,iRep_Sync_id;   
+    end while; -- 循环结束   
+    close cur; -- 关闭游标   
+end;  
+use testprocedure;
+delimiter //
+
+create procedure simpleproce1 (out par1 int)
+begin
+select count(*) into par1 from proce;
+end
+//
+delimiter ;
+call simpleproce1(@a);
+select @a;
+#<2>,每次只有单一的行可以被取回select id,name into par1,par2 from proce LIMIT 1;中的LIMIT 1;
+use testprocedure;
+delimiter //
+DROP procedure IF EXISTS simpleproce2
+create procedure simpleproce2 (out par1 int,out par2 char(30))
+begin
+select id,name into par1,par2 from proce LIMIT 1;
+end
+//
+delimiter ;
+call simpleproce2(@a,@b);
+select @a,@b;
+
+## *********second test,function************
+#<3>
+delimiter //
+DROP FUNCTION IF EXISTS hello
+//
+create function hello(s char(20)) returns char(50)
+return concat('Hello, ',s,'!');
+//
+delimiter ;
+select hello('world');
+show create function testprocedure.helloG
+#它返回子程序的特征，如数据库，名字，类型，创建者及创建和修改日期
+show function status like 'hello'G
+#<4>
+#注意name不能和字段名相同
+delimiter //
+DROP procedure IF EXISTS test //
+CREATE PROCEDURE test ()
+BEGIN
+    DECLARE name VARCHAR(5) DEFAULT 'bob';
+    DECLARE newname VARCHAR(5);
+    DECLARE xid INT;
+    
+    SELECT name,id INTO newname,xid 
+      FROM proce WHERE name = name;
+    SELECT newname;
+END;
+//
+call test1() //
+#***
+delimiter //
+DROP procedure IF EXISTS test2 //
+CREATE PROCEDURE test2 ()
+BEGIN
+    
+    DECLARE newname VARCHAR(5);
+    DECLARE xid INT;
+    
+    SELECT name,id INTO newname,xid 
+      FROM proce limit 1;
+    SELECT newname,xid;
+END;
+//
+call test2() //
+#<5>
+use testprocedure;
+CREATE PROCEDURE p1 () SELECT * FROM proce;
+call p1();
+#<6>注意此处的handler是设置SQLSTATE值，SQLWARNING是对所有以01开头的SQLSTATE代码的速记
+#NOT FOUND是对所有以02开头的SQLSTATE代码的速记
+#SQLEXCEPTION是对所有没有被SQLWARNING或NOT FOUND捕获的SQLSTATE代码的速记
+#DECLARE CONTINUE HANDLER声明CONTINUE异常处理
+#事实上这里的23000SQLSTATE是更常用的，当外键约束出错或主键约束出错就被调用了。
+#当没有发生该23000异常时， select @x2的值将是null,而不是1,
+#并且后面的第2个语句执行时将会报主键约束错误，此时@x2=1,@x=4,虽然第2句有了异常，但是后面的语句继续执行
+#保存到数据的数据是3,test3和5,test5
+use testprocedure;
+delimiter //
+DROP procedure IF EXISTS handlerdemo
+//
+create procedure handlerdemo()
+begin
+declare continue handler for sqlstate '23000' set @x2=1;
+set @x=1;
+insert into proce values(3,'test3');
+set @x=2;
+insert into proce values(3,'test4');
+set @x=3;
+insert into proce values(5,'test5');
+set @x=4;
+end;
+//
+call handlerdemo()//
+select @x //
+select @x2 //
+## ************光标****************
+#<7>光标必须在声明处理程序之前被声明，并且变量和条件必须在声明光标或处理程序之前被声明
+#在这里先声明变量a,b,c,后声明cursor
+create procedure curdemo()
+begin
+declare done int default 0;
+declare a char(16);
+declare b,c int;
+declare cur1 cursor for select id,name from proce;
+declare cur2 cursor for select id from proce2;
+declare continue handler for sqlstate '02000' set done=1;
+
+open cur1;
+open cur2;
+repeat
+fetch cur1 into b,a;
+fetch cur2 into c;
+if not done then
+   if b<c then
+     insert into proce3 values(b,a);
+   else
+     insert into proce3 values(c,a);
+   end if;
+end if;
+until done end repeat;
+
+close cur1;
+close cur2;
+end
+## **************** Case *******************
+#<8>when ... then ;case ... end case;
+delimiter //
+DROP procedure IF EXISTS p13
+//
+create procedure p13(in par1 int)
+begin
+declare var1 int;
+set var1=par1+1;
+
+case var1
+when 0 then insert into casetest values(17);
+when 1 then insert into casetest values(18);
+else insert into casetest values(19);
+end case;
+end;
+//
+call p13(-1)//
+call p13(0)//
+call p13(1)//
+call p13(null)//
+
+## **************** while ****************
+#<9>while ... do ... end while;为了防止null的错误，set v=0是必须的
+delimiter //
+DROP procedure IF EXISTS p14
+//
+create procedure p14()
+begin
+declare v int;
+set v=0;
+while v < 5 do 
+      insert into casetest values (v);
+      set v=v+1;
+end while;
+end;//
+call p14()//
+## ***************** repeat *****************
+#<10>repeat ...until ... end repeat; 是执行后检查（until v>=5），而while是执行前检查(while v<5)
+delimiter //
+DROP procedure IF EXISTS p15
+//
+create procedure p15()
+begin
+declare v int;
+set v=0;
+repeat
+    insert into casetest values(v);
+    set v=v+1;
+until v >=5
+end repeat;
+
+end;
+//
+call p15()//
+## ***************** loops *****************
+#<11> loop 和while一样不需要初始条件，同时和repeat一样不需要结束条件
+#      loop_label: loop 
+#      ...
+#       if .. then 
+#       leave loop_label 
+#       end if
+#      end loop
+delimiter //
+DROP procedure IF EXISTS p16
+//
+create procedure p16()
+begin
+declare v int;
+set v=0;
+loop_label: loop
+    insert into casetest values(v);
+    set v=v+1;
+    if v >=5 then
+      leave loop_label;
+    end if;
+end loop;
+end;//
+call p16()//
+## ***************** Labels *****************
+# <12>labels标号； 注意此处的until 0=0后面没有分号“;”
+delimiter //
+DROP procedure IF EXISTS p17//
+create procedure p17()
+label_1:begin
+label_2:while 0=1 do leave label_2; end while;
+label_3:repeat leave label_3;until 0=0 end repeat;
+label_4:loop leave label_4; end loop;
+end;//
+call p17()//
+#<13>labels 标号结束符；
+delimiter //
+DROP procedure IF EXISTS p18//
+create procedure p18()
+label_1:begin
+label_2:while 0=1 do leave label_2; end while label_2;
+label_3:repeat leave label_3;until 0=0 end repeat label_3;
+label_4:loop leave label_4; end loop label_4;
+end label_1;//
+call p18()//
+#<14>leave和labels 跳出和标号;leave 使程序跳出复杂的语句
+delimiter //
+DROP procedure IF EXISTS p19//
+create procedure p19(par char)
+label_1:begin
+label_2:begin
+label_3:begin
+if par is not null then
+if par='a' then leave label_1;
+else 
+   begin
+     if par='b' then 
+       leave label_2;
+     else
+       leave label_3;
+     end if;
+   end;
+end if;
+end if;
+end label_3;
+end label_2;
+end label_1;
+//
+call p19('a')//
+
+#<15>iterate迭代，必须用leave;iterate意思是重新开始复合语句，相当于 continue
+#该结果中3将不被保存到数据库表中
+delimiter //
+DROP procedure IF EXISTS p20//
+create procedure p20()
+begin
+declare v int;
+set v=0;
+loop_label:loop
+    if v=3 then 
+      set v=v+1;
+      iterate loop_label;
+    end if;
+    insert into casetest values(v);
+    set v=v+1;
+    if v>=5 then
+      leave loop_label;
+    end if;
+end loop loop_label;
+end;//
+call p20()//
+
+#<16>Grand combination大组合
+delimiter //
+DROP procedure IF EXISTS p21//
+create procedure p21(in par1 int,out par2 int)
+language sql deterministic sql security invoker
+begin
+declare v int;
+label goto_label;
+start_label:loop
+    if v=v then
+      leave start_label;
+    else
+      iterate start_label;
+    end if;
+end loop start_label;
+
+repeat
+    while 1=0 do begin end;
+    end while;
+until v=v
+end repeat;
+goto goto_label;
+
+end;
+//
+call p21()//
+## **************** trigger ***************************
+#<17>
+use testprocedure;
+CREATE TABLE trig1(a1 int);
+CREATE TABLE trig2(a2 int);
+CREATE TABLE trig3(a3 int not null AUTO_INCREMENT PRIMARY KEY);
+CREATE TABLE trig4(
+a4 INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+b4 INT DEFAULT 0
+);
+insert into trig3(a3) values(null),(null),(null),(null),(null),(null),(null),(null),(null),(null);
+insert into trig4(a4) values(0),(0),(0),(0),(0),(0),(0),(0),(0),(0);
+delimiter //
+DROP trigger trigtest//
+create trigger trigtest before insert on trig1
+for each row begin
+insert into trig2 set a2=NEW.a1;
+delete from trig3 where a3=NEW.a1;
+update trig4 set b4=b4+1 where a4=NEW.a1;
+end;
+//
+
+delimiter ;
+INSERT INTO trig1 VALUES(1), (3), (1), (7), (1), (8), (4), (4);
+------ -------------------------------------------------------------------------
+Drop Procedure If Exists p_report; 
+
+Delimiter forend 
+
+Create Procedure p_report 
+(In year Int, 
+In month Int, 
+In Id Char(10), 
+Out status Int) 
+Begin 
+SelectYear, 
+Month, 
+OfficeId, 
+OnTimeRate 
+FromReportByMonth 
+WhereOfficeId = Id And 
+Year = year; 
+
+End 
+
+forend 
+
+Delimiter ;
+```
+
+--------------------------------------------------------------------------------
+###MySQL 存储过程参数有三种类型：in、out、inout。它们各有什么作用和特点呢？
+####一、MySQL 存储过程参数（in）
+MySQL 存储过程 “in” 参数：跟 C 语言的函数参数的值传递类似， MySQL 存储过程内部可能会修改此参数，但对 in 类型参数的修改，对调用者（caller）来说是不可见的（not visible）。
+drop procedure if exists pr_param_in;create procedure pr_param_in( in id int -- in 类型的 MySQL 存储过程参数)begin if (id is not null) then set id = id + 1; end if; select id as id_inner;end;set @id = 10;call pr_param_in(@id);select @id as id_out;mysql> call pr_param_in(@id);+----------+| id_inner |+----------+| 11 |+----------+mysql> select @id as id_out;+--------+| id_out |+--------+| 10 |+--------+
+可以看到：用户变量 @id 传入值为 10，执行存储过程后，在过程内部值为：11（id_inner），但外部变量值依旧为：10（id_out）。
+####二、MySQL 存储过程参数（out）
+MySQL 存储过程 “out” 参数：从存储过程内部传值给调用者。在存储过程内部，该参数初始值为 null，无论调用者是否给存储过程参数设置值。
+drop procedure if exists pr_param_out;create procedure pr_param_out( out id int)begin select id as id_inner_1; -- id 初始值为 null if (id is not null) then set id = id + 1; select id as id_inner_2; else select 1 into id; end if; select id as id_inner_3;end;set @id = 10;call pr_param_out(@id);select @id as id_out;mysql> set @id = 10;mysql>mysql> call pr_param_out(@id);+------------+| id_inner_1 |+------------+| NULL |+------------++------------+| id_inner_3 |+------------+| 1 |+------------+mysql> select @id as id_out;+--------+| id_out |+--------+| 1 |+--------+
+可以看出，虽然我们设置了用户定义变量 @id 为 10，传递 @id 给存储过程后，在存储过程内部，id 的初始值总是 null（id_inner_1）。最后 id 值（id_out = 1）传回给调用者。
+####三、MySQL 存储过程参数（inout）
+MySQL 存储过程 inout 参数跟 out 类似，都可以从存储过程内部传值给调用者。不同的是：调用者还可以通过 inout 参数传递值给存储过程。
+drop procedure if exists pr_param_inout;create procedure pr_param_inout( inout id int)begin select id as id_inner_1; -- id 值为调用者传进来的值 if (id is not null) then set id = id + 1; select id as id_inner_2; else select 1 into id; end if; select id as id_inner_3;end;set @id = 10;call pr_param_inout(@id);select @id as id_out;mysql> set @id = 10;mysql>mysql> call pr_param_inout(@id);+------------+| id_inner_1 |+------------+| 10 |+------------++------------+| id_inner_2 |+------------+| 11 |+------------++------------+| id_inner_3 |+------------+| 11 |+------------+mysql>mysql> select @id as id_out;+--------+| id_out |+--------+| 11 |+--------+
+从结果可以看出：我们把 @id（10），传给存储过程后，存储过程最后又把计算结果值 11（id_inner_3）传回给调用者。 MySQL 存储过程 inout 参数的行为跟 C 语言函数中的引用传值类似。
+通过以上例子：如果仅仅想把数据传给 MySQL 存储过程，那就使用“in” 类型参数；如果仅仅从 MySQL 存储过程返回值，那就使用“out” 类型参数；如果需要把数据传给 MySQL 存储过程，还要经过一些计算后再传回给我们，此时，要使用“inout” 类型参数。
+

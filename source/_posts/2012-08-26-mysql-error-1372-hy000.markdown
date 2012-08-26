@@ -1,0 +1,26 @@
+---
+layout: post
+title: "MYSQL ERROR 1372 (HY000)"
+date: 2012-02-13 18:52
+comments: true
+categories: MySQL
+---
+
+``` 
+mysql> GRANT ALL PRIVILEGES ON KETTLE_DEMO.* TO 'dba'@'%' IDENTIFIED BY PASSWORD 'dba';
+ERROR 1372 (HY000): Password hash should be a 41-digit hexadecimal number
+```
+###将密码函数化
+
+``` 
+mysql> select password('dba');
++-------------------------------------------+
+| password('dba')                           |
++-------------------------------------------+
+| *381AD08BBFA647B14C82AC1094A29AD4D7E4F51D |
++-------------------------------------------+
+1 row in set (0.00 sec)
+mysql> GRANT ALL PRIVILEGES ON KETTLE_DEMO.* TO 'dba'@'%' IDENTIFIED BY PASSWORD '*381AD08BBFA647B14C82AC1094A29AD4D7E4F51D';
+Query OK, 0 rows affected (0.00 sec)
+```
+OK了!
