@@ -6,7 +6,7 @@ comments: true
 categories: Ruby
 ---
 
-### 1、[TryRuby](www.tyrruby.org)
+### 1、[TryRuby](www.tryruby.org)
 
 ```
 需要翻墙 配合codeschool一起练习的话 会有$5的代金券可以抵用学费
