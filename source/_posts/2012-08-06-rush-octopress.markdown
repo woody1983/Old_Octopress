@@ -3,7 +3,7 @@ layout: post
 title: "Rush OctoPress"
 date: 2012-08-05 19:37
 comments: true
-categories:  [OctoPress]
+categories:  [octopress]
 ---
 
 `Git`+`Octopress`+`Ruby`
