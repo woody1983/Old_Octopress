@@ -7,7 +7,7 @@
 	<meta name="author" content="Woody.Xu">
 
 	
-	<meta name="description" content="偶然一个机会在罗永浩的微博看到这样一段话，感觉不错，随即抄了下来。 罗永浩提到的工匠精神： 1）对所从事的事情有一种完美主义情节，在力所能及的情况下做到极致。 2）对细节的执着，点点滴滴决不放过。 3）激情，对所做的事欲罢不能，并从中获得巨大的心灵满足。 4）执着，百折不挠的勇气。可惜， &hellip;">
+	<meta name="description" content=" 生活大爆炸最新一季一直没看 说实话还蛮想他们的。BG2最近更新也慢 准备把TBBT最新一季都download下来漫漫看 Dec 10th, 2012 movie Comments ">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +78,339 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/12/10/thanks-tbbt/">Thanks TBBT</a></h1>
+	<div class="entry-content">
+		<p>生活大爆炸最新一季一直没看 说实话还蛮想他们的。BG2最近更新也慢  准备把TBBT最新一季都download下来漫漫看</p>
+
+<p><img src="../images/img/tbbt.jpg"></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-10T21:49:00+08:00" pubdate data-updated="true">Dec 10<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/movie/'>movie</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/12/10/thanks-tbbt//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/12/07/octopress-upload-images/">OctoPress Upload Images</a></h1>
+	<div class="entry-content">
+		<h3>First all</h3>
+
+<p>make <code>source/images/img</code> folder</p>
+
+<div><script src='https://gist.github.com/4230466.js?file='></script>
+<noscript><pre><code>&lt;img src=&quot;../images/img/galaxy.jpg&quot;/&gt;
+
+&lt;!-- or --&gt;
+
+{% img ../images/img/greece.jpg %}
+</code></pre></noscript></div>
+
+
+<p><img src="../images/img/galaxy.jpg"/></p>
+
+<p><img src="../images/img/greece.jpg"></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-07T10:08:00+08:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/octopress/'>octopress</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/12/07/octopress-upload-images//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/12/05/ruby-cuo-wu-chu-li-he-li-wai/">Ruby 错误处理和例外</a></h1>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ltotal</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'><span class="n">wtotal</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'><span class="n">ctotal</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">ARGV</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">file</span><span class="o">|</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>    <span class="n">input</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="k">while</span> <span class="n">line</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="n">gets</span>
+</span><span class='line'>      <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="n">c</span> <span class="o">+=</span> <span class="n">line</span><span class="o">.</span><span class="n">size</span>
+</span><span class='line'>      <span class="n">line</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/^\s+/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">ary</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sr">/\s+/</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>
+</span><span class='line'>      <span class="n">w</span> <span class="o">+=</span> <span class="n">ary</span><span class="o">.</span><span class="n">size</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">input</span><span class="o">.</span><span class="n">close</span>
+</span><span class='line'>    <span class="nb">printf</span><span class="p">(</span><span class="s2">&quot;%8d %8d %8d %s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">file</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">ltotal</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="n">wtotal</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="n">ctotal</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">ex</span>
+</span><span class='line'>    <span class="nb">print</span> <span class="s2">&quot;&gt;&gt;&gt;&quot;</span><span class="p">,</span><span class="n">ex</span><span class="o">.</span><span class="n">message</span><span class="p">,</span><span class="s2">&quot;&lt;&lt;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">printf</span><span class="p">(</span><span class="s2">&quot;%8d %8d %8d %s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">ltotal</span><span class="p">,</span><span class="n">wtotal</span><span class="p">,</span><span class="n">ctotal</span><span class="p">,</span><span class="s2">&quot;total&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>当无法打开文件阅读的时候，就会将例外报给ex变量 并打印输出。</h3>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-05T11:50:00+08:00" pubdate data-updated="true">Dec 5<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/12/05/ruby-cuo-wu-chu-li-he-li-wai//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/12/04/ruby-resource/">Ruby Resource</a></h1>
+	<div class="entry-content">
+		<h3>1、<a href="www.tryruby.org">TryRuby</a></h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>需要翻墙 配合codeschool一起练习的话 会有$5的代金券可以抵用学费</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2、<a href="http://www.codecademy.com/zh/tracks/ruby">CodeCadeMy</a></h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>全部做完，受益匪浅。</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3、<a href="http://lrthw.github.com">笨方法學 Ruby</a></h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>讲的很仔细  用的1.9的版本 各个知识点都讲了 不错</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>4、<a href="http://www.learnstreet.com/">LearnStreet的Ruby板块</a></h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>目前免费，有一个全程的练习和配套的3个小项目练习 一个银行 一个度量转换 一个锻炼记忆力的。</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+
+		
+		<a href="/blog/2012/12/04/ruby-resource/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-04T14:37:00+08:00" pubdate data-updated="true">Dec 4<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/12/04/ruby-resource//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp/">Ruby ARGV &amp; STDIN.gets.chomp()</a></h1>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ser</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'><span class="n">prompt</span> <span class="o">=</span> <span class="s1">&#39;&gt; &#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hi </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">, I&#39;m the </span><span class="si">#{</span><span class="vg">$0</span><span class="si">}</span><span class="s2"> script.&quot;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;I&#39;d like to ask you a few questions.&quot;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Do you like me </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">?&quot;</span>
+</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
+</span><span class='line'><span class="n">likes</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Where do you live </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">?&quot;</span>
+</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
+</span><span class='line'><span class="n">lives</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;What kind of computer do you have?&quot;</span>
+</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
+</span><span class='line'><span class="n">computer</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="o">&lt;&lt;</span><span class="no">MESSAGE</span>
+</span><span class='line'><span class="sh">Alright, so you said #{likes} about liking me.</span>
+</span><span class='line'><span class="sh">You live in #{lives}.  Not sure where that is.</span>
+</span><span class='line'><span class="sh">And you have a #{computer} computer.  Nice.</span>
+</span><span class='line'><span class="no">MESSAGE</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Important: 同時必須注意的是，我們也用了 STDIN.gets 取代了 gets。這是因為如果有東西在 ARGV 裡，標準的gets 會認為將第一個參數當成檔案而嘗試從裡面讀東西。在要從使用者的輸入（如stdin）讀取資料的情況下我們必須明確地使用 STDIN.gets。</p></blockquote>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-04T14:32:00+08:00" pubdate data-updated="true">Dec 4<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -337,288 +670,6 @@ after(:all)</p>
 </div>
 	
 		<span class="comments"><a href="/blog/2012/08/20/about-rspec//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/12/about-pickerviewconyroller/">About PickerViewController</a></h1>
-	<div class="entry-content">
-		<h4>Pickers get their data from a datasource and tell their delegates when something happens</h4>
-
-<p><code>UIPickerViewDatasource.</code> and <code>UIPickerViewDelegate.</code></p>
-
-<p>Controls have their own specific datasources and delegates</p>
-
-
-		
-		<a href="/blog/2012/08/12/about-pickerviewconyroller/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-12T12:44:00+08:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/12/about-pickerviewconyroller//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/11/first-app/">First App</a></h1>
-	<div class="entry-content">
-		<h4>iDecideViewController.h</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">iDecideViewController</span> : <span class="nc">UIViewController</span><span class="p">{</span>
-</span><span class='line'>    <span class="n">UILabel</span> <span class="o">*</span><span class="n">decisionText</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">host</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">port</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span><span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">decisionText</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_redo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">buttonPressed_green:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>UIViewController 尝试声明了label和TextFiled等组件的使用，声明完毕以后需要在.storyboard中去right－click选择触发动作。并指向到<code>-(IBAction)</code>上。</p>
-
-
-		
-		<a href="/blog/2012/08/11/first-app/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-11T23:32:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/11/first-app//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/11/heres-what-you-can-do-to-bend-your-brain-into-submission/">Here’s What YOU Can Do to Bend Your Brain Into Submission</a></h1>
-	<div class="entry-content">
-		<p>So, we did our part. The rest is up to you. These tips are a starting point; listen to your brain and figure out what works for you and what doesn’t. Try new things.</p>
-
-<p><code>Cut this out and stick it on your refrigerator.</code></p>
-
-
-		
-		<a href="/blog/2012/08/11/heres-what-you-can-do-to-bend-your-brain-into-submission/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-11T23:20:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/hack/'>Hack</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/11/heres-what-you-can-do-to-bend-your-brain-into-submission//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/11/idecides-logic/">iDecide&#8217;s Logic</a></h1>
-	<div class="entry-content">
-		<h4>iDecide’s logic</h4>
-
-<p>Any controls you create need a method that Interface Builder can use to connect the control to behaviors specified in the implementation file.</p>
-
-<p>The .xib file describes the button as you configured it in Interface Builder.
-You’ll likely notice all the files’ names have “ViewController”
-in them. Don’t sweat that for now, we’ll explain that in a bit.</p>
-
-<p>iDecideViewController.h
-This line declares a method called buttonPressed that Interface Builder will recognize as a possible callback.</p>
-
-<p>iDecideViewController.m
-You provide the method implementation in the
-.m file. Here’s where you code up what should actually happen when the button is pressed.</p>
-
-<h4>IBOutlet与IBAction</h4>
-
-<p>通过在变量前增加IBOutlet来说明该变量将与界面上的某个UI对象对应，在方法前增加IBAction来说明该方法将与界面上的事件对应.</p>
-
-
-		
-		<a href="/blog/2012/08/11/idecides-logic/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-11T23:11:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/11/idecides-logic//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/11/app-magnets/">App Magnets</a></h1>
-	<div class="entry-content">
-		<h2>App Magnets</h2>
-
-<ul>
-<li>Determine app layout. <code>确定应用程序的布局</code></li>
-<li>Build the GUI <code>构建用户图形界面</code></li>
-<li>Figure out how to use the controls <code>弄清楚如何使用控件</code></li>
-<li>Handle the data <code>处理数据</code></li>
-<li>Generate the email.  <code>生成电子邮件</code></li>
-</ul>
-
-
-<h3>Determine app layout.</h3>
-
-<p>Before you start coding anything, sketch up what you’re thinking.</p>
-
-<h3>Build the GUI</h3>
-
-<p>Some people write backend code first—we’re going to go back and forth depending on our project, but to get started, we’ll do the GUI first this time.</p>
-
-<h3>Figure out how to use the controls</h3>
-
-<p>After you’ve landed on the general app design, you need to get into the documentation a little and figure out how to implement the controls you’ve chosen.</p>
-
-<h3>Handle the data</h3>
-
-<p>Here we need to manage the data coming from the controls.</p>
-
-<h3>Generate the email.</h3>
-
-<p>We’ll help you out with this last step.</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-11T23:09:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/11/app-magnets//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 
