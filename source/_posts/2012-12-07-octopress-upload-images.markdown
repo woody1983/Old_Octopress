@@ -11,6 +11,4 @@ make `source/images/img` folder
 
 {% gist 4230466 %}
 
-<img src="../images/img/galaxy.jpg"/>
 
-{% img ../images/img/greece.jpg %}
