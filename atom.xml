@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Woody's 电子游牧日志]]></title>
+  <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-12-10T21:56:01+08:00</updated>
+  <updated>2012-12-25T16:11:32+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,140 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Moudle &amp; Class &amp; Method]]></title>
+    <link href="http://woody1983.github.com/blog/2012/12/11/ruby-moudle-and-class-and-method/"/>
+    <updated>2012-12-11T15:17:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/12/11/ruby-moudle-and-class-and-method</id>
+    <content type="html"><![CDATA[<h2>Moudle</h2>
+
+<blockquote><p>不能创建实例和继承 作用之一是提供namespace 通过使用<code>Moudle.method</code>的方式调用 可以避免方法 常数和类名称的冲突。
+include一个module以后 可以直接调用里面的常数和方法 一般调用方法为</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">HelloWorld</span>
+</span><span class='line'>  <span class="no">Version</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">print</span> <span class="s2">&quot;Hi </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">. </span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="c1">#如果该method需要对外部公开的话</span>
+</span><span class='line'>  <span class="kp">module_function</span> <span class="ss">:hello</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>调用的时候就是 <code>HelloWorld::Verison</code> or <code>HelloWorld.hello('1024bit')</code></p>
+
+<blockquote><p>Mix-in 讲moduld混到Class中 可以将两个Class中相同的功能植入Module中</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MyModule</span>
+</span><span class='line'>  <span class="c1">#</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MyClass1</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">MyModule</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MyClass2</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">MyModule</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Class</h2>
+
+<ul>
+<li>初始化方法 initialize</li>
+<li>访问方法 <code>attr_reader :name</code> &amp; <code>attr_writer</code> &amp; <code>attr_accessor</code></li>
+<li>类变量<code>@@</code>是所有实例共享的变量</li>
+<li>类方法 不能对实例操作。或者说实例无法调用类方法</li>
+</ul>
+
+
+<p>类方法的声明三种写法</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">HelloWorld</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">HelloWorld</span><span class="o">.</span><span class="nf">hello</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">#</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">HelloWorld</span>
+</span><span class='line'>  <span class="c1">#</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">HelloWorld</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">hello</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">HelloWorld</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">hello</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Method</h2>
+
+<p>如果Method的参数过多 建议放到Hash里去处理</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="nb">name</span><span class="o">=</span><span class="s2">&quot;Ruby&quot;</span><span class="p">,</span><span class="n">option</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>  <span class="n">long</span> <span class="o">=</span> <span class="n">options</span><span class="o">[</span><span class="ss">:long</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">body</span> <span class="o">=</span> <span class="n">message</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Thanks TBBT]]></title>
@@ -1544,109 +1678,6 @@ You provide the method implementation in the
 <h3>有一个地方需要注意的就是如何保证todo和source的一致性</h3>
 
 <p>也就是说最安全的做法就是以后写作只在todo里面完成 先push到远端的todo分支里然后到source里去merge 最后完成发布和push</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rush OctoPress]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/05/rush-octopress/"/>
-    <updated>2012-08-05T19:37:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/05/rush-octopress</id>
-    <content type="html"><![CDATA[<p><code>Git</code>+<code>Octopress</code>+<code>Ruby</code></p>
-
-<blockquote><p>终于装好了 有些细节还需要继续调整 右边没有分类边框太特么反人类了.下次继续完善安装过程和步骤。</p></blockquote>
-
-<!-- more -->
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -L https://get.rvm.io | bash -s stable --ruby
-</span><span class='line'>
-</span><span class='line'>#给 ~/.bashrc (Linux) 或 ~/.bash_profile (Mac 环境) 加上脚本引用，执行下面这行（注意修改文件名）:
-</span><span class='line'>
-</span><span class='line'>$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.' &gt;&gt; ~/.bashrc
-</span><span class='line'>
-</span><span class='line'># 如果是 Linux 
-</span><span class='line'>$ source ~/.bashrc
-</span><span class='line'>
-</span><span class='line'>#first install openssl
-</span><span class='line'>rvm pkg install openssl
-</span><span class='line'>
-</span><span class='line'>rvm install 1.9.3 -C --with-openssl-dir=$HOME/.rvm/usr
-</span><span class='line'>rvm use 1.9.3
-</span><span class='line'>rvm rubygems latest
-</span><span class='line'>rvm install rbenv</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Depoly三部曲</h3>
-
-<blockquote><p>建立一个source的分支用来保存博客源文件</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate #生成静态文件
-</span><span class='line'>rake preview #本地预览
-</span><span class='line'>rake deploy #发布到github 只是第一次上传会比较慢一些 后面就快很多
-</span><span class='line'>
-</span><span class='line'>git remote add octopress_github git@github.com:username/username.github.com.git
-</span><span class='line'>git add .
-</span><span class='line'>git commit -m "blog source md or something"
-</span><span class='line'>git push octopress_github source</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>Address.c Source Code|测试一下贴代码功能 爽</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
-</span><span class='line'><span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">x</span><span class="o">=</span><span class="mh">0x76543210</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">y</span><span class="o">=</span><span class="mh">0xfedcba98</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%x&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%d %d&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="cm">/*演示变量地址和变量的值*/</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   

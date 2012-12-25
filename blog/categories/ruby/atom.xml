@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby | Woody's 电子游牧日志]]></title>
+  <title><![CDATA[Category: Ruby | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2012-12-10T21:56:01+08:00</updated>
+  <updated>2012-12-25T16:11:32+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,103 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Moudle &amp; Class &amp; Method]]></title>
+    <link href="http://woody1983.github.com/blog/2012/12/11/ruby-moudle-and-class-and-method/"/>
+    <updated>2012-12-11T15:17:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2012/12/11/ruby-moudle-and-class-and-method</id>
+    <content type="html"><![CDATA[<h2>Moudle</h2>
+
+<blockquote><p>不能创建实例和继承 作用之一是提供namespace 通过使用<code>Moudle.method</code>的方式调用 可以避免方法 常数和类名称的冲突。
+include一个module以后 可以直接调用里面的常数和方法 一般调用方法为</p></blockquote>
+
+<p>``` ruby
+module HelloWorld
+  Version = "1.0"</p>
+
+<p>  def hello(name)</p>
+
+<pre><code>print "Hi #{name}. \n"
+</code></pre>
+
+<p>  end
+  #如果该method需要对外部公开的话
+  module_function :hello
+end
+```</p>
+
+<p>调用的时候就是 <code>HelloWorld::Verison</code> or <code>HelloWorld.hello('1024bit')</code></p>
+
+<blockquote><p>Mix-in 讲moduld混到Class中 可以将两个Class中相同的功能植入Module中</p></blockquote>
+
+<p>``` ruby
+module MyModule
+  #
+end</p>
+
+<p>class MyClass1
+  include MyModule
+end</p>
+
+<p>class MyClass2
+  include MyModule
+end
+```</p>
+
+<h2>Class</h2>
+
+<ul>
+<li>初始化方法 initialize</li>
+<li>访问方法 <code>attr_reader :name</code> &amp; <code>attr_writer</code> &amp; <code>attr_accessor</code></li>
+<li>类变量<code>@@</code>是所有实例共享的变量</li>
+<li>类方法 不能对实例操作。或者说实例无法调用类方法</li>
+</ul>
+
+
+<p>类方法的声明三种写法</p>
+
+<p>``` ruby
+class HelloWorld
+  def HelloWorld.hello(name)</p>
+
+<pre><code>#
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>=></h1>
+
+<p>class HelloWorld
+  #
+end</p>
+
+<p>class &lt;&lt; HelloWorld
+  def hello
+  end
+end</p>
+
+<h1>=></h1>
+
+<p>class HelloWorld
+  def self.hello
+  end
+end
+```</p>
+
+<h2>Method</h2>
+
+<p>如果Method的参数过多 建议放到Hash里去处理</p>
+
+<p><code>ruby
+def hello(name="Ruby",option={})
+  long = options[:long]
+  body = message
+end
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby 错误处理和例外]]></title>
