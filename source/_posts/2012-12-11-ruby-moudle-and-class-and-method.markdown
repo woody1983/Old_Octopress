@@ -4,13 +4,12 @@ title: "Ruby Moudle &amp; Class &amp; Method"
 date: 2012-12-11 15:17
 comments: true
 categories: Ruby
----
+--- 
 
-## Moudle 
+####不能创建实例和继承 作用之一是提供namespace 通过使用`Moudle.method`的方式调用 可以避免方法 常数和类名称的冲突。
 
-> 不能创建实例和继承 作用之一是提供namespace 通过使用`Moudle.method`的方式调用 可以避免方法 常数和类名称的冲突。
 include一个module以后 可以直接调用里面的常数和方法 一般调用方法为
-
+<!-- more -->
 ``` ruby
 module HelloWorld
   Version = "1.0"
