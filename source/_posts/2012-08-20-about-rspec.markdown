@@ -3,7 +3,7 @@ layout: post
 title: "关于rspec浅见"
 date: 2012-08-20 20:52
 comments: true
-categories:  [RSpec,Rails]
+categories:  [rspec,rails]
 ---
 
 ###刚入手没几天，感觉开发过程中多了很多乐趣。

@@ -3,7 +3,7 @@ layout: post
 title: "Rails学习全记录"
 date: 2012-08-22 00:10
 comments: true
-categories: Rails
+categories: rails
 ---
 
 ###创建rails项目 跳过unit-test模块
