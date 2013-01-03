@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-01-03T22:23:12+08:00</updated>
+  <updated>2013-01-03T23:25:25+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -1003,10 +1003,12 @@ Tip: You can check to see if location exists with if self.location?</p></blockqu
     <link href="http://woody1983.github.com/blog/2012/12/11/ruby-moudle-and-class-and-method/"/>
     <updated>2012-12-11T15:17:00+08:00</updated>
     <id>http://woody1983.github.com/blog/2012/12/11/ruby-moudle-and-class-and-method</id>
-    <content type="html"><![CDATA[<h2>Moudle</h2>
+    <content type="html"><![CDATA[<h4>不能创建实例和继承 作用之一是提供namespace 通过使用<code>Moudle.method</code>的方式调用 可以避免方法 常数和类名称的冲突。</h4>
 
-<blockquote><p>不能创建实例和继承 作用之一是提供namespace 通过使用<code>Moudle.method</code>的方式调用 可以避免方法 常数和类名称的冲突。
-include一个module以后 可以直接调用里面的常数和方法 一般调用方法为</p></blockquote>
+<p>include一个module以后 可以直接调用里面的常数和方法 一般调用方法为</p>
+
+<!-- more -->
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
