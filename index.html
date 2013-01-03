@@ -7,17 +7,7 @@
 	<meta name="author" content="Woody.Xu">
 
 	
-	<meta name="description" content="Moudle 不能创建实例和继承 作用之一是提供namespace 通过使用Moudle.method的方式调用 可以避免方法 常数和类名称的冲突。
-include一个module以后 可以直接调用里面的常数和方法 一般调用方法为 1
-2
-3
-4
-5
-6
-7
-8
-9
-module &hellip;">
+	<meta name="description" content=" Rails3 中和Model有关的内容我单独整理出来了。可能是做数据库的时间比较多，喜欢从数据的层面分析问题。 Read on &rarr; Jan 3rd, 2013 rails Comments ">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -88,6 +78,158 @@ module &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/01/03/rails3-notes-model/">Rails3 Notes Model</a></h1>
+	<div class="entry-content">
+		<h4>Rails3 中和Model有关的内容我单独整理出来了。可能是做数据库的时间比较多，喜欢从数据的层面分析问题。</h4>
+
+
+		
+		<a href="/blog/2013/01/03/rails3-notes-model/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-03T22:21:00+08:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/01/03/rails3-notes-model//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/01/03/rails3-notes-about-view/">Rails3 Notes About View</a></h1>
+	<div class="entry-content">
+		<h4>Rails3中View的Helper提供了很多实用的方法。</h4>
+
+
+		
+		<a href="/blog/2013/01/03/rails3-notes-about-view/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-03T22:19:00+08:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/01/03/rails3-notes-about-view//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/01/03/holiday-notes-with-rails/">Holiday Notes With Rails3</a></h1>
+	<div class="entry-content">
+		<h4>假期没有出去玩 在家里宅了十几天的时间，基本消耗在Rails和德州扑克上多一些。现在开始整理笔记了，之前写的太乱。</h4>
+
+
+		
+		<a href="/blog/2013/01/03/holiday-notes-with-rails/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-03T22:11:00+08:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/01/03/holiday-notes-with-rails//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/01/03/rails-for-zombie/">Rails for Zombie</a></h1>
+	<div class="entry-content">
+		<h3>这是国外的一个在线教育平台的课程 感觉非常不错 有很多知识点。现在共享出来，一起学习。</h3>
+
+
+		
+		<a href="/blog/2013/01/03/rails-for-zombie/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-03T21:58:00+08:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/01/03/rails-for-zombie//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -579,209 +721,6 @@ include一个module以后 可以直接调用里面的常数和方法 一般调�
 </div>
 	
 		<span class="comments"><a href="/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/26/the-artisans-art-spirit/">The Artisan&#8217;s Art Spirit</a></h1>
-	<div class="entry-content">
-		<p>偶然一个机会在罗永浩的微博看到这样一段话，感觉不错，随即抄了下来。</p>
-
-<h3>罗永浩提到的工匠精神：</h3>
-
-<h5>1）对所从事的事情有一种完美主义情节，在力所能及的情况下做到极致。</h5>
-
-<h5>2）对细节的执着，点点滴滴决不放过。</h5>
-
-<h5>3）激情，对所做的事欲罢不能，并从中获得巨大的心灵满足。</h5>
-
-<h5>4）执着，百折不挠的勇气。可惜，这年头太缺乏具有工匠精神的人。</h5>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-26T15:52:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/note/'>Note</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/26/the-artisans-art-spirit//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/22/zengguofan/">曾国藩 家书一篇</a></h1>
-	<div class="entry-content">
-		<h2>课程</h2>
-
-<pre><code>主敬  整齐严肃，无时不惧。无事时心在腔子里，应事时专一不杂。
-静坐  每日不拘何时，静坐一会，体验静极生阳来复之仁心，正位凝命，如鼎之镇。
-早起  黎明即起，醒后勿沾恋。
-读书不二  一书未点完，断不看他书。东翻西阅，都是徇外为人。
-读史  《二十三史》每日读十页，虽有事不间断。 
-写日记  须端楷，凡日间过恶，身过、心过、口过，皆记出，终身不间断。
-日知其所亡  每日记“茶余偶谈”一则，分德行门、学问门、经济门、艺术门。
-月无忘所能  每月作诗文数首，以验积理之多寡，养气之盛否。
-谨言  刻刻留心。
-养气  无不可对人言之事，气藏丹田。
-保身  谨遵大人手谕：节欲，节劳，节饮食。
-作字  早饭后作字，凡笔墨应酬，当作自己功课。
-夜不出门  旷功疲神，切戒切戒。
-</code></pre>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-22T20:54:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/note/'>Note</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/22/zengguofan//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/22/mvc/">Mvc</a></h1>
-	<div class="entry-content">
-		<p><img src="http://ruby.railstutorial.org/images/figures/mvc_detailed.png" alt="About MVC" />
-* The browser issues a request for the /users URI.
-* Rails routes /users to the index action in the Users controller.
-* The index action asks the User model to retrieve all users (User.all).
-* The User model pulls all the users from the database.
-* The User model returns the list of users to the controller.
-* The controller captures the users in the @users variable, which is passed to the index view.
-* The view uses embedded Ruby to render the page as HTML.
-* The controller passes the HTML back to the browser.3</p>
-
-<p><img src="http://ruby.railstutorial.org/images/figures/demo_controller_inheritance.png" title="Optional title attribute" alt="About Controller" />
-<code>app/controllers/application_controller.rb</code></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-22T00:36:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/rails/'>Rails</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/22/mvc//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/22/rails-notes/">Rails学习全记录</a></h1>
-	<div class="entry-content">
-		<h3>创建rails项目 跳过unit-test模块</h3>
-
-<p><code>rails new sample_app --skip-test-unit</code></p>
-
-<h3>不安装production环境所需要的gem</h3>
-
-<p><code>bundle install --without production</code></p>
-
-<h3>创建rspec测试模块</h3>
-
-<p><code>rails generate rspec:install</code></p>
-
-<h3>创建一个负责静态页面的控制器</h3>
-
-<p><code>rails generate controller StaticPages home help --no-test-framework</code></p>
-
-<p>其实还可以添加 about contact等方法</p>
-
-<p>删除一个控制器<code>rails destroy  controller FooBars baz quux</code></p>
-
-
-		
-		<a href="/blog/2012/08/22/rails-notes/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-22T00:10:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/rails/'>Rails</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/22/rails-notes//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

@@ -1,0 +1,276 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Rails3 Notes about view - 1024Bit  电子游牧日志</title>
+	<meta name="author" content="Woody.Xu">
+
+	
+	<meta name="description" content="Rails3中View的Helper提供了很多实用的方法。 Viewer Create a form 1
+2
+3
+form_for(@zombie) do |f| end 如果@zombie已经存在数据库里了 1
+2
+￼&lt;form action=&quot;/zombies/8&quot; &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="1024Bit  电子游牧日志" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">1024Bit  电子游牧日志</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:woody1983.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/unix1983@gmail.com?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/xiaoputi" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/woody1983" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:woody1983.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h1 class="title">Rails3 Notes About View</h1>
+	<div class="entry-content"><h4>Rails3中View的Helper提供了很多实用的方法。</h4>
+
+<!-- more -->
+
+
+<h1>Viewer</h1>
+
+<h2>Create a form</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">form_for</span><span class="p">(</span><span class="vi">@zombie</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果<code>@zombie</code>已经存在数据库里了</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">￼</span><span class="o">&lt;</span><span class="n">form</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;/zombies/8&quot;</span> <span class="nb">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">input</span> <span class="nb">name</span><span class="o">=</span><span class="s2">&quot;_method&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s2">&quot;hidden&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;put&quot;</span> <span class="sr">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>否则就是post</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">form</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;/zombies&quot;</span> <span class="nb">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>f.submit</code>也是根据Zombie数据对象再数据库是否存在而选择显示Create 还是Update</p>
+
+<h1>常见的Text_field</h1>
+
+<p><code>f.text_field :name</code>提交出去的时候数据模型是这样子的</p>
+
+<p><code>:params =&gt; {:zombie =&gt;{:name =&gt; 'Name'}}</code></p>
+
+<h1>Label helper</h1>
+
+<p><code>f.label :name</code> 在html里显示<code>&lt;label for="zombie_name"&gt;Name&lt;/label&gt;</code></p>
+
+<h1>input helpers</h1>
+
+<ul>
+<li>text_area</li>
+<li>check_box</li>
+<li>radio_button :decomp, &#8216;fresh&#8217;, checked: true</li>
+<li>select :decomp, [&#8216;frsh&#8217;,&#8217;new&#8217;]</li>
+<li>select :decomp, [[&#8216;fresh,1],[&#8216;new&#8217;,2]]</li>
+<li>password_field</li>
+<li>number_field</li>
+<li>range_field</li>
+<li>email_field</li>
+<li>url_field</li>
+<li>telephone_field</li>
+</ul>
+
+
+<h2>Partials 减少重复代码 比如新建和更新的表单</h2>
+
+<p>&lt;% render &#8216;form&#8217;%> <code>_form.html.erb</code></p>
+
+<h1>View helper</h1>
+
+<h2>div_for</h2>
+
+<p>之前的<code>&lt;div id="tweet_&lt;%= tweet.id%&gt;" class='tweet'&gt;</code>可以写成
+&lt;%= div_for tweet do %>
+<code>dom_id(@tweet)</code> => tweet_2</p>
+
+<h2>截断字符串</h2>
+
+<p><code>truncate("I need brains!", :length =&gt; 10,:separator =&gt; ' ')</code>
+:separator是为了保证不会切半个单词什么的。</p>
+
+<h2>自动显示数量词单复数形式</h2>
+
+<p><code>pluralize(Zombie.count,"zombie")</code></p>
+
+<h2>String的标题化 //首字母自动大小写之类的设置 很使用</h2>
+
+<p><code>@zombie.name.titleize</code></p>
+
+<h2>队列化 a , b and c</h2>
+
+<p><code>@role.name.to_sentence</code></p>
+
+<h2>时间间隔表达</h2>
+
+<p><code>time_ago_in_words @zombie.created_at</code></p>
+
+<h2>Number的转换</h2>
+
+<ul>
+<li>number_to_currency</li>
+<li>number_to_human</li>
+</ul>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-03T22:19:00+08:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/01/03/rails3-notes-about-view/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Woody.Xu
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'woodyxu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://woody1983.github.com/blog/2013/01/03/rails3-notes-about-view/';
+        var disqus_url = 'http://woody1983.github.com/blog/2013/01/03/rails3-notes-about-view/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: RSpec | 1024Bit  电子游牧日志]]></title>
+  <title><![CDATA[Category: rspec | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/rspec/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-01-03T20:14:39+08:00</updated>
+  <updated>2013-01-03T22:23:12+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>

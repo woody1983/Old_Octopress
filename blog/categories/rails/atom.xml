@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Rails | 1024Bit  电子游牧日志]]></title>
+  <title><![CDATA[Category: rails | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-01-03T20:14:39+08:00</updated>
+  <updated>2013-01-03T22:23:12+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,797 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails3 Notes Model]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/03/rails3-notes-model/"/>
+    <updated>2013-01-03T22:21:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/03/rails3-notes-model</id>
+    <content type="html"><![CDATA[<h4>Rails3 中和Model有关的内容我单独整理出来了。可能是做数据库的时间比较多，喜欢从数据的层面分析问题。</h4>
+
+<!-- more -->
+
+
+<h1>Rails Model</h1>
+
+<h2>Names Scope</h2>
+
+<p><code>ruby
+scope :rotting, where(rotting: true)
+scope :fresh, where("age &lt; 20")
+scope :recent, order("created_at desc").limit(10)
+</code></p>
+
+<h4>调用比较简单 直接在Crontroller中Call这些Scope</h4>
+
+<p><code>ruby
+Zombie.rotting.limit(10)
+Zombie.recent.fresh.rotting
+</code></p>
+
+<h2>Callbacks</h2>
+
+<blockquote><p>应用场景比较简单，比如在save一个对象之前，根据目前这个对象的一些属性自动赋值。ex: When zombie age > 20 , set rotting to true.</p></blockquote>
+
+<p>``` ruby
+defore_save :make_rotting</p>
+
+<p>def make_rotting
+  self.rotting = true if age > 20
+end</p>
+
+<p>```</p>
+
+<h4>All Callbacks</h4>
+
+<ul>
+<li>before_validation</li>
+<li>save</li>
+<li>create</li>
+<li>update</li>
+<li>destroy</li>
+</ul>
+
+
+<h2>model关系</h2>
+
+<blockquote><p>单数和复数 has_one has_many belongs_to.复数的形式和英语标准文法里一致</p></blockquote>
+
+<h1>Create Model 单数</h1>
+
+<p><code>rails g model 单数 column:type</code></p>
+
+<h2>dependent: :destroy</h2>
+
+<p>has_one</p>
+
+<h2>"include" option</h2>
+
+<p>``` ruby
+@zombie = Zombie.all #然后在view里再去拉brain的数据
+@zombie = Zombie.includes(:brain).all</p>
+
+<h1>Brain Load (0.3ms) SELECT * FROM "brains" WHERE "zombie_id" IN (4, 5, 6, 7)</h1>
+
+<p>```</p>
+
+<h2>through</h2>
+
+<blockquote><p>创建R表 也就是关联表。然后多对多关系的两边 同时宣告拥有多个R表 并且拥有多个第二个模型</p></blockquote>
+
+<p><code>ruby
+has_many :assignments
+has_many :roles, through: :assignments
+</code>
+through关系建立完毕以后，创建多对多数据时 可以直接向第二个对象添加 ex</p>
+
+<p>``` ruby
+z = Zombie.last
+z.roles &lt;&lt; Role.find_by_title('Captain')</p>
+
+<h1>也可以用z.roles.push 看个人习惯</h1>
+
+<p>这个时候check一下role的数据会看到他会inner join关系表 调用a表的时候会使用b表的主键
+z.roles
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails3 Notes about view]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/03/rails3-notes-about-view/"/>
+    <updated>2013-01-03T22:19:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/03/rails3-notes-about-view</id>
+    <content type="html"><![CDATA[<h4>Rails3中View的Helper提供了很多实用的方法。</h4>
+
+<!-- more -->
+
+
+<h1>Viewer</h1>
+
+<h2>Create a form</h2>
+
+<p>``` ruby
+form_for(@zombie) do |f|</p>
+
+<p>end
+```</p>
+
+<p>如果<code>@zombie</code>已经存在数据库里了</p>
+
+<p><code>ruby
+￼&lt;form action="/zombies/8" method="post"&gt;
+  &lt;input name="_method" type="hidden" value="put" /&gt;
+</code>
+否则就是post</p>
+
+<p><code>ruby
+&lt;form action="/zombies" method="post"&gt;
+</code></p>
+
+<p><code>f.submit</code>也是根据Zombie数据对象再数据库是否存在而选择显示Create 还是Update</p>
+
+<h1>常见的Text_field</h1>
+
+<p><code>f.text_field :name</code>提交出去的时候数据模型是这样子的</p>
+
+<p><code>:params =&gt; {:zombie =&gt;{:name =&gt; 'Name'}}</code></p>
+
+<h1>Label helper</h1>
+
+<p><code>f.label :name</code> 在html里显示<code>&lt;label for="zombie_name"&gt;Name&lt;/label&gt;</code></p>
+
+<h1>input helpers</h1>
+
+<ul>
+<li>text_area</li>
+<li>check_box</li>
+<li>radio_button :decomp, 'fresh', checked: true</li>
+<li>select :decomp, ['frsh','new']</li>
+<li>select :decomp, [['fresh,1],['new',2]]</li>
+<li>password_field</li>
+<li>number_field</li>
+<li>range_field</li>
+<li>email_field</li>
+<li>url_field</li>
+<li>telephone_field</li>
+</ul>
+
+
+<h2>Partials 减少重复代码 比如新建和更新的表单</h2>
+
+<p>&lt;% render 'form'%> <code>_form.html.erb</code></p>
+
+<h1>View helper</h1>
+
+<h2>div_for</h2>
+
+<p>之前的<code>&lt;div id="tweet_&lt;%= tweet.id%&gt;" class='tweet'&gt;</code>可以写成
+&lt;%= div_for tweet do %>
+<code>dom_id(@tweet)</code> => tweet_2</p>
+
+<h2>截断字符串</h2>
+
+<p><code>truncate("I need brains!", :length =&gt; 10,:separator =&gt; ' ')</code>
+:separator是为了保证不会切半个单词什么的。</p>
+
+<h2>自动显示数量词单复数形式</h2>
+
+<p><code>pluralize(Zombie.count,"zombie")</code></p>
+
+<h2>String的标题化 //首字母自动大小写之类的设置 很使用</h2>
+
+<p><code>@zombie.name.titleize</code></p>
+
+<h2>队列化 a , b and c</h2>
+
+<p><code>@role.name.to_sentence</code></p>
+
+<h2>时间间隔表达</h2>
+
+<p><code>time_ago_in_words @zombie.created_at</code></p>
+
+<h2>Number的转换</h2>
+
+<ul>
+<li>number_to_currency</li>
+<li>number_to_human</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Holiday Notes with Rails3]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/03/holiday-notes-with-rails/"/>
+    <updated>2013-01-03T22:11:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/03/holiday-notes-with-rails</id>
+    <content type="html"><![CDATA[<h4>假期没有出去玩 在家里宅了十几天的时间，基本消耗在Rails和德州扑克上多一些。现在开始整理笔记了，之前写的太乱。</h4>
+
+<!-- more -->
+
+
+<h1>Rails 重新开始</h1>
+
+<blockquote><p>这个是在CodeSchool上学习的Rails开发教程的笔记。纪录下来，认真回过头好好复习一下。</p></blockquote>
+
+<h1>Install Rails</h1>
+
+<p>rails new TwitterForZombies</p>
+
+<h2>Rails Commands</h2>
+
+<ul>
+<li>generate</li>
+<li>console</li>
+<li>server</li>
+<li>dbconsole</li>
+</ul>
+
+
+<h2>Using Generators</h2>
+
+<ul>
+<li>helper</li>
+<li>mailer</li>
+<li>migration</li>
+<li>model</li>
+<li>scaffold</li>
+</ul>
+
+
+<h2>Using Scaffold</h2>
+
+<p><code>rails g scaffold NAME [field:type field:type]</code></p>
+
+<h2>Variable types</h2>
+
+<ul>
+<li>string</li>
+<li>text</li>
+<li>integer</li>
+<li>boolean</li>
+<li>decimal</li>
+<li>float</li>
+<li>binary</li>
+<li>date</li>
+<li>time</li>
+<li>datetime</li>
+</ul>
+
+
+<h1>DB Migration</h1>
+
+<h2>Create table in Migration</h2>
+
+<p><code>
+create_table :tablename do |t|
+  t.数据类型 :column_name
+  t.text :bio
+  t.index :name #add index with db
+  t.timestamps# same as t.datetime :created_at t.datetime :updated_at
+end
+</code></p>
+
+<h2>Adding Columns</h2>
+
+<ul>
+<li>AddColumn<code>Add&lt;Column_name&gt;To&lt;table_name&gt;</code></li>
+<li>RemoveColumn <code>Remove&lt;&gt;From&lt;&gt;</code></li>
+<li>add_index :table, :column</li>
+<li>rename_column :table_name, :old, :new</li>
+<li>rename_table :old_table, :new_table</li>
+<li>drop_table :table_name</li>
+<li>change_column :table, :column, :type, :options</li>
+<li>change_column_default :table, :column, default: true/'string'</li>
+</ul>
+
+
+<p><code>rails g migration Drop__Table</code></p>
+
+<p><code>ruby
+def change
+  add_column :zombies, :email, :string, limit: 30,unique: true
+end
+</code></p>
+
+<h1> Migration options</h1>
+
+<ul>
+<li>default: <value></li>
+<li>limit: 30</li>
+<li>null: false</li>
+<li>first: true</li>
+<li>after: email</li>
+<li>unique: true</li>
+</ul>
+
+
+<h2>Run Migrations</h2>
+
+<ul>
+<li>rake db:migrate</li>
+<li>rake db:rollback</li>
+<li>rake db:schema:dump #->￼db/schema.rb</li>
+<li>rake db:setup</li>
+</ul>
+
+
+<h1>Ruby 1.9 Hash New Syntax</h1>
+
+<p><code>{name: "hash new stntax"}</code>
+<code>{render json: @zombies }</code></p>
+
+<h1>REST {Link_to:}</h1>
+
+<h3>to link to each action</h3>
+
+<p><code>ruby
+zombie = Zombie.find(2)
+link_to 'show', zombie
+link_to 'create', zombie, method: :post
+link_to 'edit', zombie, method: :put
+link_to 'destroy', zombie, method: :delete
+</code></p>
+
+<h2>resources :zombies</h2>
+
+<p><code>ruby
+&lt;%= link_to 'All Zombies',  zombie_path %&gt;
+&lt;%= link_to 'New Zombies',  new_zombie_path %&gt;
+&lt;%= link_to 'Edit Zombies', edit_zombie_path(@zombie) %&gt;
+&lt;%= link_to 'Show Zombies', zombie_path(@zombie) %&gt;
+&lt;%= link_to 'Show Zombies', @zombie %&gt;
+</code></p>
+
+<h1>Nested Routes</h1>
+
+<blockquote><p>嵌套路由 感觉平时项目里会经常用到 毕竟两个数据模型并行计算和处理的时候实在是太多了。</p></blockquote>
+
+<p>标准写法是：将routes写成嵌套写法。</p>
+
+<p><code>ruby
+resources :zombie do
+  resources :tweets
+end
+</code></p>
+
+<p>嵌套路由写好以后 还修改crontroller &amp; viewer{link_fo form_for}</p>
+
+<h2>标准的嵌套url是 /zombies/4/tweets/2 /zombies/4/tweets</h2>
+
+<p>那么在tweets的crontroller里 会接受到zombie和tweet两个id传参进来。</p>
+
+<p>先在tweets's crontroller中定义一个filter 来获取上一级信息 比如zombie
+<code>before_filter :get_zombie</code></p>
+
+<p>``` ruby
+def get_zombie
+  @zombie = Zombie.find(params[:zombie_id])
+end</p>
+
+<p>zombie 已经查出来了 show和index可以直接调用</p>
+
+<p>def show
+  @tweet = @zombie.tweets.find(params[:id])
+end</p>
+
+<p>def index
+  @tweets = @zombie.tweets
+end
+```</p>
+
+<h2>在Nested rake routes的link写法</h2>
+
+<p>``` ruby
+link_to "#{@zombie.name}'s Tweets", zombie_tweets_path(@zombie)</p>
+
+<p>link_to 'New Tweet', new_zombie_tweet_path(@zombie)</p>
+
+<p>link_to 'Edit Tweet', edit_zombie_tweet_path(@zombie,tweet)</p>
+
+<p>show 有两种写法 哪个简单用哪个
+link_to 'Show', zombie_path(@zombie,tweet)
+link_to 'Show',[@zombie,tweet]</p>
+
+<p>link_to 'Destroy',[@zombie,tweet],method: :delete
+```</p>
+
+<h2>嵌套的显示Viewer</h2>
+
+<p>在二级目录里的index显示 需要使用到上一级资源的调用</p>
+
+<p>``` ruby
+ @tweets.each do |tweets|
+   tweet,body
+   link_to 'Show',[@zombie,tweet]
+   link_to 'Edit',edit_zombie_tweet_path[@zombie,tweet]
+   link_to 'Edstroy',[@zombie,tweet], method: :delete
+ end</p>
+
+<p> link_to 'New Tweet',new_zombie_tweet_path(@zombie)
+```</p>
+
+<h3>创建_form 表单比较简单</h3>
+
+<p><code>form_for([@zombie,@tweet]) do |f|</code></p>
+
+<h3>嵌套路由里 Controller中就不能直接些二级目录数据实体</h3>
+
+<p>``` ruby
+def create
+  @tweet = @zombie.tweets.new(params[:tweet])</p>
+
+<p>返回信息的时候要将2级目录的信息一起返回。</p>
+
+<p>respond_to do |format|
+  if @tweet.save</p>
+
+<pre><code>format.html {redirect_to [@zombie,@tweet],
+             notice: 'Tweet was successfully created.'}
+ format.json { render json: [@zombie,@tweet],
+                      status: :created,
+                      location: [@zombie,@tweet] }
+</code></pre>
+
+<p>   else</p>
+
+<pre><code> format.html { render action: "new" }
+ format.json { render json: @tweet.errors,
+                            status: :unprocessable_entity }
+</code></pre>
+
+<p>   end
+end</p>
+
+<p>end</p>
+
+<p>```</p>
+
+<h1>Asset Pipeline</h1>
+
+<p>所有的tag 不需要指明路径 因为所有的资源调用和显示都会指向到<code>/assets/</code></p>
+
+<ul>
+<li>&lt;%= javascript_include_tag "custom" %></li>
+<li>&lt;%= stylesheet_link_tag "style" %></li>
+<li>&lt;%= image_tag "rails.png" %></li>
+</ul>
+
+
+<p>在css中调用一些图片的路径时 需要使用asset_path 否则无法使用缓存里的文件</p>
+
+<p><code>ruby
+form_new_zombie input.submit {
+  background-image: url(&lt;%= asset_path('button.png') %&gt;)
+}
+</code></p>
+
+<h1>SCSS</h1>
+
+<p><code>zombie.css.scss.erb</code> 嵌套写法的css</p>
+
+<p>``` ruby
+form.new_zombie {
+  border: 1px dashed gray;</p>
+
+<p>  .field#bio {</p>
+
+<pre><code>display: none;
+</code></pre>
+
+<p>  }
+  input.submit {</p>
+
+<pre><code>background-image: url(&lt;%= asset_path('button.png') %&gt;);
+</code></pre>
+
+<p>  }
+}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails For Zombie]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/03/rails-for-zombie/"/>
+    <updated>2013-01-03T21:58:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/03/rails-for-zombie</id>
+    <content type="html"><![CDATA[<h3>这是国外的一个在线教育平台的课程 感觉非常不错 有很多知识点。现在共享出来，一起学习。</h3>
+
+<!-- more -->
+
+
+<h4>Rails new</h4>
+
+<blockquote><p>Enter the command to start a new rails app called 'ZombieTweets'</p></blockquote>
+
+<p>rails new Zombi­eTweets</p>
+
+<h4>GENERATE SCAFFOLD</h4>
+
+<blockquote><p>Enter the command to create tweet scaffold with a string status and an integer of zombie_id</p></blockquote>
+
+<p>rails g scaff­old tweet­ statu­s:string zombi­e_id:integ­er</p>
+
+<h4>RUN MIGRATION</h4>
+
+<blockquote><p>Enter the command to run the migration you just created.</p></blockquote>
+
+<p><code>
+$ rake db:mi­grate
+==  CreateTweets: migrating ===================================================
+-- create_table(:tweets)
+   -&gt; 0.0017s
+==  CreateTweets: migrated (0.0025s) ==========================
+</code></p>
+
+<h4>BOOT IT UP</h4>
+
+<blockquote><p>Enter the command to start a rails server</p></blockquote>
+
+<p><code>
+rails s
+=&gt; Booting WEBrick
+=&gt; Rails 3.1.0 application starting in development on http://0.0.0.0:3000
+=&gt; Call with -d to detach
+=&gt; Ctrl-C to shutdown server
+[2013-01-03 12-26-14] INFO  WEBrick 1.3.1
+[2013-01-03 12-26-14] INFO  ruby 1.9.2 (2011-02-18) [x86_64-darwin10.7.0]
+[2013-01-03 12-26-14] INFO  WEBrick::HTTPServer#start: pid=35740 port=3000
+</code></p>
+
+<h4>ADD COLUMN TO TABLE</h4>
+
+<blockquote><p>Enter the command line text to generate a migration called AddPrivateToTweets which adds a boolean field called private.</p></blockquote>
+
+<p><code>
+$ rails g migra­tion AddPr­ivateToTwe­ets priva­te:boolean­
+invoke  active_record
+create    db/migrate/20130103122847_add_private_to_tweets.rb
+</code></p>
+
+<h4>ROLLBACK MIGRATION</h4>
+
+<blockquote><p>Assume we ran that last migration. However we forgot a column we wanted to add, could you please roll it back from the command line?</p></blockquote>
+
+<p><code>
+$ rake db:ro­llback
+==  AddLocationToTweets: reverting ============================================
+-- remove_column("tweets", :show_location)
+   -&gt; 0.0008s
+-- remove_column("tweets", :location)
+   -&gt; 0.0003s
+==  AddLocationToTweets: reverted (0.0012s) ===================================
+</code></p>
+
+<h4>REMOVE COLUMN</h4>
+
+<blockquote><p>On second thought, that category_name string column was a bad idea. Write a migration to remove the category_name column.</p></blockquote>
+
+<p>``` ruby
+class RemoveCategoryNameFromTweets &lt; ActiveRecord::Migration
+  def up</p>
+
+<pre><code>remove_column :tweets , :category_name
+</code></pre>
+
+<p>  end</p>
+
+<p>  def down</p>
+
+<pre><code>add_column :tweets,:category_name , :string
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h4>DATABASE SETUP</h4>
+
+<blockquote><p>You've decided to install the app on another computer. Please enter the command you should use (instead of rake db:migrate) to create the database, load the schema, and run the seed file.</p></blockquote>
+
+<p>rake db:setup</p>
+
+<h4>IN THE CONSOLE</h4>
+
+<blockquote><p>Enter the command to enter the Rails console</p></blockquote>
+
+<p><code>
+$ rails c
+Loading development environment (Rails 3.1.0)
+</code></p>
+
+<blockquote><p>Enter the command to enter the Rails console.
+You are now running in the Rails console!
+Experiment with creating a new Tweet and saving it to the database. Type next to move on.</p></blockquote>
+
+<p>```
+ruby > Tweet.crea­te(message­: 'hell­o', categ­ory_name: 'cate­gory', locat­ion: 'Chin­a', show_­location: true,­ zombi­e_id: 1)</p>
+
+<h1><Tweet id: 1, message: "hello", category_name: "category", location: "China", show_location: true, zombie_id: 1></h1>
+
+<p>ruby ><br/>
+```</p>
+
+<p>schema:</p>
+
+<p><code>ruby
+create_table(:tweets) do |t|
+  t.string :message
+  t.string :category_name
+  t.string :location, :limit =&gt; 30
+  t.boolean :show_location, :default =&gt; false
+  t.integer :zombie_id
+end
+</code></p>
+
+<h4>SCOPES</h4>
+
+<blockquote><p>Write a scope on the Tweet model called recent which returns the 4 most recent tweets. Hint: You'll need an order AND a limit scope.</p></blockquote>
+
+<p><code>ruby
+class Tweet &lt; ActiveRecord::Base
+  scope :recent , order("created_at desc").limit(4)
+end
+</code></p>
+
+<blockquote><p>Write another scope called graveyard which only shows tweets where the show_location column is true and the location is "graveyard"</p></blockquote>
+
+<p><code>ruby
+class Tweet &lt; ActiveRecord::Base
+  scope :recent, order('created_at desc').limit(4)
+  scope :graveyard, where(show_location: true,location: 'graveyard')
+end
+</code></p>
+
+<h4>USING SCOPES</h4>
+
+<blockquote><p>In this controller action create an instance variable called @graveyard_tweets which uses both of the two scopes recent and graveyard together.</p></blockquote>
+
+<p>``` ruby
+class TweetsController &lt; ApplicationController
+  def index</p>
+
+<pre><code>@tweets = Tweet.all
+@graveyard_tweets = Tweet.recent.graveyard
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h4>BEFORE SAVE</h4>
+
+<blockquote><p>Create a before_save callback that checks to see if a tweet has a location, if it does have a location then set show_location to true.
+Tip: You can check to see if location exists with if self.location?</p></blockquote>
+
+<p>``` ruby
+class Tweet &lt; ActiveRecord::Base
+  before_save :tweet</p>
+
+<p>  def tweet</p>
+
+<pre><code>self.show_location = true if self.location
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h4>CALLBACK LOGGING</h4>
+
+<blockquote><p>Add callbacks so the appropriate log function is called after an update and destroy.</p></blockquote>
+
+<p>``` ruby
+class Tweet &lt; ActiveRecord::Base</p>
+
+<p>after_update :log_update
+after_destroy :log_destroy</p>
+
+<p>  def log_update</p>
+
+<pre><code>logger.info "Tweet #{id} updated"
+</code></pre>
+
+<p>  end</p>
+
+<p>  def log_destroy</p>
+
+<pre><code>logger.info "Tweet #{id} deleted"
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h4>HAS ONE</h4>
+
+<blockquote><p>Instead of storing location inside the Tweet model, let's instead break it out into a separate table (as you see below). In this case we want to define that a Tweet can have one Location, and a Location belongs to a Tweet. Fill out the models below accordingly.</p></blockquote>
+
+<p>``` ruby
+class Tweet &lt; ActiveRecord::Base
+has_one :location
+end</p>
+
+<p>class Location &lt; ActiveRecord::Base
+belongs_to :tweet
+end
+```</p>
+
+<h4>FOREIGN KEY</h4>
+
+<blockquote><p>OH NO! Our Database Admin turned into a Zombie and decided to rename the belongs_to field in our locations table tweeter_id instead of the intelligent default tweet_id. We're going to slay him and correct this, but in the meantime set the foreign_key on both relationships to tweeter_id. Also set the dependency so when a tweet is destroyed, the location is destroyed as well.</p></blockquote>
+
+<p>``` ruby
+class Tweet &lt; ActiveRecord::Base
+  has_one :location, dependent: :destroy, foreign_key: :tweeter_id
+end</p>
+
+<p>class Location &lt; ActiveRecord::Base
+  belongs_to :tweet, foreign_key: :tweeter_id
+end
+```</p>
+
+<h4>INCLUDES</h4>
+
+<blockquote><p>We're going to be iterating through many tweets and printing out their location. Refactor the controller code below to use the includes method.</p></blockquote>
+
+<p>``` ruby
+class TweetsController &lt; ApplicationController
+  def index</p>
+
+<pre><code>@tweets = Tweet.includes(:location).recent
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h4>RELATIONSHIP MIGRATION</h4>
+
+<blockquote><p>A Tweet can belong to one or more Categories (e.g. eating flesh, walking dead, searching for brains). Write a migration that creates two tables, categories, and categorizations. Give categories one column named name of type string; and give categorizations two integer columns: tweet_id and category_id.</p></blockquote>
+
+<p>``` ruby
+class AddTweetCategories &lt; ActiveRecord::Migration
+  def change</p>
+
+<pre><code>create_table :categories do |t|
+  t.string :name
+end
+
+create_table :categorizations do |t|
+  t.integer :tweet_id
+  t.integer :category_id
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h4>HAS MANY THROUGH</h4>
+
+<blockquote><p>Now that we have our new tables, it's time to define the relationships between each of the models. Define the has_many through relationships in the Tweet &amp; Category model and the belongs_to relationships in the Categorization model.</p></blockquote>
+
+<p>``` ruby
+class Tweet &lt; ActiveRecord::Base
+  has_many :categorizations
+  has_many :categories, through: :categorizations
+end</p>
+
+<p>class Categorization &lt; ActiveRecord::Base
+  belongs_to :tweet
+  belongs_to :category
+end</p>
+
+<p>class Category &lt; ActiveRecord::Base
+  has_many :categorizations
+  has_many :tweets, through: :categorizations
+end
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[mvc]]></title>
@@ -30,244 +821,6 @@
 
 <p><img src="http://ruby.railstutorial.org/images/figures/demo_controller_inheritance.png" title="Optional title attribute" alt="About Controller" />
 <code>app/controllers/application_controller.rb</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails学习全记录]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/22/rails-notes/"/>
-    <updated>2012-08-22T00:10:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/22/rails-notes</id>
-    <content type="html"><![CDATA[<h3>创建rails项目 跳过unit-test模块</h3>
-
-<p><code>rails new sample_app --skip-test-unit</code></p>
-
-<h3>不安装production环境所需要的gem</h3>
-
-<p><code>bundle install --without production</code></p>
-
-<h3>创建rspec测试模块</h3>
-
-<p><code>rails generate rspec:install</code></p>
-
-<h3>创建一个负责静态页面的控制器</h3>
-
-<p><code>rails generate controller StaticPages home help --no-test-framework</code></p>
-
-<p>其实还可以添加 about contact等方法</p>
-
-<p>删除一个控制器<code>rails destroy  controller FooBars baz quux</code></p>
-
-<!-- more -->
-
-
-<h3>route中的get方法</h3>
-
-<p><code>config/routes.rb</code></p>
-
-<p>by using get we arrange for the route to respond to a GET request
-<code>get "static_pages/about"</code></p>
-
-<h4>The first step is to generate an integration test (request spec) for our static pages:</h4>
-
-<p>```
-$ rails generate integration_test static_pages</p>
-
-<pre><code>  invoke  rspec
-  create    spec/requests/static_pages_spec.rb
-</code></pre>
-
-<p>```</p>
-
-<h1>About RSpec</h1>
-
-<p>```
-describe "场景/描述“ do
-  it "..." do</p>
-
-<pre><code>...
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h4>一段it语句</h4>
-
-<p>```
-it "should have the content 'Sample App'" do #应该可以看到Sample App这个字样</p>
-
-<pre><code>  visit '/static_pages/home' #访问这个path
-  page.should have_content('Sample App') #页面上(page) 应该会包含这个content
-end
-</code></pre>
-
-<p>```</p>
-
-<h1>should and should_not 一招鲜</h1>
-
-<p>uses the <code>Capybara</code> function <code>visit</code></p>
-
-<p><code>spec/requests/static_pages_spec.rb</code> 可以将不同的静态页面定义到不同的describe中去测试 测试指定页面中是否包含什么文字</p>
-
-<h3>再添加一个静态页面呢？</h3>
-
-<ul>
-<li>首先route中需要添加新的<code>get "static_pages/about"</code></li>
-<li>controllers指定def</li>
-<li>views中有对应的<code>html</code>页面<code>app/views/static_pages/about.html.erb</code></li>
-</ul>
-
-
-<h4>选择测试某一个元素 比如 title h1 等</h4>
-
-<p>```
-page.should have_selector('title',</p>
-
-<pre><code>                :text =&gt; "Ruby on Rails Tutorial Sample App | Home")
-</code></pre>
-
-<p><code>``
-This uses the have_selector method, which checks for an HTML element (the “selector”) with the given content.
-要查找的内容也可以用缩写 只寻找</code>关键字<code>
-</code>page.should have_selector('title', :text => " | Home")`</p>
-
-<h3>Provide方法 可以提供临时变量给一个label</h3>
-
-<p><code>&lt;% provide(:title, 'Home') %&gt;</code></p>
-
-<h5>使用</h5>
-
-<p><code>&lt;title&gt;Ruby on Rails Tutorial Sample App | &lt;%= yield(:title) %&gt;&lt;/title&gt;</code></p>
-
-<blockquote><p>http://ruby.railstutorial.org/chapters/static-pages#top 明天继续</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于rspec浅见]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/20/about-rspec/"/>
-    <updated>2012-08-20T20:52:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/20/about-rspec</id>
-    <content type="html"><![CDATA[<h3>刚入手没几天，感觉开发过程中多了很多乐趣。</h3>
-
-<p><code>should</code> and <code>should_not</code></p>
-
-<h2>before and after</h2>
-
-<p>before(:each) 每段it之前执行
-before(:all) 每段describe 之前执行
-after(:each)
-after(:all)</p>
-
-<h3>pending 可以先列出来打算要写的代码</h3>
-
-<p><code>ruby
-it "…"
-  pending
-end
-</code></p>
-
-<!-- more-->
-
-
-<h3>let 语法 有需要才会出来运算。</h3>
-
-<p><code>ruby
-let(:user) {User.new(:is_vip =&gt; true)
-</code></p>
-
-<h3>should 后面</h3>
-
-<p>be_true
-be_false
-be_nil</p>
-
-<h3>检查class和def</h3>
-
-<ul>
-<li>target.should be_a_kind_of(Array)      <code>target.class.should == Array</code></li>
-<li>target.should be_an_instance_of(Array) <code>target.class.should == Array</code></li>
-<li>target.should respond_to(:foo)         <code>target.respond_to?(:foo).should == true</code></li>
-</ul>
-
-
-<h3>检查array hash</h3>
-
-<ul>
-<li>target.should have_key(:foo) <code>#target[:foo].should_not == nil</code></li>
-<li>target.should include(4)     <code>#target.include?(4).should == true</code></li>
-<li>target.should have(3).items  <code>#target.items.length == 3</code></li>
-</ul>
-
-
-<h3>任何be_开头的</h3>
-
-<ul>
-<li>target.should be_empty <code>#target.empty?.should == true</code></li>
-<li>target.should be_blank <code>#target.blank?.should == true</code></li>
-<li>target.should be_admin <code>#target.admin?.should == true</code></li>
-</ul>
-
-
-<h3>should ==   一招鲜吃遍天</h3>
-
-<h3>expect to</h3>
-
-<h4>希望一段代码会改变某个值货丢出例外</h4>
-
-<p><code>ruby
-it "should update status to shipping" do
-  expect{order.ship!}.to change{order.status}.from("new").to("shippping")
-end
-</code></p>
-
-<h4>希望status从new变成shipping</h4>
-
-<p>和这段差不多</p>
-
-<p><code>ruby
-it "should update status to shipping "do
-order.status.should == "new"
-order.ship!
-order.status.should == "shipping"
-end
-</code></p>
-
-<h3>subject 可以省略 receiver</h3>
-
-<p><code>ruby
-subject {Order.new(:status =&gt; "New")}
-it {should be_valid} #subject.valid?should == true
-its(:status){should == "New"} #subject.status.should == "New"
-</code></p>
-
-<h3>it example specify 是一样的 都是别名</h3>
-
-<h4>rspec filename.rb -fs 输出specdox文件</h4>
-
-<h4>rspec filename.rb -fh 输出html文件</h4>
-
-<h3>useful Rspec tools</h3>
-
-<ul>
-<li>factory_girl 造测试数据</li>
-<li>shoulda 更多rails专用的matcher</li>
-<li>capybara 提供浏览器模拟</li>
-</ul>
-
-
-<h3>rcov 测试覆盖度 看有哪些代码没有测试到</h3>
-
-<h3>Capydara</h3>
-
-<ul>
-<li>fill_in 'Login', :with=>'username'</li>
-<li>click_link 'Sign up'</li>
-</ul>
-
-
-<h3>每个it只有一个测试目的。不被周边因素影响</h3>
 ]]></content>
   </entry>
   

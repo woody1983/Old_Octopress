@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-01-03T20:14:39+08:00</updated>
+  <updated>2013-01-03T22:23:12+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,991 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails3 Notes Model]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/03/rails3-notes-model/"/>
+    <updated>2013-01-03T22:21:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/03/rails3-notes-model</id>
+    <content type="html"><![CDATA[<h4>Rails3 中和Model有关的内容我单独整理出来了。可能是做数据库的时间比较多，喜欢从数据的层面分析问题。</h4>
+
+<!-- more -->
+
+
+<h1>Rails Model</h1>
+
+<h2>Names Scope</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:rotting</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="n">rotting</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:fresh</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="s2">&quot;age &lt; 20&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:recent</span><span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;created_at desc&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>调用比较简单 直接在Crontroller中Call这些Scope</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Zombie</span><span class="o">.</span><span class="n">rotting</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="no">Zombie</span><span class="o">.</span><span class="n">recent</span><span class="o">.</span><span class="n">fresh</span><span class="o">.</span><span class="n">rotting</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Callbacks</h2>
+
+<blockquote><p>应用场景比较简单，比如在save一个对象之前，根据目前这个对象的一些属性自动赋值。ex: When zombie age > 20 , set rotting to true.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">defore_save</span> <span class="ss">:make_rotting</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">make_rotting</span>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">rotting</span> <span class="o">=</span> <span class="kp">true</span> <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">20</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>All Callbacks</h4>
+
+<ul>
+<li>before_validation</li>
+<li>save</li>
+<li>create</li>
+<li>update</li>
+<li>destroy</li>
+</ul>
+
+
+<h2>model关系</h2>
+
+<blockquote><p>单数和复数 has_one has_many belongs_to.复数的形式和英语标准文法里一致</p></blockquote>
+
+<h1>Create Model 单数</h1>
+
+<p><code>rails g model 单数 column:type</code></p>
+
+<h2>dependent: :destroy</h2>
+
+<p>has_one</p>
+
+<h2>&#8220;include&#8221; option</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@zombie</span> <span class="o">=</span> <span class="no">Zombie</span><span class="o">.</span><span class="n">all</span> <span class="c1">#然后在view里再去拉brain的数据 </span>
+</span><span class='line'><span class="vi">@zombie</span> <span class="o">=</span> <span class="no">Zombie</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="ss">:brain</span><span class="p">)</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'><span class="c1">#Brain Load (0.3ms) SELECT * FROM &quot;brains&quot; WHERE &quot;zombie_id&quot; IN (4, 5, 6, 7)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>through</h2>
+
+<blockquote><p>创建R表 也就是关联表。然后多对多关系的两边 同时宣告拥有多个R表 并且拥有多个第二个模型</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_many</span> <span class="ss">:assignments</span>
+</span><span class='line'><span class="n">has_many</span> <span class="ss">:roles</span><span class="p">,</span> <span class="n">through</span><span class="p">:</span> <span class="ss">:assignments</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>through关系建立完毕以后，创建多对多数据时 可以直接向第二个对象添加 ex</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">z</span> <span class="o">=</span> <span class="no">Zombie</span><span class="o">.</span><span class="n">last</span>
+</span><span class='line'><span class="n">z</span><span class="o">.</span><span class="n">roles</span> <span class="o">&lt;&lt;</span> <span class="no">Role</span><span class="o">.</span><span class="n">find_by_title</span><span class="p">(</span><span class="s1">&#39;Captain&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#也可以用z.roles.push 看个人习惯</span>
+</span><span class='line'><span class="err">这个时候</span><span class="n">check</span><span class="err">一下</span><span class="n">role</span><span class="err">的数据会看到他会</span><span class="n">inner</span> <span class="n">join</span><span class="err">关系表</span> <span class="err">调用</span><span class="n">a</span><span class="err">表的时候会使用</span><span class="n">b</span><span class="err">表的主键</span>
+</span><span class='line'><span class="n">z</span><span class="o">.</span><span class="n">roles</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails3 Notes about view]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/03/rails3-notes-about-view/"/>
+    <updated>2013-01-03T22:19:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/03/rails3-notes-about-view</id>
+    <content type="html"><![CDATA[<h4>Rails3中View的Helper提供了很多实用的方法。</h4>
+
+<!-- more -->
+
+
+<h1>Viewer</h1>
+
+<h2>Create a form</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">form_for</span><span class="p">(</span><span class="vi">@zombie</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果<code>@zombie</code>已经存在数据库里了</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">￼</span><span class="o">&lt;</span><span class="n">form</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;/zombies/8&quot;</span> <span class="nb">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">input</span> <span class="nb">name</span><span class="o">=</span><span class="s2">&quot;_method&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s2">&quot;hidden&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;put&quot;</span> <span class="sr">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>否则就是post</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">form</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;/zombies&quot;</span> <span class="nb">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>f.submit</code>也是根据Zombie数据对象再数据库是否存在而选择显示Create 还是Update</p>
+
+<h1>常见的Text_field</h1>
+
+<p><code>f.text_field :name</code>提交出去的时候数据模型是这样子的</p>
+
+<p><code>:params =&gt; {:zombie =&gt;{:name =&gt; 'Name'}}</code></p>
+
+<h1>Label helper</h1>
+
+<p><code>f.label :name</code> 在html里显示<code>&lt;label for="zombie_name"&gt;Name&lt;/label&gt;</code></p>
+
+<h1>input helpers</h1>
+
+<ul>
+<li>text_area</li>
+<li>check_box</li>
+<li>radio_button :decomp, &#8216;fresh&#8217;, checked: true</li>
+<li>select :decomp, [&#8216;frsh&#8217;,&#8217;new&#8217;]</li>
+<li>select :decomp, [[&#8216;fresh,1],[&#8216;new&#8217;,2]]</li>
+<li>password_field</li>
+<li>number_field</li>
+<li>range_field</li>
+<li>email_field</li>
+<li>url_field</li>
+<li>telephone_field</li>
+</ul>
+
+
+<h2>Partials 减少重复代码 比如新建和更新的表单</h2>
+
+<p>&lt;% render &#8216;form&#8217;%> <code>_form.html.erb</code></p>
+
+<h1>View helper</h1>
+
+<h2>div_for</h2>
+
+<p>之前的<code>&lt;div id="tweet_&lt;%= tweet.id%&gt;" class='tweet'&gt;</code>可以写成
+&lt;%= div_for tweet do %>
+<code>dom_id(@tweet)</code> => tweet_2</p>
+
+<h2>截断字符串</h2>
+
+<p><code>truncate("I need brains!", :length =&gt; 10,:separator =&gt; ' ')</code>
+:separator是为了保证不会切半个单词什么的。</p>
+
+<h2>自动显示数量词单复数形式</h2>
+
+<p><code>pluralize(Zombie.count,"zombie")</code></p>
+
+<h2>String的标题化 //首字母自动大小写之类的设置 很使用</h2>
+
+<p><code>@zombie.name.titleize</code></p>
+
+<h2>队列化 a , b and c</h2>
+
+<p><code>@role.name.to_sentence</code></p>
+
+<h2>时间间隔表达</h2>
+
+<p><code>time_ago_in_words @zombie.created_at</code></p>
+
+<h2>Number的转换</h2>
+
+<ul>
+<li>number_to_currency</li>
+<li>number_to_human</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Holiday Notes with Rails3]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/03/holiday-notes-with-rails/"/>
+    <updated>2013-01-03T22:11:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/03/holiday-notes-with-rails</id>
+    <content type="html"><![CDATA[<h4>假期没有出去玩 在家里宅了十几天的时间，基本消耗在Rails和德州扑克上多一些。现在开始整理笔记了，之前写的太乱。</h4>
+
+<!-- more -->
+
+
+<h1>Rails 重新开始</h1>
+
+<blockquote><p>这个是在CodeSchool上学习的Rails开发教程的笔记。纪录下来，认真回过头好好复习一下。</p></blockquote>
+
+<h1>Install Rails</h1>
+
+<p>rails new TwitterForZombies</p>
+
+<h2>Rails Commands</h2>
+
+<ul>
+<li>generate</li>
+<li>console</li>
+<li>server</li>
+<li>dbconsole</li>
+</ul>
+
+
+<h2>Using Generators</h2>
+
+<ul>
+<li>helper</li>
+<li>mailer</li>
+<li>migration</li>
+<li>model</li>
+<li>scaffold</li>
+</ul>
+
+
+<h2>Using Scaffold</h2>
+
+<p><code>rails g scaffold NAME [field:type field:type]</code></p>
+
+<h2>Variable types</h2>
+
+<ul>
+<li>string</li>
+<li>text</li>
+<li>integer</li>
+<li>boolean</li>
+<li>decimal</li>
+<li>float</li>
+<li>binary</li>
+<li>date</li>
+<li>time</li>
+<li>datetime</li>
+</ul>
+
+
+<h1>DB Migration</h1>
+
+<h2>Create table in Migration</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>create_table :tablename do |t|
+</span><span class='line'>  t.数据类型 :column_name
+</span><span class='line'>  t.text :bio
+</span><span class='line'>  t.index :name #add index with db
+</span><span class='line'>  t.timestamps# same as t.datetime :created_at t.datetime :updated_at
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Adding Columns</h2>
+
+<ul>
+<li>AddColumn<code>Add&lt;Column_name&gt;To&lt;table_name&gt;</code></li>
+<li>RemoveColumn <code>Remove&lt;&gt;From&lt;&gt;</code></li>
+<li>add_index :table, :column</li>
+<li>rename_column :table_name, :old, :new</li>
+<li>rename_table :old_table, :new_table</li>
+<li>drop_table :table_name</li>
+<li>change_column :table, :column, :type, :options</li>
+<li>change_column_default :table, :column, default: true/&#8217;string&#8217;</li>
+</ul>
+
+
+<p><code>rails g migration Drop__Table</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">change</span>
+</span><span class='line'>  <span class="n">add_column</span> <span class="ss">:zombies</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span><span class="n">unique</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1> Migration options</h1>
+
+<ul>
+<li>default: <value></li>
+<li>limit: 30</li>
+<li>null: false</li>
+<li>first: true</li>
+<li>after: email</li>
+<li>unique: true</li>
+</ul>
+
+
+<h2>Run Migrations</h2>
+
+<ul>
+<li>rake db:migrate</li>
+<li>rake db:rollback</li>
+<li>rake db:schema:dump #->￼db/schema.rb</li>
+<li>rake db:setup</li>
+</ul>
+
+
+<h1>Ruby 1.9 Hash New Syntax</h1>
+
+<p><code>{name: "hash new stntax"}</code>
+<code>{render json: @zombies }</code></p>
+
+<h1>REST {Link_to:}</h1>
+
+<h3>to link to each action</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">zombie</span> <span class="o">=</span> <span class="no">Zombie</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="n">zombie</span>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="n">zombie</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:post</span>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="n">zombie</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:put</span>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="n">zombie</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>resources :zombies</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= link_to &#39;All Zombies&#39;,  zombie_path %&gt;</span>
+</span><span class='line'><span class="sx">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;New Zombies&#39;</span><span class="p">,</span>  <span class="n">new_zombie_path</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">&lt;%= link_to &#39;Edit Zombies&#39;, edit_zombie_path(@zombie) %&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sx">%= link_to &#39;Show Zombies&#39;, zombie_path(@zombie) %&gt;</span>
+</span><span class='line'><span class="sx">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Show Zombies&#39;</span><span class="p">,</span> <span class="vi">@zombie</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Nested Routes</h1>
+
+<blockquote><p>嵌套路由 感觉平时项目里会经常用到 毕竟两个数据模型并行计算和处理的时候实在是太多了。</p></blockquote>
+
+<p>标准写法是：将routes写成嵌套写法。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">resources</span> <span class="ss">:zombie</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:tweets</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>嵌套路由写好以后 还修改crontroller &amp; viewer{link_fo form_for}</p>
+
+<h2>标准的嵌套url是 /zombies/4/tweets/2 /zombies/4/tweets</h2>
+
+<p>那么在tweets的crontroller里 会接受到zombie和tweet两个id传参进来。</p>
+
+<p>先在tweets&#8217;s crontroller中定义一个filter 来获取上一级信息 比如zombie
+<code>before_filter :get_zombie</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">get_zombie</span>
+</span><span class='line'>  <span class="vi">@zombie</span> <span class="o">=</span> <span class="no">Zombie</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:zombie_id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">zombie</span> <span class="err">已经查出来了</span> <span class="n">show</span><span class="err">和</span><span class="n">index</span><span class="err">可以直接调用</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>  <span class="vi">@tweet</span> <span class="o">=</span> <span class="vi">@zombie</span><span class="o">.</span><span class="n">tweets</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>  <span class="vi">@tweets</span> <span class="o">=</span> <span class="vi">@zombie</span><span class="o">.</span><span class="n">tweets</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>在Nested rake routes的link写法</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">link_to</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="vi">@zombie</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;s Tweets&quot;</span><span class="p">,</span> <span class="n">zombie_tweets_path</span><span class="p">(</span><span class="vi">@zombie</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;New Tweet&#39;</span><span class="p">,</span> <span class="n">new_zombie_tweet_path</span><span class="p">(</span><span class="vi">@zombie</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;Edit Tweet&#39;</span><span class="p">,</span> <span class="n">edit_zombie_tweet_path</span><span class="p">(</span><span class="vi">@zombie</span><span class="p">,</span><span class="n">tweet</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">show</span> <span class="err">有两种写法</span> <span class="err">哪个简单用哪个</span>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;Show&#39;</span><span class="p">,</span> <span class="n">zombie_path</span><span class="p">(</span><span class="vi">@zombie</span><span class="p">,</span><span class="n">tweet</span><span class="p">)</span>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;Show&#39;</span><span class="p">,</span><span class="o">[</span><span class="vi">@zombie</span><span class="p">,</span><span class="n">tweet</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span><span class="o">[</span><span class="vi">@zombie</span><span class="p">,</span><span class="n">tweet</span><span class="o">]</span><span class="p">,</span><span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>嵌套的显示Viewer</h2>
+
+<p>在二级目录里的index显示 需要使用到上一级资源的调用</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="vi">@tweets</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">tweets</span><span class="o">|</span>
+</span><span class='line'>   <span class="n">tweet</span><span class="p">,</span><span class="n">body</span>
+</span><span class='line'>   <span class="n">link_to</span> <span class="s1">&#39;Show&#39;</span><span class="p">,</span><span class="o">[</span><span class="vi">@zombie</span><span class="p">,</span><span class="n">tweet</span><span class="o">]</span>
+</span><span class='line'>   <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span><span class="n">edit_zombie_tweet_path</span><span class="o">[</span><span class="vi">@zombie</span><span class="p">,</span><span class="n">tweet</span><span class="o">]</span>
+</span><span class='line'>   <span class="n">link_to</span> <span class="s1">&#39;Edstroy&#39;</span><span class="p">,</span><span class="o">[</span><span class="vi">@zombie</span><span class="p">,</span><span class="n">tweet</span><span class="o">]</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span>
+</span><span class='line'> <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'> <span class="n">link_to</span> <span class="s1">&#39;New Tweet&#39;</span><span class="p">,</span><span class="n">new_zombie_tweet_path</span><span class="p">(</span><span class="vi">@zombie</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>创建_form 表单比较简单</h3>
+
+<p><code>form_for([@zombie,@tweet]) do |f|</code></p>
+
+<h3>嵌套路由里 Controller中就不能直接些二级目录数据实体</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>  <span class="vi">@tweet</span> <span class="o">=</span> <span class="vi">@zombie</span><span class="o">.</span><span class="n">tweets</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:tweet</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">返回信息的时候要将</span><span class="mi">2</span><span class="err">级目录的信息一起返回。</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>  <span class="k">if</span> <span class="vi">@tweet</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span><span class="n">redirect_to</span> <span class="o">[</span><span class="vi">@zombie</span><span class="p">,</span><span class="vi">@tweet</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>                 <span class="n">notice</span><span class="p">:</span> <span class="s1">&#39;Tweet was successfully created.&#39;</span><span class="p">}</span>
+</span><span class='line'>     <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="n">json</span><span class="p">:</span> <span class="o">[</span><span class="vi">@zombie</span><span class="p">,</span><span class="vi">@tweet</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>                          <span class="n">status</span><span class="p">:</span> <span class="ss">:created</span><span class="p">,</span>
+</span><span class='line'>                          <span class="n">location</span><span class="p">:</span> <span class="o">[</span><span class="vi">@zombie</span><span class="p">,</span><span class="vi">@tweet</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>   <span class="k">else</span>
+</span><span class='line'>     <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">render</span> <span class="n">action</span><span class="p">:</span> <span class="s2">&quot;new&quot;</span> <span class="p">}</span>
+</span><span class='line'>     <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="n">json</span><span class="p">:</span> <span class="vi">@tweet</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span>
+</span><span class='line'>                                <span class="n">status</span><span class="p">:</span> <span class="ss">:unprocessable_entity</span> <span class="p">}</span>
+</span><span class='line'>   <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Asset Pipeline</h1>
+
+<p>所有的tag 不需要指明路径 因为所有的资源调用和显示都会指向到<code>/assets/</code></p>
+
+<ul>
+<li>&lt;%= javascript_include_tag &#8220;custom&#8221; %></li>
+<li>&lt;%= stylesheet_link_tag &#8220;style&#8221; %></li>
+<li>&lt;%= image_tag &#8220;rails.png&#8221; %></li>
+</ul>
+
+
+<p>在css中调用一些图片的路径时 需要使用asset_path 否则无法使用缓存里的文件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">form_new_zombie</span> <span class="n">input</span><span class="o">.</span><span class="n">submit</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">background</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="o">&lt;%=</span> <span class="n">asset_path</span><span class="p">(</span><span class="s1">&#39;button.png&#39;</span><span class="p">)</span> <span class="o">%&gt;</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>SCSS</h1>
+
+<p><code>zombie.css.scss.erb</code> 嵌套写法的css</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">form</span><span class="o">.</span><span class="n">new_zombie</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">dashed</span> <span class="n">gray</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">.</span><span class="n">field</span><span class="c1">#bio {</span>
+</span><span class='line'>    <span class="nb">display</span><span class="p">:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">input</span><span class="o">.</span><span class="n">submit</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">background</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="o">&lt;%=</span> <span class="n">asset_path</span><span class="p">(</span><span class="s1">&#39;button.png&#39;</span><span class="p">)</span> <span class="o">%&gt;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails For Zombie]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/03/rails-for-zombie/"/>
+    <updated>2013-01-03T21:58:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/03/rails-for-zombie</id>
+    <content type="html"><![CDATA[<h3>这是国外的一个在线教育平台的课程 感觉非常不错 有很多知识点。现在共享出来，一起学习。</h3>
+
+<!-- more -->
+
+
+<h4>Rails new</h4>
+
+<blockquote><p>Enter the command to start a new rails app called &#8216;ZombieTweets&#8217;</p></blockquote>
+
+<p>rails new Zombi­eTweets</p>
+
+<h4>GENERATE SCAFFOLD</h4>
+
+<blockquote><p>Enter the command to create tweet scaffold with a string status and an integer of zombie_id</p></blockquote>
+
+<p>rails g scaff­old tweet­ statu­s:string zombi­e_id:integ­er</p>
+
+<h4>RUN MIGRATION</h4>
+
+<blockquote><p>Enter the command to run the migration you just created.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake db:mi­grate
+</span><span class='line'>==  CreateTweets: migrating ===================================================
+</span><span class='line'>-- create_table(:tweets)
+</span><span class='line'>   -&gt; 0.0017s
+</span><span class='line'>==  CreateTweets: migrated (0.0025s) ==========================</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>BOOT IT UP</h4>
+
+<blockquote><p>Enter the command to start a rails server</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails s
+</span><span class='line'>=&gt; Booting WEBrick
+</span><span class='line'>=&gt; Rails 3.1.0 application starting in development on http://0.0.0.0:3000
+</span><span class='line'>=&gt; Call with -d to detach
+</span><span class='line'>=&gt; Ctrl-C to shutdown server
+</span><span class='line'>[2013-01-03 12-26-14] INFO  WEBrick 1.3.1
+</span><span class='line'>[2013-01-03 12-26-14] INFO  ruby 1.9.2 (2011-02-18) [x86_64-darwin10.7.0]
+</span><span class='line'>[2013-01-03 12-26-14] INFO  WEBrick::HTTPServer#start: pid=35740 port=3000</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>ADD COLUMN TO TABLE</h4>
+
+<blockquote><p>Enter the command line text to generate a migration called AddPrivateToTweets which adds a boolean field called private.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rails g migra­tion AddPr­ivateToTwe­ets priva­te:boolean­
+</span><span class='line'>invoke  active_record
+</span><span class='line'>create    db/migrate/20130103122847_add_private_to_tweets.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>ROLLBACK MIGRATION</h4>
+
+<blockquote><p>Assume we ran that last migration. However we forgot a column we wanted to add, could you please roll it back from the command line?</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake db:ro­llback
+</span><span class='line'>==  AddLocationToTweets: reverting ============================================
+</span><span class='line'>-- remove_column("tweets", :show_location)
+</span><span class='line'>   -&gt; 0.0008s
+</span><span class='line'>-- remove_column("tweets", :location)
+</span><span class='line'>   -&gt; 0.0003s
+</span><span class='line'>==  AddLocationToTweets: reverted (0.0012s) ===================================</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>REMOVE COLUMN</h4>
+
+<blockquote><p>On second thought, that category_name string column was a bad idea. Write a migration to remove the category_name column.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">RemoveCategoryNameFromTweets</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">up</span>
+</span><span class='line'>    <span class="n">remove_column</span> <span class="ss">:tweets</span> <span class="p">,</span> <span class="ss">:category_name</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">down</span>
+</span><span class='line'>    <span class="n">add_column</span> <span class="ss">:tweets</span><span class="p">,</span><span class="ss">:category_name</span> <span class="p">,</span> <span class="ss">:string</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>DATABASE SETUP</h4>
+
+<blockquote><p>You&#8217;ve decided to install the app on another computer. Please enter the command you should use (instead of rake db:migrate) to create the database, load the schema, and run the seed file.</p></blockquote>
+
+<p>rake db:setup</p>
+
+<h4>IN THE CONSOLE</h4>
+
+<blockquote><p>Enter the command to enter the Rails console</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">rails</span> <span class="n">c</span>
+</span><span class='line'><span class="no">Loading</span> <span class="n">development</span> <span class="n">environment</span> <span class="p">(</span><span class="no">Rails</span> <span class="mi">3</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Enter the command to enter the Rails console.
+You are now running in the Rails console!
+Experiment with creating a new Tweet and saving it to the database. Type next to move on.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="o">&gt;</span> <span class="no">Tweet</span><span class="o">.</span><span class="n">crea</span><span class="err">­</span><span class="n">te</span><span class="p">(</span><span class="n">message</span><span class="err">­</span><span class="p">:</span> <span class="s1">&#39;hell­o&#39;</span><span class="p">,</span> <span class="n">categ</span><span class="err">­</span><span class="n">ory_name</span><span class="p">:</span> <span class="s1">&#39;cate­gory&#39;</span><span class="p">,</span> <span class="n">locat</span><span class="err">­</span><span class="n">ion</span><span class="p">:</span> <span class="s1">&#39;Chin­a&#39;</span><span class="p">,</span> <span class="n">show_</span><span class="err">­</span><span class="n">location</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span><span class="err">­</span> <span class="n">zombi</span><span class="err">­</span><span class="n">e_id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#&lt;Tweet id: 1, message: &quot;hello&quot;, category_name: &quot;category&quot;, location: &quot;China&quot;, show_location: true, zombie_id: 1&gt;</span>
+</span><span class='line'><span class="n">ruby</span> <span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>schema:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">create_table</span><span class="p">(</span><span class="ss">:tweets</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:message</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:category_name</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:location</span><span class="p">,</span> <span class="ss">:limit</span> <span class="o">=&gt;</span> <span class="mi">30</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">boolean</span> <span class="ss">:show_location</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:zombie_id</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>SCOPES</h4>
+
+<blockquote><p>Write a scope on the Tweet model called recent which returns the 4 most recent tweets. Hint: You&#8217;ll need an order AND a limit scope.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Tweet</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;created_at desc&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Write another scope called graveyard which only shows tweets where the show_location column is true and the location is &#8220;graveyard&#8221;</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Tweet</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span><span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s1">&#39;created_at desc&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:graveyard</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="n">show_location</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span><span class="n">location</span><span class="p">:</span> <span class="s1">&#39;graveyard&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>USING SCOPES</h4>
+
+<blockquote><p>In this controller action create an instance variable called @graveyard_tweets which uses both of the two scopes recent and graveyard together.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TweetsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="vi">@tweets</span> <span class="o">=</span> <span class="no">Tweet</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>    <span class="vi">@graveyard_tweets</span> <span class="o">=</span> <span class="no">Tweet</span><span class="o">.</span><span class="n">recent</span><span class="o">.</span><span class="n">graveyard</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>BEFORE SAVE</h4>
+
+<blockquote><p>Create a before_save callback that checks to see if a tweet has a location, if it does have a location then set show_location to true.
+Tip: You can check to see if location exists with if self.location?</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Tweet</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">before_save</span> <span class="ss">:tweet</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">tweet</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">show_location</span> <span class="o">=</span> <span class="kp">true</span> <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">location</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>CALLBACK LOGGING</h4>
+
+<blockquote><p>Add callbacks so the appropriate log function is called after an update and destroy.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Tweet</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">after_update</span> <span class="ss">:log_update</span>
+</span><span class='line'><span class="n">after_destroy</span> <span class="ss">:log_destroy</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">log_update</span>
+</span><span class='line'>    <span class="n">logger</span><span class="o">.</span><span class="n">info</span> <span class="s2">&quot;Tweet </span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2"> updated&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">log_destroy</span>
+</span><span class='line'>    <span class="n">logger</span><span class="o">.</span><span class="n">info</span> <span class="s2">&quot;Tweet </span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2"> deleted&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>HAS ONE</h4>
+
+<blockquote><p>Instead of storing location inside the Tweet model, let&#8217;s instead break it out into a separate table (as you see below). In this case we want to define that a Tweet can have one Location, and a Location belongs to a Tweet. Fill out the models below accordingly.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Tweet</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'><span class="n">has_one</span> <span class="ss">:location</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Location</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'><span class="n">belongs_to</span> <span class="ss">:tweet</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>FOREIGN KEY</h4>
+
+<blockquote><p>OH NO! Our Database Admin turned into a Zombie and decided to rename the belongs_to field in our locations table tweeter_id instead of the intelligent default tweet_id. We&#8217;re going to slay him and correct this, but in the meantime set the foreign_key on both relationships to tweeter_id. Also set the dependency so when a tweet is destroyed, the location is destroyed as well.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Tweet</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">has_one</span> <span class="ss">:location</span><span class="p">,</span> <span class="n">dependent</span><span class="p">:</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="n">foreign_key</span><span class="p">:</span> <span class="ss">:tweeter_id</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Location</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:tweet</span><span class="p">,</span> <span class="n">foreign_key</span><span class="p">:</span> <span class="ss">:tweeter_id</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>INCLUDES</h4>
+
+<blockquote><p>We&#8217;re going to be iterating through many tweets and printing out their location. Refactor the controller code below to use the includes method.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TweetsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="vi">@tweets</span> <span class="o">=</span> <span class="no">Tweet</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="ss">:location</span><span class="p">)</span><span class="o">.</span><span class="n">recent</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>RELATIONSHIP MIGRATION</h4>
+
+<blockquote><p>A Tweet can belong to one or more Categories (e.g. eating flesh, walking dead, searching for brains). Write a migration that creates two tables, categories, and categorizations. Give categories one column named name of type string; and give categorizations two integer columns: tweet_id and category_id.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">AddTweetCategories</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">change</span>
+</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:categories</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:name</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:categorizations</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:tweet_id</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:category_id</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>HAS MANY THROUGH</h4>
+
+<blockquote><p>Now that we have our new tables, it&#8217;s time to define the relationships between each of the models. Define the has_many through relationships in the Tweet &amp; Category model and the belongs_to relationships in the Categorization model.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Tweet</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:categorizations</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:categories</span><span class="p">,</span> <span class="n">through</span><span class="p">:</span> <span class="ss">:categorizations</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Categorization</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:tweet</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:category</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Category</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:categorizations</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:tweets</span><span class="p">,</span> <span class="n">through</span><span class="p">:</span> <span class="ss">:categorizations</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby Moudle &amp; Class &amp; Method]]></title>
@@ -1229,455 +2214,6 @@ You provide the method implementation in the
 <h3>Generate the email.</h3>
 
 <p>We’ll help you out with this last step.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[打造牛轰的todo]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/09/make-todo/"/>
-    <updated>2012-08-09T20:52:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/09/make-todo</id>
-    <content type="html"><![CDATA[<h3>为什么要这个todo？</h3>
-
-<p>很重要的一个原因:<code>我们欠管</code>，而恰恰也是因为这个大多数人的todo基本上就素一个摆设，要么敷衍自己要么敷衍家长大部分是敷衍寒暑假，给自己的玩耍创造更多的舆论支持。</p>
-
-<h3>为什么大多数的todo是没用的?</h3>
-
-<p>很简单，我们大脑最聪明的时候就是你不告诉他该怎么做的时候，说白了就是<code>潜意识</code>，另外最要命的是我们的大脑逃避痛苦的速度是你想象不到的快，这就是人为什么容易走神而自己却不知道。</p>
-
-<!-- more -->
-
-
-<h3>举个栗子</h3>
-
-<p>还是举个例子比较好理解，就拿学习英语这事儿来说吧，我相信大多数人上学的时候甚至是工作的时候都做过无数次的学习计划，很荣幸，我也是。</p>
-
-<p>但计划就是计划，新概念永远是第一本看的最多遍，这就是每次时间到了大脑开始进行todo里面各项任务时经常遇到的问题。</p>
-
-<h3>怎么做todo？最不反人类</h3>
-
-<p>还是以英语为栗子!! 学习英语首先要确定一些东西：</p>
-
-<ul>
-<li>什么时间学？几点开始，几点结束？</li>
-<li>在哪里学？</li>
-<li>学习的材料在哪？</li>
-<li>一次学多少？第一阶段要学到哪里？</li>
-<li>怎么才算是学？你要做什么？</li>
-</ul>
-
-
-<p>其实第五个问题最重要，前面几个只是做铺垫。你必须知道做什么才叫做学习？否则到时间了，你还是要面对这个问题，思考的时间一拉长问题就麻烦了。</p>
-
-<h4>我是怎么修改这个学习todo的</h4>
-
-<ul>
-<li>早上学习45min，心情好的话学一个小时。晚上有时间就看，不在计划内。</li>
-<li>桌子上。坚决不在公司学，就算有时间最多写个英语的twitter练习一下</li>
-<li><code>新概念</code>/<code>NCE-1</code> 别笑 我1还是没过关呢，问题是不知道怎样才算是过关</li>
-<li>学多少是个问题，遥遥无期本身就是个压力，以一本教材为<code>Milestone</code>最合适。</li>
-<li><code>重点</code>早上的练习任务就是超课文，抄完就默写，不用动脑子，只管做就可以了。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>再说说执行过程中的事情
-</span><span class='line'>所谓抄写最好的地方就是大脑几乎不需要为这个todo的动作和流程付出太多的思考，下意识里去接受就可以了。
-</span><span class='line'>题外话 如果能延伸一些的话 抄写的时候可以找一些英语对白听听，现在华尔街英语貌似有下载的mp3流出。可以拿来试试</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在试验过几次，感觉是非常好的，早上起来洗漱完毕，做到桌子上下意识直接拿书起来抄，我很喜欢用笔书写时的感觉，尤其时笔尖和纸张接触使的摩擦力。但现在更多的时间使用电脑来敲打，一是比较环保，二是平时用键盘也最多，也熟悉，如果现在用键盘输入的英语练习多了的话，对以后的使用还是有帮助，总不会那么生涩吧。</p>
-
-<p>洗洗睡了</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C里面的Byte Bit概念和数据类型]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/08/c-byte-bit-date-type/"/>
-    <updated>2012-08-08T21:16:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/08/c-byte-bit-date-type</id>
-    <content type="html"><![CDATA[<h1>二进制 八进制 十六进制</h1>
-
-<p><code>位bit</code>是含有0或1的一个单位</p>
-
-<p>给一串二进制加上架构的概念，这样的结构叫<code>字节</code></p>
-
-<p>一个字节<code>byte</code>由<code>8</code>位构成, 一个字<code>word</code>由<code>32</code>构成或<code>4</code>个字节</p>
-
-<p>一个字节最大是8位，8位数的二进制 <code>1111 1111</code>换成十进制<code>255</code>,也就是说一个字节最大能存的整数是<code>255</code></p>
-
-<p>2个字节可以存放 <code>2的16次方</code>=65535 4个字节<code>2的32次方</code>=4 294 967 295</p>
-
-<p>大小写的26个英文字母还有10个数字和标点符号加在一起的内容在字节对应中有个<code>ASC2</code>的编码。</p>
-
-<!-- more -->
-
-
-<h3>内存编号</h3>
-
-<blockquote><p>起始编号是1 隔8个位置加1</p></blockquote>
-
-<table>
-<thead>
-<tr>
-<th>起始编码1 </th>
-<th> 位7 </th>
-<th> 位6 </th>
-<th> 位5 </th>
-<th> 位4 </th>
-<th> 位3 </th>
-<th> 位2 </th>
-<th> 位1 </th>
-<th> 位0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1 </td>
-<td> 0  </td>
-<td> 0 </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 1 </td>
-<td> 0</td>
-</tr>
-<tr>
-<td>2 </td>
-<td> 1  </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 1 </td>
-<td> 0 </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 1</td>
-</tr>
-</tbody>
-</table>
-
-
-<h3>C语言用的是起始地址＋长度 编码2开始 往后4个字节</h3>
-
-<hr />
-
-<h1>数据类型 DataType</h1>
-
-<h4>数据类型是程序所处理的数据的抽象，将可能出现的数据进行分类 比如整数和带小数点的数。</h4>
-
-<h4>C语言创造了很多丰富的数据类型</h4>
-
-<ul>
-<li>构造类型</li>
-<li>指针类型</li>
-<li>空类型</li>
-<li>基本类型</li>
-</ul>
-
-
-<h4>基本类型</h4>
-
-<p>枚举类型<code>enum</code> 字符类型<code>char</code> 数值类型包括<code>实型</code>和<code>整型</code></p>
-
-<ul>
-<li>实型包括 单精度<code>float</code> 双精度<code>double</code></li>
-<li>整型包括 短整型<code>short</code> 整型<code>int</code> 长整型<code>long</code></li>
-</ul>
-
-
-<h4>构造类型</h4>
-
-<p>包括 <code>数组</code> <code>结构体</code> <code>共用体</code></p>
-
-<p>构造类型是由多个其他数据雷西瓜组合而成，可以分解成若干个元素或成员，每个元素或成员要么是一个基本数据类型，要么又是一个构造类型。</p>
-
-<ul>
-<li>数组 所有元素是同一个类型</li>
-<li>结构体 不同数据类型的组合</li>
-<li>共用体 多个雨啊宿不同数据类型 共用一块内存</li>
-</ul>
-
-
-<h4>空类型</h4>
-
-<p>Void 多数用在函数和指针的地方</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>需要Google一下的内容是
-</span><span class='line'>内存地址的布局方式 
-</span><span class='line'>int x = 4294967295 打印出来的正好是255
-</span><span class='line'>如果x的声明是4294967296 换成32地址的话
-</span><span class='line'>1 0000-0000 0000-0000 0000-0000 0000-0000 
-</span><span class='line'>如果x的声明是4294967297 换成32地址的话
-</span><span class='line'>1 0000-0000 0000-0000 0000-0000 0000-0001 </span></code></pre></td></tr></table></div></figure>
-
-
-<h1>整数类型</h1>
-
-<blockquote><p>类型分为 short int long</p></blockquote>
-
-<p>short <code>16-bit</code>or<code>2-byte</code> max&#8211;><code>11111111 11111111</code>二进制 <code>65535</code>十进制</p>
-
-<p>int <code>32 bit</code> or <code>4 byte</code>max&#8211;><code>11111111 11111111 11111111 11111111</code>二进制 <code>4294967295</code>十进制</p>
-
-<p>long <code>32 bit</code> or <code>4 byte</code>max&#8211;><code>11111111 11111111 11111111 11111111</code>二进制 <code>4294967295</code>十进制</p>
-
-<h4>一个int类型的整数实际上就是一个32个坑 一个萝卜一个坑</h4>
-
-<h2>整数的正负</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>有符号和无符号两种 32个坑的左边第一个坑就是用来标记正负的 最高位就是最左边那一位 0为正 1为负</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>关于补码 (需要另外单独资料)</h4>
-
-<p>23的二进制是0001 0111</p>
-
-<p>正数的补码就是该数的二进制数</p>
-
-<p>负数的补码是 例:-23</p>
-
-<ul>
-<li>先取该数的绝对值(-23)=23</li>
-<li>变成二进制 0001 0111</li>
-<li>二进制取反 1变0 0变1  1110 1000</li>
-<li>将取反后的值加1</li>
-</ul>
-
-
-<p><code>计算机中的数值是以补码的形式存储的!!!</code>
-<code>所有负数的二进制补码的最高位必然也必须是1</code></p>
-
-<p>signed int 表示4个字节的存储单元 第32位是符号位 剩下的31位才是数据位。</p>
-
-<p>一个二进制数如何解释 还要看要把这个数当作什么数据类型来解释 unsigned int 和 signed int 最高位的字符完全代表了不同的含义 要么计算成一个数 要么当成一个正负号标记位。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[mac安装gcc和ruby]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/08/mac-install-gcc-ruby/"/>
-    <updated>2012-08-08T20:27:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/08/mac-install-gcc-ruby</id>
-    <content type="html"><![CDATA[<h4>gcc</h4>
-
-<p>先说gcc 我这个mac安装过Xcode4.4 但安装过程中还是提示少c编译环境 查了一下需要安装xcode的插件</p>
-
-<p>安装command line tools。具体路径为：<code>Xcode –&gt; Preferences –&gt; Downloads 的Components</code>下，选择安装Command Line Tools 即可。</p>
-
-<h4>wget</h4>
-
-<p>我下载的是source code编译安装的</p>
-
-<!-- more -->
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://ftp.gnu.org/gnu/wget/wget-1.14.tar.gz
-</span><span class='line'>tar zxvf wget-1.14.tar.gz
-</span><span class='line'>cd wget-1.14
-</span><span class='line'>./configure --with-ssl=openssl
-</span><span class='line'>make
-</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Yaml</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz`
-</span><span class='line'>解tar 编译安装 不装这个东西 rvm安装ruby总是报错</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>rvm</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-</span><span class='line'>rvm --version
-</span><span class='line'>
-</span><span class='line'>xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ rvm install 1.9.3
-</span><span class='line'>Fetching yaml-0.1.4.tar.gz to /Users/xj/.rvm/archives
-</span><span class='line'>Extracting yaml-0.1.4.tar.gz to /Users/xj/.rvm/src
-</span><span class='line'>Configuring yaml in /Users/xj/.rvm/src/yaml-0.1.4.
-</span><span class='line'>Compiling yaml in /Users/xj/.rvm/src/yaml-0.1.4.
-</span><span class='line'>Installing yaml to /Users/xj/.rvm/usr
-</span><span class='line'>Building 'ruby-1.9.3-p194' using clang - but it's not (fully) supported, expect errors.
-</span><span class='line'>Installing Ruby from source to: /Users/xj/.rvm/rubies/ruby-1.9.3-p194, this may take a while depending on your cpu(s)...
-</span><span class='line'>中间需要download文件 
-</span><span class='line'>Install of ruby-1.9.3-p194 - #complete
-</span><span class='line'>Ruby 'ruby-1.9.3-p194' was built using clang - but it's not (fully) supported, expect errors.
-</span><span class='line'>xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ ruby -v
-</span><span class='line'>ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.4.0]
-</span><span class='line'>xjmatoMacBook-Air:ruby-1.9.3-rc1 xj$ gem -v
-</span><span class='line'>1.8.24
-</span><span class='line'>安装完以后看一下</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>bundle</h4>
-
-<p><code>bundle install</code></p>
-
-<p>这个是最关键的一步 进入项目文件里面 bundle所有需要的gem包</p>
-
-<h4>rake for octopress</h4>
-
-<p>日常维护octopress常用的命令大概就这么几个 分别为git和rake的</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate 声称静态页面
-</span><span class='line'>rake preview 预览
-</span><span class='line'>rake deploy 发布</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于Git的push & pull]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/07/about-git-push-and-pull/"/>
-    <updated>2012-08-07T19:39:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/07/about-git-push-and-pull</id>
-    <content type="html"><![CDATA[<h3>首先是两端同时维护的问题</h3>
-
-<p>同一个git的<code>Repo</code> 我如果需要在<code>office</code>和<code>home</code>里分开维护的话 数据的一致性是最主要的。
-比如我在家里写的blog，早上到公司以后就需要先pull下来最新版本的Repo 然后在一天中任何一个时间点或时间段都会随意的维护工作记录或笔记什么的。</p>
-
-<!-- more -->
-
-
-<p>现在的做法是把没写完的blog先<code>push</code>到一个<code>TODO的branch</code>里 然后push到远端一个分支 也叫todo</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git checkout -b todo
-</span><span class='line'>Switched to a new branch 'todo'
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git branch
-</span><span class='line'>  master
-</span><span class='line'>  source
-</span><span class='line'>* todo
-</span><span class='line'>创建一个todo的分支 
-</span><span class='line'>
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git add .
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git commit -m "todo branch : save temp file"
-</span><span class='line'>[todo 92e67d5] todo branch : save temp file
-</span><span class='line'> 1 file changed, 14 insertions(+)
-</span><span class='line'> create mode 100644 source/_posts/2012-08-07-about-git-push-and-pull.markdown
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git push origin todo
-</span><span class='line'>Counting objects: 8, done.
-</span><span class='line'>Delta compression using up to 2 threads.
-</span><span class='line'>Compressing objects: 100% (5/5), done.
-</span><span class='line'>Writing objects: 100% (5/5), 883 bytes, done.
-</span><span class='line'>Total 5 (delta 2), reused 0 (delta 0)
-</span><span class='line'>To git@github.com:woody1983/woody1983.github.com.git
-</span><span class='line'> * [new branch]      todo -&gt; todo</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>先merge一下 看能不能合并和发布出去。</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git merge todo
-</span><span class='line'>Updating 60ba0bf..5a7acfa
-</span><span class='line'>Fast-forward
-</span><span class='line'> .../2012-08-07-about-git-push-and-pull.markdown    |   42 ++++++++++++++++++++
-</span><span class='line'> 1 file changed, 42 insertions(+)
-</span><span class='line'> create mode 100644 source/_posts/2012-08-07-about-git-push-and-pull.markdown
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git add .
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git commit -m "merge todo blog 2"
-</span><span class='line'># On branch source
-</span><span class='line'># Your branch is ahead of 'origin/master' by 616 commits.
-</span><span class='line'>#
-</span><span class='line'>nothing to commit (working directory clean) #merge过来就不需要commit了？
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git branch
-</span><span class='line'>  master
-</span><span class='line'>  octopress_github/todo
-</span><span class='line'>* source
-</span><span class='line'>  todo
-</span><span class='line'>woodyxu@woodyxu-ThinkPad-R61-neo:~/woody1983.github.com$ git push origin source
-</span><span class='line'>Total 0 (delta 0), reused 0 (delta 0)
-</span><span class='line'>To git@github.com:woody1983/woody1983.github.com.git
-</span><span class='line'>   60ba0bf..5a7acfa  source -&gt; source
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>现在source是最新的版本内容了</h4>
-
-<h3>有一个地方需要注意的就是如何保证todo和source的一致性</h3>
-
-<p>也就是说最安全的做法就是以后写作只在todo里面完成 先push到远端的todo分支里然后到source里去merge 最后完成发布和push</p>
 ]]></content>
   </entry>
   
