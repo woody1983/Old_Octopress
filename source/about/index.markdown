@@ -6,17 +6,14 @@ comments: true
 sharing: true
 footer: true
 ---
-###凡人
-这个不知道是我的第几个Blog了，这个毛病确实不太好，到处写到处放，果然是游牧状态。
-在此之前看过很多blog，说实话我这个`外貌协会秘书长`其实看的更多是theme而不是性能和体验，说实话谁写的blog会写到需要测试性能方面了？我又不是`路边社`的干活。
+###一个脱离了高级趣味的人。
 
-网名很多，现用名`Woody.Xu`. 搞过网络集成，农村乡镇布过线，机房里熬过通宵搬过机器,搞过`Cisco`,自学并混到一份`FreeBSD`的工作，一做就是五年，脾气对路，深受熏陶。2010年转职`MySQl－DBA`一职至今，期间涉猎并从事过`ETL`+`DW`+`BI`,等工作和项目。
-> 我爱我的Mini Bones ^.^
+{% img ../images/img/hardy.jpg %}
 
-### 修仙
+
 
 #### 技术方面
-* 喜欢`FreeBSD`.`Python`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/[豆瓣深度用户](http://www.douban.com/people/woody1983/ "《上海老味道》")
+* 喜欢`FreeBSD`.`德州扑克`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/[豆瓣深度用户](http://www.douban.com/people/woody1983/ "《上海老味道》")
 * 不喜欢 `Java`.`WordPress`
 * 研究学习 `Git`.`OctoPress`.`Rails3`.`C`.`MarkDown`.`IOS`.`Objective-C`
 
