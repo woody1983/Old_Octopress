@@ -33,6 +33,10 @@ rvm install rbenv
 ###Depoly三部曲
 >建立一个source的分支用来保存博客源文件
 
+#最重要的一点 在Github上配置项目地址
+rake setup_github_pages
+`//键入你的git源 git://github.com/username/username.github.com.git`
+
 ```
 rake generate #生成静态文件
 rake preview #本地预览
