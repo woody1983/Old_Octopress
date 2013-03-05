@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-01-03T23:25:25+08:00</updated>
+  <updated>2013-03-05T23:50:06+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -145,6 +145,11 @@ rvm install rbenv
 <h3>Depoly三部曲</h3>
 
 <blockquote><p>建立一个source的分支用来保存博客源文件</p></blockquote>
+
+<h1>最重要的一点 在Github上配置项目地址</h1>
+
+<p>rake setup_github_pages
+<code>//键入你的git源 git://github.com/username/username.github.com.git</code></p>
 
 <p>```
 rake generate #生成静态文件

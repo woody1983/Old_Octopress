@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-01-03T23:25:25+08:00</updated>
+  <updated>2013-03-05T23:50:06+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,309 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails3的嵌套练习]]></title>
+    <link href="http://woody1983.github.com/blog/2013/01/04/rails3de-qian-tao-lian-xi/"/>
+    <updated>2013-01-04T14:41:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/01/04/rails3de-qian-tao-lian-xi</id>
+    <content type="html"><![CDATA[<h3>假期一直想把嵌套模型的东西整理出来，因为用到的时候经常搞错。其实最重要的地方就是Routes和Path的变化。其余都还好，趁着下午比较无聊，开会之前做一个Demo，跑了一下还OK。</h3>
+
+<!-- more -->
+
+
+<h5>创建2个Model</h5>
+
+<p><code>ruby
+rails g scaffold post memo:string category:string
+rails g scaffold comment content:string post_id:integer
+</code></p>
+
+<h3>修改Data Migration的内容</h3>
+
+<p>``` ruby
+class CreatePosts &lt; ActiveRecord::Migration
+  def change</p>
+
+<pre><code>create_table :posts do |t|
+  t.string :memo,limit: 1000
+  t.string :category, limit:20, default: 'tweet'
+
+  t.timestamps
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>class CreateComments &lt; ActiveRecord::Migration
+  def change</p>
+
+<pre><code>create_table :comments do |t|
+  t.string :content,limit: 100
+  t.integer :post_id
+
+  t.timestamps
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h3>修改routes</h3>
+
+<p>``` ruby
+  resources :posts do</p>
+
+<pre><code>resources :comments
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>```
+[root@mysql-test-woody ZombieTweets]# rake routes</p>
+
+<pre><code>post_comments GET    /posts/:post_id/comments(.:format)            comments#index
+              POST   /posts/:post_id/comments(.:format)            comments#create
+</code></pre>
+
+<p> new_post_comment GET    /posts/:post_id/comments/new(.:format)        comments#new
+edit_post_comment GET    /posts/:post_id/comments/:id/edit(.:format)   comments#edit</p>
+
+<pre><code> post_comment GET    /posts/:post_id/comments/:id(.:format)        comments#show
+              PUT    /posts/:post_id/comments/:id(.:format)        comments#update
+              DELETE /posts/:post_id/comments/:id(.:format)        comments#destroy
+        posts GET    /posts(.:format)                              posts#index
+              POST   /posts(.:format)                              posts#create
+     new_post GET    /posts/new(.:format)                          posts#new
+    edit_post GET    /posts/:id/edit(.:format)                     posts#edit
+         post GET    /posts/:id(.:format)                          posts#show
+              PUT    /posts/:id(.:format)                          posts#update
+              DELETE /posts/:id(.:format)                          posts#destroy
+zombie_tweets GET    /zombies/:zombie_id/tweets(.:format)          tweets#index
+              POST   /zombies/:zombie_id/tweets(.:format)          tweets#create
+</code></pre>
+
+<p> new_zombie_tweet GET    /zombies/:zombie_id/tweets/new(.:format)      tweets#new
+edit_zombie_tweet GET    /zombies/:zombie_id/tweets/:id/edit(.:format) tweets#edit</p>
+
+<pre><code> zombie_tweet GET    /zombies/:zombie_id/tweets/:id(.:format)      tweets#show
+              PUT    /zombies/:zombie_id/tweets/:id(.:format)      tweets#update
+              DELETE /zombies/:zombie_id/tweets/:id(.:format)      tweets#destroy
+      zombies GET    /zombies(.:format)                            zombies#index
+              POST   /zombies(.:format)                            zombies#create
+   new_zombie GET    /zombies/new(.:format)                        zombies#new
+  edit_zombie GET    /zombies/:id/edit(.:format)                   zombies#edit
+       zombie GET    /zombies/:id(.:format)                        zombies#show
+              PUT    /zombies/:id(.:format)                        zombies#update
+              DELETE /zombies/:id(.:format)                        zombies#destroy
+</code></pre>
+
+<p>```</p>
+
+<h3>修改Model</h3>
+
+<p>``` ruby
+class Post &lt; ActiveRecord::Base
+  attr_accessible :category, :memo
+  has_many :comments, dependent: :destroy
+end</p>
+
+<p>class Comment &lt; ActiveRecord::Base
+  attr_accessible :content, :post_is
+  belongs_to :post, foreign_key: :post_id
+end
+```</p>
+
+<h3>修改controller</h3>
+
+<h4>主要是修改Comments的controller 先获取上一级Post的信息</h4>
+
+<p>``` ruby
+before_filter :get_post</p>
+
+<p>def get_post
+  @post = Post.find(params[:post_id])
+end</p>
+
+<p>index || @comments = Comment.all 修改成@comments => @post.comments               <br/>
+show  || @comment = Comment.find(params[:id]) => @comment =  @post.comments.find(params[:id])
+new 和 edit 不变
+```</p>
+
+<h5>Create</h5>
+
+<p>``` ruby
+  def create</p>
+
+<pre><code>@comment = Comment.new(params[:comment])
+
+respond_to do |format|
+  if @comment.save
+    format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+    format.json { render json: @comment, status: :created, location: @comment }
+  else
+    format.html { render action: "new" }
+    format.json { render json: @comment.errors, status: :unprocessable_entity }
+  end
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  修改</p>
+
+<p>  def create</p>
+
+<pre><code>@comment = @post.comments.new(params[:comment])
+respond_to do |format|
+  if @comment.save
+    format.html {redirect_to [@post,@comment],
+                 notice: 'Comment was successfully created.'}
+    format.json { render json: [@post,@comment],
+                         status: :created,
+                         location: [@post,@comment] }
+  else
+    format.html { render action: "new" }
+    format.json { render json: @comment.errors,
+                         status: :unprocessable_entity }
+  end
+end
+</code></pre>
+
+<p>  end
+```</p>
+
+<h5>Update</h5>
+
+<p>``` ruby
+  def update</p>
+
+<pre><code>@comment = Comment.find(params[:id])
+
+respond_to do |format|
+  if @comment.update_attributes(params[:comment])
+    format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+    format.json { head :no_content }
+  else
+    format.html { render action: "edit" }
+    format.json { render json: @comment.errors, status: :unprocessable_entity }
+  end
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  修改</p>
+
+<p>  def update</p>
+
+<pre><code>@comment = @post.comments.find(params[:id])
+respond_to do |format|
+  if @comment.update_attributes(params[:comment])
+    format.html { redirect_to [@post,@comment], notice: 'Comment was successfully updated.' }
+    format.json { head :no_content }
+  else
+    format.html { render action: "edit" }
+    format.json { render json: @comment.errors, status: :unprocessable_entity }
+  end
+end
+</code></pre>
+
+<p>  end
+```</p>
+
+<h5>Destroy</h5>
+
+<p>``` ruby
+  def destroy</p>
+
+<pre><code>@comment = Comment.find(params[:id])
+@comment.destroy
+
+respond_to do |format|
+  format.html { redirect_to comments_url }
+  format.json { head :no_content }
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  修改</p>
+
+<p>  def destroy</p>
+
+<pre><code>@comment = @post.comments.find(params[:id])
+@comment.destroy
+
+respond_to do |format|
+  format.html { redirect_to post_comments_path(@post) }
+  format.json { head :no_content }
+end
+</code></pre>
+
+<p>  end
+```</p>
+
+<h3>View 修改部分</h3>
+
+<h4>post 页面</h4>
+
+<p>添加
+<code>ruby
+&lt;%= link_to 'New Comment',new_post_comment_path(@post) %&gt;
+</code></p>
+
+<h4>Comments Index页面</h4>
+
+<p>``` ruby</p>
+
+<pre><code>&lt;td&gt;&lt;%= link_to 'Show', [@post, comment] %&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%= link_to 'Edit', edit_post_comment_path(@post, comment) %&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' } %&gt;&lt;/td&gt;
+
+&lt;%= link_to 'New Comment',new_post_comment_path(@post) %&gt;
+</code></pre>
+
+<p>```</p>
+
+<h4>Comments show 页面</h4>
+
+<p><code>ruby
+&lt;%= link_to 'Edit', edit_post_comment_path(@post,@comment) %&gt; |
+&lt;%= link_to 'Back', post_comments_path(@post) %&gt;
+</code></p>
+
+<h4>new</h4>
+
+<p><code>ruby
+&lt;%= link_to 'Back', post_comments_path(@post) %&gt;
+</code></p>
+
+<h4>edit</h4>
+
+<p><code>ruby
+&lt;%= link_to 'Show', post_comments_path(@post,@comment) %&gt; |
+&lt;%= link_to 'Back', post_comments_path(@post) %&gt;
+</code></p>
+
+<h4>form_for</h4>
+
+<p><code>ruby
+&lt;%= form_for([@post, @comment]) do |f| %&gt;
+</code></p>
+
+<blockquote><p>将post_id的text_field删除</p></blockquote>
+
+<p>All Post
+<code>ruby
+&lt;%= link_to 'Post',@post %&gt;
+&lt;%= link_to 'Show', [@post, comment] %&gt;
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails3 Notes Model]]></title>
@@ -801,26 +1104,6 @@ end</p>
   has_many :tweets, through: :categorizations
 end
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[mvc]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/22/mvc/"/>
-    <updated>2012-08-22T00:36:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/22/mvc</id>
-    <content type="html"><![CDATA[<p><img src="http://ruby.railstutorial.org/images/figures/mvc_detailed.png" alt="About MVC" />
-* The browser issues a request for the /users URI.
-* Rails routes /users to the index action in the Users controller.
-* The index action asks the User model to retrieve all users (User.all).
-* The User model pulls all the users from the database.
-* The User model returns the list of users to the controller.
-* The controller captures the users in the @users variable, which is passed to the index view.
-* The view uses embedded Ruby to render the page as HTML.
-* The controller passes the HTML back to the browser.3</p>
-
-<p><img src="http://ruby.railstutorial.org/images/figures/demo_controller_inheritance.png" title="Optional title attribute" alt="About Controller" />
-<code>app/controllers/application_controller.rb</code></p>
 ]]></content>
   </entry>
   

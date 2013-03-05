@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Arduino,Robot | 1024Bit  电子游牧日志]]></title>
+  <link href="http://woody1983.github.com/blog/categories/arduino-robot/atom.xml" rel="self"/>
+  <link href="http://woody1983.github.com/"/>
+  <updated>2013-03-05T23:50:06+08:00</updated>
+  <id>http://woody1983.github.com/</id>
+  <author>
+    <name><![CDATA[Woody.Xu]]></name>
+    <email><![CDATA[unix1983@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino Robot]]></title>
+    <link href="http://woody1983.github.com/blog/2013/03/05/arduino-robot/"/>
+    <updated>2013-03-05T17:13:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/03/05/arduino-robot</id>
+    <content type="html"><![CDATA[<h2>这玩意看的人心里长草...</h2>
+
+<p><img src="/images/img/doob.jpg" width="300"></p>
+
+<p>抽时间研究研究 还是蛮好玩的。</p>
+
+<p><img src="/images/img/doob2.jpg" width="400"></p>
+]]></content>
+  </entry>
+  
+</feed>

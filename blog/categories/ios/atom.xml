@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IOS | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-01-03T23:25:25+08:00</updated>
+  <updated>2013-03-05T23:50:06+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,400 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Objective-C Demo Note]]></title>
+    <link href="http://woody1983.github.com/blog/2013/03/05/objective-c-demo-note/"/>
+    <updated>2013-03-05T16:38:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/03/05/objective-c-demo-note</id>
+    <content type="html"><![CDATA[<h1>Project:Single View Application</h1>
+
+<h2>MyFirstApp</h2>
+
+<p><code>viewController.h</code></p>
+
+<p>``` objective-c</p>
+
+<h1>import &lt;UIKit/UIKit.h></h1>
+
+<p>@interface ViewController : UIViewController{
+  IBOutlet UILabel *nameLabel //新增一个数据成员
+}
+-(IBAction)showName:(id)sender; //新增一个方法showName
+@end
+```</p>
+
+<p><code>viewController.m</code></p>
+
+<p>``` objective-c</p>
+
+<h1>import "viewController.h"</h1>
+
+<p>@implementation ViewController
+-(void)didReceiveMemoryWaring
+{
+  [super didReceiveMemoryWaring];
+  // 自带的？ Release any cache data, images, etc that aren't in use.
+}</p>
+
+<p>-(IBAction)showName:(id)sender
+{
+  [nameLabel setText:@"My name is Johnny!"];
+}
+```</p>
+
+<ul>
+<li>@interface 是声明一个类 大括号里面定义的是这个类的数据成员</li>
+<li>在@end 之前定义的都是类方法  只定义 实现在@implementation部分实现</li>
+<li>didReceiveMemoryWaring这个方法好像是自定义出来的</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h1>Project RadioStation</h1>
+
+<h3>添加一个Objective-C Class : RadioStation</h3>
+
+<p><code>RadioStation.h</code></p>
+
+<p>``` objective-c</p>
+
+<h1>import &lt;Foundation/Foundation.h></h1>
+
+<p>@interface RadioStation : NSObject
+{</p>
+
+<pre><code>NSString *name;
+double frequency;
+NSUInteger band;
+</code></pre>
+
+<p>}</p>
+
+<p>+(double)minAMFrequency;
++(double)maxAMFrequency;
++(double)minFMFrequency;
++(double)maxFMFrequency;</p>
+
+<p>-(id)initWithName:(NSString <em>)newName atFrequency:(double)newFrequency;
+-(NSString </em>)name;
+-(void)setName:(NSString *)newName;
+-(double)frequency;
+-(void)setFrequency:(double)newFrequency;</p>
+
+<p>@end
+```</p>
+
+<p><code>RadioStation.m</code></p>
+
+<p>``` objective-c</p>
+
+<h1>import "RadioStation.h"</h1>
+
+<p>@implementation RadioStation
++(double)minAMFrequency
+{</p>
+
+<pre><code>return 520.0;
+</code></pre>
+
+<p>}</p>
+
+<p>+(double)maxAMFrequency
+{</p>
+
+<pre><code>return 1610.0;
+</code></pre>
+
+<p>}</p>
+
+<p>+(double)minFMFrequency
+{</p>
+
+<pre><code>return 88.3;
+</code></pre>
+
+<p>}
++(double)maxFMFrequency
+{</p>
+
+<pre><code>return 107.9;
+</code></pre>
+
+<p>}</p>
+
+<p>-(id)initWithName:(NSString *)newName atFrequency:(double)newFrequency
+{</p>
+
+<pre><code>self = [super init];
+NSLog(@"initWithName is Running!\n newFrequency is %f , name is %@",newFrequency,newName);
+if (self != nil) {
+    name = newName;
+    frequency = newFrequency;
+}
+return self;
+</code></pre>
+
+<p>}</p>
+
+<p>-(NSString *)name
+{</p>
+
+<pre><code>return name;
+NSLog(@"name is ok");
+</code></pre>
+
+<p>}
+-(double)frequency{</p>
+
+<pre><code>return frequency;
+</code></pre>
+
+<p>}</p>
+
+<p>-(void)setName:(NSString *)newName{</p>
+
+<pre><code>name = newName;
+</code></pre>
+
+<p>}</p>
+
+<p>-(void)setFrequency:(double)newFrequency{</p>
+
+<pre><code>frequency = newFrequency;
+</code></pre>
+
+<p>}</p>
+
+<p>@end
+```</p>
+
+<p><code>viewController.h</code></p>
+
+<p>``` objective-c</p>
+
+<h1>import &lt;UIKit/UIKit.h></h1>
+
+<p>@class RadioStation;</p>
+
+<p>@interface XYZViewController : UIViewController
+{</p>
+
+<pre><code>RadioStation *myStation;
+IBOutlet UILabel* stationName;
+IBOutlet UILabel* stationFrequency;
+IBOutlet UILabel* stationBand;
+</code></pre>
+
+<p>}
+@end
+```</p>
+
+<p><code>viewController.m</code></p>
+
+<p>``` objective-c</p>
+
+<h1>import "XYZViewController.h"</h1>
+
+<h1>import "RadioStation.h"</h1>
+
+<p>@interface XYZViewController ()</p>
+
+<p>@end</p>
+
+<p>@implementation XYZViewController</p>
+
+<p>-(IBAction)buttonClick:(id)sender{</p>
+
+<pre><code>[stationName setText:[myStation name]];
+[stationFrequency setText:[NSString stringWithFormat:@"%.1f",[myStation frequency]]];
+if (([myStation frequency] &gt;= [RadioStation minFMFrequency]) &amp;&amp;
+    ([myStation frequency] &lt;= [RadioStation maxFMFrequency])) {
+    [stationBand setText:@"FM"];
+}else{
+    [stationBand setText:@"AM"];
+}
+NSLog(@"buttonClick frequency = %f", [myStation frequency]);
+</code></pre>
+
+<p>}</p>
+
+<ul>
+<li><p>(void)viewDidLoad
+{
+  [super viewDidLoad];
+  myStation = [[RadioStation alloc] initWithName:@"Woody Style" atFrequency:94.1];
+  NSLog(@"App is Running");
+// Do any additional setup after loading the view, typically from a nib.
+}</p></li>
+<li><p>(void)viewDidUnload
+{
+  [super viewDidUnload];
+  // Release any retained subviews of the main view.</p></li>
+</ul>
+
+
+<p>}</p>
+
+<ul>
+<li>(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+  return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}</li>
+</ul>
+
+
+<p>@end</p>
+
+<p>```</p>
+
+<p><img src="/images/img/oc_demo1.png" title="" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Objective-C Note]]></title>
+    <link href="http://woody1983.github.com/blog/2013/03/05/objective-c-note/"/>
+    <updated>2013-03-05T14:18:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/03/05/objective-c-note</id>
+    <content type="html"><![CDATA[<p>``` objective-c</p>
+
+<h1>import &lt;Foundation/Foundation.h></h1>
+
+<p>@interface HelloWorld : NSObject
+{
+}
+-(void)printGreeting;
+@end</p>
+
+<p>@implementation HelloWorld</p>
+
+<p>-(void)printGreeting
+{</p>
+
+<pre><code>    NSLog(@"Hello World!");
+</code></pre>
+
+<p>}</p>
+
+<p>@end</p>
+
+<h1>import "HelloWorld.h"</h1>
+
+<p>int main(void)
+{
+  HelloWorld* myObject = [[HelloWorld alloc] init];
+  [myObject printGreeting];</p>
+
+<p>  [myObject release];
+  return 0;
+}
+```</p>
+
+<!-- more -->
+
+
+<h3>还有上午其他的例子</h3>
+
+<p>``` objective-c
+//@"这里的内容应该作为Cocoa的NSString元素来处理"</p>
+
+<p>// 定义函数
+BOOL areIntsDifferent(int thing1, int thing2)
+{
+  if (thing1 == thing2) {</p>
+
+<pre><code>return (NO);
+</code></pre>
+
+<p>  }
+  else {</p>
+
+<pre><code>return (YES);
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>// 返回一个BOOL类型的值  接受2个int类型的参数</p>
+
+<p>NSString *boolString (BOOL yesNo)
+{
+  if (yesNo == NO){</p>
+
+<pre><code>return (@"NO");
+</code></pre>
+
+<p>  }
+  else
+  {</p>
+
+<pre><code>return (@"YES");
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>返回类型 函数名(参数类型 参数,参数类型1 参数1)
+{
+// ...  code in here
+}</p>
+
+<p>main函数里调用的时候 先声明一个BOOL类型的变量</p>
+
+<p>BOOL areTheyDifferent;
+areTheyDifferent = areIntsDifferent(5,5);</p>
+
+<p>NSLog(@"are %d and %d different? %@", 5,5, boolString(areTheyDifferent));// 直接用返回值做参数</p>
+
+<p>//定义一个类  @interface 将该类的数据成员和特性告诉给编译器</p>
+
+<p>@interface Circle : NSObject  // 类名 来自NSObject类
+{
+  ShapeColor fillColor;
+  ShapeRect bounds;
+} // 告诉编译器circle对象需要的数据成员
+//下面是方法的声明
+-(void) draw; //方法需要参数的时候才需要一个冒号 否则就不需要
+-(void) setFillColor : (ShapeColor) fillColor; //参数的类型在圆括号里定义!?
+-(void) setBounds : (ShapeRect) bounds;</p>
+
+<p>// void表示无返回值  -符号表示是类方法 区别于一般的函数原型和方法声明
+// setFillColor 需要一个颜色参数
+@end</p>
+
+<p>// @implementation 中定义了类的实现部分</p>
+
+<p>@implementation Circle</p>
+
+<p>-(void) setFillColor: (ShapeColor) c //这个c是参数的重命名!!! @implementation 和 @interface的参数名不同是正确的。如果一致则会报错。
+{
+  fillColor = c;
+}</p>
+
+<p>-(void) setBounds: (ShapeRect) b
+{
+  bounds = b;
+}</p>
+
+<p>-(void) draw
+{
+  NSLog (@"drawing a circle at (%d %d %d %d) in %@",</p>
+
+<pre><code>bounds.x, bounds.y,
+bounds.width, bounds.height,
+colorName(fillColor)
+</code></pre>
+
+<p>  );
+}</p>
+
+<p>@end
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[About PickerViewController]]></title>
@@ -342,44 +736,6 @@ decisionText_.textColor= [UIColor greenColor];
 
 <p>}
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[App Magnets]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/11/app-magnets/"/>
-    <updated>2012-08-11T23:09:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/11/app-magnets</id>
-    <content type="html"><![CDATA[<h2>App Magnets</h2>
-
-<ul>
-<li>Determine app layout. <code>确定应用程序的布局</code></li>
-<li>Build the GUI <code>构建用户图形界面</code></li>
-<li>Figure out how to use the controls <code>弄清楚如何使用控件</code></li>
-<li>Handle the data <code>处理数据</code></li>
-<li>Generate the email.  <code>生成电子邮件</code></li>
-</ul>
-
-
-<h3>Determine app layout.</h3>
-
-<p>Before you start coding anything, sketch up what you’re thinking.</p>
-
-<h3>Build the GUI</h3>
-
-<p>Some people write backend code first—we’re going to go back and forth depending on our project, but to get started, we’ll do the GUI first this time.</p>
-
-<h3>Figure out how to use the controls</h3>
-
-<p>After you’ve landed on the general app design, you need to get into the documentation a little and figure out how to implement the controls you’ve chosen.</p>
-
-<h3>Handle the data</h3>
-
-<p>Here we need to manage the data coming from the controls.</p>
-
-<h3>Generate the email.</h3>
-
-<p>We’ll help you out with this last step.</p>
 ]]></content>
   </entry>
   
