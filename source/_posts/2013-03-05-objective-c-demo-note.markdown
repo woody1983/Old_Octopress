@@ -55,22 +55,23 @@ categories: IOS
 ``` objective-c
 #import <Foundation/Foundation.h>
 
-@interface RadioStation :NSObject
+@interface RadioStation : NSObject
 {
-  NSString *name;
-  double frequency;
-  NSUInteger band;
+    NSString *name;
+    double frequency;
+    NSUInteger band;
 }
+
 +(double)minAMFrequency;
 +(double)maxAMFrequency;
 +(double)minFMFrequency;
 +(double)maxFMFrequency;
 
--(id)initWithName:(NSString *)newName atFrenquency:(double)newFrequency;
+-(id)initWithName:(NSString *)newName atFrequency:(double)newFrequency;
 -(NSString *)name;
 -(void)setName:(NSString *)newName;
 -(double)frequency;
--(double)setFrequency:(double)newFrequency;
+-(void)setFrequency:(double)newFrequency;
 
 @end
 ```
@@ -80,50 +81,54 @@ categories: IOS
 ``` objective-c
 #import "RadioStation.h"
 
-@implementation 
+@implementation RadioStation
 +(double)minAMFrequency
 {
-  return 520.0;
+    return 520.0;
 }
 
 +(double)maxAMFrequency
 {
-  return 1610.0;
+    return 1610.0;
 }
 
 +(double)minFMFrequency
 {
-  return 88.3;
+    return 88.3;
 }
-
 +(double)maxFMFrequency
 {
-  return 107.9;
+    return 107.9;
 }
 
--(id)initWithName:(NSString *)newName atFrenquency:(double)newFrequency {
-  self = [super init];
-  if (self != nil){
-    name = newName;
-	frequency = newFrequency;
-  }
-  return self;
+-(id)initWithName:(NSString *)newName atFrequency:(double)newFrequency
+{
+    self = [super init];
+    NSLog(@"initWithName is Running!\n newFrequency is %f , name is %@",newFrequency,newName);
+    if (self != nil) {
+        name = newName;
+        frequency = newFrequency;
+    }
+    return self;
+    
 }
 
--(NSString *)name{
-  return name;
+-(NSString *)name
+{
+    return name;
+    NSLog(@"name is ok");
+}
+-(double)frequency{
+    return frequency;
 }
 
 -(void)setName:(NSString *)newName{
-  name = newName;
+    name = newName;
 }
 
--(double)frequency{
-  return frequency;
-}
 
--(double)setFrequency:(double)newFrequency{
-  frequency = newFrequency;
+-(void)setFrequency:(double)newFrequency{
+    frequency = newFrequency;
 }
 
 @end
@@ -136,12 +141,12 @@ categories: IOS
 #import <UIKit/UIKit.h>
 @class RadioStation;
 
-@interface ViewController : UIViewController
+@interface XYZViewController : UIViewController
 {
-  RadioStation *myStation;
-  IBOutlet UILabel* stationName;
-  IBOutlet UILabel* stationFrequency;
-  IBOutlet UILabel* stationBand;
+    RadioStation *myStation;
+    IBOutlet UILabel* stationName;
+    IBOutlet UILabel* stationFrequency;
+    IBOutlet UILabel* stationBand;
 }
 @end
 ```
@@ -149,19 +154,48 @@ categories: IOS
 `viewController.m`
 
 ``` objective-c
+#import "XYZViewController.h"
 #import "RadioStation.h"
-@implementation ViewController
--(void)didReceiveMemoryWaring
-{
-  [super didReceiveMemoryWaring];
-  // 自带的？ Release any cache data, images, etc that aren't in use.
+@interface XYZViewController ()
+
+@end
+
+@implementation XYZViewController
+
+-(IBAction)buttonClick:(id)sender{
+    [stationName setText:[myStation name]];
+    [stationFrequency setText:[NSString stringWithFormat:@"%.1f",[myStation frequency]]];
+    if (([myStation frequency] >= [RadioStation minFMFrequency]) &&
+        ([myStation frequency] <= [RadioStation maxFMFrequency])) {
+        [stationBand setText:@"FM"];
+    }else{
+        [stationBand setText:@"AM"];
+    }
+    NSLog(@"buttonClick frequency = %f", [myStation frequency]);
 }
 
--(void)viewDidLoad
+- (void)viewDidLoad
 {
-  [super viewDidLoad];
-  //code in here...
-  myStation = [[RadioStation alloc] initWithName:@"STAR 94" atFrenquency:94.1];
+    [super viewDidLoad];
+    myStation = [[RadioStation alloc] initWithName:@"Woody Style" atFrequency:94.1];
+    NSLog(@"App is Running");
+  // Do any additional setup after loading the view, typically from a nib.
 }
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+@end
 
 ```
+
+{% img /images/img/oc_demo1.png  %}
