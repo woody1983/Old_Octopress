@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-03-05T23:50:06+08:00</updated>
+  <updated>2013-03-07T00:04:15+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,700 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Can Beautiful Design Make Your Resume Stand Out?]]></title>
+    <link href="http://woody1983.github.com/blog/2013/03/06/can-beautiful-design-make-your-resume-stand-out/"/>
+    <updated>2013-03-06T23:24:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/03/06/can-beautiful-design-make-your-resume-stand-out</id>
+    <content type="html"><![CDATA[<p>今天有人在weibo上转了一个关于Resume的帖子，还有<code>@性感玉米</code>也发了一篇关于Resume格式的微博，感觉还是蛮有道理的。要在一页纸上以最有优势的方法展现你的个人价值，确实也值得花些时间去研究一下，毕竟这是自己的事情。</p>
+
+<p><img src="http://woody1983.github.com/images/img/resume.jpg" width="500"></p>
+
+<p>Recruiters spent 80% of their time looking at six data points:</p>
+
+<ul>
+<li><p>Name</p></li>
+<li><p>Current title and company</p></li>
+<li><p>Previous title and company</p></li>
+<li><p>Current start and end dates</p></li>
+<li><p>Previous start and end dates</p></li>
+<li><p>Education</p></li>
+</ul>
+
+
+<p>The key is to keep these important data points clear. Loft Resumes recommends a hierarchy that presents information in a way that is easy to find and digest. Its service relies on graphic design principles, and clients can select from various formats or color palettes, but no two resumes will be exactly the same.</p>
+
+<h3>有一些不错的例子</h3>
+
+<!-- more -->
+
+
+<h2>这个颜色和排版还是蛮不错的</h2>
+
+<p><img src="http://woody1983.github.com/images/img/resume1.png" width="500"></p>
+
+<h2>这个是蜂巢的运用和图例</h2>
+
+<p><img src="http://woody1983.github.com/images/img/resume2.jpg" width="500"></p>
+
+<h2>饼图的展示 非常不错 尤其是用在Skills 而且中间有一个图例就是数据库的。</h2>
+
+<p><img src="http://woody1983.github.com/images/img/resume3.png" width="500"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NSLog Format]]></title>
+    <link href="http://woody1983.github.com/blog/2013/03/06/nslog-format/"/>
+    <updated>2013-03-06T23:08:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/03/06/nslog-format</id>
+    <content type="html"><![CDATA[<p><img src="http://woody1983.github.com/images/img/nslog.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Objective-C Note2]]></title>
+    <link href="http://woody1983.github.com/blog/2013/03/06/objective-c-note2/"/>
+    <updated>2013-03-06T16:12:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/03/06/objective-c-note2</id>
+    <content type="html"><![CDATA[<blockquote><p>今天的笔记 Objective-C感觉是一种很细腻的语言。</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@interface</span> <span class="nc">MyObject</span> : <span class="nc">NSObject</span> <span class="p">{</span>
+</span><span class='line'><span class="p">[</span><span class="n">instance</span> <span class="n">variables</span><span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="n">method</span> <span class="n">declarations</span><span class="p">]</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">@</span><span class="n">implementation</span> <span class="n">MyObject</span>
+</span><span class='line'><span class="p">[</span><span class="n">method</span> <span class="n">implementations</span><span class="p">]</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Method declarations in Objective-C look like this:</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">launchPlane</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Here, for example, is a method that takes a single parameters:</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">launchPlane:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">planeName</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>two parameters:</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">launchPlane:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">planeName</span> <span class="nf">fuelCapacity:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">litresOfFuel</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>实现的时候</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">planeLauncher</span> <span class="n">launchPlane</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="n">planeLauncher</span> <span class="nl">launchPlane:</span><span class="s">@&quot;Boeing 747-300&quot;</span> <span class="nl">fuelCapacity:</span><span class="mi">183380</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<blockquote><p>The method declarations for a class are kept in its interface. Here’s an example of what the interface for a class that defines some methods looks like:</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@interface</span> <span class="nc">SomeObject</span>: <span class="nc">NSObject</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">launchPlane:</span><span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">planeName</span><span class="p">;</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="nf">numberOfPlanesInTheAir</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Properties</h2>
+
+<blockquote><p>In object-oriented programming, it’s considered bad practice for one object to directly access another object’s data. Doing so breaks encapsulation, because it means that one object’s code is now dependent on the data stored in another.In order to access and change another object’s variables, you use a pair of instance methods known as a setterand getter. The getter method returns the current value of the variable, and the setter method changes the value.
+In Objective-C, setter and getter method names must follow an established pattern. For example, given an instance variable named  <code>planeName</code>, the setter method would be named <code>setPlaneName:</code>and the getter method would be named <code>planeName</code>.</p></blockquote>
+
+<h3>Declaring a property in an Objective-C class looks like this:</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@interface</span> <span class="nc">SomeClass</span>: <span class="nc">NSObject</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSObject</span><span class="o">*</span> <span class="n">myProperty</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>关于Property</h1>
+
+<h3>strong</h3>
+
+<p>This property is a strong (owning) reference to an object; see  “Object Graphs in
+Objective-C”(page  32). Using  strong  and  weakproperties controls whether the ob‐
+ject referred to by the property stays in memory or not.</p>
+
+<h3>weak</h3>
+
+<p>This property is a weak (nonowning) reference to an object. When the object re‐
+ferred to by this property is deallocated, this property is automatically set to nil.</p>
+
+<h3>assign</h3>
+
+<p>This property’s setter method simply assigns the property’s variable to whatever is
+passed in, and performs no memory management.</p>
+
+<h3>copy</h3>
+
+<p>This property’s setter copies any object passed to it, creating a duplicate object.</p>
+
+<h3>readwrite</h3>
+
+<p>This property generates both getter and setter methods. (This attribute is set by
+default—you need to explicitly use it only when overriding a superclass’s property.)</p>
+
+<h3>readonly</h3>
+
+<p>This property does not generate a setter method, rendering the property read-only
+by other classes. (Your class’s implementation code can still modify the property’s
+variable, however.)</p>
+
+<h3>nonatomic</h3>
+
+<p>This property’s setter and getter do not attempt to get a lock before making changes
+to the variable, rendering it thread-safe.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@implementation</span> <span class="nc">MyClass</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">myProperty</span> <span class="o">=</span> <span class="n">_myCustomVariableName</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// the rest of the class code goes here</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>或者不用@synthesize  而使用@dynamic 来实现getter and setter methods</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@implementation</span> <span class="nc">MyClass</span>
+</span><span class='line'><span class="k">@dynamic</span> <span class="n">myProperty</span><span class="p">;</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="nf">myProperty</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">// this is the getter method for this property</span>
+</span><span class='line'><span class="k">return</span> <span class="mi">123</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setMyProperty:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">newValue</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">// this is the setter method for this property</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Protocols</h2>
+
+<blockquote><p>A protocolis a list of methods that your class promises to implement. Protocols are used to mark classes as having certain capabilities, like the ability to be copied, to be serialized and deserialized, or to act as a data source for some other class.</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@protocol</span> <span class="nc">SomeProtocol</span>
+</span><span class='line'><span class="p">[</span> <span class="n">method</span> <span class="n">declarations</span> <span class="p">]</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'><span class="c1">//用处</span>
+</span><span class='line'><span class="n">You</span> <span class="n">can</span> <span class="n">mark</span> <span class="n">a</span> <span class="n">class</span> <span class="n">as</span> <span class="n">conformingto</span> <span class="n">a</span> <span class="n">protocol</span> <span class="n">by</span> <span class="n">declaring</span> <span class="n">so</span> <span class="k">in</span> <span class="n">the</span> <span class="n">class</span><span class="err">’</span><span class="n">s</span> <span class="nl">interface:</span>
+</span><span class='line'><span class="err">@</span><span class="n">interface</span> <span class="nl">SomeObject:</span> <span class="n">NSObject</span> <span class="o">&lt;</span><span class="n">SomeProtocol</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>alloc只是给对象保留内存空间，如果要使用必须准备初始化动作。</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">SomeClass</span><span class="o">*</span> <span class="n">anObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">SomeClass</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Some classes use a different designated initializer, or have multiple initializers you can use. For example, the NSStringclass has several—here are a few:
+一些类使用不同的多个初始化方法或多个初始化</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">myString</span>  <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat:</span><span class="s">@&quot;here&#39;s a number: %i&quot;</span><span class="p">,</span> <span class="mi">123</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">anotherString</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithData:</span><span class="n">anNSDataObject</span> <span class="nl">encoding:</span><span class="n">NSUTF8Encoding</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">oneMoreString</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithContentsOfFile:</span><span class="s">@&quot;path to a file&quot;</span> <span class="nl">encoding:</span><span class="n">NSUTF8Encoding</span> <span class="n">error</span><span class="err">：</span><span class="n">someErrorPointer</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Foundation</h1>
+
+<h2>String</h2>
+
+<p>Strings are stored in the  NSStringclass, which makes them Objective-C objects just like
+everything else. You can create an empty string with this code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">aString</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//Doing this isn’t terribly useful, because the NSString class is immutable</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">aString</span> <span class="o">=</span> <span class="s">@&quot;Hello, world!&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">@表示一个</span><span class="n">NSString</span><span class="err">对象</span> <span class="err">可以接受信息，和其他对象互动。</span>
+</span><span class='line'><span class="c1">//it can receive messages and generally interact other objects in the application. </span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSInteger</span> <span class="n">sizeOfString</span> <span class="o">=</span> <span class="p">[</span><span class="s">@&quot;Hello, world!&quot;</span> <span class="n">length</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//将这个NSString对象的长度提取出来</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">还有一些内置方法</span> <span class="err">比如</span> <span class="err">大小</span> <span class="err">小写</span> <span class="err">首字母大写之类的</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">originalString</span>  <span class="o">=</span> <span class="s">@&quot;This is An EXAMPLE&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// &quot;THIS IS AN EXAMPLE&quot;</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">uppercaseString</span>  <span class="o">=</span> <span class="p">[</span><span class="n">originalString</span> <span class="n">uppercaseString</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// &quot;this is an example&quot;</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">lowerCaseString</span>  <span class="o">=</span> <span class="p">[</span><span class="n">originalString</span> <span class="n">lowercaseString</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// &quot;This Is An Example&quot;</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">capitalizedString</span> <span class="o">=</span> <span class="p">[</span><span class="n">originalString</span> <span class="n">capitalizedString</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//To get the first five characters in a string, you do this:</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">startSubstring</span> <span class="o">=</span> <span class="p">[</span><span class="n">originalString</span> <span class="nl">substringToIndex:</span><span class="mi">5</span><span class="p">];</span> <span class="c1">// &quot;This &quot;</span>
+</span><span class='line'><span class="c1">//To get everything past the first five characters:</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">endSubstring</span> <span class="o">=</span> <span class="p">[</span><span class="n">originalString</span> <span class="nl">substringFromIndex:</span><span class="mi">5</span><span class="p">];</span> <span class="c1">// &quot;is An EXAMPLE&quot;</span>
+</span><span class='line'><span class="c1">//To get a substring of a range of characters, you first create an NSRangestructure, which</span>
+</span><span class='line'><span class="c1">//defines the start point and length of the range. For example, to create an NSRangethat </span>
+</span><span class='line'><span class="c1">//starts at the third character and is five characters long, you do this:</span>
+</span><span class='line'><span class="n">NSRange</span> <span class="n">theRange</span> <span class="o">=</span> <span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">substring</span> <span class="o">=</span> <span class="p">[</span><span class="n">originalString</span> <span class="nl">substringWithRange:</span><span class="n">theRange</span><span class="p">];</span> <span class="c1">// &quot;is is&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Structures and Objects</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">struct</span> <span class="n">CGPoint</span> <span class="p">{</span>
+</span><span class='line'><span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">CGPoint</span> <span class="n">somePoint</span><span class="p">;</span>
+</span><span class='line'><span class="n">somePoint</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+</span><span class='line'><span class="n">somePoint</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">456</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// This is a variable that contains a pointer to an NSString</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">someString</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// This is a variable that contains a CGPoint</span>
+</span><span class='line'><span class="n">CGPoint</span> <span class="n">somePoint</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>判断NSString</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">firstString</span> <span class="o">==</span> <span class="n">secondString</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">// Do something</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">if</span> <span class="p">([</span><span class="n">firstString</span> <span class="nl">isEqualToString:</span><span class="n">secondString</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">// Do something</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Searching Strings</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">sourceString</span> <span class="o">=</span> <span class="s">@&quot;Four score and seven years ago&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSRange</span> <span class="n">range</span> <span class="o">=</span> <span class="p">[</span><span class="n">sourceString</span> <span class="nl">rangeOfString:</span><span class="s">@&quot;seven&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">location</span> <span class="o">==</span> <span class="n">NSNotFound</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">// the string was not found</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">// the string was found; &#39;range&#39; variable contains info on where it is</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>还有一些选项</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">sourceString</span> <span class="o">=</span> <span class="s">@&quot;Four score and seven years ago&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSRange</span> <span class="n">range</span> <span class="o">=</span> <span class="p">[</span><span class="n">sourceString</span> <span class="nl">rangeOfString:</span><span class="s">@&quot;SEVEN&quot;</span>
+</span><span class='line'><span class="nl">options:</span><span class="n">NSCaseInsensitiveSearch</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Arrays</h2>
+
+<h3>Declaration:</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSArray</span><span class="o">*</span> <span class="n">myArray</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;one&quot;</span><span class="p">,</span> <span class="s">@&quot;two&quot;</span><span class="p">,</span> <span class="s">@&quot;three&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="cp">###You can also retrieve objects from an array, using syntax like this:</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">oneString</span> <span class="o">=</span> <span class="n">myArray</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">twoString</span> <span class="o">=</span> <span class="n">myArray</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//The syntax for accessing elements in an NSArray doesn’t work on iOS 5 and below.</span>
+</span><span class='line'><span class="c1">//Instead, you need to use the slightly wordier method objectAtIndex:, like so:</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">oneString</span> <span class="o">=</span> <span class="p">[</span><span class="n">myArray</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">myArray</span><span class="p">.</span><span class="n">count</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// count now equals 3</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSArray</span><span class="o">*</span> <span class="n">myArray</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;one&quot;</span><span class="p">,</span> <span class="s">@&quot;two&quot;</span><span class="p">,</span> <span class="s">@&quot;three&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">myArray</span> <span class="nl">indexOfObject:</span><span class="s">@&quot;two&quot;</span><span class="p">];</span>  <span class="c1">// should be equal to 1</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">NSNotFound</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Couldn&#39;t find the object!&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Here’s an example of creating a subarray from an existing array:</span>
+</span><span class='line'><span class="n">NSArray</span><span class="o">*</span> <span class="n">myArray</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;one&quot;</span><span class="p">,</span> <span class="s">@&quot;two&quot;</span><span class="p">,</span> <span class="s">@&quot;three&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSRange</span> <span class="n">subArrayRange</span> <span class="o">=</span> <span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSArray</span><span class="o">*</span> <span class="n">subArray</span> <span class="o">=</span> <span class="p">[</span><span class="n">myArray</span> <span class="nl">subArrayWithRange:</span><span class="n">subArrayRange</span><span class="p">];</span>
+</span><span class='line'><span class="cp">// subArray now contains &quot;two&quot;, &quot;three&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">###Fast Enumeration</span>
+</span><span class='line'><span class="n">To</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">an</span> <span class="n">array</span><span class="p">,</span> <span class="n">you</span> <span class="k">do</span> <span class="nl">this:</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSArray</span><span class="o">*</span> <span class="n">myArray</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;one&quot;</span><span class="p">,</span> <span class="s">@&quot;two&quot;</span><span class="p">,</span> <span class="s">@&quot;three&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span><span class="o">*</span> <span class="n">string</span> <span class="k">in</span> <span class="n">myArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">// this code is repeated 3 times, one for each item in the array</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">###Mutable Arrays</span>
+</span><span class='line'><span class="n">NSMutableArray</span><span class="o">*</span> <span class="n">myArray</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithArray:</span><span class="err">@</span><span class="p">[</span><span class="s">@&quot;One&quot;</span><span class="p">,</span> <span class="s">@&quot;Two&quot;</span><span class="p">]];</span>
+</span><span class='line'><span class="c1">// Add &quot;Three&quot; to the end</span>
+</span><span class='line'><span class="p">[</span><span class="n">myArray</span> <span class="nl">addObject:</span><span class="s">@&quot;Three&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// Add &quot;Zero&quot; to the start</span>
+</span><span class='line'><span class="p">[</span><span class="n">myArray</span> <span class="nl">insertObject:</span><span class="s">@&quot;Zero&quot;</span> <span class="nl">atIndex:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// The array now contains &quot;Zero&quot;, &quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSMutableArray</span><span class="o">*</span> <span class="n">myArray</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithArray:</span><span class="err">@</span><span class="p">[</span><span class="s">@&quot;One&quot;</span><span class="p">,</span> <span class="s">@&quot;Two&quot;</span><span class="p">,</span> <span class="s">@&quot;Three&quot;</span><span class="p">]];</span>
+</span><span class='line'><span class="p">[</span><span class="n">myArray</span> <span class="nl">removeObject:</span><span class="s">@&quot;One&quot;</span><span class="p">];</span>  <span class="c1">// removes &quot;One&quot;</span>
+</span><span class='line'><span class="p">[</span><span class="n">myArray</span> <span class="nl">removeObjectAtIndex:</span><span class="mi">1</span><span class="p">];</span> <span class="c1">// removes &quot;Three&quot;, the second</span>
+</span><span class='line'><span class="c1">// item in the array at this point</span>
+</span><span class='line'><span class="c1">// The array now contains just &quot;Two&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSMutableArray</span><span class="o">*</span> <span class="n">myArray</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithArray:</span><span class="err">@</span><span class="p">[</span><span class="s">@&quot;One&quot;</span><span class="p">,</span> <span class="s">@&quot;Two&quot;</span><span class="p">,</span><span class="s">@&quot;Three&quot;</span><span class="p">]];</span>
+</span><span class='line'><span class="p">[</span><span class="n">myArray</span> <span class="nl">replaceObjectAtIndex:</span><span class="mi">1</span> <span class="nl">withObject:</span><span class="s">@&quot;Bananas&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// myArray is now &quot;One&quot;, &quot;Bananas&quot;, &quot;Three&quot;</span>
+</span><span class='line'><span class="n">You</span> <span class="n">can</span> <span class="n">also</span> <span class="n">ask</span> <span class="n">the</span> <span class="n">mutable</span> <span class="n">array</span> <span class="n">to</span> <span class="n">set</span> <span class="n">an</span> <span class="n">object</span> <span class="n">at</span> <span class="n">a</span> <span class="n">given</span> <span class="nl">index:</span>
+</span><span class='line'><span class="n">myArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">@&quot;Null&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Dictionaries</h2>
+
+<p>/<em>
+Table 3-1. Contact information
+Key      Value
+Name     Cave Johnson
+Company  Aperture Science
+Likes    Science
+Dislikes Lemons
+</em>/</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSDictionary</span><span class="o">*</span> <span class="n">translationDictionary</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span>
+</span><span class='line'><span class="s">@&quot;greeting&quot;</span><span class="o">:</span> <span class="s">@&quot;Hello&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s">@&quot;farewell&quot;</span><span class="o">:</span> <span class="s">@&quot;Goodbye&quot;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="c1">//You can retrieve a value from the dictionary in a similar way to how you get objects out of an NSArray:</span>
+</span><span class='line'><span class="n">NSDictionary</span><span class="o">*</span> <span class="n">translationDictionary</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;greeting&quot;</span><span class="o">:</span> <span class="s">@&quot;Hello&quot;</span><span class="p">};</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">greeting</span> <span class="o">=</span> <span class="n">translationDictionary</span><span class="p">[</span><span class="s">@&quot;greeting&quot;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Here, aDictionary is an NSDictionary</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span><span class="o">*</span> <span class="n">key</span> <span class="k">in</span> <span class="n">aDictionary</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="n">NSObject</span><span class="o">*</span> <span class="n">theValue</span> <span class="o">=</span> <span class="n">aDictionary</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// do something with theValue</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//To set an object for a key in a mutable dictionary</span>
+</span><span class='line'><span class="n">NSMutableDictionary</span><span class="o">*</span> <span class="n">aDictionary</span> <span class="o">=</span> <span class="err">@</span><span class="p">{};</span>
+</span><span class='line'><span class="n">aDictionary</span><span class="p">[</span><span class="s">@&quot;greeting&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">@&quot;Hello&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">aDictionary</span><span class="p">[</span><span class="s">@&quot;farewell&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">@&quot;Goodbye&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">###To create an NSNumber from a number, simply put an @ in front of it. </span>
+</span><span class='line'><span class="n">NSNumber</span><span class="o">*</span> <span class="n">theNumber</span> <span class="o">=</span> <span class="err">@</span><span class="mi">123</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//This NSNumberinstance can be included in any collection object:</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//&#39;numbers&#39; is an NSMutableArray</span>
+</span><span class='line'><span class="p">[</span><span class="n">numbers</span> <span class="nl">addObject:</span><span class="n">theNumber</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//This NSNumberinstance can be included in any collection object:</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//&#39;numbers&#39; is an NSMutableArray</span>
+</span><span class='line'><span class="p">[</span><span class="n">numbers</span> <span class="nl">addObject:</span><span class="n">theNumber</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//You can also set NSNumbers to the result of an expression. For example:</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSNumber</span><span class="o">*</span> <span class="n">number</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="cp">// &#39;number&#39; contains 101</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#Data</span>
+</span><span class='line'><span class="cp">###To load a text file into an NSDataobject, you can do the following:</span>
+</span><span class='line'><span class="c1">// Assuming that there is a text file at /Examples/Test.txt:</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">filePath</span> <span class="o">=</span> <span class="s">@&quot;/Examples/Test.txt&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSData</span><span class="o">*</span> <span class="n">loadedData</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfFile:</span><span class="n">filePath</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>转换成NSString对象</h2>
+
+<blockquote><p>For example, to convert an  NSDataobject to an  NSString, you can use the  NSString class’s  initWithData:encoding:method, which takes an  NSData  object and  an NSStringEncodingvalue (which indicates to the class how it should interpret the bytes).</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">loadedString</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithData:</span><span class="n">loadedData</span>     <span class="nl">encoding:</span><span class="n">NSUTF8StringEncoding</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//You can write an  NSDataobject to disk in a similar way</span>
+</span><span class='line'><span class="c1">// Here, loadedData is an NSData object</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">filePath</span> <span class="o">=</span> <span class="s">@&quot;/Examples/Test.txt&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">loadedData</span> <span class="nl">writeToFile:</span><span class="n">filePath</span> <span class="nl">atomically:</span><span class="n">YES</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>The NSCodingprotocol contains two key methods, which your class must implement in order to be serializable:</h3>
+
+<ul>
+<li>encodeWithCoder:</li>
+<li>initWithCoder:</li>
+</ul>
+
+
+<h3>Here is an example of an implementation of the encodeWithCoder:method:</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">encodeWithCoder:</span><span class="p">(</span><span class="n">NSKeyedArchiver</span><span class="o">*</span><span class="p">)</span><span class="nv">aCoder</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">// Store a string (or any other Objective-C object that supports coding)</span>
+</span><span class='line'><span class="p">[</span><span class="n">aCoder</span> <span class="nl">encodeObject:</span><span class="n">myStringVariable</span> <span class="nl">forKey:</span><span class="s">@&quot;myString&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// Store a number</span>
+</span><span class='line'><span class="p">[</span><span class="n">aCoder</span> <span class="nl">encodeInteger:</span><span class="n">myIntegerVariable</span> <span class="nl">forKey:</span><span class="s">@&quot;anInteger&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Here is the corresponding initWithCoder:  method, which sets up the object and loads the encoded data:</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="nf">initWithCoder:</span><span class="p">(</span><span class="n">NSKeyedUnarchiver</span><span class="o">*</span><span class="p">)</span><span class="nv">aDecoder</span> <span class="p">{</span>
+</span><span class='line'><span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="n">myStringVariable</span> <span class="o">=</span> <span class="p">[</span><span class="n">aDecoder</span> <span class="nl">decodeObjectForKey:</span><span class="s">@&quot;myString&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="n">myIntegerVariable</span> <span class="o">=</span> <span class="p">[</span><span class="n">aDecoder</span> <span class="nl">decodeIntegerForKey:</span><span class="s">@&quot;anInteger&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>To actually convert an object to a usable NSData, you can do this:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="c1">// myObject is an object that </span>
+</span><span class='line'><span class="c1">//conforms to NSCoding</span>
+</span><span class='line'><span class="n">NSData</span><span class="o">*</span> <span class="n">object</span> <span class="n">storedData</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSKeyedArchiver</span> <span class="nl">archivedDataWithRootObject:</span><span class="n">myObject</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// storedData can now be written to a file</span>
+</span><span class='line'><span class="n">To</span> <span class="n">load</span> <span class="n">it</span> <span class="n">back</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="k">do</span> <span class="nl">this:</span>
+</span><span class='line'><span class="c1">// loadedData is an NSData loaded from somewhere, and SomeObject is </span>
+</span><span class='line'><span class="c1">//a class that conforms to NSCoding</span>
+</span><span class='line'><span class="n">SomeObject</span><span class="o">*</span> <span class="n">myObject</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSKeyedUnarchiver</span> <span class="nl">unarchiveObjectWithData:</span><span class="n">loadedData</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Design Patterns in Cocoa</h1>
+
+<blockquote><p>Delegationis Cocoa’s term for passing off some responsibilities of an object to another.An example of this in action is the UIApplicationobject, which represents an application on iOS. This application needs to know what should happen when the application moves to the background. Many other languages handle this problem by subclassing</p></blockquote>
+
+<p><img src="http://woody1983.github.com/images/img/ocnote2.png"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Arduino Robot]]></title>
@@ -2497,278 +3191,6 @@ Tip: You can check to see if location exists with if self.location?</p></blockqu
 作字  早饭后作字，凡笔墨应酬，当作自己功课。
 夜不出门  旷功疲神，切戒切戒。
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[mvc]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/22/mvc/"/>
-    <updated>2012-08-22T00:36:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/22/mvc</id>
-    <content type="html"><![CDATA[<p><img src="http://ruby.railstutorial.org/images/figures/mvc_detailed.png" alt="About MVC" />
-* The browser issues a request for the /users URI.
-* Rails routes /users to the index action in the Users controller.
-* The index action asks the User model to retrieve all users (User.all).
-* The User model pulls all the users from the database.
-* The User model returns the list of users to the controller.
-* The controller captures the users in the @users variable, which is passed to the index view.
-* The view uses embedded Ruby to render the page as HTML.
-* The controller passes the HTML back to the browser.3</p>
-
-<p><img src="http://ruby.railstutorial.org/images/figures/demo_controller_inheritance.png" title="Optional title attribute" alt="About Controller" />
-<code>app/controllers/application_controller.rb</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails学习全记录]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/22/rails-notes/"/>
-    <updated>2012-08-22T00:10:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/22/rails-notes</id>
-    <content type="html"><![CDATA[<h3>创建rails项目 跳过unit-test模块</h3>
-
-<p><code>rails new sample_app --skip-test-unit</code></p>
-
-<h3>不安装production环境所需要的gem</h3>
-
-<p><code>bundle install --without production</code></p>
-
-<h3>创建rspec测试模块</h3>
-
-<p><code>rails generate rspec:install</code></p>
-
-<h3>创建一个负责静态页面的控制器</h3>
-
-<p><code>rails generate controller StaticPages home help --no-test-framework</code></p>
-
-<p>其实还可以添加 about contact等方法</p>
-
-<p>删除一个控制器<code>rails destroy  controller FooBars baz quux</code></p>
-
-<!-- more -->
-
-
-<h3>route中的get方法</h3>
-
-<p><code>config/routes.rb</code></p>
-
-<p>by using get we arrange for the route to respond to a GET request
-<code>get "static_pages/about"</code></p>
-
-<h4>The first step is to generate an integration test (request spec) for our static pages:</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rails generate integration_test static_pages
-</span><span class='line'>      invoke  rspec
-</span><span class='line'>      create    spec/requests/static_pages_spec.rb</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>About RSpec</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>describe "场景/描述“ do
-</span><span class='line'>  it "..." do
-</span><span class='line'>    ...
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>一段it语句</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>it "should have the content 'Sample App'" do #应该可以看到Sample App这个字样
-</span><span class='line'>      visit '/static_pages/home' #访问这个path
-</span><span class='line'>      page.should have_content('Sample App') #页面上(page) 应该会包含这个content
-</span><span class='line'>    end</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>should and should_not 一招鲜</h1>
-
-<p>uses the <code>Capybara</code> function <code>visit</code></p>
-
-<p><code>spec/requests/static_pages_spec.rb</code> 可以将不同的静态页面定义到不同的describe中去测试 测试指定页面中是否包含什么文字</p>
-
-<h3>再添加一个静态页面呢？</h3>
-
-<ul>
-<li>首先route中需要添加新的<code>get "static_pages/about"</code></li>
-<li>controllers指定def</li>
-<li>views中有对应的<code>html</code>页面<code>app/views/static_pages/about.html.erb</code></li>
-</ul>
-
-
-<h4>选择测试某一个元素 比如 title h1 等</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>page.should have_selector('title',
-</span><span class='line'>                    :text =&gt; "Ruby on Rails Tutorial Sample App | Home")</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This uses the have_selector method, which checks for an HTML element (the “selector”) with the given content.
-要查找的内容也可以用缩写 只寻找<code>关键字</code>
-<code>page.should have_selector('title', :text =&gt; " | Home")</code></p>
-
-<h3>Provide方法 可以提供临时变量给一个label</h3>
-
-<p><code>&lt;% provide(:title, 'Home') %&gt;</code></p>
-
-<h5>使用</h5>
-
-<p><code>&lt;title&gt;Ruby on Rails Tutorial Sample App | &lt;%= yield(:title) %&gt;&lt;/title&gt;</code></p>
-
-<blockquote><p>http://ruby.railstutorial.org/chapters/static-pages#top 明天继续</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于rspec浅见]]></title>
-    <link href="http://woody1983.github.com/blog/2012/08/20/about-rspec/"/>
-    <updated>2012-08-20T20:52:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/08/20/about-rspec</id>
-    <content type="html"><![CDATA[<h3>刚入手没几天，感觉开发过程中多了很多乐趣。</h3>
-
-<p><code>should</code> and <code>should_not</code></p>
-
-<h2>before and after</h2>
-
-<p>before(:each) 每段it之前执行
-before(:all) 每段describe 之前执行
-after(:each)
-after(:all)</p>
-
-<h3>pending 可以先列出来打算要写的代码</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;…&quot;</span>
-</span><span class='line'>  <span class="n">pending</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<!-- more-->
-
-
-<h3>let 语法 有需要才会出来运算。</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span><span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:is_vip</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>should 后面</h3>
-
-<p>be_true
-be_false
-be_nil</p>
-
-<h3>检查class和def</h3>
-
-<ul>
-<li>target.should be_a_kind_of(Array)      <code>target.class.should == Array</code></li>
-<li>target.should be_an_instance_of(Array) <code>target.class.should == Array</code></li>
-<li>target.should respond_to(:foo)         <code>target.respond_to?(:foo).should == true</code></li>
-</ul>
-
-
-<h3>检查array hash</h3>
-
-<ul>
-<li>target.should have_key(:foo) <code>#target[:foo].should_not == nil</code></li>
-<li>target.should include(4)     <code>#target.include?(4).should == true</code></li>
-<li>target.should have(3).items  <code>#target.items.length == 3</code></li>
-</ul>
-
-
-<h3>任何be_开头的</h3>
-
-<ul>
-<li>target.should be_empty <code>#target.empty?.should == true</code></li>
-<li>target.should be_blank <code>#target.blank?.should == true</code></li>
-<li>target.should be_admin <code>#target.admin?.should == true</code></li>
-</ul>
-
-
-<h3>should ==   一招鲜吃遍天</h3>
-
-<h3>expect to</h3>
-
-<h4>希望一段代码会改变某个值货丢出例外</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;should update status to shipping&quot;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">expect</span><span class="p">{</span><span class="n">order</span><span class="o">.</span><span class="n">ship!</span><span class="p">}</span><span class="o">.</span><span class="n">to</span> <span class="n">change</span><span class="p">{</span><span class="n">order</span><span class="o">.</span><span class="n">status</span><span class="p">}</span><span class="o">.</span><span class="n">from</span><span class="p">(</span><span class="s2">&quot;new&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;shippping&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>希望status从new变成shipping</h4>
-
-<p>和这段差不多</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;should update status to shipping &quot;</span><span class="k">do</span>
-</span><span class='line'><span class="n">order</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="s2">&quot;new&quot;</span>
-</span><span class='line'><span class="n">order</span><span class="o">.</span><span class="n">ship!</span>
-</span><span class='line'><span class="n">order</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="s2">&quot;shipping&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>subject 可以省略 receiver</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">subject</span> <span class="p">{</span><span class="no">Order</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:status</span> <span class="o">=&gt;</span> <span class="s2">&quot;New&quot;</span><span class="p">)}</span>
-</span><span class='line'><span class="n">it</span> <span class="p">{</span><span class="n">should</span> <span class="n">be_valid</span><span class="p">}</span> <span class="c1">#subject.valid?should == true</span>
-</span><span class='line'><span class="n">its</span><span class="p">(</span><span class="ss">:status</span><span class="p">){</span><span class="n">should</span> <span class="o">==</span> <span class="s2">&quot;New&quot;</span><span class="p">}</span> <span class="c1">#subject.status.should == &quot;New&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>it example specify 是一样的 都是别名</h3>
-
-<h4>rspec filename.rb -fs 输出specdox文件</h4>
-
-<h4>rspec filename.rb -fh 输出html文件</h4>
-
-<h3>useful Rspec tools</h3>
-
-<ul>
-<li>factory_girl 造测试数据</li>
-<li>shoulda 更多rails专用的matcher</li>
-<li>capybara 提供浏览器模拟</li>
-</ul>
-
-
-<h3>rcov 测试覆盖度 看有哪些代码没有测试到</h3>
-
-<h3>Capydara</h3>
-
-<ul>
-<li>fill_in &#8216;Login&#8217;, :with=>&#8217;username&#8217;</li>
-<li>click_link &#8216;Sign up&#8217;</li>
-</ul>
-
-
-<h3>每个it只有一个测试目的。不被周边因素影响</h3>
 ]]></content>
   </entry>
   
