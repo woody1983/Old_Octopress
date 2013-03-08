@@ -22,8 +22,9 @@ categories: IOS
 ### 对象会直接保存非指针类型的实例变量，BNRItem 对象并没有直接保存其他对象，而只拥有三个指针，分别指向另外三个对象。这些指针都是BNRItem的实例变量。
 ### 也就是说 BNRItem通过一个itemName的指针 指向一个NSString对象。
 
-{% img /images/img/nsobject.jpg %}
 <!-- more -->
+
+{% img /images/img/nsobject.jpg %}
 
 #实例变量的存取
 
