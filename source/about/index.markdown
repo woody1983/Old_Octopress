@@ -6,11 +6,9 @@ comments: true
 sharing: true
 footer: true
 ---
-###一个脱离了高级趣味的人。
+###一个脱离了高级趣味的人。 C'est la vie.
 
-{% img ../images/img/hardy.jpg %}
-
-
+{% img ../images/img/hardy.jpg 300 %}
 
 #### 技术方面
 * 喜欢`FreeBSD`.`德州扑克`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/[豆瓣深度用户](http://www.douban.com/people/woody1983/ "《上海老味道》")

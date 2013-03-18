@@ -6,19 +6,23 @@ comments: true
 categories: French
 ---
 
+`第一次法文作业 漏洞百出 不忍直视。`
+
 {%img /images/img/monica.jpg %}
 
-###IIs s'appellent Monica et Vincent.
-###lls sont acteur et lls sont  travaille dans le cinema. 
-###lls habiten à Paris et lls ont deux enfants. 
-###lls aiment le musique, le cinme et le L'opéra.
+###Ils s'appellent Monica et Vincent.
+###Ils sont acteur et lls travaillent dans le cinéma. 
+###Ils habitent à Paris et ils ont deux enfants. 
+###Ils aiment le musique, le cinéma et l'Opéra.
 
 {%img /images/img/monica1.jpg %}
-###Monica est italienne et elle parle très bien italienne, anglaise et un peu  française.
-###Elle a les cheveux brune et raides et elle est très belle.
+###Monica est italienne et elle parle très bien italien, anglais et un peu français.
+###Elle a les cheveux bruns et raides et elle est très belle.
+
+`brun 在这里修饰头发 故不用阴性` & `语言不使用阴性`
 
 {%img /images/img/vincent.jpg %}
-###Vincent est français et ll parle très français anglais et un peu italien. 
-###ll est grand et ll a les cheveux bruns et crépus.
+###Vincent est français et il parle très bien français anglais et un peu italien. 
+###Vincent est grand et il a les cheveux bruns et crépus.
 
-###lls sont très gentille et lls sont un acteur de valeur.
+###Ils sont très gentille et ils sont acteur de valeur.
