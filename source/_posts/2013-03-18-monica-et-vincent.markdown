@@ -13,9 +13,11 @@ categories: French
 ###lls habiten à Paris et lls ont deux enfants. 
 ###lls aiment le musique, le cinme et le L'opéra.
 
+{%img /images/img/monica1.jpg %}
 ###Monica est italienne et elle parle très bien italienne, anglaise et un peu  française.
 ###Elle a les cheveux brune et raides et elle est très belle.
 
+{%img /images/img/vincent.jpg %}
 ###Vincent est français et ll parle très français anglais et un peu italien. 
 ###ll est grand et ll a les cheveux bruns et crépus.
 
