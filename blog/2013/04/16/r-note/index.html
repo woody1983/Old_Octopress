@@ -1,0 +1,1079 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>R Note - 1024Bit  电子游牧日志</title>
+	<meta name="author" content="Woody.Xu">
+
+	
+	<meta name="description" content="R 的安装 OS是Centos5.5 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12 1011 wget http://cran.r-project.org/src/base/R-3/R-3.0.0.tar.gz 1012 tar zxvf R-3.0.0.tar.gz 1013 ls - &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="1024Bit  电子游牧日志" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">1024Bit  电子游牧日志</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:woody1983.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/unix1983@gmail.com?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/xiaoputi" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/woody1983" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:woody1983.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h1 class="title">R Note</h1>
+	<div class="entry-content"><h3>R 的安装 OS是Centos5.5</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 1011  wget http://cran.r-project.org/src/base/R-3/R-3.0.0.tar.gz
+</span><span class='line'> 1012  tar zxvf R-3.0.0.tar.gz
+</span><span class='line'> 1013  ls -lah
+</span><span class='line'> 1014  cd R-3.0.0
+</span><span class='line'> 1015  yum install gcc-gfortran
+</span><span class='line'> 1016  yum install gcc gcc-c++
+</span><span class='line'> 1017  yum install readline-devel
+</span><span class='line'> 1018  yum install libXt-devel
+</span><span class='line'> 1019  ./configure
+</span><span class='line'> 1020  make
+</span><span class='line'> 1021  make install
+</span><span class='line'> 1022  R</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h3>RのSyntax</h3>
+
+<p><code>+ "" *</code>典型的四则运算</p>
+
+<p><code>Logical Values</code>
+Some expressions return a <code>Logical Values</code> : <code>TRUE</code> or <code>FALSE</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; 2 + 25
+</span><span class='line'>[1] FALSE</span></code></pre></td></tr></table></div></figure>
+
+
+<p>T and F are shorthand for TRUE FALSE</p>
+
+<p> 给Variables赋值用 <code>&lt;-</code>
+you can re-assign any value to a variable at any time, assigning the TRUE logical value to &#8216;X&#8217;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; x &lt;- 42
+</span><span class='line'>&gt; x/2
+</span><span class='line'>[1] 21
+</span><span class='line'>&gt; x &lt;- T
+</span><span class='line'>&gt; x
+</span><span class='line'>[1] TRUE
+</span><span class='line'>&gt; x &lt;- "R"
+</span><span class='line'>&gt; x
+</span><span class='line'>[1] "R"</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのFunction</h3>
+
+<p> 直接调用</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; sum(1,2,3)
+</span><span class='line'>[1] 6
+</span><span class='line'>&gt; sqrt(16)
+</span><span class='line'>[1] 4</span></code></pre></td></tr></table></div></figure>
+
+
+<p>有些Function有参数<code>names</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; rep("Yo",times=3)
+</span><span class='line'>[1] "Yo" "Yo" "Yo"</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのHelp</h3>
+
+<p><code>help(sum)</code> &amp; <code>example(sum)</code></p>
+
+<h3>RのFiles</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; list.files()
+</span><span class='line'>[1] "sum.R"
+</span><span class='line'>&gt; source("sum.R")
+</span><span class='line'>&gt; x
+</span><span class='line'>[1] 6</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのVectors</h3>
+
+<p>中文翻译:<code>载体</code>或 <code>向量</code> R的需要业务逻辑都依靠向量来完成。
+A vector&#8217;s values can be numbers, strings, logical values, or any other type, as long as they&#8217;re all the same type!
+The function <code>c</code> creates a new vector by combining a list of values.</p>
+
+<h3>c is shorthand Combine</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; c(4,5,6)
+</span><span class='line'>[1] 4 5 6
+</span><span class='line'>&gt; x &lt;- c(4,5,6,7,8,9)
+</span><span class='line'>&gt; x
+</span><span class='line'>[1] 4 5 6 7 8 9</span></code></pre></td></tr></table></div></figure>
+
+
+<p>不同Type的value不能combine成一个Vector 如果硬来 只能转换成一个characters的Vector</p>
+
+<h3>RのSequence Vectors</h3>
+
+<p>如果你需要一个数字序列的Vectors 用 <code>__:__</code>来创建</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; 5:9
+</span><span class='line'>[1] 5 6 7 8 9
+</span><span class='line'>&gt; 9:5
+</span><span class='line'>[1] 9 8 7 6 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A more Versatile way to make seq is to call the <code>seq</code> fun. Let&#8217;s do the same thing with seqs:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; seq(1,9)
+</span><span class='line'>[1] 1 2 3 4 5 6 7 8 9</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改步长</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; seq(1,9,0.5)
+</span><span class='line'> [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0 7.5 8.0 8.5 9.0</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのVector Access</h3>
+
+<p>用一些Strings创建一个Vector 并存在一个Variable里。
+we&#8217;re going to create a new vector with some strings in it,and store it in the Sentence variable.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; sentence &lt;- c('walk','the','plank')
+</span><span class='line'>&gt; sentence[3]
+</span><span class='line'>[1] "plank"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重写第三个</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; sentence[3] &lt;- 'dog'
+</span><span class='line'>&gt; sentence[3]
+</span><span class='line'>[1] "dog"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>追加第四个</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; sentence[4] &lt;- 'to'
+</span><span class='line'>&gt; sentence
+</span><span class='line'>[1] "walk" "the"  "dog"  "to"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用Vector访问Vector</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; sentence[c(1,3)]
+</span><span class='line'>[1] "walk" "dog"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者一个ranges</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; sentence[2:4]
+</span><span class='line'>[1] "the" "dog" "to"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>追加一个Vector到指定的范围</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; sentence[5:7] &lt;- c('the','poop','deck')
+</span><span class='line'>&gt; sentence
+</span><span class='line'>[1] "walk" "the"  "dog"  "to"   "the"  "poop" "deck"</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのVector Names</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; ranks &lt;- 1:3
+</span><span class='line'>&gt; names(ranks) &lt;- c("first","second","third")
+</span><span class='line'>&gt; ranks
+</span><span class='line'> first second  third
+</span><span class='line'>     1      2      3</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのPlotting One Vector</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; vesselsSunk &lt;- c(4,5,1)
+</span><span class='line'>&gt; names(vesselsSunk) &lt;- c("England","French","Norway")
+</span><span class='line'>&gt; barplot(vesselsSunk)
+</span><span class='line'>
+</span><span class='line'>&gt; barplot(1:00) 绘制一个从1到100的柱状图。</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/img/R1.jpg"></p>
+
+<h3>RのVector Math</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; a &lt;- c(1,2,3)
+</span><span class='line'>&gt; b &lt;- c(4,5,6)
+</span><span class='line'>&gt; a+1
+</span><span class='line'>[1] 2 3 4
+</span><span class='line'>&gt; a/2
+</span><span class='line'>[1] 0.5 1.0 1.5
+</span><span class='line'>&gt; a+2
+</span><span class='line'>[1] 3 4 5
+</span><span class='line'>&gt; a+b
+</span><span class='line'>[1] 5 7 9
+</span><span class='line'>&gt; a-b
+</span><span class='line'>[1] -3 -3 -3
+</span><span class='line'>
+</span><span class='line'>&gt; a == c(1,99,3)
+</span><span class='line'>[1]  TRUE FALSE  TRUE
+</span><span class='line'>
+</span><span class='line'>&gt; sin(a)
+</span><span class='line'>[1] 0.8414710 0.9092974 0.1411200
+</span><span class='line'>&gt; sqrt(a)
+</span><span class='line'>[1] 1.000000 1.414214 1.732051
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのScatter Plots</h3>
+
+<p>散点图 The plot function takes two vectors, one for X values and one for Y values and draws a graph of them.</p>
+
+<p>绘制数字和正弦sin之间的关系</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; x &lt;- seq(1,20, 0.1)
+</span><span class='line'>&gt; y &lt;- sin(x)
+</span><span class='line'>&gt; plot (x,y)
+</span><span class='line'>&gt; q();
+</span><span class='line'>Save workspace image? [y/n/c]: y
+</span><span class='line'>
+</span><span class='line'>&gt; values &lt;- -10:10
+</span><span class='line'>&gt; absolutes &lt;- abs(values)
+</span><span class='line'>&gt; plot(values,absolutes)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/img/R2.jpg"></p>
+
+<p><img src="/images/img/R3.jpg"></p>
+
+<h3>RのNA值</h3>
+
+<p>当数据中的某个值不可用时 可用NA代替</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; a &lt;- c(1,3,NA,7,9)
+</span><span class='line'>&gt; sum(a)
+</span><span class='line'>[1] NA
+</span><span class='line'>&gt; sum(a, na.rm=T)
+</span><span class='line'>[1] 20</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのMatrices</h3>
+
+<p>Matrix是一种二维数组。
+A matrix is just a fancy term for a 2-dimensional array.
+Let&#8217;s make a matrix 3 rows high by 4 columns wide,with all its fields set to 0.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; matrix(0,3,4)
+</span><span class='line'>     [,1] [,2] [,3] [,4]
+</span><span class='line'>[1,]    0    0    0    0
+</span><span class='line'>[2,]    0    0    0    0
+</span><span class='line'>[3,]    0    0    0    0
+</span><span class='line'>&gt; a &lt;- 1:12
+</span><span class='line'>&gt; a
+</span><span class='line'> [1]  1  2  3  4  5  6  7  8  9 10 11 12
+</span><span class='line'>&gt; matrix(a,3,4)
+</span><span class='line'>     [,1] [,2] [,3] [,4]
+</span><span class='line'>[1,]    1    4    7   10
+</span><span class='line'>[2,]    2    5    8   11
+</span><span class='line'>[3,]    3    6    9   12</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者另一种方法 用<code>dim</code>函数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; plank &lt;- 1:8
+</span><span class='line'>&gt; dim(plank) &lt;- c(2,4)
+</span><span class='line'>&gt; plank
+</span><span class='line'>     [,1] [,2] [,3] [,4]
+</span><span class='line'>[1,]    1    3    5    7
+</span><span class='line'>[2,]    2    4    6    8</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这就是Matrix!!!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; matrix(25,5,5)
+</span><span class='line'>     [,1] [,2] [,3] [,4] [,5]
+</span><span class='line'>[1,]   25   25   25   25   25
+</span><span class='line'>[2,]   25   25   25   25   25
+</span><span class='line'>[3,]   25   25   25   25   25
+</span><span class='line'>[4,]   25   25   25   25   25
+</span><span class='line'>[5,]   25   25   25   25   25
+</span><span class='line'>&gt; matrix(1:25,5,5)
+</span><span class='line'>     [,1] [,2] [,3] [,4] [,5]
+</span><span class='line'>[1,]    1    6   11   16   21
+</span><span class='line'>[2,]    2    7   12   17   22
+</span><span class='line'>[3,]    3    8   13   18   23
+</span><span class='line'>[4,]    4    9   14   19   24
+</span><span class='line'>[5,]    5   10   15   20   25</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのMatrices Access</h3>
+
+<p>seq真是好东西!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; plank
+</span><span class='line'>     [,1] [,2] [,3] [,4]
+</span><span class='line'>[1,]    1    3    5    7
+</span><span class='line'>[2,]    2    4    6    8
+</span><span class='line'>&gt; plank[2,3]
+</span><span class='line'>[1] 6
+</span><span class='line'>&gt; plank[2,]
+</span><span class='line'>[1] 2 4 6 8
+</span><span class='line'>&gt; plank[,4]
+</span><span class='line'>[1] 7 8
+</span><span class='line'>&gt; plank[,2:4]
+</span><span class='line'>     [,1] [,2] [,3]
+</span><span class='line'>[1,]    3    5    7
+</span><span class='line'>[2,]    4    6    8</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのMatrices  Plotting</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; elevation &lt;- matrix(1,10,10)
+</span><span class='line'>&gt; elevation[4,6] &lt;- 0
+</span><span class='line'>&gt; coutour(elevation) #等高线地图
+</span><span class='line'>&gt; persp(elevation, expand=0.2) #3D</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/img/R4.jpg"></p>
+
+<h3>Rの Summary Statistics</h3>
+
+<p>统计数字摘要 Part of a statistician&#8217;s job is to explain their data.</p>
+
+<h3>Mean  平均</h3>
+
+<p><code>mean</code>是求平均的函数  配合<code>abline</code>可以加平均线</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; limbs &lt;- c(3,4,5,6,7,8,9)
+</span><span class='line'>&gt; mean(limbs)
+</span><span class='line'>[1] 6
+</span><span class='line'>&gt; sum(limbs)
+</span><span class='line'>[1] 42
+</span><span class='line'>&gt; barplot(limbs)
+</span><span class='line'>&gt; abline(h=mean(limbs))
+</span><span class='line'>&gt; q()</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/img/R5.jpg"></p>
+
+<h3>Median 中位数</h3>
+
+<p>Attention: 先plot后标中位线</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; limbs &lt;- c(4, 3, 4, 3, 2, 4, 4, 4)
+</span><span class='line'>&gt; mean(limbs)
+</span><span class='line'>[1] 3.5
+</span><span class='line'>&gt; median(limbs)
+</span><span class='line'>[1] 4
+</span><span class='line'>&gt; abline(h = median(limbs))
+</span><span class='line'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...) :
+</span><span class='line'>  plot.new has not been called yet
+</span><span class='line'>&gt; barplot(limbs)
+</span><span class='line'>&gt; abline(h = median(limbs))
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Standard Deviation</h3>
+
+<p>标准偏差
+<code>abline</code>应该是加标记线的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; pounds &lt;- c(4500,5000,35000, 40000, 35000, 45000, 10000, 15000)
+</span><span class='line'>&gt; devication &lt;- sd(pounds)
+</span><span class='line'>&gt; meanValue &lt;- mean(pounds)
+</span><span class='line'>&gt; devication
+</span><span class='line'>[1] 16718.12
+</span><span class='line'>&gt; barplot(pounds)
+</span><span class='line'>&gt; abline(h = meanValue)
+</span><span class='line'>&gt; abline(h = devication + meanValue)
+</span><span class='line'>&gt; abline(h = devication - meanValue)
+</span><span class='line'>&gt; abline(h = meanValue - devication)
+</span><span class='line'>
+</span><span class='line'>&gt; devication - meanValue
+</span><span class='line'>[1] -6969.38
+</span><span class='line'>&gt; devication + meanValue
+</span><span class='line'>[1] 40405.62
+</span><span class='line'>&gt; meanValue - devication
+</span><span class='line'>[1] 6969.38
+</span><span class='line'>&gt; meanValue
+</span><span class='line'>[1] 23687.5</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/img/R6.jpg"></p>
+
+<h3>RのFactors</h3>
+
+<p>跟踪分类的值类型</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; chests &lt;- c('gold','silver','gems','gold','gems')
+</span><span class='line'>&gt; chests
+</span><span class='line'>[1] "gold"   "silver" "gems"   "gold"   "gems"
+</span><span class='line'>&gt; types &lt;- factor(chests)
+</span><span class='line'>&gt; types
+</span><span class='line'>[1] gold   silver gems   gold   gems
+</span><span class='line'>Levels: gems gold silver
+</span><span class='line'>
+</span><span class='line'>&gt; as.integer(types)
+</span><span class='line'>[1] 2 3 1 2 1
+</span><span class='line'>&gt; levels(types)
+</span><span class='line'>[1] "gems"   "gold"   "silver"</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのPlot with Factors</h3>
+
+<p>绘制散点图和标签</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; weights &lt;- c(300,200,100,250,150)
+</span><span class='line'>&gt; prices &lt;- c(9000,5000,12000,7500,18000)
+</span><span class='line'>&gt; plot(weights,prices)
+</span><span class='line'>
+</span><span class='line'>&gt; legend("topright", levels(types),pch = 1:length(levels(types)))</span></code></pre></td></tr></table></div></figure>
+
+
+<p>直接一点的写法:
+<code>&gt; legend("topright", c("gems","gold","silver"),pch = 1:3)</code></p>
+
+<h3>RのData Frames</h3>
+
+<p>Our vectors with treasure chest data are perfect candidates for conversion to a data frame.<code>把Data转换成一个Data Frames</code></p>
+
+<p><code>&gt; treasure &lt;- data.frame(weights, prices, types)</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; treasure
+</span><span class='line'>  weights prices  types
+</span><span class='line'>1     300   9000   gold
+</span><span class='line'>2     200   5000 silver
+</span><span class='line'>3     100  12000   gems
+</span><span class='line'>4     250   7500   gold
+</span><span class='line'>5     150  18000   gems</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのData Frames Access</h3>
+
+<h4>用双括号 [[]]</h4>
+
+<p>直接显示一列数据 直接使用列名也可以 记得加引号</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; treasure[[2]]
+</span><span class='line'>[1]  9000  5000 12000  7500 18000
+</span><span class='line'>&gt; treasure[[weights]]
+</span><span class='line'>Error in .subset2(x, i, exact = exact) : no such index at level 1
+</span><span class='line'>&gt; treasure[["weights"]]
+</span><span class='line'>[1] 300 200 100 250 150</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Typing all those brackets can get tedious, so there&#8217;s also a shorthand notation: the data frame name, a dollar sign, and the column name (without quotes). Try using it to</p>
+
+<p>get the <code>prices</code> column:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; treasure$types
+</span><span class='line'>[1] gold   silver gems   gold   gems
+</span><span class='line'>Levels: gems gold silver</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>RのLoading Data Frames</h3>
+
+<p>使用<code>read.table</code>和<code>read.csv</code>读取本地文件</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; read.table("infantry.txt", sep="\t")
+</span><span class='line'>                     V1
+</span><span class='line'>1 Port         Infantry
+</span><span class='line'>2      Porto Bello  700
+</span><span class='line'>3      Cartagena    500
+</span><span class='line'>4     Panama City  1500
+</span><span class='line'>5     Havana       2000
+</span><span class='line'>&gt; read.csv("targets.csv")
+</span><span class='line'>         Port Population Worth
+</span><span class='line'>1   Cartagena      35000 10000
+</span><span class='line'>2 Porto Bello      49000 15000
+</span><span class='line'>3      Havana     140000 50000
+</span><span class='line'>4 Panama City     105000 35000</span></code></pre></td></tr></table></div></figure>
+
+
+<p>银行<code>header</code>使用<code>read.table("infantry.txt", sep="\t", header=TRUE)</code></p>
+
+<h3>RのMerging Data Frames</h3>
+
+<p>第一步骤导入csv文件和txt文件 在TryR的教程基础上我添加了<code>data.frame</code>函数进行Data Frame化</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; targets &lt;- data.frame(read.csv("targets.csv"))
+</span><span class='line'>&gt; targets
+</span><span class='line'>         Port Population Worth
+</span><span class='line'>1   Cartagena      35000 10000
+</span><span class='line'>2 Porto Bello      49000 15000
+</span><span class='line'>3      Havana     140000 50000
+</span><span class='line'>4 Panama City     105000 35000
+</span><span class='line'>
+</span><span class='line'>&gt; infantry &lt;- data.frame(read.table("infantry.txt", sep="\t", header=TRUE))
+</span><span class='line'>&gt; infantry
+</span><span class='line'>         Port Infantry
+</span><span class='line'>1 Porto Bello      700
+</span><span class='line'>2   Cartagena      500
+</span><span class='line'>3 Panama City     1500
+</span><span class='line'>4      Havana     2000
+</span><span class='line'>&gt; infantry[[1]]
+</span><span class='line'>[1] Porto Bello Cartagena   Panama City Havana
+</span><span class='line'>Levels: Cartagena Havana Panama City Porto Bello
+</span><span class='line'>&gt; infantry[[2]]
+</span><span class='line'>[1]  700  500 1500 2000</span></code></pre></td></tr></table></div></figure>
+
+
+<p>第二步开始Merge</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; merge(x = targets, y = infantry)
+</span><span class='line'>         Port Population Worth Infantry
+</span><span class='line'>1   Cartagena      35000 10000      500
+</span><span class='line'>2      Havana     140000 50000     2000
+</span><span class='line'>3 Panama City     105000 35000     1500
+</span><span class='line'>4 Porto Bello      49000 15000      700</span></code></pre></td></tr></table></div></figure>
+
+
+<p>和教程上的出入在于制作txt文件时 <code>\t</code>部分被替换错误 导致数据格式</p>
+
+<p><img src="/images/img/R7.jpg"></p>
+
+<h3>Real-World Data</h3>
+
+<p>后记，R非常适合做统计。TryR的教程里的这一章节是用国家的GDP和盗版率做线性回归(暂时不知道啥意思)
+关于盗版率的数据文件<code>piracy.csv</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Country,Piracy
+</span><span class='line'>Australia,23
+</span><span class='line'>Bangladesh,90
+</span><span class='line'>Brunei,67
+</span><span class='line'>China,77</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>gdp.txt</code>文件</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Rank    Country        GDP
+</span><span class='line'>1       Liechtenstein  141100
+</span><span class='line'>2       Qatar          104300
+</span><span class='line'>3       Luxembourg     81100
+</span><span class='line'>4       Bermuda        69900</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; piracy &lt;- data.frame(read.csv("piracy.csv"))
+</span><span class='line'>&gt; gdp &lt;- data.frame(read.table("gdp.txt", sep="\t", header=TRUE))
+</span><span class='line'>&gt; piracy
+</span><span class='line'>     Country Piracy
+</span><span class='line'>1  Australia     23
+</span><span class='line'>2 Bangladesh     90
+</span><span class='line'>3     Brunei     67
+</span><span class='line'>4      China     77
+</span><span class='line'>&gt; gdp
+</span><span class='line'>  Rank       Country    GDP
+</span><span class='line'>1    1 Liechtenstein 141100
+</span><span class='line'>2    2         Qatar 104300
+</span><span class='line'>3    3    Luxembourg  81100
+</span><span class='line'>4    4       Bermuda  69900</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以先做一个散点图 <code>plot(countries$GDP,countries$Piracy)</code></p>
+
+<p>补充:线性回归
+<code>线性回归是利用数理统计中的回归分析，来确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法之一，运用十分广泛。分析按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析.</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lm                    package:stats                    R Documentation
+</span><span class='line'>
+</span><span class='line'>Fitting Linear Models
+</span><span class='line'>
+</span><span class='line'>Description:
+</span><span class='line'>
+</span><span class='line'>     ‘lm’ is used to fit linear models.  It can be used to carry out
+</span><span class='line'>     regression, single stratum analysis of variance and analysis of
+</span><span class='line'>     covariance (although ‘aov’ may provide a more convenient interface
+</span><span class='line'>     for these).
+</span><span class='line'>We have more countries represented in our GDP data than we do our piracy rate data. If we know a country's GDP, can we use that to estimate its piracy rate?</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Try calculating the linear model for piracy rate by GDP, and assign it to the line variable:</p>
+
+<p>RedoComplete
+<code>&gt; line &lt;- lm(countries$Piracy ~ countries$GDP)</code></p>
+
+<p>在图上标记出来
+<code>&gt; abline(line)</code></p>
+
+<h3>新图形包的安装</h3>
+
+<p><code>install.packages("ggplot2")</code> and 查询一个new packages的使用说明<code>&gt; help(package = "ggplot2")</code></p>
+
+<p>一个Demo</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; weights &lt;- c(300, 200, 100, 250, 150)
+</span><span class='line'>&gt; prices &lt;- c(9000, 5000, 12000, 7500, 18000)
+</span><span class='line'>&gt; chests &lt;- c('gold', 'silver', 'gems', 'gold', 'gems')
+</span><span class='line'>&gt; types &lt;- factor(chests)
+</span><span class='line'>
+</span><span class='line'>&gt; qplot(weights, prices, color = types)</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-16T14:21:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/r/'>R</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/04/16/r-note/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Woody.Xu
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'woodyxu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://woody1983.github.com/blog/2013/04/16/r-note/';
+        var disqus_url = 'http://woody1983.github.com/blog/2013/04/16/r-note/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
