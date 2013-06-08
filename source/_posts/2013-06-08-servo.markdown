@@ -1,0 +1,18 @@
+---
+layout: post
+title: "Servo"
+date: 2013-05-23 23:49
+comments: true
+categories: Arduino
+---
+
+Servo myservo; `创建一个舵机对象 使用Servo类最多可以控制8个舵机`
+
+int pos = 0; `// 该变量用与存储舵机角度位置`
+
+``` c
+void setup() 
+{ 
+  myservo.attach(9);  // 该舵机由arduino第九脚控制
+} 
+```

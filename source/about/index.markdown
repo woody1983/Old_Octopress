@@ -11,7 +11,7 @@ footer: true
 {% img ../images/img/hardy.jpg 300 %}
 
 #### 技术方面
-* 喜欢`FreeBSD`.`德州扑克`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/[豆瓣深度用户](http://www.douban.com/people/woody1983/ "《上海老味道》")
+* 喜欢`FreeBSD`.`德州扑克`.`Arduino`.`Raspberry Pi`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/[豆瓣深度用户](http://www.douban.com/people/woody1983/ "《上海老味道》")
 * 不喜欢 `Java`.`WordPress`
 * 研究学习 `Git`.`OctoPress`.`Rails3`.`C`.`MarkDown`.`IOS`.`Objective-C`
 
@@ -20,8 +20,11 @@ footer: true
 * 讨厌对我指手画脚一般口气的文章和装逼的文章 比如《别告诉我你会XXX》《XXX岁之前你应该XXX》。
 * 喜欢`盆栽植物`/`LOMO`／[韩国年糕火锅](http://www.dianping.com/shop/5440689)/`Wagas`
 
+{% img http://24.media.tumblr.com/c31fd798619d046b36464a4a9d519a57/tumblr_mnkeuqW2Sh1sst44io1_400.jpg %}
+
 ### Categories
 * [Notes](/blog/categories/note/)  有时候会看到一些不错的`文章`和`语录`就会随手摘下来
+* [Arduino](/blog/categories/arduino/) 让人疯狂的东西。平时PO到Tumblr上 晚上整理到这里。
 * [Rails](/blog/categories/rails/) 配合`BDD`我觉得Rails确实是一个很有生产力的工具，让人专注于功能
 * [RSpec](/blog/categories/rspec/)`BDD`首推的工具，语法灵活，学习中
 * [IOS](/blog/categories/ios/)     一些关于`Objective-C`的学习笔记

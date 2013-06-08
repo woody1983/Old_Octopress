@@ -1,0 +1,37 @@
+---
+layout: post
+title: "AR底盘"
+date: 2013-06-03 23:43
+comments: true
+categories: 4WD
+---
+
+####ミニ四駆30周年を迎え、空力を含め走行性能を追求した新設計シャーシを採用。
+
+看完图纸 第一感觉是 `底盘是越来越低了`  `电池和马达可以在车底更换，而且是在不拆壳的前提下完成。`
+
+原车配有刹车零件和`26mm低重心胎框`與六顆低磨擦導輪。
+
+迷你四驅車REV中的REV是指「REVOLUTION」，具有革命的意味。
+
+{% img http://media.tumblr.com/32ac50b59e4af6c02874ee053816f3c9/tumblr_inline_mnt1idjMPz1qz4rgp.jpg %}
+
+<!-- more -->
+
+####侧面来看车身底盘高度。
+
+{% img http://media.tumblr.com/41a4dfd6bdf6e495643f3d69cbad62f4/tumblr_inline_mnt1j3q37w1qz4rgp.jpg %}
+
+####底盘的造型可以说是对得起30周年纪念日的发型车。
+
+{% img http://media.tumblr.com/dc8096af27257865d2db2f25f5135511/tumblr_inline_mnt1l1fRxL1qz4rgp.jpg %}
+
+####传说中的空气动力系统
+
+{% img http://media.tumblr.com/b32763821bf74056603bda1a57ad6c3d/tumblr_inline_mnt1lkCqPE1qz4rgp.jpg %}
+
+
+##进气口特写
+
+{% img http://media.tumblr.com/ff855c86495064e20e3cc7e86aa83923/tumblr_inline_mnt1ng1Pow1qz4rgp.jpg %}
+
