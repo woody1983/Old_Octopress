@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-06-09T00:23:47+08:00</updated>
+  <updated>2013-08-11T23:38:52+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,561 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Try Objective-C]]></title>
+    <link href="http://woody1983.github.com/blog/2013/08/11/try-objective-c/"/>
+    <updated>2013-08-11T23:30:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/08/11/try-objective-c</id>
+    <content type="html"><![CDATA[<h3>Code School 上的免费教程，为什么要着急先把这个免费的学掉 我也不知道具体是为什么。一个月学费20$ 总是出现在我最忙的时候。月底还有考试，真TMD服了。</h3>
+
+<!-- more -->
+
+
+<h2>常规的一些语法 变量 输出</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello,Mr.Johnny&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">firstName</span> <span class="o">=</span> <span class="s">@&quot;Johnny Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="n">firstName</span><span class="p">);</span> <span class="c1">//Logging a variable</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello there, %@.&quot;</span><span class="p">,</span> <span class="n">firstName</span> <span class="p">);</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ %@&quot;</span><span class="p">,</span> <span class="n">firstName</span><span class="p">,</span> <span class="n">firstName</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">lastName</span> <span class="o">=</span> <span class="s">@&quot;Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ %@&quot;</span><span class="p">,</span> <span class="n">firstName</span><span class="p">,</span> <span class="n">lastName</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSNumber</span> <span class="o">*</span><span class="n">age</span> <span class="o">=</span> <span class="err">@</span><span class="mi">30</span><span class="p">;</span> <span class="c1">//Creating a number object</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">NSNumber *ipodBirthdayYear = @2001;</span>
+</span><span class='line'><span class="cm">NSNumber *iphoneBirthdayYear = @2007;</span>
+</span><span class='line'><span class="cm">NSNumber *ipadBirthdayYear = @2010;</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Log a number object</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is %@ years old&quot;</span><span class="p">,</span> <span class="n">firstName</span><span class="p">,</span> <span class="n">age</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Creating an array variable</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">apps</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;AngryFowl&quot;</span><span class="p">,</span><span class="s">@&quot;Lettertouch&quot;</span><span class="p">,</span><span class="s">@&quot;Tweetrobot&quot;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Accessing values in an array</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">apps</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">//challenge[11]: Lettertouch</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Changing an array</span>
+</span><span class='line'><span class="n">apps</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;AngryFowl&quot;</span><span class="p">,</span><span class="s">@&quot;Lettertouch&quot;</span><span class="p">,</span><span class="s">@&quot;Tweetrobot&quot;</span><span class="p">,</span><span class="s">@&quot;Instacanvas&quot;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">## Dictionary还是蛮实用的。</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Creating a dictionary</span>
+</span><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">person</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;First Name&quot;</span><span class="o">:</span> <span class="s">@&quot;Johnny&quot;</span><span class="p">};</span>
+</span><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">appRatings</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;AngryFowl&quot;</span><span class="o">:</span> <span class="err">@</span><span class="mi">3</span><span class="p">,</span> <span class="s">@&quot;Lettertouch&quot;</span><span class="o">:</span> <span class="err">@</span><span class="mi">5</span><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Accessing values in a dictionary</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Lettertouch has a rating of %@.&quot;</span><span class="p">,</span> <span class="n">appRatings</span><span class="p">[</span><span class="s">@&quot;Lettertouch&quot;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>基础部分结束</h1>
+
+<h1>Objective-C 有一个特性就是调用一个方法 在这里称之为传递一个信息 不过这么看倒反而形象了。</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="c1">//Sending a message</span>
+</span><span class='line'><span class="p">[</span><span class="n">tryobjc</span> <span class="n">completeThisChallenge</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//-------------------------Sending the description message</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">Try sending the description message to the foods array inside of NSLog() to see what it returns.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">foods</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;tacos&quot;</span><span class="p">,</span> <span class="s">@&quot;burgers&quot;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">foods</span> <span class="n">description</span><span class="p">]);</span>
+</span><span class='line'><span class="c1">//--------------------------Storing the result of a message</span>
+</span><span class='line'><span class="c1">//NSString *result = [myArrayObject description];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">foods</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;tacos&quot;</span><span class="p">,</span> <span class="s">@&quot;burgers&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">foods</span> <span class="n">description</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//--------------------------Trying to log an NSUInteger</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">city</span> <span class="o">=</span> <span class="s">@&quot;Ice World&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSUInteger</span> <span class="n">cityLength</span> <span class="o">=</span> <span class="p">[</span><span class="n">city</span> <span class="n">length</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;City has %lu characters&quot;</span><span class="p">,</span> <span class="n">cityLength</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//If you want to log an NSUInteger, you can use the %lu placeholder instead of %@.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>Operating on NSNumbers</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">NSNumber *higgiesAge = @6;</span>
+</span><span class='line'><span class="cm">NSNumber *phoneLives = @3;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">NSUInteger higgiesAgeInt = [higgiesAge unsignedIntegerValue];</span>
+</span><span class='line'><span class="cm">NSUInteger phoneLivesInt = [phoneLives unsignedIntegerValue];</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">NSUInteger higgiesRealAge = higgiesAgeInt * phoneLivesInt;</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="n">NSNumber</span> <span class="o">*</span><span class="n">higgiesAge</span> <span class="o">=</span> <span class="err">@</span><span class="mi">6</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSNumber</span> <span class="o">*</span><span class="n">phoneLives</span> <span class="o">=</span> <span class="err">@</span><span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSUInteger</span> <span class="n">higgiesAgeInt</span> <span class="o">=</span> <span class="p">[</span><span class="n">higgiesAge</span> <span class="n">unsignedIntegerValue</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSUInteger</span> <span class="n">phoneLivesInt</span> <span class="o">=</span> <span class="p">[</span><span class="n">phoneLives</span> <span class="n">unsignedIntegerValue</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSUInteger</span> <span class="n">product</span> <span class="o">=</span> <span class="n">higgiesAgeInt</span> <span class="o">*</span> <span class="n">phoneLivesInt</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Higgie is actually %lu years old.&quot;</span><span class="p">,</span> <span class="n">product</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//----------------------Appending 2 strings</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">firstName</span> <span class="o">=</span> <span class="s">@&quot;Johnny Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">lastName</span> <span class="o">=</span> <span class="s">@&quot;Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">fullName</span> <span class="o">=</span> <span class="p">[</span><span class="n">firstName</span> <span class="nl">stringByAppendingString:</span><span class="n">lastName</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">fullName</span><span class="p">);</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">Well, it turns out that we can. There is a method on NSString called stringByAppendingString: </span>
+</span><span class='line'><span class="cm">that takes a single NSString argument and appends it to the NSString object that received the </span>
+</span><span class='line'><span class="cm">stringByAppendingString: message, returning the full string. So we can rewrite the above code like so:</span>
+</span><span class='line'><span class="cm">*/</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h1>Nesting messages</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">firstName</span> <span class="o">=</span> <span class="s">@&quot;Johnny Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">lastName</span> <span class="o">=</span> <span class="s">@&quot;Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">fullName</span> <span class="o">=</span> <span class="p">[[</span><span class="n">firstName</span> <span class="nl">stringByAppendingString:</span><span class="s">@&quot; &quot;</span><span class="p">]</span> <span class="nl">stringByAppendingString:</span><span class="n">lastName</span> <span class="p">];</span>
+</span><span class='line'> <span class="cm">/*//Append firstName and lastName with a space between//*/</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">fullName</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//---------------------Working with long message names</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">firstName</span> <span class="o">=</span> <span class="s">@&quot;Johnny&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">lastName</span> <span class="o">=</span> <span class="s">@&quot;Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">fullName</span> <span class="o">=</span> <span class="p">[[</span><span class="n">firstName</span> <span class="nl">stringByAppendingString:</span><span class="s">@&quot; &quot;</span><span class="p">]</span>
+</span><span class='line'>                        <span class="nl">stringByAppendingString:</span><span class="n">lastName</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">replaced</span> <span class="o">=</span> <span class="p">[</span><span class="n">fullName</span> <span class="nl">stringByReplacingOccurrencesOfString:</span><span class="n">firstName</span>
+</span><span class='line'>                                                         <span class="nl">withString:</span><span class="n">lastName</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">fullName</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">replaced</span><span class="p">);</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">challenge[9]: Johnny Hsu</span>
+</span><span class='line'><span class="cm">challenge[10]: Hsu Hsu</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//-------------------------Creating an NSString with a message</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">firstName</span> <span class="o">=</span> <span class="s">@&quot;Johnny Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">copy</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithString:</span><span class="n">firstName</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a copy of %@&quot;</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">firstName</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//challenge[5]: Johnny Hsu is a copy of Johnny Hsu</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//-------------------------Creating an NSString with alloc/init</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">NSString *emptyString = [[NSString alloc] init];</span>
+</span><span class='line'><span class="cm">NSArray *emptyArray = [[NSArray alloc] init];</span>
+</span><span class='line'><span class="cm">NSDictionary *emptyDictionary = [[NSDictionary alloc] init];</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">firstName</span> <span class="o">=</span> <span class="s">@&quot;Johnny Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">copy</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString:</span><span class="n">firstName</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a copy of %@&quot;</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">firstName</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//challenge[5]: Johnny Hsu is a copy of Johnny Hsu</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//-------------------------Refactoring string combination</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">firstName</span> <span class="o">=</span> <span class="s">@&quot;Johnny Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">lastName</span> <span class="o">=</span> <span class="s">@&quot;Hsu&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">fullName</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;%@ %@&quot;</span><span class="p">,</span><span class="n">firstName</span><span class="p">,</span><span class="n">lastName</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">fullName</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h1>判断啥的 登场吧</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="c1">//----------------------A simple if</span>
+</span><span class='line'><span class="kt">BOOL</span> <span class="n">mrHiggieIsMean</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">mrHiggieIsMean</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Confirmed: he is super mean&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//----------------------if - else</span>
+</span><span class='line'><span class="kt">BOOL</span> <span class="n">mrHiggieIsMean</span> <span class="o">=</span> <span class="p">[</span><span class="n">mrHiggie</span> <span class="n">areYouMean</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">mrHiggieIsMean</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Confirmed: he is super mean&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Confirmed: he isn&#39;t super mean&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//----------------------if - else if - else</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">+----------------+-----------------------------------------+</span>
+</span><span class='line'><span class="cm">| Meanness Range |               Log String                |</span>
+</span><span class='line'><span class="cm">+----------------+-----------------------------------------+</span>
+</span><span class='line'><span class="cm">| 0-3            | Mr. Higgie is on the nice side          |</span>
+</span><span class='line'><span class="cm">| 4-7            | Mr. Higgie is sorta nice but not really |</span>
+</span><span class='line'><span class="cm">| 8-10           | Mr. Higgie is definitely mean           |</span>
+</span><span class='line'><span class="cm">+----------------+-----------------------------------------+</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="n">NSNumber</span> <span class="o">*</span><span class="n">meannessScale</span> <span class="o">=</span> <span class="p">[</span><span class="n">mrHiggie</span> <span class="n">meannessScale</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span><span class="p">([</span><span class="n">meannessScale</span> <span class="n">intValue</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie is on the nice side&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">([</span><span class="n">meannessScale</span> <span class="n">intValue</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">8</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">meannessScale</span> <span class="n">intValue</span><span class="p">]</span> <span class="o">&gt;</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie is sorta nice but not really&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie is definitely mean&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//----------------------Equal strings</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">hat</span> <span class="o">=</span> <span class="p">[</span><span class="n">mrHiggie</span> <span class="n">currentHat</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span><span class="p">([</span><span class="n">hat</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;Sombrero&quot;</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Ese es un muy buen sombrero&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="n">hat</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;Fedora&quot;</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie was an iPhone before there was iPhone&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="n">hat</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;AstronautHelmet&quot;</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie was an AstronautHelmet&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie is currently hatless&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//--------------------Switch it up</span>
+</span><span class='line'><span class="c1">//Mission:He has requested that we please update the switch to let him wear his AstronautHelmet hat on the weekends.</span>
+</span><span class='line'><span class="n">NSInteger</span> <span class="n">day</span> <span class="o">=</span> <span class="n">getDayOfWeek</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">switch</span> <span class="p">(</span><span class="n">day</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">4</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">mrHiggie</span> <span class="nl">setCurrentHat:</span><span class="s">@&quot;Fedora&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">5</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">mrHiggie</span> <span class="nl">setCurrentHat:</span><span class="s">@&quot;Sombrero&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">6</span><span class="o">:</span><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">mrHiggie</span> <span class="nl">setCurrentHat:</span><span class="s">@&quot;AstronautHelmet&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">case</span> <span class="mi">7</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">mrHiggie</span> <span class="nl">setCurrentHat:</span><span class="s">@&quot;AstronautHelmet&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie is wearing: %@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">mrHiggie</span> <span class="n">currentHat</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//-------------------------Switch on enums</span>
+</span><span class='line'><span class="k">typedef</span> <span class="nf">NS_ENUM</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">,</span> <span class="n">DayOfWeek</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">DayOfWeekMonday</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">DayOfWeekTuesday</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">DayOfWeekWednesday</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">DayOfWeekThursday</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">DayOfWeekFriday</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">DayOfWeekSaturday</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">DayOfWeekSunday</span> <span class="o">=</span> <span class="mi">7</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Mission:Finish converting the rest of the cases to use the enum values.</span>
+</span><span class='line'><span class="n">DayOfWeek</span> <span class="n">day</span> <span class="o">=</span> <span class="n">getDayOfWeek</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">switch</span> <span class="p">(</span><span class="n">day</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">case</span> <span class="nl">DayOfWeekMonday:</span>
+</span><span class='line'>    <span class="k">case</span> <span class="nl">DayOfWeekTuesday:</span>
+</span><span class='line'>    <span class="k">case</span> <span class="nl">DayOfWeekWednesday:</span>
+</span><span class='line'>    <span class="k">case</span> <span class="nl">DayOfWeekThursday:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">mrHiggie</span> <span class="nl">setCurrentHat:</span><span class="s">@&quot;Fedora&quot;</span><span class="p">];</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">case</span> <span class="nl">DayOfWeekFriday:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">mrHiggie</span> <span class="nl">setCurrentHat:</span><span class="s">@&quot;Sombrero&quot;</span><span class="p">];</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">case</span> <span class="nl">DayOfWeekSaturday:</span>
+</span><span class='line'>    <span class="k">case</span> <span class="nl">DayOfWeekSunday:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">mrHiggie</span> <span class="nl">setCurrentHat:</span><span class="s">@&quot;AstronautHelmet&quot;</span><span class="p">];</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie is wearing: %@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">mrHiggie</span> <span class="n">currentHat</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h1>Obviously 还没写完 不能对一个拖延症患者要求太高不是。</h1>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Basic Arduino]]></title>
@@ -3378,60 +3933,6 @@ Dislikes Lemons
 </span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[个人理财黄金十条]]></title>
-    <link href="http://woody1983.github.com/blog/2013/02/28/ge-ren-li-cai-huang-jin-shi-tiao/"/>
-    <updated>2013-02-28T16:53:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/02/28/ge-ren-li-cai-huang-jin-shi-tiao</id>
-    <content type="html"><![CDATA[<blockquote><p>Working hard and being smart with your money aren&#8217;t things you just should do because they seem virtuous — these behaviors ultimately allow you to get more enjoyment out of life. You&#8217;ll have no regrets when you&#8217;re able to accomplish what&#8217;s important to you because of your savvy ways. These are 10 golden rules that I try to live by; click through and then make a list of your own。你不该仅仅满足于努力工作和明智花钱，因为他们似乎不仅是一种美德，而且这些行为最终可以使你从生活中得到更多的乐趣。当你能用机智的方法完成重要的事情时，你不会有任何后悔和遗憾。这是我尝试过的10个黄金法则；你可以了解一下，然后列出自己的理财法则。</p></blockquote>
-
-<h2>1.Live Within Your Means量入为出</h2>
-
-<p>In order to be truly independent, it&#8217;s imperative</p>
-
-<p>　　to live within your means. Your freedom is limited by owing money to anyone, whether it&#8217;s a credit card company or a family member, so set yourself up for an unrestricted life by saving for the things you want and spending with a plan。想要做到真正的独立，就必须学会量入为出。任何人的自由都会受到金钱的束缚，无论是欠的是信用卡公司还是家里的亲戚。因此，想要过上不受束缚的生活，就要学会通过储蓄来得到自己想要的东西，并学会有计划的开支。</p>
-
-<!-- more -->
-
-
-<h2>2.Work Hard努力工作</h2>
-
-<p>Your job and the salary you command are your biggest assets in building wealth. Do your best at work and take the steps to make yourself indispensable to set yourself up for the highest level of success。你的工作与所能支配的工资是你建立财富的最大资产。努力工作，努力使自己一步步成长为不可或缺的人才，尽可能地迈向更大的成功。</p>
-
-<h2>3.Research Before You Act先调查后行动</h2>
-
-<p>Whether you&#8217;re comparing travel package and a la carte prices for a vacation or looking up a company to see if it&#8217;s legitimate, research is almost always worth your time。无论是比较度假的旅游套餐和点菜的价格，还是查询某公司是否合法，事前的研究都是值得你花时间去做的。</p>
-
-<h2>4.Avoid Buyer&#8217;s Remorse避免购买后的自责</h2>
-
-<p>Feeling guilty just doesn&#8217;t sit well. Avoid buyer&#8217;s remorse by asking yourself these questions before making a purchase: Do I love it? How often would I wear or use it? Can I afford it? Could I find it cheaper somewhere else?负罪感总是令人坐立不安。想要避免购买后的自责就要在采购之前先问自己几个问题：我喜欢它吗？我穿它或者用它的频率高吗？我买得起吗？别的地方有没有更便宜的？</p>
-
-<h2>5.Avoid Saver&#8217;s Remorse避免省钱后的自责</h2>
-
-<p>There is such a thing as being too thrifty for your own good. What&#8217;s the point of squirreling away so much cash if you can&#8217;t splurge occasionally on yourself and others? Include an amount of discretionary money into your budget to spend on things that you might not desperately need, but would make you smile。会有这样的事情发生，为了自己好而过分节俭。如果不能有时在周围人面前摆阔炫富，手里捧着大量现金有什么意义呢？将部分可自由支配的现金列入预算，买一些你并不是迫切需要、但会让自己开心的东西。</p>
-
-<h2>6.Strive For Happiness为快乐而奋斗</h2>
-
-<p>Finding a job that makes you happy most of the time is possible, and it&#8217;s worth taking risks to discover what fulfills you. If for one reason or another you&#8217;re stuck in a position that isn&#8217;t ideal, at least strive to end your day with something that does make you happy。找一份能让你多数时间都感到开心的工作，为了发现什么能让你获得自我满足感，花点代价是值得的。如果由于某种原因，你必须接受不理想的职位，最起码你应尽量发现可以使自己开心的事来结束每一天。</p>
-
-<h2>7.Go For Quality, Not Quantity重质不重量</h2>
-
-<p>Stuffing your closet with items that will fall apart in three months is a silly way to spend your hard earned cash. Buy a smaller quantity of things that are made to last, and you&#8217;ll be the owner of higher quality items that look and feel like they&#8217;re worth your money。用你辛辛苦苦赚的钱去买一些三个月就会坏的东西来装满你的壁橱是一种愚蠢的行为。买一些经久耐用的东西而不是单纯的追求数量，你会成为高品质生活的主人，而这些质量好的东西也会让你感觉到它们物有所值。</p>
-
-<h2>8.Face Your Weaknesses Head-On直面自己的缺点</h2>
-
-<p>We&#8217;re not perfect, but admitting that you have weaknesses and doing your best to improve will allow you to continue growing. Invest time in yourself to be the most well-rounded person you can be。人无完人，承认你的弱点并尽最大努力提升自己会让你不断成长。花费点时间在自己身上，努力让自己成为最完美的人。</p>
-
-<h2>9.Save For the Predictable and the Unexpected储蓄，以备不时之需</h2>
-
-<p>We&#8217;re all going to face retirement someday, and the best time to save for it is now. On the other hand, we also need to be prepared for the unexpected, like job loss or a medical emergency, so that we can remain in control of our finances even when other things aren&#8217;t going our way。我们都有退休的那天，现在就是存钱的最好时间。此外，我们平时应为不时之需而未雨绸缪，如失业或突发重病，这样，即使出现突发状况，我们也还能继续掌控我们的财政。</p>
-
-<h2>10.Negotiate谈判</h2>
-
-<p>Doors aren&#8217;t closed until you hear the word no. Negotiating things like salary and benefits can get you ahead of the game, and all you need is the confidence to ask。只要还没有听到“不”字，希望之门就是敞开的。谈判的内容可以是工资、福利这些可以让你在同行业中脱颖而出的东西。所以，你需要的做就是自信地去争取。</p>
 ]]></content>
   </entry>
   

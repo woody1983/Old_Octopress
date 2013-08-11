@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IOS | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-06-09T00:23:47+08:00</updated>
+  <updated>2013-08-11T23:38:52+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,326 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Try Objective-C]]></title>
+    <link href="http://woody1983.github.com/blog/2013/08/11/try-objective-c/"/>
+    <updated>2013-08-11T23:30:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/08/11/try-objective-c</id>
+    <content type="html"><![CDATA[<h3>Code School 上的免费教程，为什么要着急先把这个免费的学掉 我也不知道具体是为什么。一个月学费20$ 总是出现在我最忙的时候。月底还有考试，真TMD服了。</h3>
+
+<!-- more -->
+
+
+<h2>常规的一些语法 变量 输出</h2>
+
+<p>``` objective-c</p>
+
+<p>NSLog(@"Hello,Mr.Johnny");
+NSString *firstName = @"Johnny Hsu";
+NSLog(firstName); //Logging a variable
+NSLog(@"Hello there, %@.", firstName );
+NSLog(@"%@ %@", firstName, firstName);</p>
+
+<p>NSString *lastName = @"Hsu";</p>
+
+<p>NSLog(@"%@ %@", firstName, lastName);
+NSNumber <em>age = @30; //Creating a number object
+/</em>
+NSNumber <em>ipodBirthdayYear = @2001;
+NSNumber </em>iphoneBirthdayYear = @2007;
+NSNumber <em>ipadBirthdayYear = @2010;
+</em>/</p>
+
+<p>//Log a number object
+NSLog(@"%@ is %@ years old", firstName, age);</p>
+
+<p>//Creating an array variable</p>
+
+<p>NSArray *apps = @[@"AngryFowl",@"Lettertouch",@"Tweetrobot"];</p>
+
+<p>//Accessing values in an array
+NSLog(@"%@", apps[1]); //challenge[11]: Lettertouch</p>
+
+<p>//Changing an array
+apps = @[@"AngryFowl",@"Lettertouch",@"Tweetrobot",@"Instacanvas"];</p>
+
+<h2>Dictionary还是蛮实用的。</h2>
+
+<p>//Creating a dictionary
+NSDictionary <em>person = @{@"First Name": @"Johnny"};
+NSDictionary </em>appRatings = @{@"AngryFowl": @3, @"Lettertouch": @5};</p>
+
+<p>//Accessing values in a dictionary
+NSLog(@"Lettertouch has a rating of %@.", appRatings[@"Lettertouch"]);</p>
+
+<p>```</p>
+
+<h1>基础部分结束</h1>
+
+<h1>Objective-C 有一个特性就是调用一个方法 在这里称之为传递一个信息 不过这么看倒反而形象了。</h1>
+
+<p>``` objective-c
+//Sending a message
+[tryobjc completeThisChallenge];</p>
+
+<p>//-------------------------Sending the description message
+/<em>
+Try sending the description message to the foods array inside of NSLog() to see what it returns.
+</em>/
+NSArray *foods = @[@"tacos", @"burgers"];</p>
+
+<p>NSLog(@"%@", [foods description]);
+//--------------------------Storing the result of a message
+//NSString *result = [myArrayObject description];</p>
+
+<p>NSArray <em>foods = @[@"tacos", @"burgers"];           <br/>
+NSString </em>result = [foods description];</p>
+
+<p>NSLog(@"%@", result);</p>
+
+<p>//--------------------------Trying to log an NSUInteger
+NSString *city = @"Ice World";
+NSUInteger cityLength = [city length];</p>
+
+<p>NSLog(@"City has %lu characters", cityLength);
+//If you want to log an NSUInteger, you can use the %lu placeholder instead of %@.
+```</p>
+
+<h2>Operating on NSNumbers</h2>
+
+<p>``` objective-c
+/<em>
+NSNumber </em>higgiesAge = @6;
+NSNumber *phoneLives = @3;</p>
+
+<p>NSUInteger higgiesAgeInt = [higgiesAge unsignedIntegerValue];
+NSUInteger phoneLivesInt = [phoneLives unsignedIntegerValue];</p>
+
+<p>NSUInteger higgiesRealAge = higgiesAgeInt * phoneLivesInt;
+<em>/
+NSNumber </em>higgiesAge = @6;                                                                 <br/>
+NSNumber *phoneLives = @3;</p>
+
+<p>NSUInteger higgiesAgeInt = [higgiesAge unsignedIntegerValue];
+NSUInteger phoneLivesInt = [phoneLives unsignedIntegerValue];</p>
+
+<p>NSUInteger product = higgiesAgeInt * phoneLivesInt;
+NSLog(@"Higgie is actually %lu years old.", product);</p>
+
+<p>//----------------------Appending 2 strings
+NSString <em>firstName = @"Johnny Hsu";
+NSString </em>lastName = @"Hsu";</p>
+
+<p>NSString <em>fullName = [firstName stringByAppendingString:lastName];
+NSLog(@"%@", fullName);
+/</em>
+Well, it turns out that we can. There is a method on NSString called stringByAppendingString:
+that takes a single NSString argument and appends it to the NSString object that received the
+stringByAppendingString: message, returning the full string. So we can rewrite the above code like so:
+*/
+```</p>
+
+<h1>Nesting messages</h1>
+
+<p>``` objective-c
+NSString <em>firstName = @"Johnny Hsu";
+NSString </em>lastName = @"Hsu";</p>
+
+<p>NSString <em>fullName = [[firstName stringByAppendingString:@" "] stringByAppendingString:lastName ];
+ /</em>//Append firstName and lastName with a space between//*/;</p>
+
+<p>NSLog(@"%@", fullName);</p>
+
+<p>//---------------------Working with long message names
+NSString <em>firstName = @"Johnny";
+NSString </em>lastName = @"Hsu";</p>
+
+<p>NSString *fullName = [[firstName stringByAppendingString:@" "]</p>
+
+<pre><code>                    stringByAppendingString:lastName];
+</code></pre>
+
+<p>NSString *replaced = [fullName stringByReplacingOccurrencesOfString:firstName</p>
+
+<pre><code>                                                     withString:lastName];
+</code></pre>
+
+<p>NSLog(@"%@", fullName);
+NSLog(@"%@", replaced);
+/<em>
+challenge[9]: Johnny Hsu
+challenge[10]: Hsu Hsu
+</em>/</p>
+
+<p>//-------------------------Creating an NSString with a message
+NSString *firstName = @"Johnny Hsu";</p>
+
+<p>NSString *copy = [NSString stringWithString:firstName];</p>
+
+<p>NSLog(@"%@ is a copy of %@", copy, firstName);
+//challenge[5]: Johnny Hsu is a copy of Johnny Hsu</p>
+
+<p>//-------------------------Creating an NSString with alloc/init
+/<em>
+NSString </em>emptyString = [[NSString alloc] init];
+NSArray <em>emptyArray = [[NSArray alloc] init];
+NSDictionary </em>emptyDictionary = [[NSDictionary alloc] init];
+<em>/
+NSString </em>firstName = @"Johnny Hsu";</p>
+
+<p>NSString *copy = [[NSString alloc] initWithString:firstName];</p>
+
+<p>NSLog(@"%@ is a copy of %@", copy, firstName);
+//challenge[5]: Johnny Hsu is a copy of Johnny Hsu</p>
+
+<p>//-------------------------Refactoring string combination
+NSString <em>firstName = @"Johnny Hsu";
+NSString </em>lastName = @"Hsu";</p>
+
+<p>NSString *fullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];</p>
+
+<p>NSLog(@"%@", fullName);</p>
+
+<p>```</p>
+
+<h1>判断啥的 登场吧</h1>
+
+<p>``` objective-c</p>
+
+<p>//----------------------A simple if
+BOOL mrHiggieIsMean = YES;</p>
+
+<p>if (mrHiggieIsMean) {
+  NSLog(@"Confirmed: he is super mean");
+}
+//----------------------if - else
+BOOL mrHiggieIsMean = [mrHiggie areYouMean];</p>
+
+<p>if (mrHiggieIsMean) {
+  NSLog(@"Confirmed: he is super mean");
+}else{
+  NSLog(@"Confirmed: he isn't super mean");
+}
+//----------------------if - else if - else
+/<em>
++----------------+-----------------------------------------+
+| Meanness Range |               Log String                |
++----------------+-----------------------------------------+
+| 0-3            | Mr. Higgie is on the nice side          |
+| 4-7            | Mr. Higgie is sorta nice but not really |
+| 8-10           | Mr. Higgie is definitely mean           |
++----------------+-----------------------------------------+
+</em>/
+NSNumber *meannessScale = [mrHiggie meannessScale];</p>
+
+<p>if([meannessScale intValue] &lt; 4) {
+  NSLog(@"Mr. Higgie is on the nice side");
+} else if([meannessScale intValue] &lt; 8 &amp;&amp; [meannessScale intValue] >3) {
+  NSLog(@"Mr. Higgie is sorta nice but not really");
+} else {
+  NSLog(@"Mr. Higgie is definitely mean");
+}</p>
+
+<p>//----------------------Equal strings
+NSString *hat = [mrHiggie currentHat];</p>
+
+<p>if([hat isEqualToString:@"Sombrero"]) {
+  NSLog(@"Ese es un muy buen sombrero");
+} else if ([hat isEqualToString:@"Fedora"]) {
+  NSLog(@"Mr. Higgie was an iPhone before there was iPhone");
+} else if ([hat isEqualToString:@"AstronautHelmet"]) {
+  NSLog(@"Mr. Higgie was an AstronautHelmet");
+} else {
+  NSLog(@"Mr. Higgie is currently hatless");
+}</p>
+
+<p>//--------------------Switch it up
+//Mission:He has requested that we please update the switch to let him wear his AstronautHelmet hat on the weekends.
+NSInteger day = getDayOfWeek();</p>
+
+<p>switch (day) {
+  case 1:
+  case 2:
+  case 3:
+  case 4: {</p>
+
+<pre><code>[mrHiggie setCurrentHat:@"Fedora"];
+break;
+</code></pre>
+
+<p>  }
+  case 5: {</p>
+
+<pre><code>[mrHiggie setCurrentHat:@"Sombrero"];
+break;
+</code></pre>
+
+<p>  }
+  case 6:{</p>
+
+<pre><code>[mrHiggie setCurrentHat:@"AstronautHelmet"];
+break;
+</code></pre>
+
+<p>  }
+  case 7: {</p>
+
+<pre><code>[mrHiggie setCurrentHat:@"AstronautHelmet"];
+break;
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>NSLog(@"Mr. Higgie is wearing: %@", [mrHiggie currentHat]);</p>
+
+<p>//-------------------------Switch on enums
+typedef NS_ENUM(NSInteger, DayOfWeek) {</p>
+
+<pre><code>DayOfWeekMonday = 1,
+DayOfWeekTuesday = 2,
+DayOfWeekWednesday = 3,
+DayOfWeekThursday = 4,
+DayOfWeekFriday = 5,
+DayOfWeekSaturday = 6,
+DayOfWeekSunday = 7
+</code></pre>
+
+<p>};</p>
+
+<p>//Mission:Finish converting the rest of the cases to use the enum values.
+DayOfWeek day = getDayOfWeek();</p>
+
+<p>switch (day) {</p>
+
+<pre><code>case DayOfWeekMonday:
+case DayOfWeekTuesday:
+case DayOfWeekWednesday:
+case DayOfWeekThursday: {
+    [mrHiggie setCurrentHat:@"Fedora"];
+    break;
+}
+case DayOfWeekFriday: {
+    [mrHiggie setCurrentHat:@"Sombrero"];
+    break;
+}
+case DayOfWeekSaturday:
+case DayOfWeekSunday: {
+    [mrHiggie setCurrentHat:@"AstronautHelmet"];
+    break;
+}
+</code></pre>
+
+<p>}</p>
+
+<p>NSLog(@"Mr. Higgie is wearing: %@", [mrHiggie currentHat]);</p>
+
+<p>```</p>
+
+<h1>Obviously 还没写完 不能对一个拖延症患者要求太高不是。</h1>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Objective-C Note:Class init alloc]]></title>
@@ -946,148 +1266,6 @@ NSLog(@"buttonClick frequency = %f", [myStation frequency]);
 <p>```</p>
 
 <p><img src="/images/img/oc_demo1.png" title="" ></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Objective-C Note]]></title>
-    <link href="http://woody1983.github.com/blog/2013/03/05/objective-c-note/"/>
-    <updated>2013-03-05T14:18:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/03/05/objective-c-note</id>
-    <content type="html"><![CDATA[<p>``` objective-c</p>
-
-<h1>import &lt;Foundation/Foundation.h></h1>
-
-<p>@interface HelloWorld : NSObject
-{
-}
--(void)printGreeting;
-@end</p>
-
-<p>@implementation HelloWorld</p>
-
-<p>-(void)printGreeting
-{</p>
-
-<pre><code>    NSLog(@"Hello World!");
-</code></pre>
-
-<p>}</p>
-
-<p>@end</p>
-
-<h1>import "HelloWorld.h"</h1>
-
-<p>int main(void)
-{
-  HelloWorld* myObject = [[HelloWorld alloc] init];
-  [myObject printGreeting];</p>
-
-<p>  [myObject release];
-  return 0;
-}
-```</p>
-
-<!-- more -->
-
-
-<h3>还有上午其他的例子</h3>
-
-<p>``` objective-c
-//@"这里的内容应该作为Cocoa的NSString元素来处理"</p>
-
-<p>// 定义函数
-BOOL areIntsDifferent(int thing1, int thing2)
-{
-  if (thing1 == thing2) {</p>
-
-<pre><code>return (NO);
-</code></pre>
-
-<p>  }
-  else {</p>
-
-<pre><code>return (YES);
-</code></pre>
-
-<p>  }
-}</p>
-
-<p>// 返回一个BOOL类型的值  接受2个int类型的参数</p>
-
-<p>NSString *boolString (BOOL yesNo)
-{
-  if (yesNo == NO){</p>
-
-<pre><code>return (@"NO");
-</code></pre>
-
-<p>  }
-  else
-  {</p>
-
-<pre><code>return (@"YES");
-</code></pre>
-
-<p>  }
-}</p>
-
-<p>返回类型 函数名(参数类型 参数,参数类型1 参数1)
-{
-// ...  code in here
-}</p>
-
-<p>main函数里调用的时候 先声明一个BOOL类型的变量</p>
-
-<p>BOOL areTheyDifferent;
-areTheyDifferent = areIntsDifferent(5,5);</p>
-
-<p>NSLog(@"are %d and %d different? %@", 5,5, boolString(areTheyDifferent));// 直接用返回值做参数</p>
-
-<p>//定义一个类  @interface 将该类的数据成员和特性告诉给编译器</p>
-
-<p>@interface Circle : NSObject  // 类名 来自NSObject类
-{
-  ShapeColor fillColor;
-  ShapeRect bounds;
-} // 告诉编译器circle对象需要的数据成员
-//下面是方法的声明
--(void) draw; //方法需要参数的时候才需要一个冒号 否则就不需要
--(void) setFillColor : (ShapeColor) fillColor; //参数的类型在圆括号里定义!?
--(void) setBounds : (ShapeRect) bounds;</p>
-
-<p>// void表示无返回值  -符号表示是类方法 区别于一般的函数原型和方法声明
-// setFillColor 需要一个颜色参数
-@end</p>
-
-<p>// @implementation 中定义了类的实现部分</p>
-
-<p>@implementation Circle</p>
-
-<p>-(void) setFillColor: (ShapeColor) c //这个c是参数的重命名!!! @implementation 和 @interface的参数名不同是正确的。如果一致则会报错。
-{
-  fillColor = c;
-}</p>
-
-<p>-(void) setBounds: (ShapeRect) b
-{
-  bounds = b;
-}</p>
-
-<p>-(void) draw
-{
-  NSLog (@"drawing a circle at (%d %d %d %d) in %@",</p>
-
-<pre><code>bounds.x, bounds.y,
-bounds.width, bounds.height,
-colorName(fillColor)
-</code></pre>
-
-<p>  );
-}</p>
-
-<p>@end
-```</p>
 ]]></content>
   </entry>
   
