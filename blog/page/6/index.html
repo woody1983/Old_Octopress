@@ -7,23 +7,7 @@
 	<meta name="author" content="Woody.Xu">
 
 	
-	<meta name="description" content="uid and mid 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-DELIMITER $$ DROP PROCEDURE IF EXISTS file_test;
-CREATE PROCEDURE file_test(IN p_uid INT, IN p_mid &hellip;">
+	<meta name="description" content="Select查询细节： 【匹配多个字符】 SELECT __ FROM __ WHERE ___ LIKE 'Smith% Corp.' Smith Corp. Smithson Corp &#8230;&#8230;&#8230;&#8230; %通配符可以匹配0个或多个字符 【匹配单个字符 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -94,6 +78,80 @@ CREATE PROCEDURE file_test(IN p_uid INT, IN p_mid &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2010/05/23/mysql-note/">MySQL Note</a></h1>
+	<div class="entry-content">
+		<h2>Select查询细节：</h2>
+
+<h3>【匹配多个字符】</h3>
+
+<p><code>SELECT __ FROM __ WHERE ___ LIKE 'Smith% Corp.'</code></p>
+
+<h4>Smith Corp. Smithson Corp &#8230;&#8230;&#8230;&#8230;  %通配符可以匹配0个或多个字符</h4>
+
+<h3>【匹配单个字符】</h3>
+
+<p><code>SELECT __ FROM __ WHERE ___ LIKE 'Smiths_n Corp.'</code></p>
+
+<h4>Smithson Smithsen</h4>
+
+<h3>【以上模式的组合使用】</h3>
+
+<h4>&#8216;Smiths_n %&#8217;</h4>
+
+<h3>【转义字符】</h3>
+
+<p>比如搜索“A%BC”开始的产品   <code>'A$%BC%' ESCAPE '$'</code></p>
+
+<h3>【判断null】</h3>
+
+<p>不能使用=来判断 IS NULL  IS NOT NULL</p>
+
+<h3>【NOT判断】</h3>
+
+<p><code>AND NOT SALES &lt; 1500 不小于1500的</code></p>
+
+<h3>【索引使用情况】</h3>
+
+<ul>
+<li><code>Handler_read_key</code> 如果索引正在工作 这个值会很高</li>
+<li><code>Handler_read_rnd_next</code> 值如果高 证明查询运行低效</li>
+</ul>
+
+
+
+		
+		<a href="/blog/2010/05/23/mysql-note/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-23T23:43:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2010</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2010/05/23/mysql-note//blog/page/6/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">

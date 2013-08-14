@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IOS | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-08-11T23:38:52+08:00</updated>
+  <updated>2013-08-14T23:51:53+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fast enumeration]]></title>
+    <link href="http://woody1983.github.com/blog/2013/08/14/fast-enumeration/"/>
+    <updated>2013-08-14T23:50:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/08/14/fast-enumeration</id>
+    <content type="html"><![CDATA[<h1>Fast enumeration</h1>
+
+<h3>能多快速？</h3>
+
+<blockquote><p>Objective-C is good at making decisions, but it’s great at being lazy.</p></blockquote>
+
+<h4>笨方法循环打印数组内容</h4>
+
+<p>``` objective-c
+NSArray *funnyWords = @[@"Schadenfreude", @"Portmanteau", @"Penultimate"];</p>
+
+<p>NSLog(@"%@ is a funny word", funnyWords[0]);
+NSLog(@"%@ is a funny word", funnyWords[1]);
+NSLog(@"%@ is a funny word", funnyWords[2]);
+```</p>
+
+<h4>更简洁的方法是</h4>
+
+<p>``` objective-c
+NSArray *funnyWords = @[@"Schadenfreude", @"Portmanteau", @"Penultimate"];</p>
+
+<p>for (NSString *word in funnyWords) {
+  NSLog(@"%@ is a funny word", word);
+}
+```</p>
+
+<h3>练习</h3>
+
+<p>``` objective-c
+NSArray <em>newHats = @[@"Cowboy", @"Conductor", @"Baseball"];
+NSString </em>hat; //记得声明
+for (hat in newHats) {</p>
+
+<p>  NSLog(@"Trying on new %@ hat", hat);</p>
+
+<p>  if([mrHiggie tryOnHat:hat]) {</p>
+
+<pre><code>NSLog(@"Mr. Higgie loves it");
+</code></pre>
+
+<p>  } else {</p>
+
+<pre><code>NSLog(@"Mr. Higgie hates it");
+</code></pre>
+
+<p>  }
+}
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Try Objective-C]]></title>
@@ -1014,258 +1070,6 @@ SomeObject* myObject = [NSKeyedUnarchiver unarchiveObjectWithData:loadedData];
 <blockquote><p>Delegationis Cocoa’s term for passing off some responsibilities of an object to another.An example of this in action is the UIApplicationobject, which represents an application on iOS. This application needs to know what should happen when the application moves to the background. Many other languages handle this problem by subclassing</p></blockquote>
 
 <p><img src="/images/img/ocnote2.png"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Objective-C Demo Note]]></title>
-    <link href="http://woody1983.github.com/blog/2013/03/05/objective-c-demo-note/"/>
-    <updated>2013-03-05T16:38:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/03/05/objective-c-demo-note</id>
-    <content type="html"><![CDATA[<h1>Project:Single View Application</h1>
-
-<h2>MyFirstApp</h2>
-
-<p><code>viewController.h</code></p>
-
-<p>``` objective-c</p>
-
-<h1>import &lt;UIKit/UIKit.h></h1>
-
-<p>@interface ViewController : UIViewController{
-  IBOutlet UILabel *nameLabel //新增一个数据成员
-}
--(IBAction)showName:(id)sender; //新增一个方法showName
-@end
-```</p>
-
-<p><code>viewController.m</code></p>
-
-<p>``` objective-c</p>
-
-<h1>import "viewController.h"</h1>
-
-<p>@implementation ViewController
--(void)didReceiveMemoryWaring
-{
-  [super didReceiveMemoryWaring];
-  // 自带的？ Release any cache data, images, etc that aren't in use.
-}</p>
-
-<p>-(IBAction)showName:(id)sender
-{
-  [nameLabel setText:@"My name is Johnny!"];
-}
-```</p>
-
-<ul>
-<li>@interface 是声明一个类 大括号里面定义的是这个类的数据成员</li>
-<li>在@end 之前定义的都是类方法  只定义 实现在@implementation部分实现</li>
-<li>didReceiveMemoryWaring这个方法好像是自定义出来的</li>
-</ul>
-
-
-<!-- more -->
-
-
-<h1>Project RadioStation</h1>
-
-<h3>添加一个Objective-C Class : RadioStation</h3>
-
-<p><code>RadioStation.h</code></p>
-
-<p>``` objective-c</p>
-
-<h1>import &lt;Foundation/Foundation.h></h1>
-
-<p>@interface RadioStation : NSObject
-{</p>
-
-<pre><code>NSString *name;
-double frequency;
-NSUInteger band;
-</code></pre>
-
-<p>}</p>
-
-<p>+(double)minAMFrequency;
-+(double)maxAMFrequency;
-+(double)minFMFrequency;
-+(double)maxFMFrequency;</p>
-
-<p>-(id)initWithName:(NSString <em>)newName atFrequency:(double)newFrequency;
--(NSString </em>)name;
--(void)setName:(NSString *)newName;
--(double)frequency;
--(void)setFrequency:(double)newFrequency;</p>
-
-<p>@end
-```</p>
-
-<p><code>RadioStation.m</code></p>
-
-<p>``` objective-c</p>
-
-<h1>import "RadioStation.h"</h1>
-
-<p>@implementation RadioStation
-+(double)minAMFrequency
-{</p>
-
-<pre><code>return 520.0;
-</code></pre>
-
-<p>}</p>
-
-<p>+(double)maxAMFrequency
-{</p>
-
-<pre><code>return 1610.0;
-</code></pre>
-
-<p>}</p>
-
-<p>+(double)minFMFrequency
-{</p>
-
-<pre><code>return 88.3;
-</code></pre>
-
-<p>}
-+(double)maxFMFrequency
-{</p>
-
-<pre><code>return 107.9;
-</code></pre>
-
-<p>}</p>
-
-<p>-(id)initWithName:(NSString *)newName atFrequency:(double)newFrequency
-{</p>
-
-<pre><code>self = [super init];
-NSLog(@"initWithName is Running!\n newFrequency is %f , name is %@",newFrequency,newName);
-if (self != nil) {
-    name = newName;
-    frequency = newFrequency;
-}
-return self;
-</code></pre>
-
-<p>}</p>
-
-<p>-(NSString *)name
-{</p>
-
-<pre><code>return name;
-NSLog(@"name is ok");
-</code></pre>
-
-<p>}
--(double)frequency{</p>
-
-<pre><code>return frequency;
-</code></pre>
-
-<p>}</p>
-
-<p>-(void)setName:(NSString *)newName{</p>
-
-<pre><code>name = newName;
-</code></pre>
-
-<p>}</p>
-
-<p>-(void)setFrequency:(double)newFrequency{</p>
-
-<pre><code>frequency = newFrequency;
-</code></pre>
-
-<p>}</p>
-
-<p>@end
-```</p>
-
-<p><code>viewController.h</code></p>
-
-<p>``` objective-c</p>
-
-<h1>import &lt;UIKit/UIKit.h></h1>
-
-<p>@class RadioStation;</p>
-
-<p>@interface XYZViewController : UIViewController
-{</p>
-
-<pre><code>RadioStation *myStation;
-IBOutlet UILabel* stationName;
-IBOutlet UILabel* stationFrequency;
-IBOutlet UILabel* stationBand;
-</code></pre>
-
-<p>}
-@end
-```</p>
-
-<p><code>viewController.m</code></p>
-
-<p>``` objective-c</p>
-
-<h1>import "XYZViewController.h"</h1>
-
-<h1>import "RadioStation.h"</h1>
-
-<p>@interface XYZViewController ()</p>
-
-<p>@end</p>
-
-<p>@implementation XYZViewController</p>
-
-<p>-(IBAction)buttonClick:(id)sender{</p>
-
-<pre><code>[stationName setText:[myStation name]];
-[stationFrequency setText:[NSString stringWithFormat:@"%.1f",[myStation frequency]]];
-if (([myStation frequency] &gt;= [RadioStation minFMFrequency]) &amp;&amp;
-    ([myStation frequency] &lt;= [RadioStation maxFMFrequency])) {
-    [stationBand setText:@"FM"];
-}else{
-    [stationBand setText:@"AM"];
-}
-NSLog(@"buttonClick frequency = %f", [myStation frequency]);
-</code></pre>
-
-<p>}</p>
-
-<ul>
-<li><p>(void)viewDidLoad
-{
-  [super viewDidLoad];
-  myStation = [[RadioStation alloc] initWithName:@"Woody Style" atFrequency:94.1];
-  NSLog(@"App is Running");
-// Do any additional setup after loading the view, typically from a nib.
-}</p></li>
-<li><p>(void)viewDidUnload
-{
-  [super viewDidUnload];
-  // Release any retained subviews of the main view.</p></li>
-</ul>
-
-
-<p>}</p>
-
-<ul>
-<li>(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-  return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}</li>
-</ul>
-
-
-<p>@end</p>
-
-<p>```</p>
-
-<p><img src="/images/img/oc_demo1.png" title="" ></p>
 ]]></content>
   </entry>
   

@@ -7,18 +7,8 @@
 	<meta name="author" content="Woody.Xu">
 
 	
-	<meta name="description" content="R 的安装 OS是Centos5.5 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12 1011 wget http://cran.r-project.org/src/base/R-3/R-3.0.0.tar.gz 1012 tar zxvf R-3.0.0.tar.gz 1013 ls - &hellip;">
+	<meta name="description" content="导入数据 employees &lt;- read.csv(&#8220;http://www.headfirstlabs.com/books/hfda/hfda_ch09_employees.csv&#8221;,header=TRUE) X id
+received 加薪幅度 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -89,6 +79,55 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/05/17/ryu-yan-he-hui-gui-fen-xi-de-mo-ni/">R语言和回归分析的模拟</a></h1>
+	<div class="entry-content">
+		<h3>导入数据</h3>
+
+<p>employees &lt;- read.csv(&#8220;http://www.headfirstlabs.com/books/hfda/hfda_ch09_employees.csv&#8221;,header=TRUE)</p>
+
+<ul>
+<li>X id</li>
+<li>received 加薪幅度</li>
+<li>negotiated 是否提出加薪需求</li>
+<li>gender 性别</li>
+<li>year 加薪时间？</li>
+</ul>
+
+
+
+		
+		<a href="/blog/2013/05/17/ryu-yan-he-hui-gui-fen-xi-de-mo-ni/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-17T15:35:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/r/'>R</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/05/17/ryu-yan-he-hui-gui-fen-xi-de-mo-ni//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -645,99 +684,6 @@
 </div>
 	
 		<span class="comments"><a href="/blog/2013/03/05/objective-c-demo-note//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/03/05/objective-c-note/">Objective-C Note</a></h1>
-	<div class="entry-content">
-		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">HelloWorld</span> : <span class="nc">NSObject</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">printGreeting</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">HelloWorld</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">printGreeting</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>      <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello World!&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#import &quot;HelloWorld.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">HelloWorld</span><span class="o">*</span> <span class="n">myObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">HelloWorld</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">myObject</span> <span class="n">printGreeting</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">[</span><span class="n">myObject</span> <span class="n">release</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-
-		
-		<a href="/blog/2013/03/05/objective-c-note/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-05T14:18:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/03/05/objective-c-note//blog/page/2/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

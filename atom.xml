@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-08-11T23:38:52+08:00</updated>
+  <updated>2013-08-14T23:51:53+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Woody.Xu]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fast enumeration]]></title>
+    <link href="http://woody1983.github.com/blog/2013/08/14/fast-enumeration/"/>
+    <updated>2013-08-14T23:50:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/08/14/fast-enumeration</id>
+    <content type="html"><![CDATA[<h1>Fast enumeration</h1>
+
+<h3>能多快速？</h3>
+
+<blockquote><p>Objective-C is good at making decisions, but it’s great at being lazy.</p></blockquote>
+
+<h4>笨方法循环打印数组内容</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">funnyWords</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;Schadenfreude&quot;</span><span class="p">,</span> <span class="s">@&quot;Portmanteau&quot;</span><span class="p">,</span> <span class="s">@&quot;Penultimate&quot;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">funnyWords</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">funnyWords</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">funnyWords</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h4>更简洁的方法是</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">funnyWords</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;Schadenfreude&quot;</span><span class="p">,</span> <span class="s">@&quot;Portmanteau&quot;</span><span class="p">,</span> <span class="s">@&quot;Penultimate&quot;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">word</span> <span class="k">in</span> <span class="n">funnyWords</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>练习</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">newHats</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;Cowboy&quot;</span><span class="p">,</span> <span class="s">@&quot;Conductor&quot;</span><span class="p">,</span> <span class="s">@&quot;Baseball&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">hat</span><span class="p">;</span> <span class="c1">//记得声明</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">hat</span> <span class="k">in</span> <span class="n">newHats</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Trying on new %@ hat&quot;</span><span class="p">,</span> <span class="n">hat</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span><span class="p">([</span><span class="n">mrHiggie</span> <span class="nl">tryOnHat:</span><span class="n">hat</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie loves it&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie hates it&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Try Objective-C]]></title>
@@ -3705,234 +3781,6 @@ Dislikes Lemons
 
 
 <p><img src="http://woody1983.github.com/images/img/oc_demo1.png" title="" ></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Objective-C Note]]></title>
-    <link href="http://woody1983.github.com/blog/2013/03/05/objective-c-note/"/>
-    <updated>2013-03-05T14:18:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/03/05/objective-c-note</id>
-    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">HelloWorld</span> : <span class="nc">NSObject</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">printGreeting</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">HelloWorld</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">printGreeting</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>      <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello World!&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#import &quot;HelloWorld.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">HelloWorld</span><span class="o">*</span> <span class="n">myObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">HelloWorld</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">myObject</span> <span class="n">printGreeting</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">[</span><span class="n">myObject</span> <span class="n">release</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!-- more -->
-
-
-<h3>还有上午其他的例子</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="c1">//@&quot;这里的内容应该作为Cocoa的NSString元素来处理&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// 定义函数</span>
-</span><span class='line'><span class="kt">BOOL</span> <span class="nf">areIntsDifferent</span><span class="p">(</span><span class="kt">int</span> <span class="n">thing1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">thing2</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">thing1</span> <span class="o">==</span> <span class="n">thing2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">NO</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">YES</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// 返回一个BOOL类型的值  接受2个int类型的参数</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="nf">boolString</span> <span class="p">(</span><span class="kt">BOOL</span> <span class="n">yesNo</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">yesNo</span> <span class="o">==</span> <span class="n">NO</span><span class="p">){</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="s">@&quot;NO&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="s">@&quot;YES&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">返回类型</span> <span class="err">函数名</span><span class="p">(</span><span class="err">参数类型</span> <span class="err">参数</span><span class="p">,</span><span class="err">参数类型</span><span class="mi">1</span> <span class="err">参数</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="c1">// ...  code in here</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">main</span><span class="err">函数里调用的时候</span> <span class="err">先声明一个</span><span class="kt">BOOL</span><span class="err">类型的变量</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">BOOL</span> <span class="n">areTheyDifferent</span><span class="p">;</span>
-</span><span class='line'><span class="n">areTheyDifferent</span> <span class="o">=</span> <span class="n">areIntsDifferent</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;are %d and %d different? %@&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="n">boolString</span><span class="p">(</span><span class="n">areTheyDifferent</span><span class="p">));</span><span class="c1">// 直接用返回值做参数</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//定义一个类  @interface 将该类的数据成员和特性告诉给编译器 </span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">Circle</span> : <span class="nc">NSObject</span>  <span class="c1">// 类名 来自NSObject类</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">ShapeColor</span> <span class="n">fillColor</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">ShapeRect</span> <span class="n">bounds</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="c1">// 告诉编译器circle对象需要的数据成员</span>
-</span><span class='line'><span class="c1">//下面是方法的声明 </span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">draw</span><span class="p">;</span> <span class="c1">//方法需要参数的时候才需要一个冒号 否则就不需要</span>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setFillColor</span> <span class="o">:</span> <span class="p">(</span><span class="n">ShapeColor</span><span class="p">)</span> <span class="n">fillColor</span><span class="p">;</span> <span class="c1">//参数的类型在圆括号里定义!?</span>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setBounds</span> <span class="o">:</span> <span class="p">(</span><span class="n">ShapeRect</span><span class="p">)</span> <span class="n">bounds</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// void表示无返回值  -符号表示是类方法 区别于一般的函数原型和方法声明</span>
-</span><span class='line'><span class="c1">// setFillColor 需要一个颜色参数</span>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// @implementation 中定义了类的实现部分</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">Circle</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setFillColor:</span> <span class="p">(</span><span class="n">ShapeColor</span><span class="p">)</span> <span class="n">c</span> <span class="c1">//这个c是参数的重命名!!! @implementation 和 @interface的参数名不同是正确的。如果一致则会报错。</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">fillColor</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nl">setBounds:</span> <span class="p">(</span><span class="n">ShapeRect</span><span class="p">)</span> <span class="n">b</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">bounds</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">draw</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">NSLog</span> <span class="p">(</span><span class="s">@&quot;drawing a circle at (%d %d %d %d) in %@&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">bounds</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">bounds</span><span class="p">.</span><span class="n">y</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">bounds</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">bounds</span><span class="p">.</span><span class="n">height</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">colorName</span><span class="p">(</span><span class="n">fillColor</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
