@@ -4,10 +4,10 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-08-14T23:51:53+08:00</updated>
+  <updated>2013-08-14T23:57:03+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
-    <name><![CDATA[Woody.Xu]]></name>
+    <name><![CDATA[Johnny Hsu]]></name>
     <email><![CDATA[unix1983@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -18,9 +18,7 @@
     <link href="http://woody1983.github.com/blog/2013/08/14/fast-enumeration/"/>
     <updated>2013-08-14T23:50:00+08:00</updated>
     <id>http://woody1983.github.com/blog/2013/08/14/fast-enumeration</id>
-    <content type="html"><![CDATA[<h1>Fast enumeration</h1>
-
-<h3>能多快速？</h3>
+    <content type="html"><![CDATA[<h3>能多快速？</h3>
 
 <blockquote><p>Objective-C is good at making decisions, but it’s great at being lazy.</p></blockquote>
 
