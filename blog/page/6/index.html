@@ -7,7 +7,10 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="Select查询细节： 【匹配多个字符】 SELECT __ FROM __ WHERE ___ LIKE 'Smith% Corp.' Smith Corp. Smithson Corp &#8230;&#8230;&#8230;&#8230; %通配符可以匹配0个或多个字符 【匹配单个字符 &hellip;">
+	<meta name="description" content="1
+2
+mysql&gt; GRANT ALL PRIVILEGES ON KETTLE_DEMO.* TO 'dba'@'%' IDENTIFIED BY PASSWORD 'dba';
+ERROR 1372 (HY000): Password hash should be a 41- &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +81,220 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/02/13/mysql-error-1372-hy000/">MYSQL ERROR 1372 (HY000)</a></h1>
+	<div class="entry-content">
+		<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql&gt; GRANT ALL PRIVILEGES ON KETTLE_DEMO.* TO 'dba'@'%' IDENTIFIED BY PASSWORD 'dba';
+</span><span class='line'>ERROR 1372 (HY000): Password hash should be a 41-digit hexadecimal number</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>将密码函数化</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql&gt; select password('dba');
+</span><span class='line'>+-------------------------------------------+
+</span><span class='line'>| password('dba')                           |
+</span><span class='line'>+-------------------------------------------+
+</span><span class='line'>| *381AD08BBFA647B14C82AC1094A29AD4D7E4F51D |
+</span><span class='line'>+-------------------------------------------+
+</span><span class='line'>1 row in set (0.00 sec)
+</span><span class='line'>mysql&gt; GRANT ALL PRIVILEGES ON KETTLE_DEMO.* TO 'dba'@'%' IDENTIFIED BY PASSWORD '*381AD08BBFA647B14C82AC1094A29AD4D7E4F51D';
+</span><span class='line'>Query OK, 0 rows affected (0.00 sec)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OK了!</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-13T18:52:00+08:00" pubdate data-updated="true">Feb 13<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/02/13/mysql-error-1372-hy000//blog/page/6/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/01/03/mysql-sp/">【转】MySQL存储过程例子，包含事务，参数，嵌套调用，游标，循环等</a></h1>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">drop</span> <span class="k">procedure</span> <span class="n">if</span> <span class="k">exists</span> <span class="n">pro_rep_shadow_rs</span><span class="p">;</span>
+</span><span class='line'><span class="k">delimiter</span> <span class="o">|</span>
+</span><span class='line'><span class="c1">----------------------------------   </span>
+</span><span class='line'><span class="c1">-- rep_shadow_rs   </span>
+</span><span class='line'><span class="c1">-- 用来处理信息的增加，更新和删除   </span>
+</span><span class='line'><span class="c1">-- 每次只更新上次以来没有做过的数据   </span>
+</span><span class='line'><span class="c1">-- 根据不同的标志位   </span>
+</span><span class='line'><span class="c1">-- 需要一个输出的参数，   </span>
+</span><span class='line'><span class="c1">-- 如果返回为0，则调用失败，事务回滚   </span>
+</span><span class='line'><span class="c1">-- 如果返回为1，调用成功，事务提交   </span>
+</span><span class='line'><span class="c1">--   </span>
+</span><span class='line'><span class="c1">-- 测试方法   </span>
+</span><span class='line'><span class="c1">-- call pro_rep_shadow_rs(@rtn);   </span>
+</span><span class='line'><span class="c1">-- select @rtn;   </span>
+</span><span class='line'><span class="c1">----------------------------------   </span>
+</span><span class='line'><span class="k">create</span> <span class="k">procedure</span> <span class="n">pro_rep_shadow_rs</span><span class="p">(</span><span class="k">out</span> <span class="n">rtn</span> <span class="nb">int</span><span class="p">)</span>
+</span><span class='line'><span class="k">begin</span>
+</span><span class='line'>    <span class="c1">-- 声明变量，所有的声明必须在非声明的语句前面   </span>
+</span><span class='line'>    <span class="k">declare</span> <span class="n">iLast_rep_sync_id</span> <span class="nb">int</span> <span class="k">default</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">declare</span> <span class="n">iMax_rep_sync_id</span> <span class="nb">int</span> <span class="k">default</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">-- 如果出现异常，或自动处理并rollback,但不再通知调用方了   </span>
+</span><span class='line'>    <span class="c1">-- 如果希望应用获得异常，需要将下面这一句，以及启动事务和提交事务的语句全部去掉   </span>
+</span><span class='line'>    <span class="k">declare</span> <span class="n">exit</span> <span class="k">handler</span> <span class="k">for</span> <span class="k">sqlexception</span> <span class="k">rollback</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">-- 查找上一次的   </span>
+</span><span class='line'>    <span class="k">select</span> <span class="n">eid</span> <span class="k">into</span> <span class="n">iLast_rep_sync_id</span> <span class="k">from</span> <span class="n">rep_de_proc_log</span> <span class="k">where</span> <span class="n">tbl</span><span class="o">=</span><span class="s1">&#39;rep_shadow_rs&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">-- 如果不存在，则增加一行   </span>
+</span><span class='line'>    <span class="n">if</span> <span class="n">iLast_rep_sync_id</span><span class="o">=-</span><span class="mi">1</span> <span class="k">then</span>
+</span><span class='line'>      <span class="k">insert</span> <span class="k">into</span> <span class="n">rep_de_proc_log</span><span class="p">(</span><span class="n">rid</span><span class="p">,</span><span class="n">eid</span><span class="p">,</span><span class="n">tbl</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;rep_shadow_rs&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">set</span> <span class="n">iLast_rep_sync_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="n">if</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">-- 下一个数字   </span>
+</span><span class='line'>    <span class="k">set</span> <span class="n">iLast_rep_sync_id</span><span class="o">=</span><span class="n">iLast_rep_sync_id</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">-- 设置默认的返回值为0：失败   </span>
+</span><span class='line'>    <span class="k">set</span> <span class="n">rtn</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">-- 启动事务   </span>
+</span><span class='line'>    <span class="k">start</span> <span class="n">transaction</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">-- 查找最大编号   </span>
+</span><span class='line'>    <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">rep_sync_id</span><span class="p">)</span> <span class="k">into</span> <span class="n">iMax_rep_sync_id</span> <span class="k">from</span> <span class="n">rep_shadow_rs</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">-- 有新数据   </span>
+</span><span class='line'>    <span class="n">if</span> <span class="n">iMax_rep_sync_id</span><span class="o">&gt;=</span><span class="n">iLast_rep_sync_id</span> <span class="k">then</span>
+</span><span class='line'>        <span class="c1">-- 调用   </span>
+</span><span class='line'>        <span class="k">call</span> <span class="n">pro_rep_shadow_rs_do</span><span class="p">(</span><span class="n">iLast_rep_sync_id</span><span class="p">,</span><span class="n">iMax_rep_sync_id</span><span class="p">);</span>
+</span><span class='line'>        <span class="c1">-- 更新日志   </span>
+</span><span class='line'>        <span class="k">update</span> <span class="n">rep_de_proc_log</span> <span class="k">set</span> <span class="n">rid</span><span class="o">=</span><span class="n">iLast_rep_sync_id</span><span class="p">,</span><span class="n">eid</span><span class="o">=</span><span class="n">iMax_rep_sync_id</span> <span class="k">where</span> <span class="n">tbl</span><span class="o">=</span><span class="s1">&#39;rep_shadow_rs&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="n">if</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">-- 运行没有异常，提交事务   </span>
+</span><span class='line'>    <span class="k">commit</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">-- 设置返回值为1 </span>
+</span><span class='line'>    <span class="k">set</span> <span class="n">rtn</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="k">end</span><span class="p">;</span>
+</span><span class='line'><span class="o">|</span>
+</span><span class='line'><span class="k">delimiter</span> <span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+		
+		<a href="/blog/2012/01/03/mysql-sp/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-03T19:02:00+08:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/01/03/mysql-sp//blog/page/6/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">

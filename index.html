@@ -7,12 +7,11 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="能多快速？ Objective-C is good at making decisions, but it’s great at being lazy. 笨方法循环打印数组内容 1
+	<meta name="description" content="一般的做法 1
 2
 3
-4
-5
-NSArray *funnyWords = @[@&quot;Schadenfreude&quot &hellip;">
+if(someBOOLVariable){ NSLog(@&quot;Hello from inside the if statement&quot;);
+}//如果someBOOLVariable是YES {}里的代码将会被执行 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,6 +82,346 @@ NSArray *funnyWords = @[@&quot;Schadenfreude&quot &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/08/15/about-blocks-with-objective-c/">About Blocks With Objective-C</a></h1>
+	<div class="entry-content">
+		<h4>一般的做法</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">if</span><span class="p">(</span><span class="n">someBOOLVariable</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello from inside the if statement&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="c1">//如果someBOOLVariable是YES {}里的代码将会被执行</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>其实我们想的是能够括号里的代码能够脱离任何特定功能 比如触发条件
+Blocks是一组代码 意味着 他可以被传递到方法或像NSArray或NSDictionary中集合</p>
+
+<p> #### ^ {}块可以创建</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello from inside the block&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">^</span><span class="n">LogMessage</span> <span class="o">=</span> <span class="o">^</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="err">@“你好块里面的”</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>如果不想其返回任何值 就加一个void</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="kt">void</span> <span class="o">^</span><span class="n">logMessage</span> <span class="o">=</span> <span class="o">^</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello from inside the block&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>练习- 创建一个块  不接受和不返回任何信息</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">myFirstBlock</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span> <span class="o">=</span> <span class="o">^</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello from inside the block&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">myFirstBlock</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>Blocks with arguments</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="o">^</span><span class="p">(</span><span class="n">NSUInteger</span> <span class="n">num1</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">num2</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;The sum of the numbers is %lu&quot;</span><span class="p">,</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">sumNumbers</span><span class="p">)(</span><span class="n">NSUInteger</span><span class="p">,</span> <span class="n">NSUInteger</span><span class="p">)</span> <span class="o">=</span> <span class="o">^</span><span class="p">(</span><span class="n">NSUInteger</span> <span class="n">num1</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">num2</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;The sum of the numbers is %lu&quot;</span><span class="p">,</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> sumNumbers(45, 89);</span>
+</span><span class='line'><span class="cm"> sumNumbers(18, 56);</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">logCount</span><span class="p">)(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span> <span class="o">=</span> <span class="o">^</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="n">array</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;There are %lu objects in this array&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">array</span> <span class="n">count</span><span class="p">]);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">logCount</span><span class="p">(</span><span class="err">@</span><span class="p">[</span><span class="s">@&quot;Mr.&quot;</span><span class="p">,</span> <span class="s">@&quot;Higgie&quot;</span><span class="p">]);</span>
+</span><span class='line'><span class="n">logCount</span><span class="p">(</span><span class="err">@</span><span class="p">[</span><span class="s">@&quot;Mr.&quot;</span><span class="p">,</span> <span class="s">@&quot;Jony&quot;</span><span class="p">,</span> <span class="s">@&quot;Ive&quot;</span><span class="p">,</span> <span class="s">@&quot;Higgie&quot;</span><span class="p">]);</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> challenge[2]: There are 2 objects in this array</span>
+</span><span class='line'><span class="cm"> challenge[2]: There are 4 objects in this array</span>
+</span><span class='line'><span class="cm"> */</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>练习</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">myFirstBlock</span><span class="p">)(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span> <span class="o">=</span> <span class="o">^</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">str1</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ from inside the block&quot;</span><span class="p">,</span><span class="n">str1</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">myFirstBlock</span><span class="p">(</span><span class="s">@&quot;Hello&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">myFirstBlock</span><span class="p">(</span><span class="s">@&quot;World&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>Enumerate with blocks</h2>
+
+<p> 绝大多数的时候，你会不会块分配给一个变量，调用它自己。相反，你会传递一个块作为参数的消息，像<code>enumerateObjectsUsingBlock：NSArray</code>的消息。</p>
+
+<p> <code>enumerateObjectsUsingBlock：</code>可以用来作为快速枚举的替代品，因为它基本上是同样的事情：执行一个代码块，在一个数组中的每个对象。但是，而不是使用特殊的语法，它使用正常短信的发送和块。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">newHats</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;Cowboy&quot;</span><span class="p">,</span> <span class="s">@&quot;Conductor&quot;</span><span class="p">,</span> <span class="s">@&quot;Baseball&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s">@&quot;Beanie&quot;</span><span class="p">,</span> <span class="s">@&quot;Beret&quot;</span><span class="p">,</span> <span class="s">@&quot;Fez&quot;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">hat</span> <span class="k">in</span> <span class="n">newHats</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Trying on hat %@&quot;</span><span class="p">,</span> <span class="n">hat</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">enumeratingBlock</span><span class="p">)(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">,</span> <span class="n">NSUInteger</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="p">)</span> <span class="o">=</span>
+</span><span class='line'><span class="o">^</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">word</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">index</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="n">funnyWords</span> <span class="nl">enumerateObjectsUsingBlock:</span><span class="n">enumeratingBlock</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">newHats</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;Cowboy&quot;</span><span class="p">,</span> <span class="s">@&quot;Conductor&quot;</span><span class="p">,</span> <span class="s">@&quot;Baseball&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s">@&quot;Beanie&quot;</span><span class="p">,</span> <span class="s">@&quot;Beret&quot;</span><span class="p">,</span> <span class="s">@&quot;Fez&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">enumeratingBlock</span><span class="p">)(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">,</span> <span class="n">NSUInteger</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="p">)</span> <span class="o">=</span>
+</span><span class='line'><span class="o">^</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">hat</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">index</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">hat</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="n">newHats</span> <span class="nl">enumerateObjectsUsingBlock:</span><span class="n">enumeratingBlock</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-15T11:38:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ios/'>IOS</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/08/15/about-blocks-with-objective-c//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/08/15/enumerating-an-nsdictionary/">Enumerating an NSDictionary</a></h1>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">funnyWords</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span>
+</span><span class='line'><span class="s">@&quot;Schadenfreude&quot;</span><span class="o">:</span> <span class="s">@&quot;pleasure derived by someone from another person&#39;s misfortune.&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s">@&quot;Portmanteau&quot;</span><span class="o">:</span> <span class="s">@&quot;consisting of or combining two or more separable aspects or qualities&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s">@&quot;Penultimate&quot;</span><span class="o">:</span> <span class="s">@&quot;second to the last&quot;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">word</span> <span class="k">in</span> <span class="n">funnyWords</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">definition</span> <span class="o">=</span> <span class="n">funnyWords</span><span class="p">[</span><span class="n">word</span><span class="p">];</span><span class="c1">//</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is defined as %@&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">definition</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>Practice makes perfect</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">newHats</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span>
+</span><span class='line'><span class="s">@&quot;Cowboy&quot;</span><span class="o">:</span> <span class="s">@&quot;White&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s">@&quot;Conductor&quot;</span><span class="o">:</span> <span class="s">@&quot;Brown&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s">@&quot;Baseball&quot;</span><span class="o">:</span> <span class="s">@&quot;Red&quot;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">hat</span> <span class="k">in</span> <span class="n">newHats</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="n">newHats</span><span class="p">[</span><span class="n">hat</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Trying on new %@ %@ hat&quot;</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">hat</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span><span class="p">([</span><span class="n">mrHiggie</span> <span class="nl">tryOnHat:</span><span class="n">hat</span> <span class="nl">withColor:</span><span class="n">color</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie loves it&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie hates it&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-15T11:36:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ios/'>IOS</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/08/15/enumerating-an-nsdictionary//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -642,103 +981,6 @@ pulseIn函数用于读取引脚脉冲的时间长度，脉冲可以是HIGH或LOW
 </div>
 	
 		<span class="comments"><a href="/blog/2013/05/26/hermes//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/05/24/arduino-pwm-control-led/">Arduino PWM Control Led</a></h1>
-	<div class="entry-content">
-		<h3>几个概念</h3>
-
-<ul>
-<li>LED长脚接(+)</li>
-<li>Digital 的pin脚可以代替(+) 另一端需接GND地线</li>
-<li>resistor 要选择合适的值 否则电压会过小或过大</li>
-<li>串联和并联的区别 我初中白念了</li>
-<li>analogWrite 模拟传值</li>
-</ul>
-
-
-
-		
-		<a href="/blog/2013/05/24/arduino-pwm-control-led/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-24T11:54:00+08:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/arduino/'>Arduino</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/05/24/arduino-pwm-control-led//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/05/23/servo/">Servo</a></h1>
-	<div class="entry-content">
-		<p>Servo myservo; <code>创建一个舵机对象 使用Servo类最多可以控制8个舵机</code></p>
-
-<p>int pos = 0; <code>// 该变量用与存储舵机角度位置</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">myservo</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>  <span class="c1">// 该舵机由arduino第九脚控制</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-23T23:49:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/arduino/'>Arduino</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/05/23/servo//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

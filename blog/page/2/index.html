@@ -7,8 +7,11 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="导入数据 employees &lt;- read.csv(&#8220;http://www.headfirstlabs.com/books/hfda/hfda_ch09_employees.csv&#8221;,header=TRUE) X id
-received 加薪幅度 &hellip;">
+	<meta name="description" content="几个概念 LED长脚接(+)
+Digital 的pin脚可以代替(+) 另一端需接GND地线
+resistor 要选择合适的值 否则电压会过小或过大
+串联和并联的区别 我初中白念了
+analogWrite 模拟传值 Read on &rarr; May 24th, 2013 Arduino &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,6 +82,103 @@ received 加薪幅度 &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/05/24/arduino-pwm-control-led/">Arduino PWM Control Led</a></h1>
+	<div class="entry-content">
+		<h3>几个概念</h3>
+
+<ul>
+<li>LED长脚接(+)</li>
+<li>Digital 的pin脚可以代替(+) 另一端需接GND地线</li>
+<li>resistor 要选择合适的值 否则电压会过小或过大</li>
+<li>串联和并联的区别 我初中白念了</li>
+<li>analogWrite 模拟传值</li>
+</ul>
+
+
+
+		
+		<a href="/blog/2013/05/24/arduino-pwm-control-led/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-24T11:54:00+08:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/arduino/'>Arduino</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/05/24/arduino-pwm-control-led//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/05/23/servo/">Servo</a></h1>
+	<div class="entry-content">
+		<p>Servo myservo; <code>创建一个舵机对象 使用Servo类最多可以控制8个舵机</code></p>
+
+<p>int pos = 0; <code>// 该变量用与存储舵机角度位置</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">myservo</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>  <span class="c1">// 该舵机由arduino第九脚控制</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-23T23:49:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/arduino/'>Arduino</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/05/23/servo//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -544,146 +644,6 @@ received 加薪幅度 &hellip;">
 </div>
 	
 		<span class="comments"><a href="/blog/2013/03/06/objective-c-note2//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/03/05/arduino-robot/">Arduino Robot</a></h1>
-	<div class="entry-content">
-		<h2>这玩意看的人心里长草&#8230;</h2>
-
-<p><img src="/images/img/doob.jpg" width="300"></p>
-
-<p>抽时间研究研究 还是蛮好玩的。</p>
-
-<p><img src="/images/img/doob2.jpg" width="400"></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-05T17:13:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/arduino-robot/'>Arduino,Robot</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/03/05/arduino-robot//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/03/05/objective-c-demo-note/">Objective-C Demo Note</a></h1>
-	<div class="entry-content">
-		<h1>Project:Single View Application</h1>
-
-<h2>MyFirstApp</h2>
-
-<p><code>viewController.h</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="p">{</span>
-</span><span class='line'>  <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">nameLabel</span> <span class="c1">//新增一个数据成员</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showName:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//新增一个方法showName</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>viewController.m</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &quot;viewController.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">ViewController</span>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didReceiveMemoryWaring</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">didReceiveMemoryWaring</span><span class="p">];</span>
-</span><span class='line'>  <span class="c1">// 自带的？ Release any cache data, images, etc that aren&#39;t in use.</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">showName:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">nameLabel</span> <span class="nl">setText:</span><span class="s">@&quot;My name is Johnny!&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>@interface 是声明一个类 大括号里面定义的是这个类的数据成员</li>
-<li>在@end 之前定义的都是类方法  只定义 实现在@implementation部分实现</li>
-<li>didReceiveMemoryWaring这个方法好像是自定义出来的</li>
-</ul>
-
-
-
-		
-		<a href="/blog/2013/03/05/objective-c-demo-note/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-05T16:38:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/03/05/objective-c-demo-note//blog/page/2/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 
