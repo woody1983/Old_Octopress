@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-05T22:02:08+08:00</updated>
+  <updated>2013-09-05T22:03:21+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -18,9 +18,7 @@
     <link href="http://woody1983.github.com/blog/2013/09/05/heroku/"/>
     <updated>2013-09-05T21:20:00+08:00</updated>
     <id>http://woody1983.github.com/blog/2013/09/05/heroku</id>
-    <content type="html"><![CDATA[<h3>Heroku</h3>
-
-<p>一开始是在 <a href="https://class.coursera.org/startup-001/class/index">Coursera</a>上的公开课学到的 留个记录 以后会天天用到的。</p>
+    <content type="html"><![CDATA[<p>一开始是在 <a href="https://class.coursera.org/startup-001/class/index">Coursera</a>上的公开课学到的 留个记录 以后会天天用到的。</p>
 
 <h3>安装命令很简单 Gem包</h3>
 
