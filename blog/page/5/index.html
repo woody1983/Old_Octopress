@@ -7,10 +7,7 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="刚入手没几天，感觉开发过程中多了很多乐趣。 should and should_not before and after before(:each) 每段it之前执行
-before(:all) 每段describe 之前执行
-after(:each)
-after(:all) pending &hellip;">
+	<meta name="description" content="创建rails项目 跳过unit-test模块 rails new sample_app --skip-test-unit 不安装production环境所需要的gem bundle install --without production 创建rspec测试模块 rails generate &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,6 +78,62 @@ after(:all) pending &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/08/22/rails-notes/">Rails学习全记录</a></h1>
+	<div class="entry-content">
+		<h3>创建rails项目 跳过unit-test模块</h3>
+
+<p><code>rails new sample_app --skip-test-unit</code></p>
+
+<h3>不安装production环境所需要的gem</h3>
+
+<p><code>bundle install --without production</code></p>
+
+<h3>创建rspec测试模块</h3>
+
+<p><code>rails generate rspec:install</code></p>
+
+<h3>创建一个负责静态页面的控制器</h3>
+
+<p><code>rails generate controller StaticPages home help --no-test-framework</code></p>
+
+<p>其实还可以添加 about contact等方法</p>
+
+<p>删除一个控制器<code>rails destroy  controller FooBars baz quux</code></p>
+
+
+		
+		<a href="/blog/2012/08/22/rails-notes/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-22T00:10:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/08/22/rails-notes//blog/page/5/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -559,47 +612,6 @@ You provide the method implementation in the
 </div>
 	
 		<span class="comments"><a href="/blog/2012/08/08/mac-install-gcc-ruby//blog/page/5/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/07/about-git-push-and-pull/">关于Git的push & Pull</a></h1>
-	<div class="entry-content">
-		<h3>首先是两端同时维护的问题</h3>
-
-<p>同一个git的<code>Repo</code> 我如果需要在<code>office</code>和<code>home</code>里分开维护的话 数据的一致性是最主要的。
-比如我在家里写的blog，早上到公司以后就需要先pull下来最新版本的Repo 然后在一天中任何一个时间点或时间段都会随意的维护工作记录或笔记什么的。</p>
-
-
-		
-		<a href="/blog/2012/08/07/about-git-push-and-pull/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-07T19:39:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/git/'>git</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/07/about-git-push-and-pull//blog/page/5/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-05T22:03:21+08:00</updated>
+  <updated>2013-09-05T23:26:44+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,343 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby-Bits]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/05/ruby-bits/"/>
+    <updated>2013-09-05T22:10:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/05/ruby-bits</id>
+    <content type="html"><![CDATA[<p>关于Ruby最佳实践的记录，我几乎已经放弃向周围的人推荐Ruby这门让人开心的语言了，原因其实很奇怪。</p>
+
+<p>关于参数，Ruby的Function中定义的函数或类总是会接收很多参数 不接受参数的Function不觉得很奇葩吗？</p>
+
+<p>传统的语法和实践是</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">CHR</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">login_id</span><span class="p">,</span><span class="n">message</span><span class="p">)</span>
+</span><span class='line'> <span class="c1">#...</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个不能说错 但按照CodeSchool老师的原话来说<code>Location isn't always used, so let's add default.</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">CHR</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">login_id</span><span class="o">=</span><span class="kp">nil</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'> <span class="c1">#...</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>还有一种情况就是参数过多，以致于让function变得毫无可读性<code>have to keep placeholders for arguments you’re not using</code>
+这个时候可以采用 <code>HASH Arguments</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">tweet</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+</span><span class='line'>  <span class="n">status</span> <span class="o">=</span> <span class="no">Status</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="n">status</span><span class="o">.</span><span class="n">lat</span> <span class="o">=</span> <span class="n">options</span><span class="o">[</span><span class="ss">:lat</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">status</span><span class="o">.</span><span class="n">long</span> <span class="o">=</span> <span class="n">options</span><span class="o">[</span><span class="ss">:long</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">status</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">message</span>
+</span><span class='line'>  <span class="n">status</span><span class="o">.</span><span class="n">reply_id</span> <span class="o">=</span> <span class="n">options</span><span class="o">[</span><span class="ss">:reply_id</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">status</span><span class="o">.</span><span class="n">post</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>调用的时候 就可以利用Symbol来实现多参数。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">￼</span><span class="n">tweet</span><span class="p">(</span><span class="s2">&quot;Practicing Ruby-Fu!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:lat</span> <span class="o">=&gt;</span> <span class="mi">28</span><span class="o">.</span><span class="mi">55</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:long</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">81</span><span class="o">.</span><span class="mi">33</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:reply_id</span> <span class="o">=&gt;</span> <span class="mi">227946</span>
+</span><span class='line'><span class="err">￼￼</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h3>Using Ruby 1.9 hash syntax</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">tweet</span><span class="p">(</span><span class="s2">&quot;Practicing Ruby-Fu!&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">lat</span><span class="p">:</span> <span class="mi">28</span><span class="o">.</span><span class="mi">55</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">long</span><span class="p">:</span> <span class="o">-</span><span class="mi">81</span><span class="o">.</span><span class="mi">33</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">reply_id</span><span class="p">:</span> <span class="mi">227946</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参数的顺序也无所谓了</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">￼</span><span class="n">tweet</span><span class="p">(</span><span class="s2">&quot;Practicing Ruby-Fu!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">reply_id</span><span class="p">:</span> <span class="mi">227946</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">lat</span><span class="p">:</span> <span class="mi">28</span><span class="o">.</span><span class="mi">55</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">long</span><span class="p">:</span> <span class="o">-</span><span class="mi">81</span><span class="o">.</span><span class="mi">33</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一个参数也ok</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">tweet</span><span class="p">(</span><span class="s2">&quot;Practicing Ruby-Fu!&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">new_game</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nb">name</span><span class="p">:</span> <span class="nb">name</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">year</span><span class="p">:</span> <span class="n">options</span><span class="o">[</span><span class="ss">:year</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="nb">system</span><span class="p">:</span> <span class="n">options</span><span class="o">[</span><span class="ss">:system</span><span class="o">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">game</span> <span class="o">=</span> <span class="n">new_game</span><span class="p">(</span><span class="s2">&quot;Street Figher II&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">:</span> <span class="mi">1992</span><span class="p">,</span> <span class="nb">system</span><span class="p">:</span> <span class="s2">&quot;SNES&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>EXCEPTIONS</h3>
+
+<p>关于判断例外EXCEPTIONS的问题 最传统的写法就是先做判断 有值就出来 如果没值的话 就抛除个神器的东西。貌似这么写程序不太好。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">get_tweets</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">list</span><span class="o">.</span><span class="n">authorized?</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">list</span><span class="o">.</span><span class="n">tweets</span> <span class="c1">#如果这个user是验证成功的就把他的tweet列出来</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>    <span class="k">end</span><span class="o">[]</span> <span class="c1">#“magic” return value</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果没有tweet 查出来是空的话  还要报一个Error 貌似在Ruby里没这个必要。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">tweets</span> <span class="o">=</span> <span class="n">get_tweets</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+</span><span class='line'><span class="k">if</span> <span class="n">tweets</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>  <span class="n">alert</span> <span class="s2">&quot;No tweets were found!&quot;</span> <span class="o">+</span>
+</span><span class='line'>  <span class="s2">&quot;Are you authorized to access this list?&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最佳方法应该是用unless先对<code>@user</code>这个对象进行判断 如果没有就用<code>raise</code>来抛除一个异常并返回登陆.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">￼</span><span class="k">def</span> <span class="nf">get_tweets</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">unless</span> <span class="n">list</span><span class="o">.</span><span class="n">authorized?</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">raise</span> <span class="no">AuthorizationException</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="n">list</span><span class="o">.</span><span class="n">tweets</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">begin</span>
+</span><span class='line'>  <span class="n">tweets</span> <span class="o">=</span> <span class="n">get_tweets</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+</span><span class='line'><span class="k">rescue</span> <span class="no">AuthorizationException</span>
+</span><span class='line'>  <span class="nb">warn</span> <span class="s2">&quot;You are not authorized to access this list.&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>练习</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">InvalidGameError</span> <span class="o">&lt;</span> <span class="no">StandardError</span><span class="p">;</span> <span class="k">end</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">new_game</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nb">name</span><span class="p">:</span> <span class="nb">name</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">year</span><span class="p">:</span> <span class="n">options</span><span class="o">[</span><span class="ss">:year</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="nb">system</span><span class="p">:</span> <span class="n">options</span><span class="o">[</span><span class="ss">:system</span><span class="o">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="k">begin</span>
+</span><span class='line'>  <span class="n">game</span> <span class="o">=</span> <span class="n">new_game</span><span class="p">(</span><span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'><span class="k">rescue</span> <span class="no">InvalidGameError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;There was a problem creating your new game: </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We want to make sure that each game is a valid game object - in this case a simple hash of values. Even still, we wouldn&#8217;t want to return a hash with a nil name. Raise an InvalidGameError error in the new_game method if name is nil.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">InvalidGameError</span> <span class="o">&lt;</span> <span class="no">StandardError</span><span class="p">;</span> <span class="k">end</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">new_game</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>  <span class="k">raise</span> <span class="no">InvalidGameError</span><span class="p">,</span> <span class="s2">&quot;You must provide a name for this game.&quot;</span> <span class="k">unless</span> <span class="nb">name</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nb">name</span><span class="p">:</span> <span class="nb">name</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">year</span><span class="p">:</span> <span class="n">options</span><span class="o">[</span><span class="ss">:year</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="nb">system</span><span class="p">:</span> <span class="n">options</span><span class="o">[</span><span class="ss">:system</span><span class="o">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="k">begin</span>
+</span><span class='line'>  <span class="n">game</span> <span class="o">=</span> <span class="n">new_game</span><span class="p">(</span><span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'><span class="k">rescue</span> <span class="no">InvalidGameError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;There was a problem creating your new game: </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>splat arguments</h3>
+
+<p>说实话 我没觉得这个比hash那个要实用</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">￼</span><span class="k">def</span> <span class="nf">mention</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">tweet</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">names</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">mention</span><span class="p">(</span><span class="s1">&#39;Your courses rocked!&#39;</span><span class="p">,</span> <span class="s1">&#39;eallam&#39;</span><span class="p">,</span> <span class="s1">&#39;greggpollack&#39;</span><span class="p">,</span> <span class="s1">&#39;jasonvanlue&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">describe_favorites</span><span class="p">(</span><span class="o">*</span><span class="n">games</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">for</span> <span class="n">game</span> <span class="k">in</span> <span class="n">games</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Favorite Game: </span><span class="si">#{</span><span class="n">game</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">describe_favorites</span><span class="p">(</span><span class="s1">&#39;Mario&#39;</span><span class="p">,</span> <span class="s1">&#39;Contra&#39;</span><span class="p">,</span> <span class="s1">&#39;Metroid&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为一个二维Array创建一个Class</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">￼</span><span class="n">user_names</span> <span class="o">=</span> <span class="o">[</span>
+</span><span class='line'>  <span class="o">[</span><span class="s2">&quot;Ashton&quot;</span><span class="p">,</span> <span class="s2">&quot;Kutcher&quot;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">[</span><span class="s2">&quot;Wil&quot;</span><span class="p">,</span> <span class="s2">&quot;Wheaton&quot;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">[</span><span class="s2">&quot;Madonna&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">user_names</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">n</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">, </span><span class="si">#{</span><span class="n">n</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个要直接打印出来 最后那个就会多一个分隔符。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Name</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@first</span> <span class="o">=</span> <span class="n">first</span>
+</span><span class='line'>    <span class="vi">@last</span> <span class="o">=</span> <span class="n">last</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">￼￼</span><span class="k">def</span> <span class="nf">format</span>
+</span><span class='line'>    <span class="o">[</span><span class="vi">@last</span><span class="p">,</span> <span class="vi">@first</span><span class="o">].</span><span class="n">compact</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[heroku]]></title>
@@ -3076,15 +3413,6 @@ initWithItemName:标签对应的参数是指向NSString对象的指针。在该�
 <h2>饼图的展示 非常不错 尤其是用在Skills 而且中间有一个图例就是数据库的。</h2>
 
 <p><img src="http://woody1983.github.com/images/img/resume3.png" width="500"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[NSLog Format]]></title>
-    <link href="http://woody1983.github.com/blog/2013/03/06/nslog-format/"/>
-    <updated>2013-03-06T23:08:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/03/06/nslog-format</id>
-    <content type="html"><![CDATA[<p><img src="http://woody1983.github.com/images/img/nslog.png"></p>
 ]]></content>
   </entry>
   

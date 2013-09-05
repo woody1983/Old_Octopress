@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-05T22:03:21+08:00</updated>
+  <updated>2013-09-05T23:26:44+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,253 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby-Bits]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/05/ruby-bits/"/>
+    <updated>2013-09-05T22:10:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/05/ruby-bits</id>
+    <content type="html"><![CDATA[<p>关于Ruby最佳实践的记录，我几乎已经放弃向周围的人推荐Ruby这门让人开心的语言了，原因其实很奇怪。</p>
+
+<p>关于参数，Ruby的Function中定义的函数或类总是会接收很多参数 不接受参数的Function不觉得很奇葩吗？</p>
+
+<p>传统的语法和实践是</p>
+
+<p><code>ruby
+def CHR(username,login_id,message)
+ #...
+end
+</code></p>
+
+<p>这个不能说错 但按照CodeSchool老师的原话来说<code>Location isn't always used, so let's add default.</code></p>
+
+<p><code>ruby
+def CHR(username,login_id=nil,message=nil)
+ #...
+end
+</code></p>
+
+<p>还有一种情况就是参数过多，以致于让function变得毫无可读性<code>have to keep placeholders for arguments you’re not using</code>
+这个时候可以采用 <code>HASH Arguments</code></p>
+
+<p>``` ruby</p>
+
+<p>def tweet(message, options = {})
+  status = Status.new
+  status.lat = options[:lat]
+  status.long = options[:long]
+  status.body = message
+  status.reply_id = options[:reply_id]
+  status.post
+end
+```</p>
+
+<p>调用的时候 就可以利用Symbol来实现多参数。</p>
+
+<p><code>ruby
+￼tweet("Practicing Ruby-Fu!",
+  :lat =&gt; 28.55,
+  :long =&gt; -81.33,
+  :reply_id =&gt; 227946
+￼￼)
+</code></p>
+
+<!-- more -->
+
+
+<h3>Using Ruby 1.9 hash syntax</h3>
+
+<p>``` ruby
+tweet("Practicing Ruby-Fu!",</p>
+
+<pre><code>lat: 28.55,
+long: -81.33, 
+reply_id: 227946
+</code></pre>
+
+<p>)
+```</p>
+
+<p>参数的顺序也无所谓了</p>
+
+<p><code>ruby
+￼tweet("Practicing Ruby-Fu!",
+  reply_id: 227946,
+  lat: 28.55,
+  long: -81.33
+)
+</code></p>
+
+<p>一个参数也ok</p>
+
+<p><code>ruby
+tweet("Practicing Ruby-Fu!")
+</code></p>
+
+<p>``` ruby
+def new_game(name, options={})
+  {</p>
+
+<pre><code>name: name,
+year: options[:year],
+system: options[:system]
+</code></pre>
+
+<p>  }
+end
+game = new_game("Street Figher II", year: 1992, system: "SNES")
+```</p>
+
+<h3>EXCEPTIONS</h3>
+
+<p>关于判断例外EXCEPTIONS的问题 最传统的写法就是先做判断 有值就出来 如果没值的话 就抛除个神器的东西。貌似这么写程序不太好。</p>
+
+<p>``` ruby
+def get_tweets(list)
+  if list.authorized?(@user)</p>
+
+<pre><code>list.tweets #如果这个user是验证成功的就把他的tweet列出来
+</code></pre>
+
+<p>else</p>
+
+<pre><code>end[] #“magic” return value
+</code></pre>
+
+<p>end
+```</p>
+
+<p>如果没有tweet 查出来是空的话  还要报一个Error 貌似在Ruby里没这个必要。</p>
+
+<p><code>ruby
+tweets = get_tweets(my_list)
+if tweets.empty?
+  alert "No tweets were found!" +
+  "Are you authorized to access this list?"
+end
+</code></p>
+
+<p>最佳方法应该是用unless先对<code>@user</code>这个对象进行判断 如果没有就用<code>raise</code>来抛除一个异常并返回登陆.</p>
+
+<p>``` ruby
+￼def get_tweets(list)
+  unless list.authorized?(@user)</p>
+
+<pre><code>raise AuthorizationException.new
+</code></pre>
+
+<p>  end
+list.tweets
+end</p>
+
+<p>begin
+  tweets = get_tweets(my_list)
+rescue AuthorizationException
+  warn "You are not authorized to access this list."
+end
+```</p>
+
+<p>练习</p>
+
+<p>``` ruby
+class InvalidGameError &lt; StandardError; end
+def new_game(name, options={})
+  {</p>
+
+<pre><code>name: name,
+year: options[:year],
+system: options[:system]
+</code></pre>
+
+<p>  }
+end
+begin
+  game = new_game(nil)
+rescue InvalidGameError => e
+  puts "There was a problem creating your new game: #{e.message}"
+end
+```
+We want to make sure that each game is a valid game object - in this case a simple hash of values. Even still, we wouldn't want to return a hash with a nil name. Raise an InvalidGameError error in the new_game method if name is nil.</p>
+
+<p>``` ruby
+class InvalidGameError &lt; StandardError; end
+def new_game(name, options={})</p>
+
+<pre><code>raise InvalidGameError, "You must provide a name for this game." unless name
+</code></pre>
+
+<p>  {</p>
+
+<pre><code>name: name,
+year: options[:year],
+system: options[:system]
+</code></pre>
+
+<p>  }
+end
+begin
+  game = new_game(nil)
+rescue InvalidGameError => e
+  puts "There was a problem creating your new game: #{e.message}"
+end
+```</p>
+
+<h3>splat arguments</h3>
+
+<p>说实话 我没觉得这个比hash那个要实用</p>
+
+<p>``` ruby
+￼def mention(status, *names)
+  tweet("#{names.join(' ')} #{status}")
+end</p>
+
+<p>mention('Your courses rocked!', 'eallam', 'greggpollack', 'jasonvanlue')</p>
+
+<p>def describe_favorites(*games)
+  for game in games</p>
+
+<pre><code>puts "Favorite Game: #{game}"
+</code></pre>
+
+<p>  end<br/>
+end
+describe_favorites('Mario', 'Contra', 'Metroid')
+```</p>
+
+<p>为一个二维Array创建一个Class</p>
+
+<p>``` ruby
+￼user_names = [
+  ["Ashton", "Kutcher"],
+  ["Wil", "Wheaton"],
+  ["Madonna"]
+]</p>
+
+<p>user_names.each { |n| puts "#{n[1]}, #{n[0]}" }
+```</p>
+
+<p>这个要直接打印出来 最后那个就会多一个分隔符。</p>
+
+<p>``` ruby
+class Name
+  def initialize(first, last = nil)</p>
+
+<pre><code>@first = first
+@last = last
+</code></pre>
+
+<p>  end</p>
+
+<p>￼￼def format</p>
+
+<pre><code>[@last, @first].compact.join(', ')
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[heroku]]></title>
@@ -251,40 +498,6 @@ http://ruby-doc.org/
 http://apidock.com/
 http://guides.rubyonrails.org/
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby ARGV &amp; STDIN.gets.chomp()]]></title>
-    <link href="http://woody1983.github.com/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp/"/>
-    <updated>2012-12-04T14:32:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp</id>
-    <content type="html"><![CDATA[<p>``` ruby
-ser = ARGV.first
-prompt = '> '</p>
-
-<p>puts "Hi #{user}, I'm the #{$0} script."
-puts "I'd like to ask you a few questions."
-puts "Do you like me #{user}?"
-print prompt
-likes = STDIN.gets.chomp()</p>
-
-<p>puts "Where do you live #{user}?"
-print prompt
-lives = STDIN.gets.chomp()</p>
-
-<p>puts "What kind of computer do you have?"
-print prompt
-computer = STDIN.gets.chomp()</p>
-
-<p>puts &lt;&lt;MESSAGE
-Alright, so you said #{likes} about liking me.
-You live in #{lives}.  Not sure where that is.
-And you have a #{computer} computer.  Nice.
-MESSAGE
-```</p>
-
-<blockquote><p>Important: 同時必須注意的是，我們也用了 STDIN.gets 取代了 gets。這是因為如果有東西在 ARGV 裡，標準的gets 會認為將第一個參數當成檔案而嘗試從裡面讀東西。在要從使用者的輸入（如stdin）讀取資料的情況下我們必須明確地使用 STDIN.gets。</p></blockquote>
 ]]></content>
   </entry>
   
