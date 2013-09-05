@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-08-15T11:41:29+08:00</updated>
+  <updated>2013-09-05T22:02:08+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[heroku]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/05/heroku/"/>
+    <updated>2013-09-05T21:20:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/05/heroku</id>
+    <content type="html"><![CDATA[<h3>Heroku</h3>
+
+<p>一开始是在 <a href="https://class.coursera.org/startup-001/class/index">Coursera</a>上的公开课学到的 留个记录 以后会天天用到的。</p>
+
+<h3>安装命令很简单 Gem包</h3>
+
+<p><code>gem install heroku</code></p>
+
+<p><code>$ heroku keys</code> 可以查看目前主机中存有的key 如果没有你当前主机的话 就用<code>heroku keys:add</code></p>
+
+<p>Heroku只是一个托管平台而已 Code还是要保存在Github上 需要部署的时候部署过去。我还真不知道怎么从Heroku直接拖Code下来。</p>
+
+<p><code>
+$ heroku create semisconblog
+Creating semisconblog... done, stack is cedar
+http://semisconblog.herokuapp.com/ | git@heroku.com:semisconblog.git
+Git remote heroku added
+</code>
+回头再写 Heroku还是有点不熟悉</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails3的嵌套练习]]></title>
@@ -802,307 +829,6 @@ form.new_zombie {
 
 <p>  }
 }
-```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails For Zombie]]></title>
-    <link href="http://woody1983.github.com/blog/2013/01/03/rails-for-zombie/"/>
-    <updated>2013-01-03T21:58:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/01/03/rails-for-zombie</id>
-    <content type="html"><![CDATA[<h3>这是国外的一个在线教育平台的课程 感觉非常不错 有很多知识点。现在共享出来，一起学习。</h3>
-
-<!-- more -->
-
-
-<h4>Rails new</h4>
-
-<blockquote><p>Enter the command to start a new rails app called 'ZombieTweets'</p></blockquote>
-
-<p>rails new Zombi­eTweets</p>
-
-<h4>GENERATE SCAFFOLD</h4>
-
-<blockquote><p>Enter the command to create tweet scaffold with a string status and an integer of zombie_id</p></blockquote>
-
-<p>rails g scaff­old tweet­ statu­s:string zombi­e_id:integ­er</p>
-
-<h4>RUN MIGRATION</h4>
-
-<blockquote><p>Enter the command to run the migration you just created.</p></blockquote>
-
-<p><code>
-$ rake db:mi­grate
-==  CreateTweets: migrating ===================================================
--- create_table(:tweets)
-   -&gt; 0.0017s
-==  CreateTweets: migrated (0.0025s) ==========================
-</code></p>
-
-<h4>BOOT IT UP</h4>
-
-<blockquote><p>Enter the command to start a rails server</p></blockquote>
-
-<p><code>
-rails s
-=&gt; Booting WEBrick
-=&gt; Rails 3.1.0 application starting in development on http://0.0.0.0:3000
-=&gt; Call with -d to detach
-=&gt; Ctrl-C to shutdown server
-[2013-01-03 12-26-14] INFO  WEBrick 1.3.1
-[2013-01-03 12-26-14] INFO  ruby 1.9.2 (2011-02-18) [x86_64-darwin10.7.0]
-[2013-01-03 12-26-14] INFO  WEBrick::HTTPServer#start: pid=35740 port=3000
-</code></p>
-
-<h4>ADD COLUMN TO TABLE</h4>
-
-<blockquote><p>Enter the command line text to generate a migration called AddPrivateToTweets which adds a boolean field called private.</p></blockquote>
-
-<p><code>
-$ rails g migra­tion AddPr­ivateToTwe­ets priva­te:boolean­
-invoke  active_record
-create    db/migrate/20130103122847_add_private_to_tweets.rb
-</code></p>
-
-<h4>ROLLBACK MIGRATION</h4>
-
-<blockquote><p>Assume we ran that last migration. However we forgot a column we wanted to add, could you please roll it back from the command line?</p></blockquote>
-
-<p><code>
-$ rake db:ro­llback
-==  AddLocationToTweets: reverting ============================================
--- remove_column("tweets", :show_location)
-   -&gt; 0.0008s
--- remove_column("tweets", :location)
-   -&gt; 0.0003s
-==  AddLocationToTweets: reverted (0.0012s) ===================================
-</code></p>
-
-<h4>REMOVE COLUMN</h4>
-
-<blockquote><p>On second thought, that category_name string column was a bad idea. Write a migration to remove the category_name column.</p></blockquote>
-
-<p>``` ruby
-class RemoveCategoryNameFromTweets &lt; ActiveRecord::Migration
-  def up</p>
-
-<pre><code>remove_column :tweets , :category_name
-</code></pre>
-
-<p>  end</p>
-
-<p>  def down</p>
-
-<pre><code>add_column :tweets,:category_name , :string
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h4>DATABASE SETUP</h4>
-
-<blockquote><p>You've decided to install the app on another computer. Please enter the command you should use (instead of rake db:migrate) to create the database, load the schema, and run the seed file.</p></blockquote>
-
-<p>rake db:setup</p>
-
-<h4>IN THE CONSOLE</h4>
-
-<blockquote><p>Enter the command to enter the Rails console</p></blockquote>
-
-<p><code>
-$ rails c
-Loading development environment (Rails 3.1.0)
-</code></p>
-
-<blockquote><p>Enter the command to enter the Rails console.
-You are now running in the Rails console!
-Experiment with creating a new Tweet and saving it to the database. Type next to move on.</p></blockquote>
-
-<p>```
-ruby > Tweet.crea­te(message­: 'hell­o', categ­ory_name: 'cate­gory', locat­ion: 'Chin­a', show_­location: true,­ zombi­e_id: 1)</p>
-
-<h1><Tweet id: 1, message: "hello", category_name: "category", location: "China", show_location: true, zombie_id: 1></h1>
-
-<p>ruby ><br/>
-```</p>
-
-<p>schema:</p>
-
-<p><code>ruby
-create_table(:tweets) do |t|
-  t.string :message
-  t.string :category_name
-  t.string :location, :limit =&gt; 30
-  t.boolean :show_location, :default =&gt; false
-  t.integer :zombie_id
-end
-</code></p>
-
-<h4>SCOPES</h4>
-
-<blockquote><p>Write a scope on the Tweet model called recent which returns the 4 most recent tweets. Hint: You'll need an order AND a limit scope.</p></blockquote>
-
-<p><code>ruby
-class Tweet &lt; ActiveRecord::Base
-  scope :recent , order("created_at desc").limit(4)
-end
-</code></p>
-
-<blockquote><p>Write another scope called graveyard which only shows tweets where the show_location column is true and the location is "graveyard"</p></blockquote>
-
-<p><code>ruby
-class Tweet &lt; ActiveRecord::Base
-  scope :recent, order('created_at desc').limit(4)
-  scope :graveyard, where(show_location: true,location: 'graveyard')
-end
-</code></p>
-
-<h4>USING SCOPES</h4>
-
-<blockquote><p>In this controller action create an instance variable called @graveyard_tweets which uses both of the two scopes recent and graveyard together.</p></blockquote>
-
-<p>``` ruby
-class TweetsController &lt; ApplicationController
-  def index</p>
-
-<pre><code>@tweets = Tweet.all
-@graveyard_tweets = Tweet.recent.graveyard
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h4>BEFORE SAVE</h4>
-
-<blockquote><p>Create a before_save callback that checks to see if a tweet has a location, if it does have a location then set show_location to true.
-Tip: You can check to see if location exists with if self.location?</p></blockquote>
-
-<p>``` ruby
-class Tweet &lt; ActiveRecord::Base
-  before_save :tweet</p>
-
-<p>  def tweet</p>
-
-<pre><code>self.show_location = true if self.location
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h4>CALLBACK LOGGING</h4>
-
-<blockquote><p>Add callbacks so the appropriate log function is called after an update and destroy.</p></blockquote>
-
-<p>``` ruby
-class Tweet &lt; ActiveRecord::Base</p>
-
-<p>after_update :log_update
-after_destroy :log_destroy</p>
-
-<p>  def log_update</p>
-
-<pre><code>logger.info "Tweet #{id} updated"
-</code></pre>
-
-<p>  end</p>
-
-<p>  def log_destroy</p>
-
-<pre><code>logger.info "Tweet #{id} deleted"
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h4>HAS ONE</h4>
-
-<blockquote><p>Instead of storing location inside the Tweet model, let's instead break it out into a separate table (as you see below). In this case we want to define that a Tweet can have one Location, and a Location belongs to a Tweet. Fill out the models below accordingly.</p></blockquote>
-
-<p>``` ruby
-class Tweet &lt; ActiveRecord::Base
-has_one :location
-end</p>
-
-<p>class Location &lt; ActiveRecord::Base
-belongs_to :tweet
-end
-```</p>
-
-<h4>FOREIGN KEY</h4>
-
-<blockquote><p>OH NO! Our Database Admin turned into a Zombie and decided to rename the belongs_to field in our locations table tweeter_id instead of the intelligent default tweet_id. We're going to slay him and correct this, but in the meantime set the foreign_key on both relationships to tweeter_id. Also set the dependency so when a tweet is destroyed, the location is destroyed as well.</p></blockquote>
-
-<p>``` ruby
-class Tweet &lt; ActiveRecord::Base
-  has_one :location, dependent: :destroy, foreign_key: :tweeter_id
-end</p>
-
-<p>class Location &lt; ActiveRecord::Base
-  belongs_to :tweet, foreign_key: :tweeter_id
-end
-```</p>
-
-<h4>INCLUDES</h4>
-
-<blockquote><p>We're going to be iterating through many tweets and printing out their location. Refactor the controller code below to use the includes method.</p></blockquote>
-
-<p>``` ruby
-class TweetsController &lt; ApplicationController
-  def index</p>
-
-<pre><code>@tweets = Tweet.includes(:location).recent
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h4>RELATIONSHIP MIGRATION</h4>
-
-<blockquote><p>A Tweet can belong to one or more Categories (e.g. eating flesh, walking dead, searching for brains). Write a migration that creates two tables, categories, and categorizations. Give categories one column named name of type string; and give categorizations two integer columns: tweet_id and category_id.</p></blockquote>
-
-<p>``` ruby
-class AddTweetCategories &lt; ActiveRecord::Migration
-  def change</p>
-
-<pre><code>create_table :categories do |t|
-  t.string :name
-end
-
-create_table :categorizations do |t|
-  t.integer :tweet_id
-  t.integer :category_id
-end
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h4>HAS MANY THROUGH</h4>
-
-<blockquote><p>Now that we have our new tables, it's time to define the relationships between each of the models. Define the has_many through relationships in the Tweet &amp; Category model and the belongs_to relationships in the Categorization model.</p></blockquote>
-
-<p>``` ruby
-class Tweet &lt; ActiveRecord::Base
-  has_many :categorizations
-  has_many :categories, through: :categorizations
-end</p>
-
-<p>class Categorization &lt; ActiveRecord::Base
-  belongs_to :tweet
-  belongs_to :category
-end</p>
-
-<p>class Category &lt; ActiveRecord::Base
-  has_many :categorizations
-  has_many :tweets, through: :categorizations
-end
 ```</p>
 ]]></content>
   </entry>

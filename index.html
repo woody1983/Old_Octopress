@@ -7,11 +7,7 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="一般的做法 1
-2
-3
-if(someBOOLVariable){ NSLog(@&quot;Hello from inside the if statement&quot;);
-}//如果someBOOLVariable是YES {}里的代码将会被执行 &hellip;">
+	<meta name="description" content="Heroku 一开始是在 Coursera上的公开课学到的 留个记录 以后会天天用到的。 安装命令很简单 Gem包 gem install heroku $ heroku keys 可以查看目前主机中存有的key 如果没有你当前主机的话 就用heroku keys:add &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -82,6 +78,65 @@ if(someBOOLVariable){ NSLog(@&quot;Hello from inside the if statement&quot;);
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/09/05/heroku/">Heroku</a></h1>
+	<div class="entry-content">
+		<h3>Heroku</h3>
+
+<p>一开始是在 <a href="https://class.coursera.org/startup-001/class/index">Coursera</a>上的公开课学到的 留个记录 以后会天天用到的。</p>
+
+<h3>安装命令很简单 Gem包</h3>
+
+<p><code>gem install heroku</code></p>
+
+<p><code>$ heroku keys</code> 可以查看目前主机中存有的key 如果没有你当前主机的话 就用<code>heroku keys:add</code></p>
+
+<p>Heroku只是一个托管平台而已 Code还是要保存在Github上 需要部署的时候部署过去。我还真不知道怎么从Heroku直接拖Code下来。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku create semisconblog
+</span><span class='line'>Creating semisconblog... done, stack is cedar
+</span><span class='line'>http://semisconblog.herokuapp.com/ | git@heroku.com:semisconblog.git
+</span><span class='line'>Git remote heroku added</span></code></pre></td></tr></table></div></figure>
+
+
+<p>回头再写 Heroku还是有点不熟悉</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-05T21:20:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/09/05/heroku//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -928,59 +983,6 @@ pulseIn函数用于读取引脚脉冲的时间长度，脉冲可以是HIGH或LOW
 </div>
 	
 		<span class="comments"><a href="/blog/2013/05/26/ariadne//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/05/26/hermes/">Hermes</a></h1>
-	<div class="entry-content">
-		<h2>ヘルメス/ Hermes/ 赫耳墨斯</h2>
-
-<p>赫耳墨斯是宙斯與瑪亞的兒子，是奧林匹斯十二主神之一。 他是邊界及穿越邊界的旅行者之神，亦掌管牧羊人與牧牛人，辯論與靈舌， 詩與文字，體育，重量與度量，發明與商業，他也是狡猾的小偷和騙子之神。 《荷馬詩頌》裡描述他是一個變化多端、圓滑機靈的盜賊，他帶給人夢境， 是夜裡守望者，門外的小偷，在長生不老的眾神裡最先展示善意的人。</p>
-
-<p>赫耳墨斯是神界與人界之間的信使，這是他與伊里斯共同擔當的職責。</p>
-
-<p>赫耳墨斯發明了鑽木取火，他還發明了樂器排蕭和里拉琴。 赫耳墨斯也是各種競技比賽及拳擊的發明人，也因此成為運動員的保護神。 現代神話收集家經常把赫耳墨斯和其他民族文化裡的耍詭計的神相提並論。</p>
-
-<p>赫耳墨斯還是亡靈的接引神，他幫助死去的靈魂到達冥界。 在許多希臘神話故事里，赫耳墨斯是除了哈得斯和珀耳塞福涅之外 唯一可以在冥界自由出入的神。</p>
-
-<p>赫耳墨斯的代表動物是公雞和烏龜，他的身上戴有皮包或是皮夾， 腳穿插翼涼鞋，頭戴翼帽，手拿信使的權杖，也叫做雙盤蛇帶翼權杖。 赫耳墨斯因為他的機智與狡猾也成為盜賊之神，他出生的第一晚就已經 做了小偷，從母親瑪亞那裡溜出去偷他哥哥阿波羅的神牛。</p>
-
-<p>赫耳墨斯對他的父親宙斯十分忠誠，當宙斯的愛人之一寧芙仙子 伊俄被赫拉捉住，並且派了百眼巨人阿耳戈斯看守的時候，是赫耳墨斯出手 解救了她。他給巨人唱悅耳動聽的歌，講冗長乏味的故事以哄他入睡之後， 用月牙形的彎刀砍下了他的頭。</p>
-
-<p>赫耳墨斯在羅馬神話中對應于墨丘利(拉丁語：Mercurius)，是九大行星中的水星。 墨丘利繼承了赫耳墨斯的許多特徵，比如商業的守護神。</p>
-
-<p>他雙腳長有雙翼、因此行走如飛，並成為在奧林匹斯山擔任宙斯和諸神傳令的 使者，為諸神傳送消息，並完成宙斯交給他的各種任務。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-26T00:07:00+08:00" pubdate data-updated="true">May 26<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/art/'>Art</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/05/26/hermes//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 
