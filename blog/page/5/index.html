@@ -7,7 +7,9 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="创建rails项目 跳过unit-test模块 rails new sample_app --skip-test-unit 不安装production环境所需要的gem bundle install --without production 创建rspec测试模块 rails generate &hellip;">
+	<meta name="description" content="* The browser issues a request for the /users URI.
+* Rails routes /users to the index action in the Users controller.
+* The index action asks the &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +80,54 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/08/22/mvc/">Mvc</a></h1>
+	<div class="entry-content">
+		<p><img src="http://ruby.railstutorial.org/images/figures/mvc_detailed.png" alt="About MVC" />
+* The browser issues a request for the /users URI.
+* Rails routes /users to the index action in the Users controller.
+* The index action asks the User model to retrieve all users (User.all).
+* The User model pulls all the users from the database.
+* The User model returns the list of users to the controller.
+* The controller captures the users in the @users variable, which is passed to the index view.
+* The view uses embedded Ruby to render the page as HTML.
+* The controller passes the HTML back to the browser.3</p>
+
+<p><img src="http://ruby.railstutorial.org/images/figures/demo_controller_inheritance.png" title="Optional title attribute" alt="About Controller" />
+<code>app/controllers/application_controller.rb</code></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-22T00:36:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/08/22/mvc//blog/page/5/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -566,52 +616,6 @@ You provide the method implementation in the
 </div>
 	
 		<span class="comments"><a href="/blog/2012/08/08/c-byte-bit-date-type//blog/page/5/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/08/mac-install-gcc-ruby/">Mac安装gcc和ruby</a></h1>
-	<div class="entry-content">
-		<h4>gcc</h4>
-
-<p>先说gcc 我这个mac安装过Xcode4.4 但安装过程中还是提示少c编译环境 查了一下需要安装xcode的插件</p>
-
-<p>安装command line tools。具体路径为：<code>Xcode –&gt; Preferences –&gt; Downloads 的Components</code>下，选择安装Command Line Tools 即可。</p>
-
-<h4>wget</h4>
-
-<p>我下载的是source code编译安装的</p>
-
-
-		
-		<a href="/blog/2012/08/08/mac-install-gcc-ruby/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-08T20:27:00+08:00" pubdate data-updated="true">Aug 8<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/08/mac-install-gcc-ruby//blog/page/5/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

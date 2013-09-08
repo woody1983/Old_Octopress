@@ -7,10 +7,8 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="关于Ruby最佳实践的记录，我几乎已经放弃向周围的人推荐Ruby这门让人开心的语言了，原因其实很奇怪。 关于参数，Ruby的Function中定义的函数或类总是会接收很多参数 不接受参数的Function不觉得很奇葩吗？ 传统的语法和实践是 1
-2
-3
-def CHR(username, &hellip;">
+	<meta name="description" content="很早之前再Ruby China问的一个问题 就是1到10 可以创建多少个3位数不重复的组合 现在有了答案! 1
+(1..10).to_a.combination(3).to_a 说实话 这个函数我也没见过 但效果还不错 目测了一把基本是我要的，和数据打交道时间久了就总觉得号码是有规律可言的。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,6 +79,59 @@ def CHR(username, &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/09/08/ruby-inject/">Ruby Inject</a></h1>
+	<div class="entry-content">
+		<p>很早之前再Ruby China问的一个问题 就是1到10 可以创建多少个3位数不重复的组合</p>
+
+<p>现在有了答案!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>说实话 这个函数我也没见过 但效果还不错 目测了一把基本是我要的，和数据打交道时间久了就总觉得号码是有规律可言的。上周研习了一下<code>inject</code>的用法 感觉可以做一点小东西出来玩一下。</p>
+
+<p>大乐透的前五位数有多少种组合呢？ 呵呵</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">35</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T23:26:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/09/08/ruby-inject//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -944,88 +995,6 @@ Blocks是一组代码 意味着 他可以被传递到方法或像NSArray或NSDic
 </div>
 	
 		<span class="comments"><a href="/blog/2013/06/03/ardi-pan//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/05/27/guan-yu-hc-sr04-chao-sheng-bo-chuan-gan-qi/">关于HC-SR04 超声波传感器</a></h1>
-	<div class="entry-content">
-		<p>关于HC-SR04 超声波传感器</p>
-
-<p>淘宝上面最便宜的SRF-04超声波传感器，有四个脚：5v电源脚（Vcc），触发控制端（Trig），接收端（Echo），地端（GND） 我的是HC-SR04</p>
-
-<p>模块工作原理：</p>
-
-<p>1.采用IO触发测距，给至少10us的高电平信号；
-2.模块自动发送8个40KHz的方波，自动检测是否有信号返回；
-3.有信号返回，通过IO输出一高电平，高电平持续的时间就是超声波从发射到返回的时间．测试距离=(高电平时间*声速(340m/s))/2;
-pulseIn函数用于读取引脚脉冲的时间长度，脉冲可以是HIGH或LOW。如果是HIGH，函数将先等引脚变为高电平，然后开始计时，一直到变为低电平为止。返回脉冲持续的时间长短, 单位为ms。如果超时还没有读到的话, 将返回0。</p>
-
-<p>Demo:</p>
-
-<p>发一个10ms的高脉冲去触发TrigPin</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">digitalWrite</span><span class="p">(</span><span class="n">TrigPin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
-</span><span class='line'><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">//使发出发出超声波信号接口低电平2μs</span>
-</span><span class='line'><span class="n">digitalWrite</span><span class="p">(</span><span class="n">TrigPin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
-</span><span class='line'><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">//使发出发出超声波信号接口高电平10μs，这里是至少10μs</span>
-</span><span class='line'><span class="n">digitalWrite</span><span class="p">(</span><span class="n">TrigPin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span> <span class="c1">//保持发出超声波信号接口低电平</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>距离换算</h4>
-
-<ul>
-<li>cm = pulseIn(EchoPin, HIGH) / 58.0; //算成厘米</li>
-<li>cm = (int(cm * 100.0)) / 100.0; //保留两位小数</li>
-</ul>
-
-
-<p>原理理解以后 尽量使用arduino官方推荐的SR04超声波传感器类库</p>
-
-<h3>读出脉冲时间</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">pulseIn</span><span class="p">(</span><span class="n">inputPin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
-</span><span class='line'><span class="n">distance</span><span class="o">=</span> <span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span> <span class="c1">// 将脉冲时间转化为距离（单位：厘米）</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-27T00:21:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/arduino/'>Arduino</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/05/27/guan-yu-hc-sr04-chao-sheng-bo-chuan-gan-qi//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-05T23:26:44+08:00</updated>
+  <updated>2013-09-08T23:30:44+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby inject]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/08/ruby-inject/"/>
+    <updated>2013-09-08T23:26:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/08/ruby-inject</id>
+    <content type="html"><![CDATA[<p>很早之前再Ruby China问的一个问题 就是1到10 可以创建多少个3位数不重复的组合</p>
+
+<p>现在有了答案!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>说实话 这个函数我也没见过 但效果还不错 目测了一把基本是我要的，和数据打交道时间久了就总觉得号码是有规律可言的。上周研习了一下<code>inject</code>的用法 感觉可以做一点小东西出来玩一下。</p>
+
+<p>大乐透的前五位数有多少种组合呢？ 呵呵</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">35</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby-Bits]]></title>
@@ -3371,48 +3396,6 @@ initWithItemName:标签对应的参数是指向NSString对象的指针。在该�
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Can Beautiful Design Make Your Resume Stand Out?]]></title>
-    <link href="http://woody1983.github.com/blog/2013/03/06/can-beautiful-design-make-your-resume-stand-out/"/>
-    <updated>2013-03-06T23:24:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/03/06/can-beautiful-design-make-your-resume-stand-out</id>
-    <content type="html"><![CDATA[<p>今天有人在weibo上转了一个关于Resume的帖子，还有<code>@性感玉米</code>也发了一篇关于Resume格式的微博，感觉还是蛮有道理的。要在一页纸上以最有优势的方法展现你的个人价值，确实也值得花些时间去研究一下，毕竟这是自己的事情。</p>
-
-<p><img src="http://woody1983.github.com/images/img/resume.jpg" width="500"></p>
-
-<p>Recruiters spent 80% of their time looking at six data points:</p>
-
-<ul>
-<li><p>Name</p></li>
-<li><p>Current title and company</p></li>
-<li><p>Previous title and company</p></li>
-<li><p>Current start and end dates</p></li>
-<li><p>Previous start and end dates</p></li>
-<li><p>Education</p></li>
-</ul>
-
-
-<p>The key is to keep these important data points clear. Loft Resumes recommends a hierarchy that presents information in a way that is easy to find and digest. Its service relies on graphic design principles, and clients can select from various formats or color palettes, but no two resumes will be exactly the same.</p>
-
-<h3>有一些不错的例子</h3>
-
-<!-- more -->
-
-
-<h2>这个颜色和排版还是蛮不错的</h2>
-
-<p><img src="http://woody1983.github.com/images/img/resume1.png" width="500"></p>
-
-<h2>这个是蜂巢的运用和图例</h2>
-
-<p><img src="http://woody1983.github.com/images/img/resume2.jpg" width="500"></p>
-
-<h2>饼图的展示 非常不错 尤其是用在Skills 而且中间有一个图例就是数据库的。</h2>
-
-<p><img src="http://woody1983.github.com/images/img/resume3.png" width="500"></p>
 ]]></content>
   </entry>
   

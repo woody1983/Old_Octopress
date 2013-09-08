@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-05T23:26:44+08:00</updated>
+  <updated>2013-09-08T23:30:44+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby inject]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/08/ruby-inject/"/>
+    <updated>2013-09-08T23:26:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/08/ruby-inject</id>
+    <content type="html"><![CDATA[<p>很早之前再Ruby China问的一个问题 就是1到10 可以创建多少个3位数不重复的组合</p>
+
+<p>现在有了答案!</p>
+
+<p><code>ruby
+(1..10).to_a.combination(3).to_a
+</code></p>
+
+<p>说实话 这个函数我也没见过 但效果还不错 目测了一把基本是我要的，和数据打交道时间久了就总觉得号码是有规律可言的。上周研习了一下<code>inject</code>的用法 感觉可以做一点小东西出来玩一下。</p>
+
+<p>大乐透的前五位数有多少种组合呢？ 呵呵</p>
+
+<p><code>ruby
+(1..35).to_a.combination(5).to_a
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby-Bits]]></title>
@@ -427,77 +450,6 @@ ctotal += 1
 ```</p>
 
 <h3>当无法打开文件阅读的时候，就会将例外报给ex变量 并打印输出。</h3>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby Resource]]></title>
-    <link href="http://woody1983.github.com/blog/2012/12/04/ruby-resource/"/>
-    <updated>2012-12-04T14:37:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/12/04/ruby-resource</id>
-    <content type="html"><![CDATA[<h3>1、<a href="www.tryruby.org">TryRuby</a></h3>
-
-<p><code>
-需要翻墙 配合codeschool一起练习的话 会有$5的代金券可以抵用学费
-</code></p>
-
-<h3>2、<a href="http://www.codecademy.com/zh/tracks/ruby">CodeCadeMy</a></h3>
-
-<p><code>
-全部做完，受益匪浅。
-</code></p>
-
-<h3>3、<a href="http://lrthw.github.com">笨方法學 Ruby</a></h3>
-
-<p><code>
-讲的很仔细  用的1.9的版本 各个知识点都讲了 不错
-</code></p>
-
-<h3>4、<a href="http://www.learnstreet.com/">LearnStreet的Ruby板块</a></h3>
-
-<p><code>
-目前免费，有一个全程的练习和配套的3个小项目练习 一个银行 一个度量转换 一个锻炼记忆力的。
-</code></p>
-
-<!-- more -->
-
-
-<h3>5、<a href="http://teamtreehouse.com">TeamtreeHouse</a></h3>
-
-<p><code>
-最近广告打的最猛的就是这个网站 收费 一个月25$  有Ruby 试听过一节课 暂时没报名
-讲的很详细 有内建Project配合 连发布工具都有 免费的用户可以看每个课程的前1分钟
-</code></p>
-
-<h3>6、 <a href="www.codeschool.com">CodeSchool</a></h3>
-
-<p><code>
-强烈推荐的 包含Git 什么的 都有 其中的Ruby Bits讲最佳实践的课程 现在可以免费停Level-1
-感觉不错 配合PDF和视频都可以下载的。 有几门免费课程CSS啊 之类的 学完都会有$5的代金券
-</code></p>
-
-<h2><a href="http://stylesror.github.com">Ruby Style Guide 及 Rails Style Guide</a></h2>
-
-<h2><a href="http://www.zenspider.com/Languages/Ruby/QuickRef.html">Ruby QuickRef</a></h2>
-
-<h2><a href="http://mislav.uniqpath.com/poignant-guide/book/chapter-3.html">漫画教程 Why's (Poignant) Guide to Ruby</a></h2>
-
-<h2><a href="http://download.csdn.net/detail/Sevk/659363">RUBY语言入门教程.PDF</a></h2>
-
-<h2><a href="http://ruby.on-page.net/">Ruby manual 一页教程</a></h2>
-
-<h2><a href="http://www.kuqin.com/rubycndocument/man/index.html">面向对象脚本语言 Ruby 参考手册</a></h2>
-
-<h2><a href="http://www.ruby-lang.org/zh_cn/documentation/ruby-from-other-languages/">从其它语言到 Ruby</a></h2>
-
-<h2>Ruby 工具箱</h2>
-
-<p><code>
-http://api.rubyonrails.org/
-http://ruby-doc.org/
-http://apidock.com/
-http://guides.rubyonrails.org/
-</code></p>
 ]]></content>
   </entry>
   
