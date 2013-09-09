@@ -7,8 +7,7 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="关于HC-SR04 超声波传感器 淘宝上面最便宜的SRF-04超声波传感器，有四个脚：5v电源脚（Vcc），触发控制端（Trig），接收端（Echo），地端（GND） 我的是HC-SR04 模块工作原理： 1.采用IO触发测距，给至少10us的高电平信号；
-2.模块自动发送8个40KHz的方波， &hellip;">
+	<meta name="description" content="ミニ四駆30周年を迎え、空力を含め走行性能を追求した新設計シャーシを採用。 看完图纸 第一感觉是 底盘是越来越低了 电池和马达可以在车底更换，而且是在不拆壳的前提下完成。 原车配有刹车零件和26mm低重心胎框與六顆低磨擦導輪。 迷你四驅車REV中的REV是指「REVOLUTION」， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,6 +78,52 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/06/03/ardi-pan/">AR底盘</a></h1>
+	<div class="entry-content">
+		<h4>ミニ四駆30周年を迎え、空力を含め走行性能を追求した新設計シャーシを採用。</h4>
+
+<p>看完图纸 第一感觉是 <code>底盘是越来越低了</code>  <code>电池和马达可以在车底更换，而且是在不拆壳的前提下完成。</code></p>
+
+<p>原车配有刹车零件和<code>26mm低重心胎框</code>與六顆低磨擦導輪。</p>
+
+<p>迷你四驅車REV中的REV是指「REVOLUTION」，具有革命的意味。</p>
+
+<p><img src="http://media.tumblr.com/32ac50b59e4af6c02874ee053816f3c9/tumblr_inline_mnt1idjMPz1qz4rgp.jpg"></p>
+
+
+		
+		<a href="/blog/2013/06/03/ardi-pan/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-03T23:43:00+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/4wd/'>4WD</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/06/03/ardi-pan//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -590,69 +635,6 @@ pulseIn函数用于读取引脚脉冲的时间长度，脉冲可以是HIGH或LOW
 </div>
 	
 		<span class="comments"><a href="/blog/2013/03/18/monica-et-vincent//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/03/08/objective-c-note-class-init-alloc/">Objective-C Note:Class Init Alloc</a></h1>
-	<div class="entry-content">
-		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">BNRItem</span> : <span class="nc">NSObject</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">itemName</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">serialNumber</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">valueInDollars</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">NSDate</span> <span class="o">*</span><span class="n">dateCreated</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>对象会直接保存非指针类型的实例变量，BNRItem 对象并没有直接保存其他对象，而只拥有三个指针，分别指向另外三个对象。这些指针都是BNRItem的实例变量。</h3>
-
-<h3>也就是说 BNRItem通过一个itemName的指针 指向一个NSString对象。</h3>
-
-
-		
-		<a href="/blog/2013/03/08/objective-c-note-class-init-alloc/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-08T16:58:00+08:00" pubdate data-updated="true">Mar 8<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/03/08/objective-c-note-class-init-alloc//blog/page/2/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

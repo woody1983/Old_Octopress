@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-08T23:30:44+08:00</updated>
+  <updated>2013-09-09T22:49:30+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby On Kettle]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/09/ruby-on-kettle/"/>
+    <updated>2013-09-09T22:34:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/09/ruby-on-kettle</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">to_i</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">1023</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="mi">1023</span><span class="o">.</span><span class="n">to_s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;1111111111&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>总要为Kettle做点什么 用二进制来完成一对多线路分发 监控就成了主要的问题。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">013</span> <span class="o">&gt;</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">size</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">10</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">014</span> <span class="o">&gt;</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">length</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">10</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>10位对应10个分发线路</h4>
+
+<p>一个最常见的问题 我需要充值某条数据的某个线路重新发送 或者紧急止停某条线路的一批数据下发，so 要定位</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">016</span> <span class="o">&gt;</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>重置Reset 0号线路 也就是Array最右边那个</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">021</span> <span class="o">&gt;</span> <span class="n">rok</span> <span class="o">=</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">022</span> <span class="o">&gt;</span> <span class="n">rok</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">023</span> <span class="o">&gt;</span> <span class="n">rok</span><span class="o">[</span><span class="mi">10</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;1&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">024</span> <span class="o">&gt;</span> <span class="n">rok</span><span class="o">[</span><span class="mi">10</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;0&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">025</span> <span class="o">&gt;</span> <span class="n">rok</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>明天抽时间写一个Class 封装这个动作</code></p>
+
+<h3>我想要的功能应该有</h3>
+
+<ul>
+<li>Preview Kettle当前运行状况和<code>质量</code></li>
+<li>单独查看某个线路或某张表的下发情况 <code>时间</code> &amp; <code>Error</code> &amp; <code>Count</code></li>
+<li>Error 单独分析和Email寄送功能</li>
+<li>Reset 下发Status</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby inject]]></title>
@@ -3038,364 +3117,6 @@ Let&#8217;s make a matrix 3 rows high by 4 columns wide,with all its fields set 
 <h3>Vincent est grand et il a les cheveux bruns et crépus.</h3>
 
 <h3>Ils sont très gentille et ils sont acteur de valeur.</h3>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Objective-C Note:Class init alloc]]></title>
-    <link href="http://woody1983.github.com/blog/2013/03/08/objective-c-note-class-init-alloc/"/>
-    <updated>2013-03-08T16:58:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/03/08/objective-c-note-class-init-alloc</id>
-    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">BNRItem</span> : <span class="nc">NSObject</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">itemName</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">serialNumber</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">valueInDollars</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">NSDate</span> <span class="o">*</span><span class="n">dateCreated</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>对象会直接保存非指针类型的实例变量，BNRItem 对象并没有直接保存其他对象，而只拥有三个指针，分别指向另外三个对象。这些指针都是BNRItem的实例变量。</h3>
-
-<h3>也就是说 BNRItem通过一个itemName的指针 指向一个NSString对象。</h3>
-
-<!-- more -->
-
-
-<p><img src="http://woody1983.github.com/images/img/nsobject.jpg"></p>
-
-<h1>实例变量的存取</h1>
-
-<h2>存方法</h2>
-
-<h3>修改实例的变量，指向另一个字符串，该BNRItem对象会将新的NSString对象命名为itemName</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setItemName:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">newItemName</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">itemName</span> <span class="o">=</span> <span class="n">newItemName</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>取方法</h2>
-
-<h3>返回BNRItem名为itemName的实例变量 一个指向NSString对象的指针</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">itemName</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">itemName</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>调用</h2>
-
-<p>对BNRItem对象使用setItemName和itemName方法即可实现设置和读取该变量的动作。</p>
-
-<h2>例子</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="c1">//声明</span>
-</span><span class='line'><span class="n">BNRItem</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="p">[[</span><span class="n">BNRItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'><span class="c1">//设置</span>
-</span><span class='line'><span class="p">[</span><span class="n">p</span> <span class="nl">setItemName:</span><span class="s">@&quot;Red Sofa&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="c1">//读取</span>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="n">itemName</span><span class="p">];</span>
-</span><span class='line'><span class="c1">//输出</span>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>但在Objective-C中，取方法的方法名就是实例变量的变量名。</p></blockquote>
-
-<h2>覆盖某种方法 直接定义就可以了</h2>
-
-<h2>关于实例说明</h2>
-
-<p>Description是NSObject类的方法，是一个介绍该类的方法。因为这个类已经在父类NSObject中声明过了，因此只要在定义文件中重新覆盖即可。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">description</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">descriptionString</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat:</span><span class="s">@&quot;%@ (%@): Worth $%d, recorded on %@&quot;</span><span class="p">,</span>
-</span><span class='line'>                                                   <span class="n">itemName</span><span class="p">,</span><span class="n">serialNumber</span><span class="p">,</span><span class="n">valueInDollars</span><span class="p">,</span><span class="n">dateCreated</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">descriptionString</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&gt;</span><span class="err">向某个</span><span class="n">BNRItem</span><span class="err">实例发送</span><span class="n">description</span><span class="err">消息就会得到描述该实例的</span><span class="n">NSString</span><span class="err">对象，一般情况下格式化说明</span><span class="o">%</span><span class="err">@</span> <span class="err">程序就先调用实参的</span><span class="n">description</span><span class="err">方法。</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">p</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>alloc 向某个类发送这个信息 是创建该类的实例并得到指向新实例的指针</li>
-<li>init 为实例变量设置初始值 编写更复杂的类时 需要创建更多的初始化方法 类似init 但会带参数</li>
-</ul>
-
-
-<h2>原先的代码</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;Foundation/Foundation.h&gt; </span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">BNRItem</span> : <span class="nc">NSObject</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">itemName</span><span class="p">;</span>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">serialNumber</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">valueInDollars</span><span class="p">;</span>
-</span><span class='line'><span class="n">NSDate</span> <span class="o">*</span><span class="n">dateCreated</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">setItemName:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">str</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">itemName</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setSerialNumber:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">str</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">serialNumber</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setValueInDollars:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">i</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">valueInDollars</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSDate</span> <span class="o">*</span><span class="p">)</span><span class="nf">dateCreated</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>要新增的方法</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithItemName:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">name</span>
-</span><span class='line'><span class="nf">valueInDollars:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">value</span>
-</span><span class='line'><span class="nf">serialNumber:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">sNumber</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>这些参数都有类型和参数名。声明参数时，要先写标签，然后写类型（写在圆括号里），
-最后写参数名。以initWithItemName:valueInDollars:serialNumber:为例， 和
-initWithItemName:标签对应的参数是指向NSString对象的指针。在该方法的程序段中，
-可以用name来引用该指针所指向的NSString对象。</p></blockquote>
-
-<p>这个方法返回的是一个id类型，OC中ID可以指向任意对象的指针。</p>
-
-<h1>实现指定初始化方法</h1>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@implementation</span> <span class="nc">BNRItem</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithItemName:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">name</span>
-</span><span class='line'><span class="nf">valueInDollars:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">value</span>
-</span><span class='line'><span class="nf">serialNumber:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">sNumber</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="c1">// 调用父类的指定初始化方法</span>
-</span><span class='line'>  <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'><span class="c1">// 为实例变量设定初始值</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="nl">setItemName:</span><span class="n">name</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="nl">setSerialNumber:</span><span class="n">sNumber</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="nl">setValueInDollars:</span><span class="n">value</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">dateCreated</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSDate</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'><span class="c1">// 返回初始化后的对象的地址</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>self</h2>
-
-<p><code>self</code>存在于方法中，是一个隐式（implicit）局部变量。编写方法时不需要声明self，并且程序会自动为self赋值，通常情况下，self会用来向对象自己发送消息。</p>
-
-<blockquote><p>初始化方法的最后一行代码必须返回初始化后的对象。</p></blockquote>
-
-<h2>Super</h2>
-
-<p>覆盖某个类的某个方法时 需要保留该方法在父类中的实现，在其基础上扩充子类的实现。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">someMethod</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="n">doMoreStuff</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">super</span> <span class="n">someMethod</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>以BNRItem的指定初始化方法为例，向super发送init消息会调用NSObject的init。</p></blockquote>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'> <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="n">init</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这一步其实是先调用父类的初始化方法后 先将得到的返回值赋给self变量 如果变量是不是nil，如果不是就继续。</p>
-
-<h2>一个类可以有多个初始化方法</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithItemName:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">name</span><span class="p">;</span>
-</span><span class='line'><span class="c1">//和之前initWithItemName的声明看起来貌似只少了几个参数而已</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>实现initWithItemName:方法时，不需要将指定初始化方法中的代码搬过来再重写一遍。它只需要调用指定初始化方法，将得到的实参作为itemName传入，而其他实参则使用某个默认值传入，代码如下：</p></blockquote>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithItemName:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">name</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="k">return</span> <span class="p">[</span><span class="n">self</span> <span class="nl">initWithItemName:</span><span class="n">name</span>
-</span><span class='line'><span class="nl">valueInDollars:</span><span class="mi">0</span>
-</span><span class='line'><span class="nl">serialNumber:</span><span class="s">@&quot;&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>这种串联（chain）使用初始化方法的机制可以降低出错的概率，也更容易维护代码。在创建拥有多个初始化方法的类时，需要先将其中的某个初始化方法确定为“指定初始化方法”。然后只在指定初始化方法中编写初始化的核心代码，其他初始化方法只需要调用该核心代码并输入默认值即可。</p></blockquote>
-
-<h2>初始化方法的调用方向</h2>
-
-<p><img src="http://woody1983.github.com/images/img/nsobject2.jpg"></p>
-
-<h4>覆盖BNRItem.m中的init方法，调用指定初始化方法，并使用默认值输入所有的实参，代码如下：</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{</span>
-</span><span class='line'><span class="k">return</span> <span class="p">[</span><span class="n">self</span> <span class="nl">initWithItemName:</span><span class="s">@&quot;Item&quot;</span>
-</span><span class='line'><span class="nl">valueInDollars:</span><span class="mi">0</span>
-</span><span class='line'><span class="nl">serialNumber:</span><span class="s">@&quot;&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>使用初始化方法</h1>
-
-<p>main.m会向BNRItem实例发送init消息，因为BNRItem类实现了上述两个初始化方法，所以程序会调用该类所实现的init方法，而该方法又会调用initWithItemName:valueInDollars：serialNumber:并输入默认值</p>
-
-<p>测试:main.m中加入一行代码</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">BNRItem</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="p">[[</span><span class="n">BNRItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
-</span><span class='line'><span class="c1">// 创建一个新的NSString对象“Red Sofa”，并传给BNRItem对象</span>
-</span><span class='line'><span class="p">[</span><span class="n">p</span> <span class="nl">setItemName:</span><span class="s">@&quot;Red Sofa&quot;</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>main.h</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;Foundation/Foundation.h&gt; </span>
-</span><span class='line'><span class="cp">#import &quot;BNRItem.h&quot; </span>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="err">@</span><span class="n">autoreleasepool</span> <span class="p">{</span>
-</span><span class='line'><span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">items</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSMutableArray</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'><span class="n">BNRItem</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="p">[[</span><span class="n">BNRItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithItemName:</span><span class="s">@&quot;Red Sofa&quot;</span>
-</span><span class='line'><span class="nl">valueInDollars:</span><span class="mi">100</span>
-</span><span class='line'><span class="nl">serialNumber:</span><span class="s">@&quot;A1B2C&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
-</span><span class='line'><span class="n">items</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

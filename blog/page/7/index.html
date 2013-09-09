@@ -7,9 +7,12 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="标准的需求： 用户名 email 主页 电话 联系地址 发帖ID 发帖标题 发帖内容 回复ID 回复标题 回复内容 按照2NF开始拆分 对应关系的确定为 (用户名) → (email,主页,电话,联系地址)
-(发帖ID) → (发帖标题,发帖内容)
-(回复ID) → (回复标题,回复内容) &hellip;">
+	<meta name="description" content="DDL DML DCL 基础中的基础 没这个 你能在数据库上面做什么？
+Install 重要性相当于hello world
+DataType 可以理解为约束
++-*% 处理数据的基础工具
+function-inside 内置函数 枯燥 但如果告诉你这个可以减轻你工作压力的话？
+engine # &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -80,6 +83,71 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2010/05/02/mysql-dba-sop/">一个MYSQL专职DBA要掌握的</a></h1>
+	<div class="entry-content">
+		<ul>
+<li><code>DDL DML DCL</code> 基础中的基础 没这个 你能在数据库上面做什么？</li>
+<li><code>Install</code>  重要性相当于hello world</li>
+<li><code>DataType</code> 可以理解为约束</li>
+<li><code>+-*%</code> 处理数据的基础工具</li>
+<li><code>function-inside</code> 内置函数 枯燥 但如果告诉你这个可以减轻你工作压力的话？</li>
+<li><code>engine</code> #与系统关系最紧密的内容</li>
+<li><code>engine-Myisam</code> #速度快 开销小 相对发展比较完善的引擎 应用最多</li>
+<li><code>engine-Innodb</code> #对数据完整性要求高的最爱</li>
+<li><code>charset</code> #跨平台时会想到这个</li>
+<li><code>Index-design</code> #小数据量的前提下体会不出的重要性</li>
+<li><code>Procedure</code> #封装还是封装 将查询细节封装 甚至其他的动作。</li>
+<li><code>DIY-function</code> #不再重复过去的劳动</li>
+<li><code>Trigger</code> #虽然是智能化的体现 但用之前要想好关联的准确性。</li>
+<li><code>Lock</code> # 确保数据库的一致性 维护时的神器之一</li>
+<li><code>optimize-table</code> #完整范式的表不一定是最优秀的表。</li>
+<li><code>Transaction</code> #Innodb中的最爱。</li>
+<li><code>MySQL-tools</code> #不一定做什么事情都需要登进MYSQL里面。</li>
+<li><code>Logs</code> #二进制日志是最好的备份。</li>
+<li><code>Backup/Recover</code> #这个不说了</li>
+<li><code>Privileges</code> # 很简单但很重要 更新过后记得flush一下</li>
+<li><code>Safe-config</code> #数据的安全。</li>
+<li><code>Replication</code> #应用很广的内容之一 双机热备 主从架构等等</li>
+<li><code>NDB-Cluster</code> #比replication稍微负载一些 机器多的前提下性能发挥越高。</li>
+<li><code>Partitioning</code> #千万级数据的瞬间查询完成。</li>
+<li><code>Variables</code> #当改跑车一样的去调教吧。</li>
+<li><code>DataBase-design</code> #文字无法描述 但却最重要 设计定格后的数据库优化 提升的幅度不会超过30%，良好的设计就是最优秀的优化方案。</li>
+</ul>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-02T17:40:00+08:00" pubdate data-updated="true">May 2<span>nd</span>, 2010</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2010/05/02/mysql-dba-sop//blog/page/7/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">

@@ -7,8 +7,12 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="很早之前再Ruby China问的一个问题 就是1到10 可以创建多少个3位数不重复的组合 现在有了答案! 1
-(1..10).to_a.combination(3).to_a 说实话 这个函数我也没见过 但效果还不错 目测了一把基本是我要的，和数据打交道时间久了就总觉得号码是有规律可言的。 &hellip;">
+	<meta name="description" content="1
+2
+3
+4
+1.9.3-p194 :009 &gt; &quot;1111111111&quot;.to_i(2) =&gt; 1023
+1.9.3-p194 :010 &gt; 1023.to_s(2) =&gt; &quot;1111111111&quot; 总要为Kettle做点什么 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,6 +83,113 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/09/09/ruby-on-kettle/">Ruby on Kettle</a></h1>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">to_i</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">1023</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="mi">1023</span><span class="o">.</span><span class="n">to_s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;1111111111&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>总要为Kettle做点什么 用二进制来完成一对多线路分发 监控就成了主要的问题。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">013</span> <span class="o">&gt;</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">size</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">10</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">014</span> <span class="o">&gt;</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">length</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">10</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>10位对应10个分发线路</h4>
+
+<p>一个最常见的问题 我需要充值某条数据的某个线路重新发送 或者紧急止停某条线路的一批数据下发，so 要定位</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">016</span> <span class="o">&gt;</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>重置Reset 0号线路 也就是Array最右边那个</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">021</span> <span class="o">&gt;</span> <span class="n">rok</span> <span class="o">=</span> <span class="s2">&quot;1111111111&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">022</span> <span class="o">&gt;</span> <span class="n">rok</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">023</span> <span class="o">&gt;</span> <span class="n">rok</span><span class="o">[</span><span class="mi">10</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;1&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">024</span> <span class="o">&gt;</span> <span class="n">rok</span><span class="o">[</span><span class="mi">10</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;0&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span> <span class="p">:</span><span class="mo">025</span> <span class="o">&gt;</span> <span class="n">rok</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>明天抽时间写一个Class 封装这个动作</code></p>
+
+<h3>我想要的功能应该有</h3>
+
+<ul>
+<li>Preview Kettle当前运行状况和<code>质量</code></li>
+<li>单独查看某个线路或某张表的下发情况 <code>时间</code> &amp; <code>Error</code> &amp; <code>Count</code></li>
+<li>Error 单独分析和Email寄送功能</li>
+<li>Reset 下发Status</li>
+</ul>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-09T22:34:00+08:00" pubdate data-updated="true">Sep 9<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/09/09/ruby-on-kettle//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -949,52 +1060,6 @@ Blocks是一组代码 意味着 他可以被传递到方法或像NSArray或NSDic
 </div>
 	
 		<span class="comments"><a href="/blog/2013/06/08/lm35shi-yong-bi-ji//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/06/03/ardi-pan/">AR底盘</a></h1>
-	<div class="entry-content">
-		<h4>ミニ四駆30周年を迎え、空力を含め走行性能を追求した新設計シャーシを採用。</h4>
-
-<p>看完图纸 第一感觉是 <code>底盘是越来越低了</code>  <code>电池和马达可以在车底更换，而且是在不拆壳的前提下完成。</code></p>
-
-<p>原车配有刹车零件和<code>26mm低重心胎框</code>與六顆低磨擦導輪。</p>
-
-<p>迷你四驅車REV中的REV是指「REVOLUTION」，具有革命的意味。</p>
-
-<p><img src="http://media.tumblr.com/32ac50b59e4af6c02874ee053816f3c9/tumblr_inline_mnt1idjMPz1qz4rgp.jpg"></p>
-
-
-		
-		<a href="/blog/2013/06/03/ardi-pan/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-03T23:43:00+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/4wd/'>4WD</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/06/03/ardi-pan//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 
