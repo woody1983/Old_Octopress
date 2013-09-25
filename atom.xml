@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-09T22:49:30+08:00</updated>
+  <updated>2013-09-25T23:22:14+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,282 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Block & Proc]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/25/ruby-block-proc/"/>
+    <updated>2013-09-25T23:19:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/25/ruby-block-proc</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">yield</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#math写成这样子 不跟block是会报错的 因为功能单一 也没必要加上 block_given?</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">teach_math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="o">&amp;</span><span class="n">opertion</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="o">&amp;</span><span class="n">opertion</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#opertion加上&amp;意思就是 opertion是个Proc对象 但我当Block来用</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">teach_math</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">|</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="p">}</span>
+</span><span class='line'><span class="c1">#调用的时候2和3会当作参数穿给a和b两个变量 后面挂着的Block会传给opertion对象</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># 稍微修改一下就看出对比了</span>
+</span><span class='line'><span class="c1">#因为math定义了一个yield 所以就必须有一个block挂上去一起玩或者把一个Proc当做block来挂着玩</span>
+</span><span class='line'><span class="c1">#懂？</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 这么写的话  opertion_again就必须是一个proc的对象 使用其自身的call方法来回调</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">opertion_again</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">opertion_again</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">teach_math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">opertion</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">opertion</span><span class="p">)</span><span class="c1">#在这里就传进去一个proc对象而不是一个当做block的proc</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">teach_math</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">|</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#-------------------Block---&gt;Proc-------------------------------------- </span>
+</span><span class='line'><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="o">&amp;</span><span class="n">the_proc</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">the_proc</span> <span class="c1">#去掉了&amp;就变成了一个普通的proc对象并返回出去！</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">cmp</span> <span class="o">=</span> <span class="n">my_method</span> <span class="p">{</span><span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="s2">&quot;Hello,</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">}</span><span class="c1">#cmp其实是me_method的返回值就是一个proc对象</span>
+</span><span class='line'><span class="c1">#所以要call回调</span>
+</span><span class='line'><span class="n">cmp</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;Johnny&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#-------------------Proc---&gt;Block-------------------------------------- </span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">greeting</span><span class="si">}</span><span class="s2">,</span><span class="si">#{</span><span class="k">yield</span><span class="si">}</span><span class="s2">&quot;</span><span class="c1">#看到yield了就意味着这个方法调用的时候需要跟一个block</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">my_proc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span> <span class="s2">&quot;Woody&quot;</span> <span class="p">}</span> <span class="c1">#声明一个proc对象</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">my_method</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">my_proc</span><span class="p">)</span><span class="c1">#把Proc当Block ！again!</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">me_method</span><span class="p">()</span>
+</span><span class='line'>  <span class="k">yield</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1"># puts my_method { &quot;xXx&quot; }   =&gt; &quot;xXx&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">me_method2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_proc</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">my_proc</span><span class="o">.</span><span class="n">call</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#me_method2 { &quot;xXx&quot; }   =&gt; &quot;xXx&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#当你会把Block和Proc串起来玩的时候  可调用对象的概念应该了解的差不多了</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">me_method</span><span class="p">()</span>
+</span><span class='line'>  <span class="k">yield</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">me_method2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_proc</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">me_method</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_proc</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">me_method2</span> <span class="p">{</span> <span class="s2">&quot;_why&quot;</span> <span class="p">}</span> <span class="c1"># =&gt; &quot;_why&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>这两个方法在调用的时候都需要跟一个block</p></blockquote>
+
+<h3>大招</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="o">].</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:to_i</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#其效果和下面这个一样</span>
+</span><span class='line'><span class="o">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">to_i</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Reg Braithwaite简单地介绍了to_proc是怎样让 (1..100).inject(&amp;:+) 这样的代码工作的:</p></blockquote>
+
+<p>&amp; 操作符用来把Proc对象转化成块，或者把块转化成Proc对象。这此例中，它试图把符号 :+ 转换成一个块。此转换过程使用了Ruby内建的强制机制。这个机制会检查我们是否有一个Proc对象。如果没有，它就把#to_proc方法传递到参数中 来生成一个Proc。如果符号 :+ 有#to_proc方法，就调用它。在Ruby 1.9中，它就有一个#to_proc方法。此方法使用了第一个参数，然后返回一个Proc，并把 + 方法和其他参数传递给它。
+由此可见，&amp;:+ 实际上就是 { |x, y| x + y }</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:to_s</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;]</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">to_s</span> <span class="p">}</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;]</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s2">&quot;woody&quot;</span><span class="p">,</span><span class="s2">&quot;johnny&quot;</span><span class="o">].</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:capitalize</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Woody&quot;, &quot;Johnny&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>另一种可调用对象的方法  .method</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">MyClass</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span class='line'>        <span class="vi">@name</span> <span class="o">=</span> <span class="n">value</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">my_method</span>
+</span><span class='line'>        <span class="vi">@name</span><span class="o">.</span><span class="n">capitalize</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">object</span> <span class="o">=</span> <span class="no">MyClass</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;woody&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">cmp</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="n">method</span> <span class="ss">:my_method</span>
+</span><span class='line'><span class="n">cmp</span><span class="o">.</span><span class="n">class</span> <span class="c1">#=&gt; Method</span>
+</span><span class='line'><span class="n">cmp</span><span class="o">.</span><span class="n">call</span> <span class="c1">#=&gt; &quot;Woody&quot;</span>
+</span><span class='line'><span class="c1">#String.instance_methods</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>instance_eval</h3>
+
+<p><code>object#instance_eval</code> 可以在对象的上下文中执行一个Block</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@setups</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="c1"># 初始化</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@setups</span> <span class="o">&lt;&lt;</span> <span class="n">block</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">setup</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;[</span><span class="se">\033</span><span class="s2">[1;36;40m Setting up </span><span class="se">\033</span><span class="s2">[m] [</span><span class="se">\033</span><span class="s2">[1;37;40m Sky </span><span class="se">\033</span><span class="s2">[m]&quot;</span>
+</span><span class='line'>  <span class="vi">@sky_height</span> <span class="o">=</span> <span class="mi">100</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">setup</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;[</span><span class="se">\033</span><span class="s2">[1;36;40m Setting up </span><span class="se">\033</span><span class="s2">[m] [</span><span class="se">\033</span><span class="s2">[1;37;40m Mountains </span><span class="se">\033</span><span class="s2">[m]&quot;</span>
+</span><span class='line'>  <span class="vi">@mountains_height</span> <span class="o">=</span> <span class="mi">200</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'> <span class="vi">@setups</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">setup</span><span class="o">|</span> <span class="n">env</span><span class="o">.</span><span class="n">instance_eval</span> <span class="o">&amp;</span><span class="n">setup</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby On Kettle]]></title>
@@ -3082,41 +3358,6 @@ Let&#8217;s make a matrix 3 rows high by 4 columns wide,with all its fields set 
 <p>今天的天亮不亮，取决于你的眼睛是不是特别需要光。 ————吴秀波</p>
 
 <h2>回头再总结吧 总之是个很值得学习的男人。</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Monica et Vincent]]></title>
-    <link href="http://woody1983.github.com/blog/2013/03/18/monica-et-vincent/"/>
-    <updated>2013-03-18T17:34:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/03/18/monica-et-vincent</id>
-    <content type="html"><![CDATA[<p><code>第一次法文作业 漏洞百出 不忍直视。</code></p>
-
-<p><img src="http://woody1983.github.com/images/img/monica.jpg"></p>
-
-<h3>Ils s&#8217;appellent Monica et Vincent.</h3>
-
-<h3>Ils sont acteur et lls travaillent dans le cinéma.</h3>
-
-<h3>Ils habitent à Paris et ils ont deux enfants.</h3>
-
-<h3>Ils aiment le musique, le cinéma et l&#8217;Opéra.</h3>
-
-<p><img src="http://woody1983.github.com/images/img/monica1.jpg"></p>
-
-<h3>Monica est italienne et elle parle très bien italien, anglais et un peu français.</h3>
-
-<h3>Elle a les cheveux bruns et raides et elle est très belle.</h3>
-
-<p><code>brun 在这里修饰头发 故不用阴性</code> &amp; <code>语言不使用阴性</code></p>
-
-<p><img src="http://woody1983.github.com/images/img/vincent.jpg"></p>
-
-<h3>Vincent est français et il parle très bien français anglais et un peu italien.</h3>
-
-<h3>Vincent est grand et il a les cheveux bruns et crépus.</h3>
-
-<h3>Ils sont très gentille et ils sont acteur de valeur.</h3>
 ]]></content>
   </entry>
   

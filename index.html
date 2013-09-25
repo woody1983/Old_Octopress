@@ -11,8 +11,18 @@
 2
 3
 4
-1.9.3-p194 :009 &gt; &quot;1111111111&quot;.to_i(2) =&gt; 1023
-1.9.3-p194 :010 &gt; 1023.to_s(2) =&gt; &quot;1111111111&quot; 总要为Kettle做点什么 &hellip;">
+5
+6
+7
+8
+9
+10
+11
+12
+13
+def math(a,b) yield(a,b)
+end
+#math写成这样子 不跟block是会报错的 因为功能单一 也没必要加上 block_given? def teach_math(a,b,&amp;opertion) puts &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,6 +93,73 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/09/25/ruby-block-proc/">Ruby Block & Proc</a></h1>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">yield</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#math写成这样子 不跟block是会报错的 因为功能单一 也没必要加上 block_given?</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">teach_math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="o">&amp;</span><span class="n">opertion</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">math</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="o">&amp;</span><span class="n">opertion</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#opertion加上&amp;意思就是 opertion是个Proc对象 但我当Block来用</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">teach_math</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">|</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="p">}</span>
+</span><span class='line'><span class="c1">#调用的时候2和3会当作参数穿给a和b两个变量 后面挂着的Block会传给opertion对象</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+
+		
+		<a href="/blog/2013/09/25/ruby-block-proc/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-25T23:19:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/09/25/ruby-block-proc//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -934,132 +1011,6 @@ Blocks是一组代码 意味着 他可以被传递到方法或像NSArray或NSDic
 </div>
 	
 		<span class="comments"><a href="/blog/2013/06/08/basic-arduino//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/06/08/lm35shi-yong-bi-ji/">LM35使用笔记</a></h1>
-	<div class="entry-content">
-		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cm">/*</span>
-</span><span class='line'><span class="cm">使用LM35来测量室内温度</span>
-</span><span class='line'>
-</span><span class='line'><span class="cm">留意float类型的计算和温度换算公式</span>
-</span><span class='line'><span class="cm">*/</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">A0</span><span class="p">);</span>    <span class="c1">//读取A0口的电压值</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kt">float</span> <span class="n">vol</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mf">1024.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">5.0</span><span class="p">;</span>   <span class="c1">//使用浮点数存储温度数据，温度数据由电压值换算得到</span>
-</span><span class='line'>  <span class="kt">float</span> <span class="n">T</span> <span class="o">=</span> <span class="n">vol</span><span class="o">*</span><span class="mi">100</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;analogRead A0: &quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot; Volatge: &quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">vol</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot; Temperature: &quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>                   <span class="c1">//串口输出温度数据</span>
-</span><span class='line'>  <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>                           <span class="c1">//等待2秒，控制刷新速度</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Analog convert Voltage</h3>
-
-<p>LM35换算公式简化掉 Analog数值*(5/1024) 即可 5 voltage 1024 analog</p>
-
-<p><img src="http://25.media.tumblr.com/d0f801f032d35b3ff84a0df6c6c2cb63/tumblr_mnbaw9lKc31sst44io1_400.jpg">
-<img src="http://25.media.tumblr.com/0dae8653daf7cb673d7956f3ecc5ef20/tumblr_mnb63bt0J11sst44io1_400.jpg"></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">LM35</span> <span class="n">Temperature</span> <span class="n">Sensor</span>
-</span><span class='line'><span class="err">和</span><span class="n">TMP36</span><span class="err">不太一样</span> <span class="n">LM35</span><span class="err">没有默认电流</span> <span class="err">在没有温度的时候</span> <span class="err">输出电压是</span><span class="mi">0</span><span class="n">mv</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">对比关系还是</span><span class="mi">5</span><span class="n">v</span><span class="err">对应</span><span class="n">analog</span><span class="err">的</span><span class="mi">1023</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">1023</span><span class="err">的</span><span class="n">analog</span><span class="err">数值转换成</span><span class="n">voltage</span> <span class="o">=</span> <span class="n">analog</span><span class="o">/</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">5</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">1</span><span class="err">摄氏度</span> <span class="o">=</span> <span class="mi">10</span><span class="n">mv</span> <span class="n">so</span> <span class="n">voltage</span><span class="err">转温度也比较容易一些</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">open</span> <span class="n">a</span> <span class="n">serial</span> <span class="n">connection</span> <span class="n">to</span> <span class="n">display</span> <span class="n">values</span> <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-08T23:25:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/arduino/'>Arduino</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/06/08/lm35shi-yong-bi-ji//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

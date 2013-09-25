@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-09T22:49:30+08:00</updated>
+  <updated>2013-09-25T23:22:14+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,206 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Block & Proc]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/25/ruby-block-proc/"/>
+    <updated>2013-09-25T23:19:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/25/ruby-block-proc</id>
+    <content type="html"><![CDATA[<p>``` ruby
+def math(a,b)</p>
+
+<pre><code>yield(a,b)
+</code></pre>
+
+<p>end</p>
+
+<h1>math写成这样子 不跟block是会报错的 因为功能单一 也没必要加上 block_given?</h1>
+
+<p>def teach_math(a,b,&amp;opertion)</p>
+
+<pre><code>puts math(a,b,&amp;opertion)
+</code></pre>
+
+<p>end</p>
+
+<h1>opertion加上&amp;意思就是 opertion是个Proc对象 但我当Block来用</h1>
+
+<p>teach_math(2,3) {|x,y| x * y }</p>
+
+<h1>调用的时候2和3会当作参数穿给a和b两个变量 后面挂着的Block会传给opertion对象</h1>
+
+<p>```</p>
+
+<!-- more -->
+
+
+<p>``` ruby</p>
+
+<h1>稍微修改一下就看出对比了</h1>
+
+<h1>因为math定义了一个yield 所以就必须有一个block挂上去一起玩或者把一个Proc当做block来挂着玩</h1>
+
+<h1>懂？</h1>
+
+<h1>这么写的话  opertion_again就必须是一个proc的对象 使用其自身的call方法来回调</h1>
+
+<p>def math(a,b,opertion_again)</p>
+
+<pre><code>opertion_again.call(a,b)
+</code></pre>
+
+<p>end</p>
+
+<p>def teach_math(a, b, &amp;opertion)</p>
+
+<pre><code>puts math(a,b,opertion)#在这里就传进去一个proc对象而不是一个当做block的proc
+</code></pre>
+
+<p>end</p>
+
+<p>teach_math(2,3) { |x,y| x * y }</p>
+
+<h1>-------------------Block--->Proc--------------------------------------</h1>
+
+<p>def my_method(&amp;the_proc)</p>
+
+<pre><code>the_proc #去掉了&amp;就变成了一个普通的proc对象并返回出去！
+</code></pre>
+
+<p>end</p>
+
+<p>cmp = my_method {|name| "Hello,#{name}!"}#cmp其实是me_method的返回值就是一个proc对象</p>
+
+<h1>所以要call回调</h1>
+
+<p>cmp.call("Johnny")</p>
+
+<h1>-------------------Proc--->Block--------------------------------------</h1>
+
+<p>def my_method(greeting)</p>
+
+<pre><code>puts "#{greeting},#{yield}"#看到yield了就意味着这个方法调用的时候需要跟一个block
+</code></pre>
+
+<p>end</p>
+
+<p>my_proc = proc { "Woody" } #声明一个proc对象</p>
+
+<p>my_method("Hello",&amp;my_proc)#把Proc当Block ！again!</p>
+
+<p>```</p>
+
+<p>``` ruby
+def me_method()
+  yield
+end</p>
+
+<h1>puts my_method { "xXx" }   => "xXx"</h1>
+
+<p>def me_method2(&amp;my_proc)
+  my_proc.call
+end</p>
+
+<h1>me_method2 { "xXx" }   => "xXx"</h1>
+
+<h1>当你会把Block和Proc串起来玩的时候  可调用对象的概念应该了解的差不多了</h1>
+
+<p>def me_method()
+  yield
+end</p>
+
+<p>def me_method2(&amp;my_proc)
+  me_method(&amp;my_proc)
+end</p>
+
+<p>me_method2 { "<em>why" } # => "</em>why"
+```</p>
+
+<blockquote><p>这两个方法在调用的时候都需要跟一个block</p></blockquote>
+
+<h3>大招</h3>
+
+<p>``` ruby
+["1", "2", "3"].map(&amp;:to_i)</p>
+
+<h1>其效果和下面这个一样</h1>
+
+<p>["1", "2", "3"].map {|i| i.to_i }
+```</p>
+
+<blockquote><p>Reg Braithwaite简单地介绍了to_proc是怎样让 (1..100).inject(&amp;:+) 这样的代码工作的:</p></blockquote>
+
+<p>&amp; 操作符用来把Proc对象转化成块，或者把块转化成Proc对象。这此例中，它试图把符号 :+ 转换成一个块。此转换过程使用了Ruby内建的强制机制。这个机制会检查我们是否有一个Proc对象。如果没有，它就把#to_proc方法传递到参数中 来生成一个Proc。如果符号 :+ 有#to_proc方法，就调用它。在Ruby 1.9中，它就有一个#to_proc方法。此方法使用了第一个参数，然后返回一个Proc，并把 + 方法和其他参数传递给它。
+由此可见，&amp;:+ 实际上就是 { |x, y| x + y }</p>
+
+<p>``` ruby
+(1..5).map(&amp;:to_s)</p>
+
+<h1>=> ["1", "2", "3", "4", "5"]</h1>
+
+<p>(1..5).map{|x| x.to_s }</p>
+
+<h1>=> ["1", "2", "3", "4", "5"]</h1>
+
+<p> ["woody","johnny"].map(&amp;:capitalize)</p>
+
+<h1>=> ["Woody", "Johnny"]</h1>
+
+<p>```</p>
+
+<h3>另一种可调用对象的方法  .method</h3>
+
+<p>``` ruby
+class MyClass</p>
+
+<pre><code>def initialize(value)
+    @name = value
+end
+
+def my_method
+    @name.capitalize
+end
+</code></pre>
+
+<p>end</p>
+
+<p>object = MyClass.new("woody")
+cmp = object.method :my_method
+cmp.class #=> Method
+cmp.call #=> "Woody"</p>
+
+<h1>String.instance_methods</h1>
+
+<p>```</p>
+
+<h3>instance_eval</h3>
+
+<p><code>object#instance_eval</code> 可以在对象的上下文中执行一个Block</p>
+
+<p>``` ruby
+@setups = []</p>
+
+<h1>初始化</h1>
+
+<p>def setup(&amp;block)
+  @setups &lt;&lt; block
+end</p>
+
+<p>setup do
+  puts "[\033[1;36;40m Setting up \033[m] [\033[1;37;40m Sky \033[m]"
+  @sky_height = 100
+end</p>
+
+<p>setup do
+  puts "[\033[1;36;40m Setting up \033[m] [\033[1;37;40m Mountains \033[m]"
+  @mountains_height = 200
+end</p>
+
+<p> @setups.each {|setup| env.instance_eval &amp;setup }
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby On Kettle]]></title>
@@ -364,105 +564,6 @@ http://semisconblog.herokuapp.com/ | git@heroku.com:semisconblog.git
 Git remote heroku added
 </code>
 回头再写 Heroku还是有点不熟悉</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby Moudle &amp; Class &amp; Method]]></title>
-    <link href="http://woody1983.github.com/blog/2012/12/11/ruby-moudle-and-class-and-method/"/>
-    <updated>2012-12-11T15:17:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2012/12/11/ruby-moudle-and-class-and-method</id>
-    <content type="html"><![CDATA[<h4>不能创建实例和继承 作用之一是提供namespace 通过使用<code>Moudle.method</code>的方式调用 可以避免方法 常数和类名称的冲突。</h4>
-
-<p>include一个module以后 可以直接调用里面的常数和方法 一般调用方法为</p>
-
-<!-- more -->
-
-
-<p>``` ruby
-module HelloWorld
-  Version = "1.0"</p>
-
-<p>  def hello(name)</p>
-
-<pre><code>print "Hi #{name}. \n"
-</code></pre>
-
-<p>  end
-  #如果该method需要对外部公开的话
-  module_function :hello
-end
-```</p>
-
-<p>调用的时候就是 <code>HelloWorld::Verison</code> or <code>HelloWorld.hello('1024bit')</code></p>
-
-<blockquote><p>Mix-in 讲moduld混到Class中 可以将两个Class中相同的功能植入Module中</p></blockquote>
-
-<p>``` ruby
-module MyModule
-  #
-end</p>
-
-<p>class MyClass1
-  include MyModule
-end</p>
-
-<p>class MyClass2
-  include MyModule
-end
-```</p>
-
-<h2>Class</h2>
-
-<ul>
-<li>初始化方法 initialize</li>
-<li>访问方法 <code>attr_reader :name</code> &amp; <code>attr_writer</code> &amp; <code>attr_accessor</code></li>
-<li>类变量<code>@@</code>是所有实例共享的变量</li>
-<li>类方法 不能对实例操作。或者说实例无法调用类方法</li>
-</ul>
-
-
-<p>类方法的声明三种写法</p>
-
-<p>``` ruby
-class HelloWorld
-  def HelloWorld.hello(name)</p>
-
-<pre><code>#
-</code></pre>
-
-<p>  end
-end</p>
-
-<h1>=></h1>
-
-<p>class HelloWorld
-  #
-end</p>
-
-<p>class &lt;&lt; HelloWorld
-  def hello
-  end
-end</p>
-
-<h1>=></h1>
-
-<p>class HelloWorld
-  def self.hello
-  end
-end
-```</p>
-
-<h2>Method</h2>
-
-<p>如果Method的参数过多 建议放到Hash里去处理</p>
-
-<p><code>ruby
-def hello(name="Ruby",option={})
-  long = options[:long]
-  body = message
-end
-</code></p>
 ]]></content>
   </entry>
   
