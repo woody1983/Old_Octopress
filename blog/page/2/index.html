@@ -7,38 +7,10 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-/*
-使用LM35来测量室内温度 留意float类型的计算和温度换算公式
-*/ void setup() { Serial.begin( &hellip;">
+	<meta name="description" content="PIN脚电压 digitalWrite(led, HIGH); 使13腳位的電壓設定為相對應的值,HIGH為5V(3.3的板子上為3.3v),LOW為0V Digital Read Serial 串行数字阅读
+Analog Read Serial 串行模拟阅读
+resistor 电阻
+hook- &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -109,6 +81,61 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/06/08/basic-arduino/">Basic Arduino</a></h1>
+	<div class="entry-content">
+		<h3>PIN脚电压</h3>
+
+<p>digitalWrite(led, HIGH);</p>
+
+<p>使13腳位的電壓設定為相對應的值,HIGH為5V(3.3的板子上為3.3v),LOW為0V</p>
+
+<ul>
+<li>Digital Read Serial 串行数字阅读</li>
+<li>Analog Read Serial 串行模拟阅读</li>
+<li>resistor 电阻</li>
+<li>hook-up wire 面包板插线</li>
+<li>breadboard 面包板</li>
+</ul>
+
+
+<p>留意 LED的+电源是有PIN脚给的~ 5V电源是直接供电给button 然后通过10k的电阻连接到GND~ 并在-电源上插了一根线连到一个PIN脚上 并pinMode设置为OUTPUT~获取pushbutton的电源情况~</p>
+
+<p><img src="http://25.media.tumblr.com/fa5442720a0bb7c5977224b78bcde78f/tumblr_mnb2qw0yjf1sst44io1_400.jpg"></p>
+
+
+		
+		<a href="/blog/2013/06/08/basic-arduino/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-08T23:50:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/arduino/'>Arduino</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/06/08/basic-arduino//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -685,50 +712,6 @@ pulseIn函数用于读取引脚脉冲的时间长度，脉冲可以是HIGH或LOW
 </div>
 	
 		<span class="comments"><a href="/blog/2013/04/16/r-note//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/03/25/wu-xiu-bo-tan-you-yu/">吴秀波谈忧郁</a></h1>
-	<div class="entry-content">
-		<p>吴秀波：我觉得人生除了在得意忘形时，其实无处不是困境，所谓困境就是因为不满，所以带来沮丧的感受。就拿影片中Frank这个男人做个解释，他就像一棵“树”，你看树的生存环境是“不能动”。所谓“不能动”，是指他在家庭中的位置，他生活的选择、对妻女的爱、对人性的善意不能动。那么，随之而来你会看到他面临了所有的困境，工作离他而去，妻子嫁给别人，甚至连孩子的抚养权都没有了，隐约而来以为的“幸福”也要离他而去。这些接踵而来的变故，就像树的叶子、花朵、果实一个个都掉了，这就是困境。如果这棵树就此死掉了，就是绝望。<code>如果这棵树在明年春天还能开花，到了秋天依旧结果，那在整个冬天他就叫做忧郁。在所有东西离你而去，生命中所有的失去渐渐开始，你依然在静静带着感恩的心境来接受的时候，我以为这是唯一能被人称为“忧郁”气质的东西</code>。</p>
-
-<h3>吴秀波给我一种很睿智的感觉 网上也经常看到他的<code>语录</code> 读了几遍 感觉禅意十足 而且有些东西在我看来 实在是需要岁月的沉淀才能酝酿不一样的人生。</h3>
-
-<p>时光网：Frank是一个稀有好男人，用文佳佳话说“好的都有点贱”，你怎么理解这个角色？</p>
-
-<p>吴秀波：可能现今的社会状态下，一个男人不占女人便宜就叫好了。所以很多人看Frank这个角色，真有这样的男的吗？我不知道您是哪年生人，在我父母那个年代，这样的人比比皆是，也许现在还有这样的人。</p>
-
-
-		
-		<a href="/blog/2013/03/25/wu-xiu-bo-tan-you-yu/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-25T15:01:00+08:00" pubdate data-updated="true">Mar 25<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/talks/'>talks</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/03/25/wu-xiu-bo-tan-you-yu//blog/page/2/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

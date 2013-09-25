@@ -7,7 +7,30 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="偶然一个机会在罗永浩的微博看到这样一段话，感觉不错，随即抄了下来。 罗永浩提到的工匠精神： 1）对所从事的事情有一种完美主义情节，在力所能及的情况下做到极致。 2）对细节的执着，点点滴滴决不放过。 3）激情，对所做的事欲罢不能，并从中获得巨大的心灵满足。 4）执着，百折不挠的勇气。可惜， &hellip;">
+	<meta name="description" content="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+ser = ARGV.first
+prompt = &#39;&gt; &#39; puts &quot;Hi #{user}, I&#39;m the #{$0} script.& &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +101,90 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp/">Ruby ARGV &amp; STDIN.gets.chomp()</a></h1>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ser</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'><span class="n">prompt</span> <span class="o">=</span> <span class="s1">&#39;&gt; &#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hi </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">, I&#39;m the </span><span class="si">#{</span><span class="vg">$0</span><span class="si">}</span><span class="s2"> script.&quot;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;I&#39;d like to ask you a few questions.&quot;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Do you like me </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">?&quot;</span>
+</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
+</span><span class='line'><span class="n">likes</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Where do you live </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">?&quot;</span>
+</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
+</span><span class='line'><span class="n">lives</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;What kind of computer do you have?&quot;</span>
+</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
+</span><span class='line'><span class="n">computer</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="o">&lt;&lt;</span><span class="no">MESSAGE</span>
+</span><span class='line'><span class="sh">Alright, so you said #{likes} about liking me.</span>
+</span><span class='line'><span class="sh">You live in #{lives}.  Not sure where that is.</span>
+</span><span class='line'><span class="sh">And you have a #{computer} computer.  Nice.</span>
+</span><span class='line'><span class="no">MESSAGE</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Important: 同時必須注意的是，我們也用了 STDIN.gets 取代了 gets。這是因為如果有東西在 ARGV 裡，標準的gets 會認為將第一個參數當成檔案而嘗試從裡面讀東西。在要從使用者的輸入（如stdin）讀取資料的情況下我們必須明確地使用 STDIN.gets。</p></blockquote>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-04T14:32:00+08:00" pubdate data-updated="true">Dec 4<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp//blog/page/5/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -553,72 +660,6 @@ You provide the method implementation in the
 </div>
 	
 		<span class="comments"><a href="/blog/2012/08/11/idecides-logic//blog/page/5/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/11/app-magnets/">App Magnets</a></h1>
-	<div class="entry-content">
-		<h2>App Magnets</h2>
-
-<ul>
-<li>Determine app layout. <code>确定应用程序的布局</code></li>
-<li>Build the GUI <code>构建用户图形界面</code></li>
-<li>Figure out how to use the controls <code>弄清楚如何使用控件</code></li>
-<li>Handle the data <code>处理数据</code></li>
-<li>Generate the email.  <code>生成电子邮件</code></li>
-</ul>
-
-
-<h3>Determine app layout.</h3>
-
-<p>Before you start coding anything, sketch up what you’re thinking.</p>
-
-<h3>Build the GUI</h3>
-
-<p>Some people write backend code first—we’re going to go back and forth depending on our project, but to get started, we’ll do the GUI first this time.</p>
-
-<h3>Figure out how to use the controls</h3>
-
-<p>After you’ve landed on the general app design, you need to get into the documentation a little and figure out how to implement the controls you’ve chosen.</p>
-
-<h3>Handle the data</h3>
-
-<p>Here we need to manage the data coming from the controls.</p>
-
-<h3>Generate the email.</h3>
-
-<p>We’ll help you out with this last step.</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-11T23:09:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/08/11/app-magnets//blog/page/5/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

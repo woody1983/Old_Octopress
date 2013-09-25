@@ -7,7 +7,7 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content=" Rails3 中和Model有关的内容我单独整理出来了。可能是做数据库的时间比较多，喜欢从数据的层面分析问题。 Read on &rarr; Jan 3rd, 2013 rails Comments ">
+	<meta name="description" content=" 假期一直想把嵌套模型的东西整理出来，因为用到的时候经常搞错。其实最重要的地方就是Routes和Path的变化。其余都还好，趁着下午比较无聊，开会之前做一个Demo，跑了一下还OK。 Read on &rarr; Jan 4th, 2013 rails Comments ">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +78,44 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/01/04/rails3de-qian-tao-lian-xi/">Rails3的嵌套练习</a></h1>
+	<div class="entry-content">
+		<h3>假期一直想把嵌套模型的东西整理出来，因为用到的时候经常搞错。其实最重要的地方就是Routes和Path的变化。其余都还好，趁着下午比较无聊，开会之前做一个Demo，跑了一下还OK。</h3>
+
+
+		
+		<a href="/blog/2013/01/04/rails3de-qian-tao-lian-xi/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-04T14:41:00+08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/01/04/rails3de-qian-tao-lian-xi//blog/page/4/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -515,90 +553,6 @@
 </div>
 	
 		<span class="comments"><a href="/blog/2012/12/04/ruby-resource//blog/page/4/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp/">Ruby ARGV &amp; STDIN.gets.chomp()</a></h1>
-	<div class="entry-content">
-		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ser</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
-</span><span class='line'><span class="n">prompt</span> <span class="o">=</span> <span class="s1">&#39;&gt; &#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hi </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">, I&#39;m the </span><span class="si">#{</span><span class="vg">$0</span><span class="si">}</span><span class="s2"> script.&quot;</span>
-</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;I&#39;d like to ask you a few questions.&quot;</span>
-</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Do you like me </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">?&quot;</span>
-</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
-</span><span class='line'><span class="n">likes</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Where do you live </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">?&quot;</span>
-</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
-</span><span class='line'><span class="n">lives</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;What kind of computer do you have?&quot;</span>
-</span><span class='line'><span class="nb">print</span> <span class="n">prompt</span>
-</span><span class='line'><span class="n">computer</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="o">&lt;&lt;</span><span class="no">MESSAGE</span>
-</span><span class='line'><span class="sh">Alright, so you said #{likes} about liking me.</span>
-</span><span class='line'><span class="sh">You live in #{lives}.  Not sure where that is.</span>
-</span><span class='line'><span class="sh">And you have a #{computer} computer.  Nice.</span>
-</span><span class='line'><span class="no">MESSAGE</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>Important: 同時必須注意的是，我們也用了 STDIN.gets 取代了 gets。這是因為如果有東西在 ARGV 裡，標準的gets 會認為將第一個參數當成檔案而嘗試從裡面讀東西。在要從使用者的輸入（如stdin）讀取資料的情況下我們必須明確地使用 STDIN.gets。</p></blockquote>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-04T14:32:00+08:00" pubdate data-updated="true">Dec 4<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/12/04/ruby-argv-and-stdin-dot-gets-dot-chomp//blog/page/4/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

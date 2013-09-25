@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-25T23:22:14+08:00</updated>
+  <updated>2013-09-25T23:45:26+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,244 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[eigenclass with Module]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/25/eigenclass-with-module/"/>
+    <updated>2013-09-25T23:23:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/25/eigenclass-with-module</id>
+    <content type="html"><![CDATA[<p>我用了一个很笨的方法才把这个搞明白 那就是&#8230;</p>
+
+<h1>Module的eigenclass 不会被任何事物继承  绝对封闭！</h1>
+
+<p><code>元编程#129Pages#Quiz</code></p>
+
+<h3>例子弄错了~在线编辑器害死人  凸</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MyModule</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">my_method</span><span class="p">;</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Myclass</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">MyModule</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">004</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">MyModule</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for MyModule:Module</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">010</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="nb">puts</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for Myclass:Class</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">011</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;Myclass:0x861fa78&gt;</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">012</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">obj</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#hello</span>
+</span><span class='line'><span class="c1">#=&gt; nil</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在Module中定义一个普通的实例方法 Myclass Include该Module 只有Myclass的实例obj可以调用
+也就是说<code>my_method</code>一直作为实例方法在ancestors中流窜</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MyModule</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">my_method</span><span class="p">;</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Myclass</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">MyModule</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">007</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">MyModule</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;hello&quot;</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">00</span><span class="mi">8</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for Myclass:Class</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">00</span><span class="mi">9</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;Myclass:0x8627980&gt;</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">010</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">obj</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for #&lt;Myclass:0x8627980&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>第二次  将Module中的方法改成是了实例方法  结果正常 只有MyModule可以正常调用  但Myclass并没有继承到
+难道在Myclass的eigenclass中并没有得到这个继承？</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MyModule</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">my_method</span><span class="p">;</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Myclass</span>
+</span><span class='line'>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">MyModule</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">00</span><span class="mi">9</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">MyModule</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for MyModule:Module</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">010</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;hello&quot;</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">011</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;Myclass:0x8627570&gt;</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">012</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">obj</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for #&lt;Myclass:0x8627570&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>第三次和第一次的修改差异在 将MyModule植入到 Myclass的eigenclass中了~ Myclass可以正常调用该类方法</p>
+
+<h3>可是作为 Myclass的实例对象obj却不能调用这个my_method了</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MyModule</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">my_method</span><span class="p">;</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Myclass</span>
+</span><span class='line'>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">MyModule</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">00</span><span class="mi">9</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">MyModule</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;hello&quot;</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">010</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for Myclass:Class</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">011</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;Myclass:0x862bfa8&gt;</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">012</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">obj</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for #&lt;Myclass:0x862bfa8&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># my_method就算变成Module的类方法以后 还是被继承下来了 和普通的Include看起来效果好像是一样的</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>第四次和第二次 得到的结果是一样的 也就是进没进Myclass的eigenclass都一样~</p>
+
+<p>我把第四部分重写了一下 加入了另一个实例方法在Module中</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MyModule</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">my_method</span><span class="p">;</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">mine_method</span><span class="p">;</span> <span class="s1">&#39;another method&#39;</span><span class="p">;</span> <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Myclass</span>
+</span><span class='line'>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>    <span class="kp">include</span> <span class="no">MyModule</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">012</span><span class="p">:</span><span class="mi">0</span><span class="o">*</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">mine_method</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;another method&quot;</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">013</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">Myclass</span><span class="o">.</span><span class="n">my_method</span>
+</span><span class='line'><span class="c1">#NoMethodError: undefined method `my_method&#39; for Myclass:Class</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看来<code>class &lt;&lt; self</code>这种方法只能把MyModule中的实例方法植入到Myclass的eigenclass中 类方法不行</p>
+
+<h2>难道下面这么做是让 MyModule仅仅植入到 Myclass的eigenclass中 而在Myclass中是不可见的？</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Myclass</span>
+</span><span class='line'>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>    <span class="kp">include</span> <span class="no">MyModule</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby Block & Proc]]></title>
@@ -3311,53 +3549,6 @@ Let&#8217;s make a matrix 3 rows high by 4 columns wide,with all its fields set 
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[吴秀波谈忧郁]]></title>
-    <link href="http://woody1983.github.com/blog/2013/03/25/wu-xiu-bo-tan-you-yu/"/>
-    <updated>2013-03-25T15:01:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/03/25/wu-xiu-bo-tan-you-yu</id>
-    <content type="html"><![CDATA[<p>吴秀波：我觉得人生除了在得意忘形时，其实无处不是困境，所谓困境就是因为不满，所以带来沮丧的感受。就拿影片中Frank这个男人做个解释，他就像一棵“树”，你看树的生存环境是“不能动”。所谓“不能动”，是指他在家庭中的位置，他生活的选择、对妻女的爱、对人性的善意不能动。那么，随之而来你会看到他面临了所有的困境，工作离他而去，妻子嫁给别人，甚至连孩子的抚养权都没有了，隐约而来以为的“幸福”也要离他而去。这些接踵而来的变故，就像树的叶子、花朵、果实一个个都掉了，这就是困境。如果这棵树就此死掉了，就是绝望。<code>如果这棵树在明年春天还能开花，到了秋天依旧结果，那在整个冬天他就叫做忧郁。在所有东西离你而去，生命中所有的失去渐渐开始，你依然在静静带着感恩的心境来接受的时候，我以为这是唯一能被人称为“忧郁”气质的东西</code>。</p>
-
-<h3>吴秀波给我一种很睿智的感觉 网上也经常看到他的<code>语录</code> 读了几遍 感觉禅意十足 而且有些东西在我看来 实在是需要岁月的沉淀才能酝酿不一样的人生。</h3>
-
-<p>时光网：Frank是一个稀有好男人，用文佳佳话说“好的都有点贱”，你怎么理解这个角色？</p>
-
-<p>吴秀波：可能现今的社会状态下，一个男人不占女人便宜就叫好了。所以很多人看Frank这个角色，真有这样的男的吗？我不知道您是哪年生人，在我父母那个年代，这样的人比比皆是，也许现在还有这样的人。</p>
-
-<!-- more -->
-
-
-<p>“家庭”对吴秀波来说太重要了，他认为“如果你自己都不能去正确的领悟生活，你拿什么作为跟儿子的谈资？如果你自己都没有稳定的事业，你怎么来养活家人？如果你自己都不能保证不犯法，你怎么去报效你的父母？作为一个男人来讲，要对自己负责。”因此，脱下“明星光环”的吴秀波，就是个不折不扣的“家居男”。</p>
-
-<p>　　早在成名之前，不停在歌厅与餐馆之间来回折腾的吴秀波便结识了现在的爱妻，当初他们是“姐弟恋”，30多岁时结婚，在吴秀波整个家底只剩下几千块的时候，妻子为他生下了两个可爱的孩子。正是因为妻儿让吴秀波放下了愤青架子，努力在影视圈打拼，为他们的幸福而不断努力。美满的家庭生活，让吴秀波本人都充满了温馨的“家居味”，丝毫没有“性格派”的硬冷与装酷，私下只给人平和亲切之感。</p>
-
-<p>　　与此同时，吴秀波再红再风光，都竭力保护家人的信息不被公开，从未想过把老婆孩子作为娱乐话题被媒体曝光，也没有大秀恩爱，平淡低调才是吴秀波维护幸福的秘诀。所以每次看完采访提纲，他都会与媒体沟通说：“我非常真诚地表示，感情、家人、绯闻问题真的与工作无关，但我可以接受跟工作有关的采访。”所以，吴秀波只会对外界强调：“你问我爱我儿子和妻子吗，我的回答是爱。你问我如何处理家庭和工作之间的关系，我说在工作中想着家里，在家里想着工作。”就是如此“倔强”，让吴秀波至今都能将家人捍卫得滴水不漏，他在被问及私生活方面的表现越是“圆滑”和“难搞”，便越显示他对家的深厚感情。如此“家居男子”，不作秀、不喧哗，才是最有人情味儿的。</p>
-
-<h3>关于明星</h3>
-
-<p>马龙·白兰度最后也是一具枯骨，梦露再漂亮也就是一张照片。这就是一个过程，给你幸福你就要承受痛苦，同意吗？就好像你看一窝蚂蚁，从小到大看过无数蚂蚁，你记得哪只蚂蚁是你见过的吗？没有，都是蚂蚁，都是凡人。</p>
-
-<h3>关于爱情</h3>
-
-<p>被翻译成英文的:I fall in love with you at this age,it&#8217;s not because you have car and house.It&#8217;s only because you wore a shirt I like on that sunny day.
-在这个年纪爱你，不因为你有车有房，只是那天阳光很好，你穿了一件我爱的衬衫。</p>
-
-<p>原版<code>“那时候爱上一个人不是因为你有车有房，而是下午阳光很好，你穿了一件白衬衫。”</code></p>
-
-<h3>关于信仰</h3>
-
-<p>我觉得任何的信仰的源泉都来源于爱。爱是什么？爱只存在于第一人称，如我爱什么，我爱你，我爱他，我爱谁，这就是爱。你要说我爱你，你爱我吗？这不是爱，这叫换，两码事。所以我觉得所有的信仰源于爱，一旦爱不能成立或者不能释放，我就需要新的信仰来完善这个世界。</p>
-
-<p>人在正常情况下，都要保持平静和愉悦，学习也是随时随地的，这样人会变得谦卑。</p>
-
-<p>只要拥有完善的精神世界就好，别人骂我赞我，我都感恩，也都算是我的修行。</p>
-
-<p>今天的天亮不亮，取决于你的眼睛是不是特别需要光。 ————吴秀波</p>
-
-<h2>回头再总结吧 总之是个很值得学习的男人。</h2>
 ]]></content>
   </entry>
   

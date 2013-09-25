@@ -7,7 +7,11 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="为什么要这个todo？ 很重要的一个原因:我们欠管，而恰恰也是因为这个大多数人的todo基本上就素一个摆设，要么敷衍自己要么敷衍家长大部分是敷衍寒暑假，给自己的玩耍创造更多的舆论支持。 为什么大多数的todo是没用的? 很简单，我们大脑最聪明的时候就是你不告诉他该怎么做的时候，说白了就是潜意识， &hellip;">
+	<meta name="description" content="App Magnets Determine app layout. 确定应用程序的布局
+Build the GUI 构建用户图形界面
+Figure out how to use the controls 弄清楚如何使用控件
+Handle the data 处理数据
+Generate the &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +82,72 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/08/11/app-magnets/">App Magnets</a></h1>
+	<div class="entry-content">
+		<h2>App Magnets</h2>
+
+<ul>
+<li>Determine app layout. <code>确定应用程序的布局</code></li>
+<li>Build the GUI <code>构建用户图形界面</code></li>
+<li>Figure out how to use the controls <code>弄清楚如何使用控件</code></li>
+<li>Handle the data <code>处理数据</code></li>
+<li>Generate the email.  <code>生成电子邮件</code></li>
+</ul>
+
+
+<h3>Determine app layout.</h3>
+
+<p>Before you start coding anything, sketch up what you’re thinking.</p>
+
+<h3>Build the GUI</h3>
+
+<p>Some people write backend code first—we’re going to go back and forth depending on our project, but to get started, we’ll do the GUI first this time.</p>
+
+<h3>Figure out how to use the controls</h3>
+
+<p>After you’ve landed on the general app design, you need to get into the documentation a little and figure out how to implement the controls you’ve chosen.</p>
+
+<h3>Handle the data</h3>
+
+<p>Here we need to manage the data coming from the controls.</p>
+
+<h3>Generate the email.</h3>
+
+<p>We’ll help you out with this last step.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-11T23:09:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ios/'>IOS</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/08/11/app-magnets//blog/page/6/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -656,481 +726,6 @@
 </div>
 	
 		<span class="comments"><a href="/blog/2010/05/23/mysql-sp-funny//blog/page/6/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2010/05/23/mysql-multi/">MySQL 多實例練習實錄</a></h1>
-	<div class="entry-content">
-		<h4>流程：</h4>
-
-<ul>
-<li>初始化一个库 然后-P端口号 -hIP地址进去</li>
-<li>配置权限</li>
-<li>接着用multi来实现管理。 以start和stop为主。</li>
-<li>@MYSQL server没有启动</li>
-<li>@建仓</li>
-<li>@修改my.cnf</li>
-<li>@mysqld_multi start 005</li>
-<li>@mysql_install_db &#8211;user=mysql &#8211;datadir=/db5</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[root@MySQL-NDB ~]# cd /
-</span><span class='line'>[root@MySQL-NDB /]# mkdir db7
-</span><span class='line'>[root@MySQL-NDB /]# chown -R mysql.mysql db7
-</span><span class='line'>[root@MySQL-NDB /]# cd db7
-</span><span class='line'>[root@MySQL-NDB db7]# vim /etc/my.cnf 
-</span><span class='line'>&lt;!-- more--&gt;
-</span><span class='line'>
-</span><span class='line'>[mysqld007]
-</span><span class='line'>port            = 3312
-</span><span class='line'>socket          = /db7/mysql.sock
-</span><span class='line'>pid-file        = /db7/mysqld007.pid
-</span><span class='line'>datadir         = /db7
-</span><span class='line'>server-id       = 7
-</span><span class='line'>log-bin         = mysql-bin</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[root@MySQL-NDB db7]# mysql_install_db --user=mysql --datadir=/db7
-</span><span class='line'>[root@MySQL-NDB db7]# ls -la
-</span><span class='line'>total 20
-</span><span class='line'>drwxr-xr-x  4 mysql mysql 4096 May 13 05:14 .
-</span><span class='line'>drwxr-xr-x 27 root  root  4096 May 13 05:12 ..
-</span><span class='line'>drwx------  2 mysql root  4096 May 13 05:14 mysql
-</span><span class='line'>drwx------  2 mysql root  4096 May 13 05:14 test
-</span><span class='line'>[root@MySQL-NDB db7]# mysqld_multi start 007
-</span><span class='line'>[root@MySQL-NDB db7]# ls -la
-</span><span class='line'>total 11408
-</span><span class='line'>drwxr-xr-x  4 mysql mysql     4096 May 13 05:15 .
-</span><span class='line'>drwxr-xr-x 27 root  root      4096 May 13 05:12 ..
-</span><span class='line'>-rw-rw----  1 mysql mysql 10485760 May 13 05:15 ibdata1
-</span><span class='line'>-rw-rw----  1 mysql mysql  1150976 May 13 05:15 ib_logfile0
-</span><span class='line'>drwx------  2 mysql root      4096 May 13 05:14 mysql
-</span><span class='line'>-rw-rw----  1 mysql mysql        0 May 13 05:15 mysql-bin.index
-</span><span class='line'>-rw-rw----  1 mysql root       543 May 13 05:15 MySQL-NDB.err
-</span><span class='line'>drwx------  2 mysql root      4096 May 13 05:14 test
-</span><span class='line'>
-</span><span class='line'>[root@MySQL-NDB db7]# netstat -tunlp
-</span><span class='line'>Active Internet connections (only servers)
-</span><span class='line'>Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID/Program name   
-</span><span class='line'>tcp        0      0 0.0.0.0:3307                0.0.0.0:*                   LISTEN      2011/mysqld         
-</span><span class='line'>tcp        0      0 0.0.0.0:3308                0.0.0.0:*                   LISTEN      2113/mysqld         
-</span><span class='line'>tcp        0      0 0.0.0.0:3309                0.0.0.0:*                   LISTEN      2213/mysqld         
-</span><span class='line'>tcp        0      0 0.0.0.0:3310                0.0.0.0:*                   LISTEN      2606/mysqld         
-</span><span class='line'>tcp        0      0 0.0.0.0:3311                0.0.0.0:*                   LISTEN      2858/mysqld         
-</span><span class='line'>tcp        0      0 0.0.0.0:3312                0.0.0.0:*                   LISTEN      3023/mysqld         
-</span><span class='line'>tcp        0      0 :::22                       :::*                        LISTEN      1649/sshd   </span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[root@MySQL-NDB db7]# mysql -P3312 -h127.0.0.1
-</span><span class='line'>Welcome to the MySQL monitor.  Commands end with ; or \g.
-</span><span class='line'>Your MySQL connection id is 1
-</span><span class='line'>Server version: 5.1.46-log MySQL Community Server (GPL)
-</span><span class='line'>
-</span><span class='line'>Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
-</span><span class='line'>This software comes with ABSOLUTELY NO WARRANTY. This is free software,
-</span><span class='line'>and you are welcome to modify and redistribute it under the GPL v2 license
-</span><span class='line'>
-</span><span class='line'>Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-</span><span class='line'>
-</span><span class='line'>mysql&gt; \s
-</span><span class='line'>--------------
-</span><span class='line'>mysql  Ver 14.14 Distrib 5.1.46, for pc-linux-gnu (i686) using readline 5.1
-</span><span class='line'>
-</span><span class='line'>Connection id:          1
-</span><span class='line'>Current database:
-</span><span class='line'>Current user:           root@localhost
-</span><span class='line'>SSL:                    Not in use
-</span><span class='line'>Current pager:          stdout
-</span><span class='line'>Using outfile:          ''
-</span><span class='line'>Using delimiter:        ;
-</span><span class='line'>Server version:         5.1.46-log MySQL Community Server (GPL)
-</span><span class='line'>Protocol version:       10
-</span><span class='line'>Connection:             127.0.0.1 via TCP/IP
-</span><span class='line'>Server characterset:    latin1
-</span><span class='line'>Db     characterset:    latin1
-</span><span class='line'>Client characterset:    latin1
-</span><span class='line'>Conn.  characterset:    latin1
-</span><span class='line'>TCP port:               3312
-</span><span class='line'>Uptime:                 39 sec
-</span><span class='line'>
-</span><span class='line'>Threads: 1  Questions: 4  Slow queries: 0  Opens: 15  Flush tables: 1  Open tables: 8  Queries per second avg: 0.102
-</span><span class='line'>--------------</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[root@MySQL-NDB db7]# ls -la
-</span><span class='line'>total 20556
-</span><span class='line'>drwxr-xr-x  4 mysql mysql     4096 May 13 05:15 .
-</span><span class='line'>drwxr-xr-x 27 root  root      4096 May 13 05:12 ..
-</span><span class='line'>-rw-rw----  1 mysql mysql 10485760 May 13 05:15 ibdata1
-</span><span class='line'>-rw-rw----  1 mysql mysql  5242880 May 13 05:15 ib_logfile0
-</span><span class='line'>-rw-rw----  1 mysql mysql  5242880 May 13 05:15 ib_logfile1
-</span><span class='line'>drwx------  2 mysql root      4096 May 13 05:14 mysql
-</span><span class='line'>-rw-rw----  1 mysql mysql      106 May 13 05:15 mysql-bin.000001
-</span><span class='line'>-rw-rw----  1 mysql mysql       19 May 13 05:15 mysql-bin.index
-</span><span class='line'>-rw-rw----  1 mysql mysql        5 May 13 05:15 mysqld006.pid
-</span><span class='line'>-rw-rw----  1 mysql root      1196 May 13 05:15 MySQL-NDB.err
-</span><span class='line'>srwxrwxrwx  1 mysql mysql        0 May 13 05:15 mysql.sock
-</span><span class='line'>drwx------  2 mysql root      4096 May 13 05:14 test</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[root@MySQL-NDB db]# mysql_install_db --user=mysql
-</span><span class='line'>[root@MySQL-NDB db]# service mysql start
-</span><span class='line'>
-</span><span class='line'>否则
-</span><span class='line'>[root@MySQL-NDB db]# service mysql start
-</span><span class='line'>Starting MySQL... ERROR! Manager of pid-file quit without updating file.
-</span><span class='line'>pid-file=/db/mysqld001.pid
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>GRANT SHUTDOWN ON *.*  TO 'multi_admin'@'localhost' IDENTIFIED BY 'multipass';</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[mysqld_multi]
-</span><span class='line'>mysqld     = /usr/bin/mysqld_safe
-</span><span class='line'>mysqladmin = /usr/bin/mysqladmin
-</span><span class='line'>user       = multi_admin
-</span><span class='line'>password   = multipass
-</span><span class='line'>
-</span><span class='line'>[mysqld002]
-</span><span class='line'>port            = 3307
-</span><span class='line'>socket          = /db/mysql.sock
-</span><span class='line'>pid-file        = /db/mysqld001.pid
-</span><span class='line'>datadir         = /db
-</span><span class='line'>skip-locking
-</span><span class='line'>key_buffer_size = 16M
-</span><span class='line'>max_allowed_packet = 1M
-</span><span class='line'>table_open_cache = 64
-</span><span class='line'>sort_buffer_size = 512K
-</span><span class='line'>net_buffer_length = 8K
-</span><span class='line'>read_buffer_size = 256K
-</span><span class='line'>read_rnd_buffer_size = 512K
-</span><span class='line'>myisam_sort_buffer_size = 8M
-</span><span class='line'>log-bin=mysql-bin
-</span><span class='line'>binlog_format=mixed
-</span><span class='line'>server-id       = 1
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>[mysqld003]
-</span><span class='line'>port            = 3308
-</span><span class='line'>socket          = /db2/mysql.sock
-</span><span class='line'>pid-file        = /db2/mysqld002.pid
-</span><span class='line'>datadir         = /db2
-</span><span class='line'>server-id       = 2
-</span><span class='line'>log-bin         = mysql-bin
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>###############
-</span><span class='line'>| Innodb_buffer_pool_read_requests  | 77      |
-</span><span class='line'>| Innodb_buffer_pool_reads               | 12      |
-</span><span class='line'>(Innodb_buffer_pool_read_requests - Innodb_buffer_pool_reads) / Innodb_buffer_pool_read_requests * 100%
-</span><span class='line'>
-</span><span class='line'>77-12/77
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>###################
-</span><span class='line'>
-</span><span class='line'>[mysqld008]
-</span><span class='line'>port            = 3318
-</span><span class='line'>socket          = /db8/mysql.sock
-</span><span class='line'>pid-file        = /db8/mysqld008.pid
-</span><span class='line'>datadir         = /db8
-</span><span class='line'>server-id       = 8
-</span><span class='line'>log-bin         = mysql-bin
-</span><span class='line'>skip_slave_start = 1
-</span><span class='line'>
-</span><span class='line'>innodb_buffer_pool_size = 64M
-</span><span class='line'>innodb_flush_log_at_trx_commit = 2
-</span><span class='line'>innodb_additional_mem_pool_size = 16M
-</span><span class='line'>innodb_lock_wait_timeout = 30
-</span><span class='line'>innodb_support_xa = OFF
-</span><span class='line'>innodb_log_buffer_size = 32M
-</span><span class='line'>innodb_flush_method = O_DIRECT
-</span><span class='line'>innodb_log_file_size = 15M
-</span><span class='line'>
-</span><span class='line'>[mysqld009]
-</span><span class='line'>port            = 3319
-</span><span class='line'>socket          = /db9/mysql.sock
-</span><span class='line'>pid-file        = /db9/mysqld009.pid
-</span><span class='line'>datadir         = /db9
-</span><span class='line'>server-id       = 9
-</span><span class='line'>log-bin         = mysql-bin
-</span><span class='line'>skip_slave_start = 1
-</span><span class='line'>
-</span><span class='line'>replicate_ignore_table = mysql.columns_priv
-</span><span class='line'>replicate_ignore_table = mysql.db
-</span><span class='line'>replicate_ignore_table = mysql.host
-</span><span class='line'>replicate_ignore_table = mysql.procs_priv
-</span><span class='line'>replicate_ignore_table = mysql.tables_priv
-</span><span class='line'>replicate_ignore_table = mysql.user
-</span><span class='line'>
-</span><span class='line'>innodb_buffer_pool_size = 64M
-</span><span class='line'>innodb_flush_log_at_trx_commit = 2
-</span><span class='line'>innodb_additional_mem_pool_size = 16M
-</span><span class='line'>innodb_lock_wait_timeout = 30
-</span><span class='line'>innodb_support_xa = OFF
-</span><span class='line'>innodb_log_buffer_size = 32M
-</span><span class='line'>innodb_flush_method = O_DIRECT
-</span><span class='line'>innodb_log_file_size = 15M</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>grant replication slave ON *.* TO 'rep009'@'localhost' identified by '12345';</code></p>
-
-<p><code>GRANT SHUTDOWN ON *.*  TO 'multi_admin'@'localhost' IDENTIFIED BY 'multipass';</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mysql-bin.000001 527
-</span><span class='line'>
-</span><span class='line'>009
-</span><span class='line'>CHANGE MASTER TO
-</span><span class='line'>MASTER_HOST = '192.168.200.200',
-</span><span class='line'>MASTER_PORT = 3318,
-</span><span class='line'>MASTER_USER = 'rep009',
-</span><span class='line'>MASTER_PASSWORD = '12345',
-</span><span class='line'>MASTER_LOG_FILE = 'mysql-bin.000001',
-</span><span class='line'>MASTER_LOG_POS = 743</span></code></pre></td></tr></table></div></figure>
-
-
-<p>;</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-05-23T19:12:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2010</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2010/05/23/mysql-multi//blog/page/6/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 
