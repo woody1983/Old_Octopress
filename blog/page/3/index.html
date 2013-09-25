@@ -7,7 +7,8 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="吴秀波：我觉得人生除了在得意忘形时，其实无处不是困境，所谓困境就是因为不满，所以带来沮丧的感受。就拿影片中Frank这个男人做个解释，他就像一棵“树”，你看树的生存环境是“不能动”。所谓“不能动”，是指他在家庭中的位置，他生活的选择、对妻女的爱、对人性的善意不能动。那么， &hellip;">
+	<meta name="description" content="导入数据 employees &lt;- read.csv(&#8220;http://www.headfirstlabs.com/books/hfda/hfda_ch09_employees.csv&#8221;,header=TRUE) X id
+received 加薪幅度 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +79,121 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/05/17/ryu-yan-he-hui-gui-fen-xi-de-mo-ni/">R语言和回归分析的模拟</a></h1>
+	<div class="entry-content">
+		<h3>导入数据</h3>
+
+<p>employees &lt;- read.csv(&#8220;http://www.headfirstlabs.com/books/hfda/hfda_ch09_employees.csv&#8221;,header=TRUE)</p>
+
+<ul>
+<li>X id</li>
+<li>received 加薪幅度</li>
+<li>negotiated 是否提出加薪需求</li>
+<li>gender 性别</li>
+<li>year 加薪时间？</li>
+</ul>
+
+
+
+		
+		<a href="/blog/2013/05/17/ryu-yan-he-hui-gui-fen-xi-de-mo-ni/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-17T15:35:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/r/'>R</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/05/17/ryu-yan-he-hui-gui-fen-xi-de-mo-ni//blog/page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/04/16/r-note/">R Note</a></h1>
+	<div class="entry-content">
+		<h3>R 的安装 OS是Centos5.5</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 1011  wget http://cran.r-project.org/src/base/R-3/R-3.0.0.tar.gz
+</span><span class='line'> 1012  tar zxvf R-3.0.0.tar.gz
+</span><span class='line'> 1013  ls -lah
+</span><span class='line'> 1014  cd R-3.0.0
+</span><span class='line'> 1015  yum install gcc-gfortran
+</span><span class='line'> 1016  yum install gcc gcc-c++
+</span><span class='line'> 1017  yum install readline-devel
+</span><span class='line'> 1018  yum install libXt-devel
+</span><span class='line'> 1019  ./configure
+</span><span class='line'> 1020  make
+</span><span class='line'> 1021  make install
+</span><span class='line'> 1022  R</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+
+		
+		<a href="/blog/2013/04/16/r-note/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-16T14:21:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/r/'>R</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/04/16/r-note//blog/page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -568,139 +684,6 @@
 </div>
 	
 		<span class="comments"><a href="/blog/2013/03/05/objective-c-demo-note//blog/page/3/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/03/05/objective-c-note/">Objective-C Note</a></h1>
-	<div class="entry-content">
-		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">HelloWorld</span> : <span class="nc">NSObject</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">printGreeting</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">HelloWorld</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">printGreeting</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>      <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Hello World!&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#import &quot;HelloWorld.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">HelloWorld</span><span class="o">*</span> <span class="n">myObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">HelloWorld</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">myObject</span> <span class="n">printGreeting</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">[</span><span class="n">myObject</span> <span class="n">release</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-
-		
-		<a href="/blog/2013/03/05/objective-c-note/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-05T14:18:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/03/05/objective-c-note//blog/page/3/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/02/28/ge-ren-li-cai-huang-jin-shi-tiao/">个人理财黄金十条</a></h1>
-	<div class="entry-content">
-		<blockquote><p>Working hard and being smart with your money aren&#8217;t things you just should do because they seem virtuous — these behaviors ultimately allow you to get more enjoyment out of life. You&#8217;ll have no regrets when you&#8217;re able to accomplish what&#8217;s important to you because of your savvy ways. These are 10 golden rules that I try to live by; click through and then make a list of your own。你不该仅仅满足于努力工作和明智花钱，因为他们似乎不仅是一种美德，而且这些行为最终可以使你从生活中得到更多的乐趣。当你能用机智的方法完成重要的事情时，你不会有任何后悔和遗憾。这是我尝试过的10个黄金法则；你可以了解一下，然后列出自己的理财法则。</p></blockquote>
-
-<h2>1.Live Within Your Means量入为出</h2>
-
-<p>In order to be truly independent, it&#8217;s imperative</p>
-
-<p>　　to live within your means. Your freedom is limited by owing money to anyone, whether it&#8217;s a credit card company or a family member, so set yourself up for an unrestricted life by saving for the things you want and spending with a plan。想要做到真正的独立，就必须学会量入为出。任何人的自由都会受到金钱的束缚，无论是欠的是信用卡公司还是家里的亲戚。因此，想要过上不受束缚的生活，就要学会通过储蓄来得到自己想要的东西，并学会有计划的开支。</p>
-
-
-		
-		<a href="/blog/2013/02/28/ge-ren-li-cai-huang-jin-shi-tiao/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-28T16:53:00+08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/02/28/ge-ren-li-cai-huang-jin-shi-tiao//blog/page/3/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

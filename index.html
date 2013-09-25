@@ -7,7 +7,7 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="我用了一个很笨的方法才把这个搞明白 那就是&#8230; Module的eigenclass 不会被任何事物继承 绝对封闭！ 元编程#129Pages#Quiz 例子弄错了~在线编辑器害死人 凸 1
+	<meta name="description" content="关于环绕别名 实际用途还是蛮多的 1
 2
 3
 4
@@ -24,7 +24,7 @@
 15
 16
 17
-module &hellip;">
+class Myclass def greet puts &quot;Hello!&quot; end def greet_with_log puts &quot;&gt;&gt &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -95,6 +95,201 @@ module &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/09/25/ruby-alias-around/">Ruby Alias Around</a></h1>
+	<div class="entry-content">
+		<h2>关于环绕别名 实际用途还是蛮多的</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Myclass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">greet</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hello!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">greet_with_log</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt;&gt;&gt;&quot;</span>
+</span><span class='line'>    <span class="n">greet_without_log</span> <span class="c1">#在这里调用的时候 其实是调用的是greet这个方法</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&lt;&lt;&lt;&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">alias_method</span> <span class="ss">:greet_without_log</span><span class="p">,</span> <span class="ss">:greet</span>
+</span><span class='line'>  <span class="n">alias_method</span> <span class="ss">:greet</span><span class="p">,</span> <span class="ss">:greet_with_log</span> <span class="c1">#再把含有Log输出的重新别名给greet这个方法</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Myclass</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">greet_with_log</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-25T23:51:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/09/25/ruby-alias-around//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/09/25/ruby-refactoring/">Ruby Refactoring</a></h1>
+	<div class="entry-content">
+		<p>这堆神似的函数 越看越不爽 明天用method_missing重构</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;yaml&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Datasource</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">()</span>
+</span><span class='line'>    <span class="vi">@dw</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;info_price.yml&#39;</span><span class="p">))</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">get_cpu_info</span><span class="p">(</span><span class="n">computer_id</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@dw</span><span class="o">[</span><span class="n">computer_id</span><span class="o">][</span><span class="s2">&quot;cpu_info&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">get_cpu_price</span><span class="p">(</span><span class="n">computer_id</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@dw</span><span class="o">[</span><span class="n">computer_id</span><span class="o">][</span><span class="s2">&quot;cpu_price&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">get_mouse_info</span><span class="p">(</span><span class="n">computer_id</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@dw</span><span class="o">[</span><span class="n">computer_id</span><span class="o">][</span><span class="s2">&quot;mouse_info&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">get_mouse_price</span><span class="p">(</span><span class="n">computer_id</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@dw</span><span class="o">[</span><span class="n">computer_id</span><span class="o">][</span><span class="s2">&quot;mouse_price&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">get_memory_info</span><span class="p">(</span><span class="n">computer_id</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@dw</span><span class="o">[</span><span class="n">computer_id</span><span class="o">][</span><span class="s2">&quot;memory_info&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">get_memory_price</span><span class="p">(</span><span class="n">computer_id</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@dw</span><span class="o">[</span><span class="n">computer_id</span><span class="o">][</span><span class="s2">&quot;memory_price&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#-- Debug --#</span>
+</span><span class='line'><span class="cm">=begin</span>
+</span><span class='line'><span class="cm">ds = Datasource.new</span>
+</span><span class='line'><span class="cm">puts ds.get_cpu_info(10001)</span>
+</span><span class='line'><span class="cm">puts ds.get_cpu_price(10002)</span>
+</span><span class='line'><span class="cm">=end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+		
+		<a href="/blog/2013/09/25/ruby-refactoring/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-25T23:48:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/09/25/ruby-refactoring//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -902,146 +1097,6 @@ Blocks是一组代码 意味着 他可以被传递到方法或像NSArray或NSDic
 </div>
 	
 		<span class="comments"><a href="/blog/2013/08/15/enumerating-an-nsdictionary//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/08/14/fast-enumeration/">Fast Enumeration</a></h1>
-	<div class="entry-content">
-		<h3>能多快速？</h3>
-
-<blockquote><p>Objective-C is good at making decisions, but it’s great at being lazy.</p></blockquote>
-
-<h4>笨方法循环打印数组内容</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">funnyWords</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;Schadenfreude&quot;</span><span class="p">,</span> <span class="s">@&quot;Portmanteau&quot;</span><span class="p">,</span> <span class="s">@&quot;Penultimate&quot;</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">funnyWords</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">funnyWords</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">funnyWords</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h4>更简洁的方法是</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">funnyWords</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;Schadenfreude&quot;</span><span class="p">,</span> <span class="s">@&quot;Portmanteau&quot;</span><span class="p">,</span> <span class="s">@&quot;Penultimate&quot;</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">word</span> <span class="k">in</span> <span class="n">funnyWords</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is a funny word&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h3>练习</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">newHats</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;Cowboy&quot;</span><span class="p">,</span> <span class="s">@&quot;Conductor&quot;</span><span class="p">,</span> <span class="s">@&quot;Baseball&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">hat</span><span class="p">;</span> <span class="c1">//记得声明</span>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">hat</span> <span class="k">in</span> <span class="n">newHats</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Trying on new %@ hat&quot;</span><span class="p">,</span> <span class="n">hat</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span><span class="p">([</span><span class="n">mrHiggie</span> <span class="nl">tryOnHat:</span><span class="n">hat</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie loves it&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie hates it&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-14T23:50:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/08/14/fast-enumeration//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/08/11/try-objective-c/">Try Objective-C</a></h1>
-	<div class="entry-content">
-		<h3>Code School 上的免费教程，为什么要着急先把这个免费的学掉 我也不知道具体是为什么。一个月学费20$ 总是出现在我最忙的时候。月底还有考试，真TMD服了。</h3>
-
-
-		
-		<a href="/blog/2013/08/11/try-objective-c/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-11T23:30:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/08/11/try-objective-c//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

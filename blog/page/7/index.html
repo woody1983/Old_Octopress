@@ -7,14 +7,7 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="流程： 初始化一个库 然后-P端口号 -hIP地址进去
-配置权限
-接着用multi来实现管理。 以start和stop为主。
-@MYSQL server没有启动
-@建仓
-@修改my.cnf
-@mysqld_multi start 005
-@mysql_install_db &#8211;user &hellip;">
+	<meta name="description" content="Select查询细节： 【匹配多个字符】 SELECT __ FROM __ WHERE ___ LIKE 'Smith% Corp.' Smith Corp. Smithson Corp &#8230;&#8230;&#8230;&#8230; %通配符可以匹配0个或多个字符 【匹配单个字符 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -85,6 +78,151 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2010/05/23/mysql-note/">MySQL Note</a></h1>
+	<div class="entry-content">
+		<h2>Select查询细节：</h2>
+
+<h3>【匹配多个字符】</h3>
+
+<p><code>SELECT __ FROM __ WHERE ___ LIKE 'Smith% Corp.'</code></p>
+
+<h4>Smith Corp. Smithson Corp &#8230;&#8230;&#8230;&#8230;  %通配符可以匹配0个或多个字符</h4>
+
+<h3>【匹配单个字符】</h3>
+
+<p><code>SELECT __ FROM __ WHERE ___ LIKE 'Smiths_n Corp.'</code></p>
+
+<h4>Smithson Smithsen</h4>
+
+<h3>【以上模式的组合使用】</h3>
+
+<h4>&#8216;Smiths_n %&#8217;</h4>
+
+<h3>【转义字符】</h3>
+
+<p>比如搜索“A%BC”开始的产品   <code>'A$%BC%' ESCAPE '$'</code></p>
+
+<h3>【判断null】</h3>
+
+<p>不能使用=来判断 IS NULL  IS NOT NULL</p>
+
+<h3>【NOT判断】</h3>
+
+<p><code>AND NOT SALES &lt; 1500 不小于1500的</code></p>
+
+<h3>【索引使用情况】</h3>
+
+<ul>
+<li><code>Handler_read_key</code> 如果索引正在工作 这个值会很高</li>
+<li><code>Handler_read_rnd_next</code> 值如果高 证明查询运行低效</li>
+</ul>
+
+
+
+		
+		<a href="/blog/2010/05/23/mysql-note/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-23T23:43:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2010</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2010/05/23/mysql-note//blog/page/7/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2010/05/23/mysql-sp-funny/">MySQL存储过程 写着玩的</a></h1>
+	<div class="entry-content">
+		<h3>uid and mid</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">DELIMITER</span> <span class="err">$$</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">DROP</span> <span class="k">PROCEDURE</span>  <span class="n">IF</span> <span class="k">EXISTS</span> <span class="n">file_test</span><span class="p">;</span>
+</span><span class='line'><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">file_test</span><span class="p">(</span><span class="k">IN</span> <span class="n">p_uid</span> <span class="nb">INT</span><span class="p">,</span> <span class="k">IN</span> <span class="n">p_mid</span> <span class="nb">INT</span><span class="p">,</span> <span class="k">OUT</span> <span class="n">p_count</span> <span class="nb">INT</span><span class="p">)</span>
+</span><span class='line'><span class="k">READS</span> <span class="k">SQL</span> <span class="k">DATA</span>
+</span><span class='line'><span class="k">BEGIN</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span><span class="n">uname</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">emp</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">uid</span> <span class="o">=</span> <span class="n">p_uid</span>
+</span><span class='line'><span class="k">AND</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">p_mid</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">FOUND_ROWS</span><span class="p">()</span> <span class="k">INTO</span> <span class="n">p_count</span><span class="p">;</span>
+</span><span class='line'><span class="k">END</span> <span class="err">$$</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">DELIMITER</span> <span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+		
+		<a href="/blog/2010/05/23/mysql-sp-funny/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-23T19:23:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2010</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2010/05/23/mysql-sp-funny//blog/page/7/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">

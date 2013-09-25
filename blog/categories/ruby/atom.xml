@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-25T23:45:26+08:00</updated>
+  <updated>2013-09-25T23:51:52+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,163 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Alias around]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/25/ruby-alias-around/"/>
+    <updated>2013-09-25T23:51:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/25/ruby-alias-around</id>
+    <content type="html"><![CDATA[<h2>关于环绕别名 实际用途还是蛮多的</h2>
+
+<p>``` ruby
+class Myclass
+  def greet</p>
+
+<pre><code>puts "Hello!"
+</code></pre>
+
+<p>  end</p>
+
+<p>  def greet_with_log</p>
+
+<pre><code>puts "&gt;&gt;&gt;"
+greet_without_log #在这里调用的时候 其实是调用的是greet这个方法
+puts "&lt;&lt;&lt;"
+</code></pre>
+
+<p>  end</p>
+
+<p>  alias_method :greet_without_log, :greet
+  alias_method :greet, :greet_with_log #再把含有Log输出的重新别名给greet这个方法</p>
+
+<p>end</p>
+
+<p>Myclass.new.greet_with_log
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Refactoring]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/25/ruby-refactoring/"/>
+    <updated>2013-09-25T23:48:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/25/ruby-refactoring</id>
+    <content type="html"><![CDATA[<p>这堆神似的函数 越看越不爽 明天用method_missing重构</p>
+
+<p>``` ruby
+require 'yaml'</p>
+
+<p>class Datasource</p>
+
+<p>  def initialize()</p>
+
+<pre><code>@dw = YAML.load(File.open('info_price.yml')) 
+</code></pre>
+
+<p>  end</p>
+
+<p>  def get_cpu_info(computer_id)</p>
+
+<pre><code>@dw[computer_id]["cpu_info"]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def get_cpu_price(computer_id)</p>
+
+<pre><code>@dw[computer_id]["cpu_price"]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def get_mouse_info(computer_id)</p>
+
+<pre><code>@dw[computer_id]["mouse_info"]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def get_mouse_price(computer_id)</p>
+
+<pre><code>@dw[computer_id]["mouse_price"]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def get_memory_info(computer_id)</p>
+
+<pre><code>@dw[computer_id]["memory_info"]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def get_memory_price(computer_id)</p>
+
+<pre><code>@dw[computer_id]["memory_price"]
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>-- Debug --</h1>
+
+<p>=begin
+ds = Datasource.new
+puts ds.get_cpu_info(10001)
+puts ds.get_cpu_price(10002)
+=end
+```</p>
+
+<!-- more -->
+
+
+<h3>参考</h3>
+
+<p>``` ruby
+class Computer</p>
+
+<p>  instance_methods.each do |m|</p>
+
+<pre><code>undef_method m unless m.to_s =~ /^__|method_missing|respond_to?|object_id/
+</code></pre>
+
+<p>  end</p>
+
+<p>  def initialize(data_source)</p>
+
+<pre><code>#@pc_id = computer_id
+@data_source = data_source
+</code></pre>
+
+<p>  end</p>
+
+<p>  def method_missing(name, *args)</p>
+
+<pre><code>  super if !respond_to?(name)
+  #puts "&gt;&gt;&gt; #{name}, args: #{args}, args class: #{args.class} and size: #{args.size}"
+
+  args.inject(0) do |result,pc_id|
+    info = @data_source.send "get_#{name}_info", pc_id
+    price = @data_source.send "get_#{name}_price", pc_id
+    result = "#{name.capitalize}: #{info}, ($#{price})"
+    result = "* #{result}" if price &gt; 1700
+    puts result
+  end
+</code></pre>
+
+<p>  end</p>
+
+<p>  def respond_to?(method)</p>
+
+<pre><code>@data_source.respond_to?("get_#{method}_info") || super
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[eigenclass with Module]]></title>
@@ -469,276 +626,6 @@ end</p>
 <li>Reset 下发Status</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby inject]]></title>
-    <link href="http://woody1983.github.com/blog/2013/09/08/ruby-inject/"/>
-    <updated>2013-09-08T23:26:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/09/08/ruby-inject</id>
-    <content type="html"><![CDATA[<p>很早之前再Ruby China问的一个问题 就是1到10 可以创建多少个3位数不重复的组合</p>
-
-<p>现在有了答案!</p>
-
-<p><code>ruby
-(1..10).to_a.combination(3).to_a
-</code></p>
-
-<p>说实话 这个函数我也没见过 但效果还不错 目测了一把基本是我要的，和数据打交道时间久了就总觉得号码是有规律可言的。上周研习了一下<code>inject</code>的用法 感觉可以做一点小东西出来玩一下。</p>
-
-<p>大乐透的前五位数有多少种组合呢？ 呵呵</p>
-
-<p><code>ruby
-(1..35).to_a.combination(5).to_a
-</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby-Bits]]></title>
-    <link href="http://woody1983.github.com/blog/2013/09/05/ruby-bits/"/>
-    <updated>2013-09-05T22:10:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/09/05/ruby-bits</id>
-    <content type="html"><![CDATA[<p>关于Ruby最佳实践的记录，我几乎已经放弃向周围的人推荐Ruby这门让人开心的语言了，原因其实很奇怪。</p>
-
-<p>关于参数，Ruby的Function中定义的函数或类总是会接收很多参数 不接受参数的Function不觉得很奇葩吗？</p>
-
-<p>传统的语法和实践是</p>
-
-<p><code>ruby
-def CHR(username,login_id,message)
- #...
-end
-</code></p>
-
-<p>这个不能说错 但按照CodeSchool老师的原话来说<code>Location isn't always used, so let's add default.</code></p>
-
-<p><code>ruby
-def CHR(username,login_id=nil,message=nil)
- #...
-end
-</code></p>
-
-<p>还有一种情况就是参数过多，以致于让function变得毫无可读性<code>have to keep placeholders for arguments you’re not using</code>
-这个时候可以采用 <code>HASH Arguments</code></p>
-
-<p>``` ruby</p>
-
-<p>def tweet(message, options = {})
-  status = Status.new
-  status.lat = options[:lat]
-  status.long = options[:long]
-  status.body = message
-  status.reply_id = options[:reply_id]
-  status.post
-end
-```</p>
-
-<p>调用的时候 就可以利用Symbol来实现多参数。</p>
-
-<p><code>ruby
-￼tweet("Practicing Ruby-Fu!",
-  :lat =&gt; 28.55,
-  :long =&gt; -81.33,
-  :reply_id =&gt; 227946
-￼￼)
-</code></p>
-
-<!-- more -->
-
-
-<h3>Using Ruby 1.9 hash syntax</h3>
-
-<p>``` ruby
-tweet("Practicing Ruby-Fu!",</p>
-
-<pre><code>lat: 28.55,
-long: -81.33, 
-reply_id: 227946
-</code></pre>
-
-<p>)
-```</p>
-
-<p>参数的顺序也无所谓了</p>
-
-<p><code>ruby
-￼tweet("Practicing Ruby-Fu!",
-  reply_id: 227946,
-  lat: 28.55,
-  long: -81.33
-)
-</code></p>
-
-<p>一个参数也ok</p>
-
-<p><code>ruby
-tweet("Practicing Ruby-Fu!")
-</code></p>
-
-<p>``` ruby
-def new_game(name, options={})
-  {</p>
-
-<pre><code>name: name,
-year: options[:year],
-system: options[:system]
-</code></pre>
-
-<p>  }
-end
-game = new_game("Street Figher II", year: 1992, system: "SNES")
-```</p>
-
-<h3>EXCEPTIONS</h3>
-
-<p>关于判断例外EXCEPTIONS的问题 最传统的写法就是先做判断 有值就出来 如果没值的话 就抛除个神器的东西。貌似这么写程序不太好。</p>
-
-<p>``` ruby
-def get_tweets(list)
-  if list.authorized?(@user)</p>
-
-<pre><code>list.tweets #如果这个user是验证成功的就把他的tweet列出来
-</code></pre>
-
-<p>else</p>
-
-<pre><code>end[] #“magic” return value
-</code></pre>
-
-<p>end
-```</p>
-
-<p>如果没有tweet 查出来是空的话  还要报一个Error 貌似在Ruby里没这个必要。</p>
-
-<p><code>ruby
-tweets = get_tweets(my_list)
-if tweets.empty?
-  alert "No tweets were found!" +
-  "Are you authorized to access this list?"
-end
-</code></p>
-
-<p>最佳方法应该是用unless先对<code>@user</code>这个对象进行判断 如果没有就用<code>raise</code>来抛除一个异常并返回登陆.</p>
-
-<p>``` ruby
-￼def get_tweets(list)
-  unless list.authorized?(@user)</p>
-
-<pre><code>raise AuthorizationException.new
-</code></pre>
-
-<p>  end
-list.tweets
-end</p>
-
-<p>begin
-  tweets = get_tweets(my_list)
-rescue AuthorizationException
-  warn "You are not authorized to access this list."
-end
-```</p>
-
-<p>练习</p>
-
-<p>``` ruby
-class InvalidGameError &lt; StandardError; end
-def new_game(name, options={})
-  {</p>
-
-<pre><code>name: name,
-year: options[:year],
-system: options[:system]
-</code></pre>
-
-<p>  }
-end
-begin
-  game = new_game(nil)
-rescue InvalidGameError => e
-  puts "There was a problem creating your new game: #{e.message}"
-end
-```
-We want to make sure that each game is a valid game object - in this case a simple hash of values. Even still, we wouldn't want to return a hash with a nil name. Raise an InvalidGameError error in the new_game method if name is nil.</p>
-
-<p>``` ruby
-class InvalidGameError &lt; StandardError; end
-def new_game(name, options={})</p>
-
-<pre><code>raise InvalidGameError, "You must provide a name for this game." unless name
-</code></pre>
-
-<p>  {</p>
-
-<pre><code>name: name,
-year: options[:year],
-system: options[:system]
-</code></pre>
-
-<p>  }
-end
-begin
-  game = new_game(nil)
-rescue InvalidGameError => e
-  puts "There was a problem creating your new game: #{e.message}"
-end
-```</p>
-
-<h3>splat arguments</h3>
-
-<p>说实话 我没觉得这个比hash那个要实用</p>
-
-<p>``` ruby
-￼def mention(status, *names)
-  tweet("#{names.join(' ')} #{status}")
-end</p>
-
-<p>mention('Your courses rocked!', 'eallam', 'greggpollack', 'jasonvanlue')</p>
-
-<p>def describe_favorites(*games)
-  for game in games</p>
-
-<pre><code>puts "Favorite Game: #{game}"
-</code></pre>
-
-<p>  end<br/>
-end
-describe_favorites('Mario', 'Contra', 'Metroid')
-```</p>
-
-<p>为一个二维Array创建一个Class</p>
-
-<p>``` ruby
-￼user_names = [
-  ["Ashton", "Kutcher"],
-  ["Wil", "Wheaton"],
-  ["Madonna"]
-]</p>
-
-<p>user_names.each { |n| puts "#{n[1]}, #{n[0]}" }
-```</p>
-
-<p>这个要直接打印出来 最后那个就会多一个分隔符。</p>
-
-<p>``` ruby
-class Name
-  def initialize(first, last = nil)</p>
-
-<pre><code>@first = first
-@last = last
-</code></pre>
-
-<p>  end</p>
-
-<p>￼￼def format</p>
-
-<pre><code>[@last, @first].compact.join(', ')
-</code></pre>
-
-<p>  end
-end
-```</p>
 ]]></content>
   </entry>
   
