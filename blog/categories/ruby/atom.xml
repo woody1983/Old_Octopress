@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | 1024Bit  电子游牧日志]]></title>
   <link href="http://woody1983.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-25T23:51:52+08:00</updated>
+  <updated>2013-09-26T00:07:13+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[驼峰日笔记  {Block|Scope|Proc}]]></title>
+    <link href="http://woody1983.github.com/blog/2013/09/26/ruby-proc/"/>
+    <updated>2013-09-26T00:03:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2013/09/26/ruby-proc</id>
+    <content type="html"><![CDATA[<h3>Basice</h3>
+
+<p>``` ruby
+def m_method(a,b)
+  a + yield(a,b)
+end</p>
+
+<p>m_method(1,2) {|x,y| (x+y)*3}
+```</p>
+
+<h4>运行m_method方法时 走到yield的时候会执行 调用方法m_method时后面跟着的一坨Code  {}</h4>
+
+<h3>Closures</h3>
+
+<blockquote><p>这句话蛮好 : 代码要想运行 需要执行环境   局部变量 全局变量 self 等  但Block中 既有代码又有绑定 可以立即运行
+创建Block的时候 Block会自动获取局部的绑定 作用域class def module中的除外。</p></blockquote>
+
+<p>一个方法中已经绑定了一个x变量 但调用Block的时候获取了def以外的一个名字也叫x的绑定 并用在自己的Block中 运行该方法时 回调Block的时候会将这个x的绑定直接带进原方法中</p>
+
+<h4>另外就算原方法中已经绑定了x变量 如果Block没有获取到x的时候 直接运行该方法 会报错说找不到x</h4>
+
+<p><code>`` ruby
+   def my_method
+..   x="Hello"
+..   yield("woody")
+..   end
+=&gt; nil
+   my_method{|y| "#{x}, #{y} world" }
+(eval):3: undefined local variable or method</code>x' for main:Object (NameError)</p>
+
+<pre><code>from (eval):2:in `my_method'
+from (eval):3
+</code></pre>
+
+<p>   x = "Hi"
+=> "Hi"
+   my_method{|y| "#{x}, #{y} world" }
+=> "Hi, woody world"
+```</p>
+
+<h3>Scope Gate</h3>
+
+<h4>全局变量 $开头 任何作用域都可以访问！但是你依然可以用  顶级实例变量@ 来替代全局变量</h4>
+
+<p><code>ruby
+   @var = "the top-level @var"
+=&gt; "the top-level @var"
+   def my_method
+..   @var
+..   end
+=&gt; nil
+   my_method
+=&gt; "the top-level @var"
+</code></p>
+
+<h4>顶级实例变量比全局变量要安全一些</h4>
+
+<h3>扁平化Scope</h3>
+
+<h4>class/def/module 之间有一个小小的区别 Class和Module中的Code会被立即执行  def要等到调用的时候才会被执行</h4>
+
+<p><code>ruby
+   class Test_my_class
+..   puts "111"
+..   end
+111
+=&gt; nil
+   module Test_my_module
+..   puts "Module"
+..   end
+Module
+=&gt; nil
+   def Test_my_method
+..   puts "Method"
+..   end
+=&gt; nil
+</code></p>
+
+<h3>穿越作用域</h3>
+
+<h4>要让局部变量穿越 class Myclass这个Scope Gate</h4>
+
+<p>``` ruby
+var = 'scope'
+Myclass = Class.new do
+  puts "#{var} is here!"
+  define_method :my_method do</p>
+
+<pre><code> puts "#{var} in the def here!"
+</code></pre>
+
+<p>  end
+end
+scope is here!
+=> Myclass</p>
+
+<p>My_module = Module.new do
+  puts "#{var}"
+end
+```</p>
+
+<ul>
+<li>想要让一组方法之间共享一个变量 而屏蔽掉方法对其的访问就用扁平化的方法</li>
+<li>将局部变量传给对象内的实例变量---打破封装---直接修改实例变量---能接受的理由就是测试</li>
+<li>创建一个对象 仅仅是为了用instance_eval来执行Block 这叫做Clean room</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby Alias around]]></title>
@@ -567,65 +682,6 @@ end</p>
 
 <p> @setups.each {|setup| env.instance_eval &amp;setup }
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby On Kettle]]></title>
-    <link href="http://woody1983.github.com/blog/2013/09/09/ruby-on-kettle/"/>
-    <updated>2013-09-09T22:34:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/09/09/ruby-on-kettle</id>
-    <content type="html"><![CDATA[<p><code>ruby
-1.9.3-p194 :009 &gt; "1111111111".to_i(2)
- =&gt; 1023
-1.9.3-p194 :010 &gt; 1023.to_s(2)
- =&gt; "1111111111"
-</code></p>
-
-<p>总要为Kettle做点什么 用二进制来完成一对多线路分发 监控就成了主要的问题。</p>
-
-<p><code>ruby
-1.9.3-p194 :013 &gt; "1111111111".size
- =&gt; 10
-1.9.3-p194 :014 &gt; "1111111111".length
- =&gt; 10
-</code></p>
-
-<h4>10位对应10个分发线路</h4>
-
-<p>一个最常见的问题 我需要充值某条数据的某个线路重新发送 或者紧急止停某条线路的一批数据下发，so 要定位</p>
-
-<p><code>ruby
-1.9.3-p194 :016 &gt; "1111111111".split('')
- =&gt; ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
-</code></p>
-
-<h4>重置Reset 0号线路 也就是Array最右边那个</h4>
-
-<p><code>ruby
-1.9.3-p194 :021 &gt; rok = "1111111111".split('')
- =&gt; ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
-1.9.3-p194 :022 &gt; rok
- =&gt; ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
-1.9.3-p194 :023 &gt; rok[10-1]
- =&gt; "1"
-1.9.3-p194 :024 &gt; rok[10-1] = "0"
- =&gt; "0"
-1.9.3-p194 :025 &gt; rok
- =&gt; ["1", "1", "1", "1", "1", "1", "1", "1", "1", "0"]
-</code></p>
-
-<p><code>明天抽时间写一个Class 封装这个动作</code></p>
-
-<h3>我想要的功能应该有</h3>
-
-<ul>
-<li>Preview Kettle当前运行状况和<code>质量</code></li>
-<li>单独查看某个线路或某张表的下发情况 <code>时间</code> &amp; <code>Error</code> &amp; <code>Count</code></li>
-<li>Error 单独分析和Email寄送功能</li>
-<li>Reset 下发Status</li>
-</ul>
-
 ]]></content>
   </entry>
   

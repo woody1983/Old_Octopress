@@ -7,24 +7,13 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="关于环绕别名 实际用途还是蛮多的 1
+	<meta name="description" content="Basice 1
 2
 3
 4
 5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-class Myclass def greet puts &quot;Hello!&quot; end def greet_with_log puts &quot;&gt;&gt &hellip;">
+def m_method(a,b) a + yield(a,b)
+end m_method(1,2) {|x,y| (x+y)*3} 运行m_method方法时 走到yield的时候会执行 调用方法m_method时后面跟着的一坨Code {} Closures &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -95,6 +84,200 @@ class Myclass def greet puts &quot;Hello!&quot; end def greet_with_log puts &quo
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/09/26/ruby-proc/">驼峰日笔记 {Block|Scope|Proc}</a></h1>
+	<div class="entry-content">
+		<h3>Basice</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">m_method</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">a</span> <span class="o">+</span> <span class="k">yield</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">m_method</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">|</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>运行m_method方法时 走到yield的时候会执行 调用方法m_method时后面跟着的一坨Code  {}</h4>
+
+<h3>Closures</h3>
+
+<blockquote><p>这句话蛮好 : 代码要想运行 需要执行环境   局部变量 全局变量 self 等  但Block中 既有代码又有绑定 可以立即运行
+创建Block的时候 Block会自动获取局部的绑定 作用域class def module中的除外。</p></blockquote>
+
+<p>一个方法中已经绑定了一个x变量 但调用Block的时候获取了def以外的一个名字也叫x的绑定 并用在自己的Block中 运行该方法时 回调Block的时候会将这个x的绑定直接带进原方法中</p>
+
+<h4>另外就算原方法中已经绑定了x变量 如果Block没有获取到x的时候 直接运行该方法 会报错说找不到x</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">my_method</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="k">yield</span><span class="p">(</span><span class="s2">&quot;woody&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="k">end</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'>   <span class="n">my_method</span><span class="p">{</span><span class="o">|</span><span class="n">y</span><span class="o">|</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">#{</span><span class="n">y</span><span class="si">}</span><span class="s2"> world&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">(</span><span class="nb">eval</span><span class="p">):</span><span class="mi">3</span><span class="p">:</span> <span class="n">undefined</span> <span class="n">local</span> <span class="n">variable</span> <span class="ow">or</span> <span class="nb">method</span> <span class="sb">`x&#39; for main:Object (NameError)</span>
+</span><span class='line'><span class="sb"> from (eval):2:in `</span><span class="n">my_method</span><span class="err">&#39;</span>
+</span><span class='line'>  <span class="n">from</span> <span class="p">(</span><span class="nb">eval</span><span class="p">):</span><span class="mi">3</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>   <span class="n">my_method</span><span class="p">{</span><span class="o">|</span><span class="n">y</span><span class="o">|</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">#{</span><span class="n">y</span><span class="si">}</span><span class="s2"> world&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Hi, woody world&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Scope Gate</h3>
+
+<h4>全局变量 $开头 任何作用域都可以访问！但是你依然可以用  顶级实例变量@ 来替代全局变量</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="vi">@var</span> <span class="o">=</span> <span class="s2">&quot;the top-level @var&quot;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;the top-level @var&quot;</span>
+</span><span class='line'>   <span class="k">def</span> <span class="nf">my_method</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="vi">@var</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="k">end</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'>   <span class="n">my_method</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;the top-level @var&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>顶级实例变量比全局变量要安全一些</h4>
+
+<h3>扁平化Scope</h3>
+
+<h4>class/def/module 之间有一个小小的区别 Class和Module中的Code会被立即执行  def要等到调用的时候才会被执行</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">class</span> <span class="nc">Test_my_class</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="nb">puts</span> <span class="s2">&quot;111&quot;</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="k">end</span>
+</span><span class='line'><span class="mi">111</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'>   <span class="k">module</span> <span class="nn">Test_my_module</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="nb">puts</span> <span class="s2">&quot;Module&quot;</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="k">end</span>
+</span><span class='line'><span class="no">Module</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'>   <span class="k">def</span> <span class="nf">Test_my_method</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="nb">puts</span> <span class="s2">&quot;Method&quot;</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span>   <span class="k">end</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>穿越作用域</h3>
+
+<h4>要让局部变量穿越 class Myclass这个Scope Gate</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;scope&#39;</span>
+</span><span class='line'><span class="no">Myclass</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">var</span><span class="si">}</span><span class="s2"> is here!&quot;</span>
+</span><span class='line'>  <span class="n">define_method</span> <span class="ss">:my_method</span> <span class="k">do</span>
+</span><span class='line'>     <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">var</span><span class="si">}</span><span class="s2"> in the def here!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">scope</span> <span class="n">is</span> <span class="n">here!</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="no">Myclass</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="no">My_module</span> <span class="o">=</span> <span class="no">Module</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">var</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>想要让一组方法之间共享一个变量 而屏蔽掉方法对其的访问就用扁平化的方法</li>
+<li>将局部变量传给对象内的实例变量&#8212;打破封装&#8212;直接修改实例变量&#8212;能接受的理由就是测试</li>
+<li>创建一个对象 仅仅是为了用instance_eval来执行Block 这叫做Clean room</li>
+</ul>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-26T00:03:00+08:00" pubdate data-updated="true">Sep 26<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/09/26/ruby-proc//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -994,109 +1177,6 @@ Blocks是一组代码 意味着 他可以被传递到方法或像NSArray或NSDic
 </div>
 	
 		<span class="comments"><a href="/blog/2013/08/15/about-blocks-with-objective-c//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/08/15/enumerating-an-nsdictionary/">Enumerating an NSDictionary</a></h1>
-	<div class="entry-content">
-		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">funnyWords</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span>
-</span><span class='line'><span class="s">@&quot;Schadenfreude&quot;</span><span class="o">:</span> <span class="s">@&quot;pleasure derived by someone from another person&#39;s misfortune.&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="s">@&quot;Portmanteau&quot;</span><span class="o">:</span> <span class="s">@&quot;consisting of or combining two or more separable aspects or qualities&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="s">@&quot;Penultimate&quot;</span><span class="o">:</span> <span class="s">@&quot;second to the last&quot;</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">word</span> <span class="k">in</span> <span class="n">funnyWords</span><span class="p">){</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">definition</span> <span class="o">=</span> <span class="n">funnyWords</span><span class="p">[</span><span class="n">word</span><span class="p">];</span><span class="c1">//</span>
-</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ is defined as %@&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">definition</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h2>Practice makes perfect</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">newHats</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span>
-</span><span class='line'><span class="s">@&quot;Cowboy&quot;</span><span class="o">:</span> <span class="s">@&quot;White&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="s">@&quot;Conductor&quot;</span><span class="o">:</span> <span class="s">@&quot;Brown&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="s">@&quot;Baseball&quot;</span><span class="o">:</span> <span class="s">@&quot;Red&quot;</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">hat</span> <span class="k">in</span> <span class="n">newHats</span><span class="p">){</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="n">newHats</span><span class="p">[</span><span class="n">hat</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Trying on new %@ %@ hat&quot;</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">hat</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span><span class="p">([</span><span class="n">mrHiggie</span> <span class="nl">tryOnHat:</span><span class="n">hat</span> <span class="nl">withColor:</span><span class="n">color</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie loves it&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mr. Higgie hates it&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-15T11:36:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>IOS</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/08/15/enumerating-an-nsdictionary//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 
