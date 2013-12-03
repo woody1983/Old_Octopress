@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "驼峰日笔记  {Block|Scope|Proc}"
+title: "Hump day Note  {Block|Scope|Proc}"
 date: 2013-09-26 00:03
 comments: true
 categories: Ruby
@@ -16,7 +16,7 @@ end
 m_method(1,2) {|x,y| (x+y)*3} 
 ```
 
-#### 运行m_method方法时 走到yield的时候会执行 调用方法m_method时后面跟着的一坨Code  {}
+#### When you run m_method ,then yield is should be excute, and include {_code_}
 
 ### Closures
 

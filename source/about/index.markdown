@@ -6,33 +6,33 @@ comments: true
 sharing: true
 footer: true
 ---
-###一个脱离了高级趣味的人。 C'est la vie.
+###一个脱离了高级趣味的人。 C'est la vie, pas le paradis.
 
 {% img ../images/img/hardy.jpg 300 %}
 
-#### 技术方面
-* 喜欢`FreeBSD`.`德州扑克`.`Arduino`.`Raspberry Pi`.`VIM`.`MySQL`.`Mac`.`C`.`Shell`.`OctoPress`/[豆瓣深度用户](http://www.douban.com/people/woody1983/ "《上海老味道》")
-* 不喜欢 `Java`.`WordPress`
-* 研究学习 `Git`.`OctoPress`.`Rails3`.`C`.`MarkDown`.`IOS`.`Objective-C`
+#### Technology
+* Like`FreeBSD`.`Texas Hold’em poker`.`Arduino`.`Raspberry Pi`.`VIM`.`C`.`Shell`.`OctoPress` [Douban豆瓣](http://www.douban.com/people/woody1983/ )
+* Dislike `Java`.`WordPress`
+* Research learning `Git`.`OctoPress`.`Rails3`.`C`.`MarkDown`.`IOS`.`Objective-C`
 
-#### 生活方面
-* 喜欢看`散文`和写`饮食`的文章，推荐[《上海老味道》](http://book.douban.com/subject/2044609/ "《上海老味道》")和[《文艺犯》](http://book.douban.com/subject/10491690/"《文艺犯》")
-* 讨厌对我指手画脚一般口气的文章和装逼的文章 比如《别告诉我你会XXX》《XXX岁之前你应该XXX》。
-* 喜欢`盆栽植物`/`LOMO`／[韩国年糕火锅](http://www.dianping.com/shop/5440689)/`Wagas`
+#### Life
+* I like to read essay and recipe，I will recommend [《上海老味道》](http://book.douban.com/subject/2044609/ "《上海老味道》") and [《文艺犯》](http://book.douban.com/subject/10491690/"《文艺犯》")
+* Actually，I hate drunbility books, Like 《Don't told me you can to do sth》 or 《You should know sth Before Age 30》. That's bullshit.凸-_-凸
+* I like `Succulent` `LOMO` [Ddeokbokki](http://www.dianping.com/shop/5440689) and [Wagas](https://foursquare.com/explore?mode=autocompleteQuery&q=wagas&acrid=529e004711d26ac93a8d6ca8&near=Shanghai%2C%20CN)
 
 {% img http://24.media.tumblr.com/c31fd798619d046b36464a4a9d519a57/tumblr_mnkeuqW2Sh1sst44io1_400.jpg %}
 
 ### Categories
-* [Notes](/blog/categories/note/)  有时候会看到一些不错的`文章`和`语录`就会随手摘下来
-* [Arduino](/blog/categories/arduino/) 让人疯狂的东西。平时PO到Tumblr上 晚上整理到这里。
-* [Rails](/blog/categories/rails/) 配合`BDD`我觉得Rails确实是一个很有生产力的工具，让人专注于功能
-* [RSpec](/blog/categories/rspec/)`BDD`首推的工具，语法灵活，学习中
-* [IOS](/blog/categories/ios/)     一些关于`Objective-C`的学习笔记
-* [MySQL](/blog/categories/mysql/) 之前记录的笔记都太过零散，这次统一集中到这里来管理吧
-* [Hack](/blog/categories/hack/)   小技巧
-* [GTD](/blog/categories/gtd/)     关于GTD 我觉得真的能提高不少工作效率
-* [C](/blog/categories/c/)         最经典的语言，无论投入多少时间都不会浪费。
-* [Octopress](/blog/categories/octopress/) 就是目前在用的Blog，用起来太爽了。
-* [Git](/blog/categories/git/)     个人感觉比`SVN`好用太多，不是一个Level上的。
-* [MAC](/blog/categories/mac/)     家有MAC初成长
-* [Ruby](/blog/categories/ruby/)   和`Python`一样好用的脚本级语言
+* [Notes](/blog/categories/note/)  Something need note it
+* [Arduino](/blog/categories/arduino/) Funny toy
+* [Rails](/blog/categories/rails/) A Great tool
+* [RSpec](/blog/categories/rspec/)`BDD`Testing 
+* [IOS](/blog/categories/ios/)     About `Objective-C` memo
+* [MySQL](/blog/categories/mysql/) About MySQL notes
+* [Hack](/blog/categories/hack/)   A little HACK
+* [GTD](/blog/categories/gtd/)     Time is real.
+* [C](/blog/categories/c/)         Classics
+* [Octopress](/blog/categories/octopress/) That's my Blog using.
+* [Git](/blog/categories/git/)     Feel is better
+* [MAC](/blog/categories/mac/)     Thanks Jobs.
+* [Ruby](/blog/categories/ruby/)   Let's Rock it!
