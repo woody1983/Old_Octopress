@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby | 1024Bit  电子游牧日志]]></title>
+  <title><![CDATA[Category: Ruby | 1024Bit |  Net _ Nomads _ Note]]></title>
   <link href="http://woody1983.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-09-26T00:07:13+08:00</updated>
+  <updated>2013-12-04T00:05:57+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[驼峰日笔记  {Block|Scope|Proc}]]></title>
+    <title type="html"><![CDATA[Hump day Note  {Block|Scope|Proc}]]></title>
     <link href="http://woody1983.github.com/blog/2013/09/26/ruby-proc/"/>
     <updated>2013-09-26T00:03:00+08:00</updated>
     <id>http://woody1983.github.com/blog/2013/09/26/ruby-proc</id>
@@ -28,7 +28,7 @@ end</p>
 <p>m_method(1,2) {|x,y| (x+y)*3}
 ```</p>
 
-<h4>运行m_method方法时 走到yield的时候会执行 调用方法m_method时后面跟着的一坨Code  {}</h4>
+<h4>When you run m_method ,then yield is should be excute, and include {<em>code</em>}</h4>
 
 <h3>Closures</h3>
 
