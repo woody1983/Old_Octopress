@@ -11,7 +11,7 @@ categories: Ruby
 ``` ruby
 def m_method(a,b)
   a + yield(a,b)
-end
+end 
 
 m_method(1,2) {|x,y| (x+y)*3} 
 ```

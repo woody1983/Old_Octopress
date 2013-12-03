@@ -6,7 +6,7 @@ comments: true
 sharing: true
 footer: true
 ---
-###一个脱离了高级趣味的人。 C'est la vie, pas le paradis.
+###一个脱离了高级趣味的人。 C'est la vie, pas le paradis. 
 
 {% img ../images/img/hardy.jpg 300 %}
 
