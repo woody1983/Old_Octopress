@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[1024Bit |  Net _ Nomads _ Note]]></title>
+  <title><![CDATA[1024Bit |  Aloha~]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2013-12-04T00:05:57+08:00</updated>
+  <updated>2014-04-16T22:35:24+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Aloha~2014]]></title>
+    <link href="http://woody1983.github.com/blog/2014/04/16/2014-wish-list/"/>
+    <updated>2014-04-16T22:20:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2014/04/16/2014-wish-list</id>
+    <content type="html"><![CDATA[<h2>我的2014～ 首先是结婚了～</h2>
+
+<h3>想学一门新的语言</h3>
+
+<p>可后来还是觉得Ruby才是我的最爱～虽然很用功的研究过一段时间的Objective-C
+结婚后 时间越来越少了 之前可以花一个晚上 最少4个小时去研究 Arduino 插插电路板啥的
+现在买个Raspberry还要和老婆申请一下～ 问题更大的是 买回来以后 几乎没有时间去研究</p>
+
+<p>晚上回来做饭 洗菜 做菜 装便当 洗碗 刷锅 大概就到21点了～ 洗洗澡 给老婆擦擦肚子 基本也快睡觉了</p>
+
+<p>迫于工作的压力 英语也变得没那么有趣 Hawaii之旅 对于我而言更多的是一种启发吧</p>
+
+<h3>关于英语</h3>
+
+<p>我现在锁定一套教材和一本词典
+坚持吧</p>
+
+<h3>工作</h3>
+
+<p>已经变得不再有趣～ 我会花时间去研究一下<code>Mongodb</code> 配合<code>Kettle</code><br/>
+剩下的时间和精力 我想投入到Ruby的深度学习 仅仅只是Ruby 不包含Rails</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hump day Note  {Block|Scope|Proc}]]></title>
@@ -2597,156 +2626,6 @@ pulseIn函数用于读取引脚脉冲的时间长度，脉冲可以是HIGH或LOW
 <p>赫耳墨斯在羅馬神話中對應于墨丘利(拉丁語：Mercurius)，是九大行星中的水星。 墨丘利繼承了赫耳墨斯的許多特徵，比如商業的守護神。</p>
 
 <p>他雙腳長有雙翼、因此行走如飛，並成為在奧林匹斯山擔任宙斯和諸神傳令的 使者，為諸神傳送消息，並完成宙斯交給他的各種任務。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Arduino PWM Control Led]]></title>
-    <link href="http://woody1983.github.com/blog/2013/05/24/arduino-pwm-control-led/"/>
-    <updated>2013-05-24T11:54:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/05/24/arduino-pwm-control-led</id>
-    <content type="html"><![CDATA[<h3>几个概念</h3>
-
-<ul>
-<li>LED长脚接(+)</li>
-<li>Digital 的pin脚可以代替(+) 另一端需接GND地线</li>
-<li>resistor 要选择合适的值 否则电压会过小或过大</li>
-<li>串联和并联的区别 我初中白念了</li>
-<li>analogWrite 模拟传值</li>
-</ul>
-
-
-<!-- more -->
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">const</span> <span class="kt">int</span> <span class="n">redled_1</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
-</span><span class='line'><span class="k">const</span> <span class="kt">int</span> <span class="n">redled_2</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
-</span><span class='line'><span class="k">const</span> <span class="kt">int</span> <span class="n">greenled</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">const</span> <span class="kt">int</span> <span class="n">switchPins</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="n">brightness</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">fadeAmount</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="c1">// 把3,4,5腳定義為輸出 </span>
-</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">redled_1</span><span class="p">,</span><span class="n">OUTPUT</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">redled_2</span><span class="p">,</span><span class="n">OUTPUT</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">greenled</span><span class="p">,</span><span class="n">OUTPUT</span><span class="p">);</span>
-</span><span class='line'><span class="c1">// 把第2腳定義為輸入 </span>
-</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">switchPins</span><span class="p">,</span><span class="n">INPUT</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">switchstate</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">// 用 digitalRead(2) 來讀取第2腳開關的狀態 </span>
-</span><span class='line'>  <span class="n">switchstate</span> <span class="o">=</span> <span class="n">digitalRead</span><span class="p">(</span><span class="n">switchPins</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// 如果案件沒有按下，就只亮綠燈 </span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">switchstate</span> <span class="o">==</span> <span class="n">LOW</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="c1">//digitalWrite(3, HIGH); </span>
-</span><span class='line'>    <span class="c1">// 將第3腳的綠燈點亮 </span>
-</span><span class='line'>    <span class="n">analogWrite</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">brightness</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">brightness</span> <span class="o">=</span> <span class="n">brightness</span> <span class="o">+</span> <span class="n">fadeAmount</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">brightness</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">brightness</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>        <span class="n">fadeAmount</span> <span class="o">=</span> <span class="o">-</span><span class="n">fadeAmount</span> <span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="n">delay</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
-</span><span class='line'>    <span class="c1">// 將第4腳的紅燈熄滅 </span>
-</span><span class='line'>    <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
-</span><span class='line'>    <span class="c1">// 將第5腳的紅燈熄滅 </span>
-</span><span class='line'>   <span class="p">}</span>
-</span><span class='line'>    <span class="c1">// 如果按鍵按下了，就會進入下面的程式碼 </span>
-</span><span class='line'>   <span class="k">else</span>
-</span><span class='line'>     <span class="p">{</span>
-</span><span class='line'>       <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
-</span><span class='line'>       <span class="c1">// 將第3腳的綠燈熄滅 </span>
-</span><span class='line'>       <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
-</span><span class='line'>       <span class="c1">// 將第4腳的紅燈熄滅 </span>
-</span><span class='line'>       <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
-</span><span class='line'>       <span class="c1">// 將第5腳的紅燈點亮 </span>
-</span><span class='line'>       <span class="c1">// 等 250 mini-second 後再改變燈號 </span>
-</span><span class='line'>       <span class="n">delay</span><span class="p">(</span><span class="mi">250</span><span class="p">);</span>
-</span><span class='line'>       <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
-</span><span class='line'>       <span class="c1">// 將第4腳的紅燈點亮 </span>
-</span><span class='line'>       <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
-</span><span class='line'>       <span class="c1">// 將第5腳的紅燈熄滅 </span>
-</span><span class='line'>       <span class="c1">// 等 250 mini-second 後再改變燈號 </span>
-</span><span class='line'>       <span class="n">delay</span><span class="p">(</span><span class="mi">250</span><span class="p">);</span>
-</span><span class='line'>     <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
