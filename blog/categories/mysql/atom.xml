@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MySQL | 1024Bit |  Aloha~]]></title>
   <link href="http://woody1983.github.com/blog/categories/mysql/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2014-04-16T22:35:24+08:00</updated>
+  <updated>2014-04-16T23:07:45+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL Integration Redis]]></title>
+    <link href="http://woody1983.github.com/blog/2014/04/16/mysql-integration-redis/"/>
+    <updated>2014-04-16T23:01:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2014/04/16/mysql-integration-redis</id>
+    <content type="html"><![CDATA[<p>在把一个大表从 MySQL 迁移到 Redis 时，你可能会发现，每次提取、转换、导入一条数据是让人难以忍受的慢!这里有一个技巧，你可以通过使用管道把 MySQL 的输出直接输入到 redis-cli输入端，这可以使两个数据库都能以他们的最顶级速度来运行。</p>
+
+<p>　　使用了这个技术，我把 800 万条 MySQL 数据导入到 Redis 的时间从 90 分钟缩短到了两分钟。</p>
+
+<p>　　Mysql到Redis的数据协议</p>
+
+<p>　　redis-cli命令行工具有一个批量插入模式，是专门为批量执行命令设计的。这第一步就是把Mysql查询的内容格式化成redis-cli可用的数据格式。here we go!</p>
+
+<p>　　我的统计表：</p>
+
+<p>``` sql
+　　CREATE TABLE events_all_time</p>
+
+<pre><code>    ( id int(11) unsigned NOT NULL AUTO_INCREMENT, 
+      action varchar(255) NOT NULL, 
+      count int(11) NOT NULL DEFAULT 0, 
+      PRIMARY KEY (id), UNIQUE KEY uniq_action (action) );
+</code></pre>
+
+<p>```</p>
+
+<p>　　准备在每行数据中执行的redis命令如下：</p>
+
+<p><code>sql
+　　HSET events_all_time [action] [count]
+</code></p>
+
+<p>　　按照以上redis命令规则，创建一个events_to_redis.sql文件，内容是用来生成redis数据协议格式的SQL：</p>
+
+<p><code>
+　　-- events_to_redis.sql SELECT CONCAT( "*4\r\n", '$', LENGTH(redis_cmd), '\r\n', redis_cmd, '\r\n', '$', LENGTH(redis_key), '\r\n', redis_key, '\r\n', '$', LENGTH(hkey), '\r\n', hkey, '\r\n', '$', LENGTH(hval), '\r\n', hval, '\r' ) FROM ( SELECT 'HSET' as redis_cmd, 'events_all_time' AS redis_key, action AS hkey, count AS hval FROM events_all_time ) AS t
+</code></p>
+
+<p>　　ok, 用下面的命令执行：</p>
+
+<p><code>
+　　mysql stats_db --skip-column-names --raw &lt; events_to_redis.sql | redis-cli --pipe
+</code></p>
+
+<p>　　很重要的mysql参数说明：</p>
+
+<p>　　--raw: 使mysql不转换字段值中的换行符。</p>
+
+<p>　　--skip-column-names: 使mysql输出的每行中不包含列名。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MYSQL ERROR 1372 (HY000)]]></title>
@@ -953,248 +1005,6 @@ SET @day_part = 'afternoon or night';
 END IF;
 END;
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MySQL 多實例練習實錄]]></title>
-    <link href="http://woody1983.github.com/blog/2010/05/23/mysql-multi/"/>
-    <updated>2010-05-23T19:12:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2010/05/23/mysql-multi</id>
-    <content type="html"><![CDATA[<h4>流程：</h4>
-
-<ul>
-<li>初始化一个库 然后-P端口号 -hIP地址进去</li>
-<li>配置权限</li>
-<li>接着用multi来实现管理。 以start和stop为主。</li>
-<li>@MYSQL server没有启动</li>
-<li>@建仓</li>
-<li>@修改my.cnf</li>
-<li>@mysqld_multi start 005</li>
-<li>@mysql_install_db --user=mysql --datadir=/db5</li>
-</ul>
-
-
-<p>```
-[root@MySQL-NDB ~]# cd /
-[root@MySQL-NDB /]# mkdir db7
-[root@MySQL-NDB /]# chown -R mysql.mysql db7
-[root@MySQL-NDB /]# cd db7
-[root@MySQL-NDB db7]# vim /etc/my.cnf</p>
-
-<!-- more-->
-
-
-<p>[mysqld007]
-port            = 3312
-socket          = /db7/mysql.sock
-pid-file        = /db7/mysqld007.pid
-datadir         = /db7
-server-id       = 7
-log-bin         = mysql-bin
-```</p>
-
-<p>```
-[root@MySQL-NDB db7]# mysql_install_db --user=mysql --datadir=/db7
-[root@MySQL-NDB db7]# ls -la
-total 20
-drwxr-xr-x  4 mysql mysql 4096 May 13 05:14 .
-drwxr-xr-x 27 root  root  4096 May 13 05:12 ..
-drwx------  2 mysql root  4096 May 13 05:14 mysql
-drwx------  2 mysql root  4096 May 13 05:14 test
-[root@MySQL-NDB db7]# mysqld_multi start 007
-[root@MySQL-NDB db7]# ls -la
-total 11408
-drwxr-xr-x  4 mysql mysql     4096 May 13 05:15 .
-drwxr-xr-x 27 root  root      4096 May 13 05:12 ..
--rw-rw----  1 mysql mysql 10485760 May 13 05:15 ibdata1
--rw-rw----  1 mysql mysql  1150976 May 13 05:15 ib_logfile0
-drwx------  2 mysql root      4096 May 13 05:14 mysql
--rw-rw----  1 mysql mysql        0 May 13 05:15 mysql-bin.index
--rw-rw----  1 mysql root       543 May 13 05:15 MySQL-NDB.err
-drwx------  2 mysql root      4096 May 13 05:14 test</p>
-
-<p>[root@MySQL-NDB db7]# netstat -tunlp
-Active Internet connections (only servers)
-Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID/Program name <br/>
-tcp        0      0 0.0.0.0:3307                0.0.0.0:<em>                   LISTEN      2011/mysqld       <br/>
-tcp        0      0 0.0.0.0:3308                0.0.0.0:</em>                   LISTEN      2113/mysqld       <br/>
-tcp        0      0 0.0.0.0:3309                0.0.0.0:<em>                   LISTEN      2213/mysqld       <br/>
-tcp        0      0 0.0.0.0:3310                0.0.0.0:</em>                   LISTEN      2606/mysqld       <br/>
-tcp        0      0 0.0.0.0:3311                0.0.0.0:<em>                   LISTEN      2858/mysqld       <br/>
-tcp        0      0 0.0.0.0:3312                0.0.0.0:</em>                   LISTEN      3023/mysqld       <br/>
-tcp        0      0 :::22                       :::*                        LISTEN      1649/sshd <br/>
-```</p>
-
-<p>```
-[root@MySQL-NDB db7]# mysql -P3312 -h127.0.0.1
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 1
-Server version: 5.1.46-log MySQL Community Server (GPL)</p>
-
-<p>Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
-This software comes with ABSOLUTELY NO WARRANTY. This is free software,
-and you are welcome to modify and redistribute it under the GPL v2 license</p>
-
-<p>Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</p>
-
-<h2>mysql> \s</h2>
-
-<p>mysql  Ver 14.14 Distrib 5.1.46, for pc-linux-gnu (i686) using readline 5.1</p>
-
-<p>Connection id:          1
-Current database:
-Current user:           root@localhost
-SSL:                    Not in use
-Current pager:          stdout
-Using outfile:          ''
-Using delimiter:        ;
-Server version:         5.1.46-log MySQL Community Server (GPL)
-Protocol version:       10
-Connection:             127.0.0.1 via TCP/IP
-Server characterset:    latin1
-Db     characterset:    latin1
-Client characterset:    latin1
-Conn.  characterset:    latin1
-TCP port:               3312
-Uptime:                 39 sec</p>
-
-<h2>Threads: 1  Questions: 4  Slow queries: 0  Opens: 15  Flush tables: 1  Open tables: 8  Queries per second avg: 0.102</h2>
-
-<p>```</p>
-
-<p><code>
-[root@MySQL-NDB db7]# ls -la
-total 20556
-drwxr-xr-x  4 mysql mysql     4096 May 13 05:15 .
-drwxr-xr-x 27 root  root      4096 May 13 05:12 ..
--rw-rw----  1 mysql mysql 10485760 May 13 05:15 ibdata1
--rw-rw----  1 mysql mysql  5242880 May 13 05:15 ib_logfile0
--rw-rw----  1 mysql mysql  5242880 May 13 05:15 ib_logfile1
-drwx------  2 mysql root      4096 May 13 05:14 mysql
--rw-rw----  1 mysql mysql      106 May 13 05:15 mysql-bin.000001
--rw-rw----  1 mysql mysql       19 May 13 05:15 mysql-bin.index
--rw-rw----  1 mysql mysql        5 May 13 05:15 mysqld006.pid
--rw-rw----  1 mysql root      1196 May 13 05:15 MySQL-NDB.err
-srwxrwxrwx  1 mysql mysql        0 May 13 05:15 mysql.sock
-drwx------  2 mysql root      4096 May 13 05:14 test
-</code></p>
-
-<p>```
-[root@MySQL-NDB db]# mysql_install_db --user=mysql
-[root@MySQL-NDB db]# service mysql start</p>
-
-<p>否则
-[root@MySQL-NDB db]# service mysql start
-Starting MySQL... ERROR! Manager of pid-file quit without updating file.
-pid-file=/db/mysqld001.pid</p>
-
-<p>GRANT SHUTDOWN ON <em>.</em>  TO 'multi_admin'@'localhost' IDENTIFIED BY 'multipass';
-```</p>
-
-<p>```
-[mysqld_multi]
-mysqld     = /usr/bin/mysqld_safe
-mysqladmin = /usr/bin/mysqladmin
-user       = multi_admin
-password   = multipass</p>
-
-<p>[mysqld002]
-port            = 3307
-socket          = /db/mysql.sock
-pid-file        = /db/mysqld001.pid
-datadir         = /db
-skip-locking
-key_buffer_size = 16M
-max_allowed_packet = 1M
-table_open_cache = 64
-sort_buffer_size = 512K
-net_buffer_length = 8K
-read_buffer_size = 256K
-read_rnd_buffer_size = 512K
-myisam_sort_buffer_size = 8M
-log-bin=mysql-bin
-binlog_format=mixed
-server-id       = 1</p>
-
-<p>[mysqld003]
-port            = 3308
-socket          = /db2/mysql.sock
-pid-file        = /db2/mysqld002.pid
-datadir         = /db2
-server-id       = 2
-log-bin         = mysql-bin</p>
-
-<h6>#</h6>
-
-<p>| Innodb_buffer_pool_read_requests  | 77      |
-| Innodb_buffer_pool_reads               | 12      |
-(Innodb_buffer_pool_read_requests - Innodb_buffer_pool_reads) / Innodb_buffer_pool_read_requests * 100%</p>
-
-<p>77-12/77</p>
-
-<h6>#</h6>
-
-<p>[mysqld008]
-port            = 3318
-socket          = /db8/mysql.sock
-pid-file        = /db8/mysqld008.pid
-datadir         = /db8
-server-id       = 8
-log-bin         = mysql-bin
-skip_slave_start = 1</p>
-
-<p>innodb_buffer_pool_size = 64M
-innodb_flush_log_at_trx_commit = 2
-innodb_additional_mem_pool_size = 16M
-innodb_lock_wait_timeout = 30
-innodb_support_xa = OFF
-innodb_log_buffer_size = 32M
-innodb_flush_method = O_DIRECT
-innodb_log_file_size = 15M</p>
-
-<p>[mysqld009]
-port            = 3319
-socket          = /db9/mysql.sock
-pid-file        = /db9/mysqld009.pid
-datadir         = /db9
-server-id       = 9
-log-bin         = mysql-bin
-skip_slave_start = 1</p>
-
-<p>replicate_ignore_table = mysql.columns_priv
-replicate_ignore_table = mysql.db
-replicate_ignore_table = mysql.host
-replicate_ignore_table = mysql.procs_priv
-replicate_ignore_table = mysql.tables_priv
-replicate_ignore_table = mysql.user</p>
-
-<p>innodb_buffer_pool_size = 64M
-innodb_flush_log_at_trx_commit = 2
-innodb_additional_mem_pool_size = 16M
-innodb_lock_wait_timeout = 30
-innodb_support_xa = OFF
-innodb_log_buffer_size = 32M
-innodb_flush_method = O_DIRECT
-innodb_log_file_size = 15M
-```</p>
-
-<p><code>grant replication slave ON *.* TO 'rep009'@'localhost' identified by '12345';</code></p>
-
-<p><code>GRANT SHUTDOWN ON *.*  TO 'multi_admin'@'localhost' IDENTIFIED BY 'multipass';</code></p>
-
-<p>```
-mysql-bin.000001 527</p>
-
-<p>009
-CHANGE MASTER TO
-MASTER_HOST = '192.168.200.200',
-MASTER_PORT = 3318,
-MASTER_USER = 'rep009',
-MASTER_PASSWORD = '12345',
-MASTER_LOG_FILE = 'mysql-bin.000001',
-MASTER_LOG_POS = 743
-```;</p>
 ]]></content>
   </entry>
   

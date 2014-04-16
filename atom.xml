@@ -4,7 +4,7 @@
   <title><![CDATA[1024Bit |  Aloha~]]></title>
   <link href="http://woody1983.github.com/atom.xml" rel="self"/>
   <link href="http://woody1983.github.com/"/>
-  <updated>2014-04-16T22:35:24+08:00</updated>
+  <updated>2014-04-16T23:07:45+08:00</updated>
   <id>http://woody1983.github.com/</id>
   <author>
     <name><![CDATA[Johnny Hsu]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL Integration Redis]]></title>
+    <link href="http://woody1983.github.com/blog/2014/04/16/mysql-integration-redis/"/>
+    <updated>2014-04-16T23:01:00+08:00</updated>
+    <id>http://woody1983.github.com/blog/2014/04/16/mysql-integration-redis</id>
+    <content type="html"><![CDATA[<p>在把一个大表从 MySQL 迁移到 Redis 时，你可能会发现，每次提取、转换、导入一条数据是让人难以忍受的慢!这里有一个技巧，你可以通过使用管道把 MySQL 的输出直接输入到 redis-cli输入端，这可以使两个数据库都能以他们的最顶级速度来运行。</p>
+
+<p>　　使用了这个技术，我把 800 万条 MySQL 数据导入到 Redis 的时间从 90 分钟缩短到了两分钟。</p>
+
+<p>　　Mysql到Redis的数据协议</p>
+
+<p>　　redis-cli命令行工具有一个批量插入模式，是专门为批量执行命令设计的。这第一步就是把Mysql查询的内容格式化成redis-cli可用的数据格式。here we go!</p>
+
+<p>　　我的统计表：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">　　</span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">events_all_time</span>
+</span><span class='line'>      <span class="p">(</span> <span class="n">id</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">action</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>        <span class="k">count</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="k">UNIQUE</span> <span class="k">KEY</span> <span class="n">uniq_action</span> <span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　准备在每行数据中执行的redis命令如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">　　</span><span class="n">HSET</span> <span class="n">events_all_time</span> <span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="p">[</span><span class="k">count</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　按照以上redis命令规则，创建一个events_to_redis.sql文件，内容是用来生成redis数据协议格式的SQL：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">　　</span><span class="c1">-- events_to_redis.sql SELECT CONCAT( &quot;*4\r\n&quot;, &#39;$&#39;, LENGTH(redis_cmd), &#39;\r\n&#39;, redis_cmd, &#39;\r\n&#39;, &#39;$&#39;, LENGTH(redis_key), &#39;\r\n&#39;, redis_key, &#39;\r\n&#39;, &#39;$&#39;, LENGTH(hkey), &#39;\r\n&#39;, hkey, &#39;\r\n&#39;, &#39;$&#39;, LENGTH(hval), &#39;\r\n&#39;, hval, &#39;\r&#39; ) FROM ( SELECT &#39;HSET&#39; as redis_cmd, &#39;events_all_time&#39; AS redis_key, action AS hkey, count AS hval FROM events_all_time ) AS t</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　ok, 用下面的命令执行：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">　　</span><span class="n">mysql</span> <span class="n">stats_db</span> <span class="c1">--skip-column-names --raw &lt; events_to_redis.sql | redis-cli --pipe</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　很重要的mysql参数说明：</p>
+
+<p>　　&#8211;raw: 使mysql不转换字段值中的换行符。</p>
+
+<p>　　&#8211;skip-column-names: 使mysql输出的每行中不包含列名。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Aloha~2014]]></title>
@@ -2601,31 +2658,6 @@ pulseIn函数用于读取引脚脉冲的时间长度，脉冲可以是HIGH或LOW
 <p>在古希臘人的想象中，彌諾陶洛斯具有人類的身體，但長著一顆牛頭和 一條牛尾巴。據說帕西菲在彌諾陶洛斯嬰兒時期還曾撫養過它， 但彌諾陶洛斯在長大之後就變得非常殘忍凶暴。</p>
 
 <p>[補充7] 狄俄倪索斯是古希臘神話中的酒神，與羅馬人信奉的巴克斯(拉丁語：Bacchus) 相對應。狄俄倪索斯是古代希臘色雷斯人信奉的葡萄酒之神，不僅握有葡萄酒 醉人的力量，還以布施歡樂與慈愛在當時成為極有感召力的神，他推動了古代 社會的文明並確立了法則，維護著世界的和平。此外，他還護佑著希臘的農業 與戲劇文化。傳說中他是宙斯與塞墨勒之子，又有一說是宙斯與珀耳塞福涅之子。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hermes]]></title>
-    <link href="http://woody1983.github.com/blog/2013/05/26/hermes/"/>
-    <updated>2013-05-26T00:07:00+08:00</updated>
-    <id>http://woody1983.github.com/blog/2013/05/26/hermes</id>
-    <content type="html"><![CDATA[<h2>ヘルメス/ Hermes/ 赫耳墨斯</h2>
-
-<p>赫耳墨斯是宙斯與瑪亞的兒子，是奧林匹斯十二主神之一。 他是邊界及穿越邊界的旅行者之神，亦掌管牧羊人與牧牛人，辯論與靈舌， 詩與文字，體育，重量與度量，發明與商業，他也是狡猾的小偷和騙子之神。 《荷馬詩頌》裡描述他是一個變化多端、圓滑機靈的盜賊，他帶給人夢境， 是夜裡守望者，門外的小偷，在長生不老的眾神裡最先展示善意的人。</p>
-
-<p>赫耳墨斯是神界與人界之間的信使，這是他與伊里斯共同擔當的職責。</p>
-
-<p>赫耳墨斯發明了鑽木取火，他還發明了樂器排蕭和里拉琴。 赫耳墨斯也是各種競技比賽及拳擊的發明人，也因此成為運動員的保護神。 現代神話收集家經常把赫耳墨斯和其他民族文化裡的耍詭計的神相提並論。</p>
-
-<p>赫耳墨斯還是亡靈的接引神，他幫助死去的靈魂到達冥界。 在許多希臘神話故事里，赫耳墨斯是除了哈得斯和珀耳塞福涅之外 唯一可以在冥界自由出入的神。</p>
-
-<p>赫耳墨斯的代表動物是公雞和烏龜，他的身上戴有皮包或是皮夾， 腳穿插翼涼鞋，頭戴翼帽，手拿信使的權杖，也叫做雙盤蛇帶翼權杖。 赫耳墨斯因為他的機智與狡猾也成為盜賊之神，他出生的第一晚就已經 做了小偷，從母親瑪亞那裡溜出去偷他哥哥阿波羅的神牛。</p>
-
-<p>赫耳墨斯對他的父親宙斯十分忠誠，當宙斯的愛人之一寧芙仙子 伊俄被赫拉捉住，並且派了百眼巨人阿耳戈斯看守的時候，是赫耳墨斯出手 解救了她。他給巨人唱悅耳動聽的歌，講冗長乏味的故事以哄他入睡之後， 用月牙形的彎刀砍下了他的頭。</p>
-
-<p>赫耳墨斯在羅馬神話中對應于墨丘利(拉丁語：Mercurius)，是九大行星中的水星。 墨丘利繼承了赫耳墨斯的許多特徵，比如商業的守護神。</p>
-
-<p>他雙腳長有雙翼、因此行走如飛，並成為在奧林匹斯山擔任宙斯和諸神傳令的 使者，為諸神傳送消息，並完成宙斯交給他的各種任務。</p>
 ]]></content>
   </entry>
   

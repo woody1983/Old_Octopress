@@ -7,9 +7,7 @@
 	<meta name="author" content="Johnny Hsu">
 
 	
-	<meta name="description" content="我的2014～ 首先是结婚了～ 想学一门新的语言 可后来还是觉得Ruby才是我的最爱～虽然很用功的研究过一段时间的Objective-C
-结婚后 时间越来越少了 之前可以花一个晚上 最少4个小时去研究 Arduino 插插电路板啥的
-现在买个Raspberry还要和老婆申请一下～ 问题更大的是 &hellip;">
+	<meta name="description" content="在把一个大表从 MySQL 迁移到 Redis 时，你可能会发现，每次提取、转换、导入一条数据是让人难以忍受的慢!这里有一个技巧，你可以通过使用管道把 MySQL 的输出直接输入到 redis-cli输入端，这可以使两个数据库都能以他们的最顶级速度来运行。 　　使用了这个技术，我把 800 万条 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -80,6 +78,91 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2014/04/16/mysql-integration-redis/">MySQL Integration Redis</a></h1>
+	<div class="entry-content">
+		<p>在把一个大表从 MySQL 迁移到 Redis 时，你可能会发现，每次提取、转换、导入一条数据是让人难以忍受的慢!这里有一个技巧，你可以通过使用管道把 MySQL 的输出直接输入到 redis-cli输入端，这可以使两个数据库都能以他们的最顶级速度来运行。</p>
+
+<p>　　使用了这个技术，我把 800 万条 MySQL 数据导入到 Redis 的时间从 90 分钟缩短到了两分钟。</p>
+
+<p>　　Mysql到Redis的数据协议</p>
+
+<p>　　redis-cli命令行工具有一个批量插入模式，是专门为批量执行命令设计的。这第一步就是把Mysql查询的内容格式化成redis-cli可用的数据格式。here we go!</p>
+
+<p>　　我的统计表：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">　　</span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">events_all_time</span>
+</span><span class='line'>      <span class="p">(</span> <span class="n">id</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">action</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>        <span class="k">count</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">id</span><span class="p">),</span> <span class="k">UNIQUE</span> <span class="k">KEY</span> <span class="n">uniq_action</span> <span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　准备在每行数据中执行的redis命令如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">　　</span><span class="n">HSET</span> <span class="n">events_all_time</span> <span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="p">[</span><span class="k">count</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　按照以上redis命令规则，创建一个events_to_redis.sql文件，内容是用来生成redis数据协议格式的SQL：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">　　</span><span class="c1">-- events_to_redis.sql SELECT CONCAT( &quot;*4\r\n&quot;, &#39;$&#39;, LENGTH(redis_cmd), &#39;\r\n&#39;, redis_cmd, &#39;\r\n&#39;, &#39;$&#39;, LENGTH(redis_key), &#39;\r\n&#39;, redis_key, &#39;\r\n&#39;, &#39;$&#39;, LENGTH(hkey), &#39;\r\n&#39;, hkey, &#39;\r\n&#39;, &#39;$&#39;, LENGTH(hval), &#39;\r\n&#39;, hval, &#39;\r&#39; ) FROM ( SELECT &#39;HSET&#39; as redis_cmd, &#39;events_all_time&#39; AS redis_key, action AS hkey, count AS hval FROM events_all_time ) AS t</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　ok, 用下面的命令执行：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">　　</span><span class="n">mysql</span> <span class="n">stats_db</span> <span class="c1">--skip-column-names --raw &lt; events_to_redis.sql | redis-cli --pipe</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　很重要的mysql参数说明：</p>
+
+<p>　　&#8211;raw: 使mysql不转换字段值中的换行符。</p>
+
+<p>　　&#8211;skip-column-names: 使mysql输出的每行中不包含列名。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-16T23:01:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2014/04/16/mysql-integration-redis//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -932,63 +1015,6 @@
 </div>
 	
 		<span class="comments"><a href="/blog/2013/09/05/ruby-bits//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2013/09/05/heroku/">Heroku</a></h1>
-	<div class="entry-content">
-		<p>一开始是在 <a href="https://class.coursera.org/startup-001/class/index">Coursera</a>上的公开课学到的 留个记录 以后会天天用到的。</p>
-
-<h3>安装命令很简单 Gem包</h3>
-
-<p><code>gem install heroku</code></p>
-
-<p><code>$ heroku keys</code> 可以查看目前主机中存有的key 如果没有你当前主机的话 就用<code>heroku keys:add</code></p>
-
-<p>Heroku只是一个托管平台而已 Code还是要保存在Github上 需要部署的时候部署过去。我还真不知道怎么从Heroku直接拖Code下来。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku create semisconblog
-</span><span class='line'>Creating semisconblog... done, stack is cedar
-</span><span class='line'>http://semisconblog.herokuapp.com/ | git@heroku.com:semisconblog.git
-</span><span class='line'>Git remote heroku added</span></code></pre></td></tr></table></div></figure>
-
-
-<p>回头再写 Heroku还是有点不熟悉</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-05T21:20:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2013/09/05/heroku//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 
